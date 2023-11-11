@@ -7,16 +7,29 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    gap: 25,
   },
   imgContainer: {
-    width: "70%",
+    width: "80%",
     resizeMode: "contain",
+    padding: 25,
+    marginTop: 35,
   },
   titleText: {
-    fontSize: 36,
-    fontWeight: "600",
-    lineHeight: 40,
-    letterSpacing: 0.3,
+    lineHeight: 41,
+    letterSpacing: 0.36,
+  },
+  subtitleText: {
+    lineHeight: 41,
+  },
+  textView: {
+    width: "100%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    paddingLeft: 30,
+    paddingRight: 40,
+    paddingVertical: 40,
+    gap: 10,
   },
 });
 export default styles;

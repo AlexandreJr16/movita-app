@@ -9,9 +9,15 @@ export default function SplashScreen() {
         style={styles.imgContainer}
         source={require("../../assents/SplashImage.png")}
       />
-      <Texto weight="bold" fontSize={40}>
-        Compre móveis planejados sem dificuldades.
-      </Texto>
+      <View style={styles.textView}>
+        <Texto weight="bold" fontSize={36} style={styles.titleText}>
+          Compre móveis planejados sem dificuldades.
+        </Texto>
+        <Texto weight="regular" fontSize={25} style={styles.subtitleText}>
+          O Movita oferece a solução
+        </Texto>
+        <Image source={require("../../assents/splashImageProgress.png")} />
+      </View>
     </View>
   );
 }
