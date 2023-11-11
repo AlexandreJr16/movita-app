@@ -12,6 +12,7 @@ type StyleOptions = "bold" | "regular";
 interface CustomViewStyle extends ViewStyle {
   letterSpacing?: number;
   lineHeight?: number;
+  color?: string;
 }
 
 interface TextProps {

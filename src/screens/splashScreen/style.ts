@@ -26,10 +26,17 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-start",
     justifyContent: "center",
-    paddingLeft: 30,
+    paddingLeft: 35,
     paddingRight: 40,
     paddingVertical: 40,
     gap: 10,
+  },
+  lastView: {
+    width: "100%",
+    justifyContent: "flex-end",
+    end: 0,
+    alignItems: "flex-end",
+    paddingHorizontal: 30,
   },
 });
 export default styles;
