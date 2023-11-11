@@ -13,7 +13,6 @@ interface TextProps {
   children: string;
   weight: StyleOptions;
   fontSize: number;
-  // Adicione uma propriedade genérica para futuros atributos
   [key: string]: any;
 }
 
