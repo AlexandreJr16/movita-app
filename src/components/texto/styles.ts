@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   regular: {
-    fontFamily: "PoppinsRegular",
+    fontFamily: "Poppins_500Medium",
     fontWeight: "normal",
   },
   bold: {
-    fontFamily: "PoppinsBold",
+    fontFamily: "Poppins_600SemiBold",
     fontWeight: "normal",
   },
 });

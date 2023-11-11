@@ -9,7 +9,9 @@ export default function SplashScreen() {
         style={styles.imgContainer}
         source={require("../../assents/SplashImage.png")}
       />
-      <Texto style="bold">Compre móveis planejados sem dificuldades.</Texto>
+      <Texto weight="bold" fontSize={40}>
+        Compre móveis planejados sem dificuldades.
+      </Texto>
     </View>
   );
 }
