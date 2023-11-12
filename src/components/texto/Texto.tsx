@@ -20,6 +20,7 @@ interface TextProps {
   weight: StyleOptions;
   fontSize: number;
   style?: CustomViewStyle;
+  color?: string;
 }
 
 export default function Texto({
@@ -27,6 +28,7 @@ export default function Texto({
   weight,
   fontSize,
   style,
+  color,
   ...restProps
 }: TextProps) {
   const [textLoaded] = useFonts({
@@ -41,7 +43,7 @@ export default function Texto({
   const textStyle = weight === "bold" ? styles.bold : styles.regular;
 
   return (
-    <Text style={[textStyle, { fontSize }, style]} {...restProps}>
+    <Text style={[textStyle, { fontSize, color }, style]} {...restProps}>
       {children}
     </Text>
   );
