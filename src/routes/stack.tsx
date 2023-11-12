@@ -2,6 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SplashScreen from "../screens/splashScreen/SplashScreen";
+
 export default function StackComponent() {
   const Stack = createNativeStackNavigator();
 

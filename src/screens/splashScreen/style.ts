@@ -9,11 +9,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 25,
   },
+
   imgContainer: {
-    width: "80%",
+    width: "75%",
     resizeMode: "contain",
     padding: 25,
-    marginTop: 35,
+    marginTop: "25%",
   },
   titleText: {
     lineHeight: 41,
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-start",
     justifyContent: "center",
-    paddingLeft: 35,
+    paddingLeft: 20,
     paddingRight: 40,
     paddingVertical: 40,
     gap: 10,

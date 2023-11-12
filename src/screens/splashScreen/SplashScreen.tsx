@@ -3,6 +3,7 @@ import { Image } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./style";
 import Button from "../../components/splashScreenComponents/button/Button";
+
 export default function SplashScreen() {
   return (
     <View style={styles.container}>
