@@ -7,15 +7,25 @@ type ButtonDTO = {
   children: string;
   colorBg: string;
   color: string;
+  onPress: () => void;
 };
 
-export default function Button({ children, colorBg, color }: ButtonDTO) {
+export default function Button({
+  children,
+  colorBg,
+  color,
+  onPress,
+}: ButtonDTO) {
   const img =
-    color == "#1f1f1f"
+    color == "#1f1f1f" || color == "#1F1F1F"
       ? require("../../../assents/blackArrow.png")
       : require("../../../assents/whiteArrow.png");
+
   return (
-    <Pressable style={[{ backgroundColor: colorBg }, styles.button]}>
+    <Pressable
+      style={[{ backgroundColor: colorBg }, styles.button]}
+      onPress={onPress}
+    >
       <Texto
         weight="regular"
         fontSize={16}
