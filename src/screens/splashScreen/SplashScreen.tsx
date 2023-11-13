@@ -6,7 +6,7 @@ import Button from "../../components/splashScreenComponents/button/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SplashScreen() {
-  const [bg, setbg] = useState("#F2F2F2");
+  const [bg, setBg] = useState("#F2F2F2");
   const [textColor, setTextColor] = useState("#1F1F1F");
   const [imgProgress, setImgProgress] = useState(
     require("../../assents/splashImageProgress.png")
@@ -16,29 +16,18 @@ export default function SplashScreen() {
   );
   const [btnFontColor, setBtnFontColor] = useState("#1F1F1F");
   const [btnBgColor, setBtnBgColor] = useState("#36A5BF");
-
-  const handlePages = async () => {
-    const existingNumber = await AsyncStorage.getItem("lastNumber");
-
-    if (existingNumber === null) {
-      await AsyncStorage.setItem("lastNumber", "1");
+  const [number, setNumber] = useState(1);
+  const handlePages = () => {
+    setNumber(number + 1);
+    if (number >= 2) {
+      setImgPage(require("../../assents/SplashImage2.png"));
+      setImgProgress(require("../../assents/splashImageProgress2.png"));
+      setBg("#1F1F1F");
+      setTextColor("#FFF");
+      setBtnFontColor("#FFF");
+      setBtnBgColor("#BF9969");
     }
   };
-
-  useEffect(() => {
-    const getLastNumber = async () => {
-      try {
-        const lastNumber = await AsyncStorage.getItem("lastNumber");
-        if (lastNumber) {
-          alert(`Último número salvo: ${lastNumber}`);
-        }
-      } catch (error) {
-        console.error("Erro ao recuperar o número:", error);
-      }
-    };
-
-    getLastNumber();
-  }, []);
 
   return (
     <View style={[styles.container, { backgroundColor: bg }]}>
