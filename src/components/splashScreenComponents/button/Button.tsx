@@ -18,8 +18,8 @@ export default function Button({
 }: ButtonDTO) {
   const img =
     color == "#1f1f1f" || color == "#1F1F1F"
-      ? require("../../../assents/blackArrow.png")
-      : require("../../../assents/whiteArrow.png");
+      ? require("../../../assents/Splash/blackArrow.png")
+      : require("../../../assents/Splash/whiteArrow.png");
 
   return (
     <Pressable
