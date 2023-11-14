@@ -1,15 +1,13 @@
 import { View } from "react-native";
 import Texto from "../../components/texto/Texto";
+import styles from "./styles";
 
 const Login = () => {
   return (
-    <View>
-      <Texto
-        weight="regular"
-        fontSize={25}
-        style={null}
-        color={"#1F1F1F"}
-      ></Texto>
+    <View style={styles.container}>
+      <Texto weight="regular" style={{ fontSize: 36 }}>
+        Olá
+      </Texto>
     </View>
   );
 };
