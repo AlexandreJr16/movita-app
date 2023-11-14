@@ -2,6 +2,8 @@ import { View, Image } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
 import { useState } from "react";
+import React from "react";
+import Carrossel from "../../components/Login/Carrossel/Carrossel";
 
 const Login = () => {
   const [imgHeader, setImgHeader] = useState(
@@ -10,9 +12,7 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Image source={imgHeader} />
-      </View>
+      <Carrossel />
     </View>
   );
 };
