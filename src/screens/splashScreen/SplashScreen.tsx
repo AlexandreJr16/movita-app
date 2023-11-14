@@ -5,7 +5,7 @@ import styles from "./style";
 import Button from "../../components/splashScreenComponents/button/Button";
 
 export default function SplashScreen() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState<number>(0);
 
   const pages = [
     {
@@ -33,6 +33,11 @@ export default function SplashScreen() {
       btnBgColor: "#1F1F1F",
     },
   ];
+  const texts = [
+    "Compre móveis planejados sem dificuldades.",
+    "Visualize móveis em seu ambiente.",
+    "Acompanhe o progresso de seu móvel.",
+  ];
 
   const handlePages = () => {
     if (page < pages.length - 1) {
@@ -41,6 +46,7 @@ export default function SplashScreen() {
   };
 
   const currentPage = pages[page];
+  const text = texts[page];
 
   return (
     <View style={[styles.container, { backgroundColor: currentPage.bg }]}>
@@ -52,7 +58,7 @@ export default function SplashScreen() {
           style={styles.titleText}
           color={currentPage.textColor}
         >
-          Compre móveis planejados sem dificuldades.
+          {text}
         </Texto>
         <Texto
           weight="regular"
