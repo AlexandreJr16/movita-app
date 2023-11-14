@@ -4,10 +4,19 @@ import Texto from "../../components/texto/Texto";
 import styles from "./style";
 import Button from "../../components/splashScreenComponents/button/Button";
 
-export default function SplashScreen() {
+interface Page {
+  bg: string;
+  textColor: string;
+  imgProgress: any;
+  imgPage: any;
+  btnFontColor: string;
+  btnBgColor: string;
+}
+
+export default function SplashScreen({ navigation }: { navigation: any }) {
   const [page, setPage] = useState<number>(0);
 
-  const pages = [
+  const pages: Page[] = [
     {
       bg: "#F2F2F2",
       textColor: "#1F1F1F",
@@ -33,6 +42,7 @@ export default function SplashScreen() {
       btnBgColor: "#1F1F1F",
     },
   ];
+
   const texts = [
     "Compre móveis planejados sem dificuldades.",
     "Visualize móveis em seu ambiente.",
@@ -40,42 +50,31 @@ export default function SplashScreen() {
   ];
 
   const handlePages = () => {
+    if (page === pages.length - 1) {
+      navigation.navigate("Login");
+    }
     if (page < pages.length - 1) {
       setPage(page + 1);
     }
   };
 
-  const currentPage = pages[page];
-  const text = texts[page];
+  const { bg, textColor, imgPage, imgProgress, btnFontColor, btnBgColor } =
+    pages[page % 3];
 
   return (
-    <View style={[styles.container, { backgroundColor: currentPage.bg }]}>
-      <Image style={styles.imgContainer} source={currentPage.imgPage} />
+    <View style={[styles.container, { backgroundColor: bg }]}>
+      <Image style={styles.imgContainer} source={imgPage} />
       <View style={styles.textView}>
-        <Texto
-          weight="bold"
-          fontSize={36}
-          style={styles.titleText}
-          color={currentPage.textColor}
-        >
-          {text}
+        <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
+          {texts[page % 3]}
         </Texto>
-        <Texto
-          weight="regular"
-          fontSize={25}
-          style={styles.subtitleText}
-          color={currentPage.textColor}
-        >
+        <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
           O Movita oferece a solução
         </Texto>
-        <Image source={currentPage.imgProgress} />
+        <Image source={imgProgress} />
       </View>
       <View style={styles.lastView}>
-        <Button
-          colorBg={currentPage.btnBgColor}
-          color={currentPage.btnFontColor}
-          onPress={handlePages}
-        >
+        <Button colorBg={btnBgColor} color={btnFontColor} onPress={handlePages}>
           PULAR
         </Button>
       </View>

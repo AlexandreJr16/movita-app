@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: 25,
+    gap: 20,
   },
 
   imgContainer: {
@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0.36,
   },
   subtitleText: {
-    lineHeight: 41,
+    lineHeight: 40,
   },
   textView: {
     width: "100%",
+    maxHeight: "25%",
     alignItems: "flex-start",
     justifyContent: "center",
     paddingLeft: 20,

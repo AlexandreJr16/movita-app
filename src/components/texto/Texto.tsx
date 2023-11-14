@@ -13,22 +13,19 @@ interface CustomViewStyle extends ViewStyle {
   letterSpacing?: number;
   lineHeight?: number;
   color?: string;
+  fontSize?: number;
 }
 
 interface TextProps {
   children: string;
   weight: StyleOptions;
-  fontSize: number;
-  style?: CustomViewStyle;
-  color?: string;
+  style?: CustomViewStyle | null;
 }
 
 export default function Texto({
   children,
   weight,
-  fontSize,
   style,
-  color,
   ...restProps
 }: TextProps) {
   const [textLoaded] = useFonts({
@@ -43,7 +40,7 @@ export default function Texto({
   const textStyle = weight === "bold" ? styles.bold : styles.regular;
 
   return (
-    <Text style={[textStyle, { fontSize, color }, style]} {...restProps}>
+    <Text style={[textStyle, style]} {...restProps}>
       {children}
     </Text>
   );
