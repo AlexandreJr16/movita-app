@@ -3,41 +3,41 @@ import { View, Image } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./style";
 import Button from "../../components/splashScreenComponents/button/Button";
+import SplashImage from "../../assents/Splash/SplashImage";
+import SplashImage2 from "../../assents/Splash/SplashImage2";
+import SplashImage3 from "../../assents/Splash/SplashImage3";
+import ImageProgress from "../../assents/Splash/ImageProgress";
+import ImageProgress2 from "../../assents/Splash/ImageProgress2";
+import ImageProgress3 from "../../assents/Splash/ImageProgress3";
 
 interface Page {
   bg: string;
   textColor: string;
-  imgProgress: any;
-  imgPage: any;
   btnFontColor: string;
   btnBgColor: string;
 }
 
 export default function SplashScreen({ navigation }: { navigation: any }) {
   const [page, setPage] = useState<number>(0);
+  const [img, setImg] = useState<React.ReactNode>(<SplashImage />);
+  const [imageProgress, setImageProgress] = useState(<ImageProgress />);
 
   const pages: Page[] = [
     {
       bg: "#F2F2F2",
       textColor: "#1F1F1F",
-      imgProgress: require("../../assents/Splash/splashImageProgress.png"),
-      imgPage: require("../../assents/Splash/SplashImage.png"),
       btnFontColor: "#1F1F1F",
       btnBgColor: "#36A5BF",
     },
     {
       bg: "#1F1F1F",
       textColor: "#FFF",
-      imgProgress: require("../../assents/Splash/splashImageProgress2.png"),
-      imgPage: require("../../assents/Splash/SplashImage2.png"),
       btnFontColor: "#FFF",
       btnBgColor: "#BF9969",
     },
     {
       bg: "#BF9969",
       textColor: "#1F1F1F",
-      imgProgress: require("../../assents/Splash/splashImageProgress3.png"),
-      imgPage: require("../../assents/Splash/SplashImage3.png"),
       btnFontColor: "#FFF",
       btnBgColor: "#1F1F1F",
     },
@@ -48,6 +48,38 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
     "Visualize móveis em seu ambiente.",
     "Acompanhe o progresso de seu móvel.",
   ];
+  const updateImage = (page: number) => {
+    switch (page) {
+      case 1:
+        setImg(<SplashImage />);
+        break;
+      case 2:
+        setImg(<SplashImage2 />);
+        break;
+      case 3:
+        setImg(<SplashImage3 />);
+        break;
+      default:
+        setImg(<SplashImage2 />);
+        break;
+    }
+  };
+  const updateImageProgress = (page: number) => {
+    switch (page) {
+      case 1:
+        setImageProgress(<ImageProgress />);
+        break;
+      case 2:
+        setImageProgress(<ImageProgress2 />);
+        break;
+      case 3:
+        setImageProgress(<ImageProgress3 />);
+        break;
+      default:
+        setImageProgress(<ImageProgress />);
+        break;
+    }
+  };
 
   const handlePages = () => {
     if (page === pages.length - 1) {
@@ -55,23 +87,24 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
     }
     if (page < pages.length - 1) {
       setPage(page + 1);
+      updateImage(page + 2);
+      updateImageProgress(page + 2);
     }
   };
 
-  const { bg, textColor, imgPage, imgProgress, btnFontColor, btnBgColor } =
-    pages[page % 3];
+  const { bg, textColor, btnFontColor, btnBgColor } = pages[page % 3];
 
   return (
     <View style={[styles.container, { backgroundColor: bg }]}>
-      <Image style={styles.imgContainer} source={imgPage} />
+      {img}
       <View style={styles.textView}>
         <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
-          {texts[page % 3]}
+          {texts[page]}
         </Texto>
         <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
-          O Movita oferece a solução
+          O Movita oferece a solução.
         </Texto>
-        <Image source={imgProgress} />
+        {imageProgress}
       </View>
       <View style={styles.lastView}>
         <Button colorBg={btnBgColor} color={btnFontColor} onPress={handlePages}>

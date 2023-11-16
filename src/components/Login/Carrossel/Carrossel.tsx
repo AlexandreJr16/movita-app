@@ -8,7 +8,7 @@ const SLIDER_HEIGHT = Dimensions.get("window").height;
 const ITEM_WIDTH = SLIDER_WIDTH / 2;
 const ITEM_HEIGHT = SLIDER_HEIGHT / 3.5;
 
-const Item = ({ item }: { item: { color: string; imgSource: any } }) => {
+const Item = ({ item }: { item: { color: string } }) => {
   return (
     <View
       style={{
@@ -16,12 +16,7 @@ const Item = ({ item }: { item: { color: string; imgSource: any } }) => {
         backgroundColor: item.color,
         height: ITEM_HEIGHT,
       }}
-    >
-      <Image
-        source={item.imgSource}
-        style={{ width: "100%", height: "100%" }}
-      />
-    </View>
+    ></View>
   );
 };
 
@@ -29,27 +24,21 @@ export const Carrossel = () => {
   const carousel = [
     {
       color: "#1f1f1f",
-      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
       color: "#1f1f1f",
-      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
       color: "#1f1f1f",
-      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
       color: "#1f1f1f",
-      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
       color: "#1f1f1f",
-      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
       color: "#1f1f1f",
-      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
   ];
 

@@ -6,16 +6,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2F2F2",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
+    justifyContent: "space-around",
+    paddingTop: "30%",
+    paddingBottom: "15%",
   },
 
-  imgContainer: {
-    width: "75%",
-    resizeMode: "contain",
-    padding: 25,
-    marginTop: "25%",
-  },
   titleText: {
     lineHeight: 41,
     letterSpacing: 0.36,
@@ -25,11 +20,11 @@ const styles = StyleSheet.create({
   },
   textView: {
     width: "100%",
-    maxHeight: "25%",
+    height: "40%",
     alignItems: "flex-start",
     justifyContent: "center",
     paddingLeft: 20,
-    paddingRight: 40,
+    paddingRight: 0,
     paddingVertical: 40,
     gap: 10,
   },
