@@ -8,12 +8,19 @@ const SLIDER_HEIGHT = Dimensions.get("window").height;
 const ITEM_WIDTH = SLIDER_WIDTH / 2;
 const ITEM_HEIGHT = SLIDER_HEIGHT / 3.5;
 
-const Item = ({ item }: { item: { text: string } }) => {
+const Item = ({ item }: { item: { color: string; imgSource: any } }) => {
   return (
     <View
-      style={{ width: "100%", backgroundColor: "#1f1f1f", height: ITEM_HEIGHT }}
+      style={{
+        width: "100%",
+        backgroundColor: item.color,
+        height: ITEM_HEIGHT,
+      }}
     >
-      <Text style={{ color: "#fff" }}>{item.text}</Text>
+      <Image
+        source={item.imgSource}
+        style={{ width: "100%", height: "100%" }}
+      />
     </View>
   );
 };
@@ -21,22 +28,28 @@ const Item = ({ item }: { item: { text: string } }) => {
 export const Carrossel = () => {
   const carousel = [
     {
-      text: "Text 1",
+      color: "#1f1f1f",
+      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
-      text: "Text 2",
+      color: "#1f1f1f",
+      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
-      text: "Text 3",
+      color: "#1f1f1f",
+      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
-      text: "Text 4",
+      color: "#1f1f1f",
+      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
-      text: "Text 5",
+      color: "#1f1f1f",
+      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
     {
-      text: "Text 6",
+      color: "#1f1f1f",
+      imgSource: require("../../../assents/Splash/SplashImage2.png"),
     },
   ];
 
@@ -45,7 +58,7 @@ export const Carrossel = () => {
       <Text style={{ marginBottom: 100 }}>Carrosel</Text>
       <Carousel
         data={carousel}
-        renderItem={Item}
+        renderItem={({ item }) => <Item item={item} />}
         layout={"default"}
         sliderWidth={SLIDER_WIDTH}
         sliderHeight={SLIDER_HEIGHT}
