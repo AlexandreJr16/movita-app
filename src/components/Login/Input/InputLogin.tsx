@@ -7,7 +7,7 @@ import React from "react";
 const InputLogin = ({ text }: InputDTO) => {
   return (
     <View>
-      <Texto weight="regular" style={}>
+      <Texto weight="regular" style={styles.text}>
         {text}
       </Texto>
     </View>
