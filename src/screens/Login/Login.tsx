@@ -5,7 +5,8 @@ import React from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import Logo from "../../assents/Login/Logo";
 import { SafeAreaView } from "react-native-safe-area-context";
-import InputLogin from "../../components/Cadastro/Input/InputCadastro";
+import InputLogin from "../../components/Login/Input/InputLogin";
+import UserIcon from "../../assents/Login/UserIcon";
 
 const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
@@ -26,7 +27,9 @@ const Login = () => {
               Acesse a sua conta:
             </Texto>
           </View>
-          <View style={styles.inputContainer}></View>
+          <View style={styles.inputContainer}>
+            <InputLogin Icon={<UserIcon />} placeholder="E-mail"></InputLogin>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

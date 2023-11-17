@@ -2,15 +2,19 @@ import { View, TextInput } from "react-native";
 import Texto from "../../texto/Texto";
 import styles from "./styles";
 import InputDTO from "./InputDTO";
-import React from "react";
+import React, { useState } from "react";
+import UserIcon from "../../../assents/Login/UserIcon";
 
-const InputLogin = ({ children }: InputDTO) => {
+const InputLogin = ({ Icon, placeholder, func }: InputDTO) => {
   return (
     <View style={styles.container}>
-      <Texto weight="regular" style={styles.text}>
-        {children}
-      </Texto>
-      <TextInput style={styles.input}></TextInput>
+      {Icon}
+      <TextInput
+        onChange={func}
+        style={styles.input}
+        placeholder={placeholder}
+        placeholderTextColor={"#878787"}
+      ></TextInput>
     </View>
   );
 };

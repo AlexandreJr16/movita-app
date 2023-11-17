@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: "5%",
   },
 });
 export default styles;
