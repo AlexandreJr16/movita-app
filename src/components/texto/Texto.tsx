@@ -14,6 +14,7 @@ interface CustomViewStyle extends ViewStyle {
   lineHeight?: number;
   color?: string;
   fontSize?: number;
+  marginRight?: number;
 }
 
 interface TextProps {

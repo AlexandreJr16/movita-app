@@ -2,6 +2,9 @@ import { Pressable } from "react-native";
 import Texto from "../../texto/Texto";
 import { Image } from "react-native";
 import styles from "./styles";
+import React from "react";
+import BlackArrow from "../../../assents/Splash/BlackArrow";
+import WhiteArrow from "../../../assents/Splash/WhiteArrow";
 
 type ButtonDTO = {
   children: string;
@@ -17,9 +20,7 @@ export default function Button({
   onPress,
 }: ButtonDTO) {
   const img =
-    color == "#1f1f1f" || color == "#1F1F1F"
-      ? require("../../../assents/Splash/blackArrow.png")
-      : require("../../../assents/Splash/whiteArrow.png");
+    color == "#1f1f1f" || color == "#1F1F1F" ? <BlackArrow /> : <WhiteArrow />;
 
   return (
     <Pressable
@@ -28,12 +29,17 @@ export default function Button({
     >
       <Texto
         weight="regular"
-        fontSize={16}
-        style={{ color: color, marginLeft: 5, marginTop: 5 }}
+        style={{
+          color: color,
+          marginLeft: 5,
+          marginTop: 5,
+          fontSize: 16,
+          marginRight: 25,
+        }}
       >
         {children}
       </Texto>
-      <Image source={img} style={styles.arrowImage} />
+      {img}
     </Pressable>
   );
 }

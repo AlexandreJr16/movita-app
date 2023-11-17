@@ -9,9 +9,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 50,
   },
-
-  arrowImage: {
-    marginLeft: 25,
-  },
 });
 export default styles;
