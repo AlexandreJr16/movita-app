@@ -1,22 +1,31 @@
 import { View, Image } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
-import { useState } from "react";
 import React from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
+import Logo from "../../assents/Login/Logo";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
 const Login = () => {
-  const [imgHeader, setImgHeader] = useState(
-    require("../../assents/Login/logo.png")
-  );
-  const cond = true;
-
   return (
-    <View style={styles.container}>
-      <Carrossel />
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <Logo style={styles.logo} />
+        <View style={styles.carrossel}>
+          <Carrossel />
+        </View>
+        <View style={styles.textContainer}>
+          <Texto weight="regular" style={styles.title}>
+            Bem-vindo!
+          </Texto>
+          <Texto weight="regular" style={styles.smallTitle}>
+            Acesse a sua conta:
+          </Texto>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 export default Login;
