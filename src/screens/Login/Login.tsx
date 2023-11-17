@@ -10,22 +10,20 @@ const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
 const Login = () => {
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <Logo style={styles.logo} />
-        <View style={styles.carrossel}>
-          <Carrossel />
-        </View>
-        <View style={styles.textContainer}>
-          <Texto weight="regular" style={styles.title}>
-            Bem-vindo!
-          </Texto>
-          <Texto weight="regular" style={styles.smallTitle}>
-            Acesse a sua conta:
-          </Texto>
-        </View>
+    <View style={styles.container}>
+      <Logo style={styles.logo} />
+      <View style={styles.carrossel}>
+        <Carrossel />
       </View>
-    </SafeAreaView>
+      <View style={styles.textContainer}>
+        <Texto weight="regular" style={styles.title}>
+          Bem-vindo!
+        </Texto>
+        <Texto weight="regular" style={styles.smallTitle}>
+          Acesse a sua conta:
+        </Texto>
+      </View>
+    </View>
   );
 };
 export default Login;

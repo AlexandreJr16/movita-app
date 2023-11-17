@@ -5,13 +5,15 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    backgroundColor: "#F2F2F2",
+    height: "100%",
+    backgroundColor: "#1F1F1F",
+    paddingTop: 60,
   },
   logo: {
     marginBottom: 60,
   },
   carrossel: {
-    maxHeight: "60%",
+    maxHeight: "40%",
   },
   textContainer: {
     width: "100%",
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingHorizontal: 25,
   },
-  title: { color: "#000", fontSize: 32, lineHeight: 36 },
-  smallTitle: { color: "#000", fontSize: 20, lineHeight: 23 },
+  title: { color: "#fff", fontSize: 32, lineHeight: 36 },
+  smallTitle: { color: "#fff", fontSize: 20, lineHeight: 23 },
 });
 export default styles;
