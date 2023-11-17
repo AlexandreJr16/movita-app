@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     backgroundColor: "#1F1F1F",
-    paddingTop: 60,
   },
   logo: {
     marginBottom: 60,
   },
   carrossel: {
-    maxHeight: "40%",
+    maxHeight: 300,
+    marginBottom: 20,
   },
   textContainer: {
     width: "100%",
@@ -23,5 +23,11 @@ const styles = StyleSheet.create({
   },
   title: { color: "#fff", fontSize: 32, lineHeight: 36 },
   smallTitle: { color: "#fff", fontSize: 20, lineHeight: 23 },
+  inputContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 export default styles;
