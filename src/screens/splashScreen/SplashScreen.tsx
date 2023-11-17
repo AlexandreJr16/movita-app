@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image } from "react-native";
+import { View, Image, SafeAreaView } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./style";
 import Button from "../../components/splashScreenComponents/button/Button";
@@ -10,6 +10,7 @@ import ImageProgress from "../../assents/Splash/ImageProgress";
 import ImageProgress2 from "../../assents/Splash/ImageProgress2";
 import ImageProgress3 from "../../assents/Splash/ImageProgress3";
 
+//Eu quero colocar alguma função pra quando apertar na seta de voltar do celular decremente a page (Simples)
 interface Page {
   bg: string;
   textColor: string;
@@ -95,22 +96,28 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
   const { bg, textColor, btnFontColor, btnBgColor } = pages[page % 3];
 
   return (
-    <View style={[styles.container, { backgroundColor: bg }]}>
-      {img}
-      <View style={styles.textView}>
-        <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
-          {texts[page]}
-        </Texto>
-        <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
-          O Movita oferece a solução.
-        </Texto>
-        {imageProgress}
+    <SafeAreaView>
+      <View style={[styles.container, { backgroundColor: bg }]}>
+        {img}
+        <View style={styles.textView}>
+          <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
+            {texts[page]}
+          </Texto>
+          <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
+            O Movita oferece a solução.
+          </Texto>
+          {imageProgress}
+        </View>
+        <View style={styles.lastView}>
+          <Button
+            colorBg={btnBgColor}
+            color={btnFontColor}
+            onPress={handlePages}
+          >
+            PULAR
+          </Button>
+        </View>
       </View>
-      <View style={styles.lastView}>
-        <Button colorBg={btnBgColor} color={btnFontColor} onPress={handlePages}>
-          PULAR
-        </Button>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }
