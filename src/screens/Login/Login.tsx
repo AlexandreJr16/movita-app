@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import InputLogin from "../../components/Login/Input/InputLogin";
 import UserIcon from "../../assents/Login/UserIcon";
 import SecurityIcon from "../../assents/Login/SecurityIcon";
+import LoginButton from "../../components/Login/LoginButton/LoginButton";
 
 const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
@@ -20,6 +21,9 @@ const Login = () => {
   };
   const handlePassword = (password: string) => {
     setPassword(password);
+  };
+  const handleLogin = () => {
+    const login = { email, password };
   };
 
   return (
@@ -51,6 +55,7 @@ const Login = () => {
               func={handlePassword}
             ></InputLogin>
           </View>
+          <LoginButton text="Enviar" func={handleLogin} />
         </View>
       </ScrollView>
     </SafeAreaView>
