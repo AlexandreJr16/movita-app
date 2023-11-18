@@ -12,13 +12,14 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   carrossel: {
-    maxHeight: 325,
+    maxHeight: 310,
   },
   textContainer: {
     width: "100%",
     display: "flex",
     alignItems: "flex-start",
     paddingHorizontal: 25,
+    margin: 10,
   },
   title: { color: "#fff", fontSize: 32, lineHeight: 36 },
   smallTitle: { color: "#fff", fontSize: 20, lineHeight: 23 },
@@ -28,8 +29,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: "5%",
-    paddingVertical: 20,
-    gap: 15,
   },
 });
 export default styles;

@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: "row",
     gap: 20,
+    marginTop: 10,
+    marginBottom: 5,
   },
   input: {
     fontSize: 16,

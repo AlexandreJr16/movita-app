@@ -54,7 +54,9 @@ const Login = () => {
               secureText={true}
               func={handlePassword}
             ></InputLogin>
+            <Texto weight="regular">Oi</Texto>
           </View>
+
           <LoginButton text="Enviar" func={handleLogin} />
         </View>
       </ScrollView>
