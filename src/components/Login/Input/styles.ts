@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 20,
     marginTop: 10,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   input: {
     fontSize: 16,

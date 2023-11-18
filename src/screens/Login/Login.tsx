@@ -1,4 +1,4 @@
-import { View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView, Pressable } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
 import React, { useState } from "react";
@@ -24,6 +24,9 @@ const Login = () => {
   };
   const handleLogin = () => {
     const login = { email, password };
+  };
+  const redirectToSignUp = () => {
+    console.log("Olá, ihago 17/11/2023");
   };
 
   return (
@@ -54,10 +57,19 @@ const Login = () => {
               secureText={true}
               func={handlePassword}
             ></InputLogin>
-            <Texto weight="regular">Oi</Texto>
+            <View style={styles.forgetPContainer}>
+              <Texto weight="regular" style={styles.forgetPassword}>
+                Esqueceu a senha?
+              </Texto>
+              <Pressable onPress={redirectToSignUp}>
+                <Texto weight="regular" style={styles.blueForgetPassword}>
+                  Clique Aqui.
+                </Texto>
+              </Pressable>
+            </View>
           </View>
 
-          <LoginButton text="Enviar" func={handleLogin} />
+          <LoginButton text="Entrar" func={handleLogin} />
         </View>
       </ScrollView>
     </SafeAreaView>

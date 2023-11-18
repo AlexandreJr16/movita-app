@@ -29,6 +29,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: "5%",
+    marginBottom: 60,
+  },
+  forgetPContainer: {
+    paddingHorizontal: 12,
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    flexDirection: "row",
+  },
+  forgetPassword: {
+    color: "#fff",
+    marginRight: 5,
+  },
+  blueForgetPassword: {
+    color: "#36A5BF",
+    textDecorationLine: "underline",
   },
 });
 export default styles;
