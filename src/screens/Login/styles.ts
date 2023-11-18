@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   carrossel: {
-    maxHeight: 300,
-    marginBottom: 20,
+    maxHeight: 325,
   },
   textContainer: {
     width: "100%",
@@ -29,6 +28,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: "5%",
+    paddingVertical: 20,
   },
 });
 export default styles;
