@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "5%",
     paddingVertical: 20,
+    gap: 15,
   },
 });
 export default styles;

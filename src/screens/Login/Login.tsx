@@ -1,7 +1,7 @@
 import { View, Image, ScrollView } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
-import React from "react";
+import React, { useState } from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import Logo from "../../assents/Login/Logo";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,6 +11,16 @@ import UserIcon from "../../assents/Login/UserIcon";
 const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
 const Login = () => {
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  const handleEmail = (email: string) => {
+    setEmail(email);
+  };
+  const handlePassword = (password: string) => {
+    setPassword(password);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -28,7 +38,17 @@ const Login = () => {
             </Texto>
           </View>
           <View style={styles.inputContainer}>
-            <InputLogin Icon={<UserIcon />} placeholder="E-mail"></InputLogin>
+            <InputLogin
+              Icon={<UserIcon />}
+              placeholder="E-mail:"
+              func={handleEmail}
+            ></InputLogin>
+            <InputLogin
+              Icon={<UserIcon />}
+              placeholder="Senha"
+              secureText={true}
+              func={handlePassword}
+            ></InputLogin>
           </View>
         </View>
       </ScrollView>
