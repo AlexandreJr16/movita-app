@@ -7,6 +7,7 @@ import Logo from "../../assents/Login/Logo";
 import { SafeAreaView } from "react-native-safe-area-context";
 import InputLogin from "../../components/Login/Input/InputLogin";
 import UserIcon from "../../assents/Login/UserIcon";
+import SecurityIcon from "../../assents/Login/SecurityIcon";
 
 const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
@@ -44,8 +45,8 @@ const Login = () => {
               func={handleEmail}
             ></InputLogin>
             <InputLogin
-              Icon={<UserIcon />}
-              placeholder="Senha"
+              Icon={<SecurityIcon />}
+              placeholder="Senha:"
               secureText={true}
               func={handlePassword}
             ></InputLogin>
