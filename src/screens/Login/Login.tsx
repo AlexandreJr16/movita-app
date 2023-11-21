@@ -1,7 +1,7 @@
 import { View, Image, ScrollView, Pressable } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import Logo from "../../assents/Login/Logo";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,13 +11,12 @@ import SecurityIcon from "../../assents/Login/SecurityIcon";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
 import React from "react";
 import { signIn } from "../../service/auth";
-
-const carousel = [{ color: "1f1f1f", imgSource: "www" }];
+import AuthContext from "../../contexts/auth";
 
 const Login = () => {
+  const { signed, signIn } = useContext(AuthContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
   const handleEmail = (email: string) => {
     setEmail(email);
   };
@@ -25,8 +24,7 @@ const Login = () => {
     setPassword(password);
   };
   const handleLogin = async () => {
-    const response = await signIn(email, password);
-    console.log(response);
+    await signIn(email, password);
   };
   const redirectToSignUp = () => {
     console.log("Olá, ihago 17/11/2023");

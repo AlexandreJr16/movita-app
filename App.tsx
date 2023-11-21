@@ -1,11 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import Routes from "./src/routes/main";
-import React = require("react");
+import AuthContext, { AuthProvider } from "./src/contexts/auth";
+import React from "react";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </NavigationContainer>
   );
 }
