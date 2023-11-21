@@ -1,5 +1,11 @@
-import React from "react";
-import StackComponent from "./src/routes/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import Routes from "./src/routes/main";
+import React = require("react");
+
 export default function App() {
-  return <StackComponent />;
+  return (
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
+  );
 }

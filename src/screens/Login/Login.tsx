@@ -1,7 +1,7 @@
 import { View, Image, ScrollView, Pressable } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
-import React, { useState } from "react";
+import { useState } from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import Logo from "../../assents/Login/Logo";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,6 +9,7 @@ import InputLogin from "../../components/Login/Input/InputLogin";
 import UserIcon from "../../assents/Login/UserIcon";
 import SecurityIcon from "../../assents/Login/SecurityIcon";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
+import React = require("react");
 
 const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
