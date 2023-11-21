@@ -10,11 +10,10 @@ import UserIcon from "../../assents/Login/UserIcon";
 import SecurityIcon from "../../assents/Login/SecurityIcon";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
 import React from "react";
-import { signIn } from "../../service/auth";
 import AuthContext from "../../contexts/auth";
 
 const Login = () => {
-  const { signed, signIn } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const handleEmail = (email: string) => {
@@ -24,8 +23,10 @@ const Login = () => {
     setPassword(password);
   };
   const handleLogin = async () => {
-    await signIn(email, password);
+    const response = await signIn(email, password);
+    console.log(response);
   };
+
   const redirectToSignUp = () => {
     console.log("Olá, ihago 17/11/2023");
   };

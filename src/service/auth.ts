@@ -1,17 +1,14 @@
 interface Response {
-  token: string;
-  user: {
-    name: string;
-    email: string;
-  };
+  access_token: string;
 }
 
 export function signIn(email: string, senha: string): Promise<Response> {
-  const url = "http://localhost:3000/auth/signin";
+  const url = "http://192.168.30.173:3000/auth/signin";
   const data = {
     email: email,
     senha: senha,
   };
+
   const options = {
     method: "POST",
     headers: {
@@ -19,14 +16,19 @@ export function signIn(email: string, senha: string): Promise<Response> {
     },
     body: JSON.stringify(data),
   };
-  return fetch(url, options)
-    .then((resp) => {
-      if (!resp.ok) {
-        throw new Error("Erro na requisição");
-      }
-      return resp.json();
+
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(async (resp) => {
+      const responseData = await resp.json();
+      console.log("Resposta da API:", responseData);
+      return responseData;
     })
-    .then((data) => data)
     .catch((error) => {
       console.error("Erro na requisição:", error);
     });
