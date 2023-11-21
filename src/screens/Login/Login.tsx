@@ -9,13 +9,14 @@ import InputLogin from "../../components/Login/Input/InputLogin";
 import UserIcon from "../../assents/Login/UserIcon";
 import SecurityIcon from "../../assents/Login/SecurityIcon";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
-import React = require("react");
+import React from "react";
+import { signIn } from "../../service/auth";
 
 const carousel = [{ color: "1f1f1f", imgSource: "www" }];
 
 const Login = () => {
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const handleEmail = (email: string) => {
     setEmail(email);
@@ -23,8 +24,9 @@ const Login = () => {
   const handlePassword = (password: string) => {
     setPassword(password);
   };
-  const handleLogin = () => {
-    const login = { email, password };
+  const handleLogin = async () => {
+    const response = await signIn(email, password);
+    console.log(response);
   };
   const redirectToSignUp = () => {
     console.log("Olá, ihago 17/11/2023");

@@ -21,7 +21,7 @@ const InputLogin = ({ Icon, placeholder, func, secureText }: InputDTO) => {
     <View style={styles.container}>
       {Icon}
       <TextInput
-        onChange={func}
+        onChangeText={func}
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor={"#878787"}
