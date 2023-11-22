@@ -12,7 +12,7 @@ import LoginButton from "../../components/Login/LoginButton/LoginButton";
 import React from "react";
 import AuthContext from "../../contexts/auth";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -28,8 +28,9 @@ const Login = () => {
   };
 
   const redirectToSignUp = () => {
-    console.log("Olá, ihago 17/11/2023");
+    navigation.navigate("SignUp");
   };
+  const redirectToForgetPassword = () => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,7 +64,7 @@ const Login = () => {
               <Texto weight="regular" style={styles.forgetPassword}>
                 Esqueceu a senha?
               </Texto>
-              <Pressable onPress={redirectToSignUp}>
+              <Pressable onPress={redirectToForgetPassword}>
                 <Texto weight="regular" style={styles.blueForgetPassword}>
                   Clique Aqui.
                 </Texto>
