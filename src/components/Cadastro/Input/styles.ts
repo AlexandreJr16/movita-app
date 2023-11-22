@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
   },
   container: {
-    width: "100%",
     display: "flex",
     alignContent: "center",
     justifyContent: "center",
@@ -22,6 +21,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     height: 58,
+    paddingHorizontal: 20,
+    color: "#fff",
+    fontFamily: "Poppins_500Medium",
+    display: "flex",
+    fontSize: 16,
+    alignContent: "center",
+    justifyContent: "center",
   },
 });
 export default styles;
