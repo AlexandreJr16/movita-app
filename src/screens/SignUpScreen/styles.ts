@@ -23,5 +23,15 @@ const styles = StyleSheet.create({
   },
   title: { color: "#fff", fontSize: 32, lineHeight: 36 },
   smallTitle: { color: "#fff", fontSize: 20, lineHeight: 23 },
+
+  inputContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: "5%",
+    marginBottom: 60,
+    marginTop: 0,
+  },
 });
 export default styles;

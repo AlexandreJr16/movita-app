@@ -5,6 +5,7 @@ import Logo from "../../assents/Login/Logo";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import styles from "./styles";
 import Texto from "../../components/texto/Texto";
+import InputCadastro from "../../components/Cadastro/Input/InputCadastro";
 
 const SignUpScreen = () => {
   return (
@@ -19,6 +20,10 @@ const SignUpScreen = () => {
             <Texto weight="regular" style={styles.title}>
               Informe seu nome completo:
             </Texto>
+          </View>
+          <View style={styles.inputContainer}>
+            <InputCadastro>Nome</InputCadastro>
+            <InputCadastro>Sobrenome</InputCadastro>
           </View>
         </View>
       </ScrollView>

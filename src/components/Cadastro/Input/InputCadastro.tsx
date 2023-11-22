@@ -4,7 +4,7 @@ import styles from "./styles";
 import InputDTO from "./InputDTO";
 import React from "react";
 
-const InputLogin = ({ children }: InputDTO) => {
+const InputCadastro = ({ children }: InputDTO) => {
   return (
     <View style={styles.container}>
       <Texto weight="regular" style={styles.text}>
@@ -15,4 +15,4 @@ const InputLogin = ({ children }: InputDTO) => {
   );
 };
 
-export default InputLogin;
+export default InputCadastro;

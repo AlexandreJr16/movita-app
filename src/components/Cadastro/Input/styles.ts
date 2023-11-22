@@ -5,13 +5,16 @@ const styles = StyleSheet.create({
     color: "#878787",
     fontSize: 16,
     lineHeight: 18,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
   },
   container: {
     width: "100%",
     display: "flex",
     alignContent: "center",
     justifyContent: "center",
-    paddingHorizontal: "5%",
+    paddingHorizontal: "0%",
+    marginTop: 10,
   },
   input: {
     width: "100%",
