@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginBottom: 60,
+    marginTop: 20,
   },
   carrossel: {
     maxHeight: 310,

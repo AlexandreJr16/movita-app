@@ -6,13 +6,22 @@ import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import styles from "./styles";
 import Texto from "../../components/texto/Texto";
 import InputCadastro from "../../components/Cadastro/Input/InputCadastro";
+import BlueBack from "../../assents/Cadastro/BlueBack";
+import LoginButton from "../../components/Login/LoginButton/LoginButton";
 
 const SignUpScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.container}>
-          <Logo style={styles.logo} />
+          <View style={styles.logoContainer}>
+            <View style={styles.logo1}>
+              <BlueBack />
+            </View>
+            <View style={styles.logo2}>
+              <Logo />
+            </View>
+          </View>
           <View style={styles.carrossel}>
             <Carrossel />
           </View>
@@ -25,6 +34,7 @@ const SignUpScreen = () => {
             <InputCadastro>Nome</InputCadastro>
             <InputCadastro>Sobrenome</InputCadastro>
           </View>
+          <LoginButton text="Entrar" />
         </View>
       </ScrollView>
     </SafeAreaView>
