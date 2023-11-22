@@ -1,5 +1,6 @@
 interface Response {
   access_token: string;
+  user: {};
 }
 
 export function signIn(email: string, senha: string): Promise<Response> {

@@ -3,20 +3,23 @@ import * as auth from "../service/auth";
 
 interface AuthContextData {
   signIn(email: string, senha: string): Promise<void>;
+  user: object | null;
+  signed: boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
-  // const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<object | null>(null);
 
   async function signIn(email: string, senha: string) {
     const response = await auth.signIn(email, senha);
-    console.log(response);
-    // setUser(response.user);
+    setUser(response.user);
   }
   return (
-    <AuthContext.Provider value={{ signIn }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ signed: !!user, user, signIn }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

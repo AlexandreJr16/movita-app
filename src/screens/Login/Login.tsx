@@ -72,6 +72,16 @@ const Login = () => {
           </View>
 
           <LoginButton text="Entrar" func={handleLogin} />
+          <View style={styles.signUpContainer}>
+            <Texto weight="regular" style={styles.signIn}>
+              Não possui conta?
+            </Texto>
+            <Pressable onPress={redirectToSignUp}>
+              <Texto weight="regular" style={styles.blueSignUp}>
+                Cadastre-se.
+              </Texto>
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

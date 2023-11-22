@@ -47,5 +47,22 @@ const styles = StyleSheet.create({
     color: "#36A5BF",
     textDecorationLine: "underline",
   },
+  signUpContainer: {
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  blueSignUp: {
+    color: "#36A5BF",
+    textDecorationLine: "underline",
+  },
+  signIn: {
+    color: "#fff",
+    marginRight: 5,
+  },
 });
 export default styles;
