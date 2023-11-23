@@ -1,9 +1,9 @@
 type InputDTO = {
-  children?: string;
+  children?: any;
   func?: any;
-  text?: string;
+  text?: any;
   styleContainer?: any;
-  secureText?: boolean;
+  secureText?: any;
 };
 
 export default InputDTO;
