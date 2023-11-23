@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     height: 58,
     paddingHorizontal: 20,
     color: "#fff",
-    fontFamily: "Poppins_500Medium",
+    // fontFamily: "Poppins_500Medium",
     display: "flex",
     fontSize: 16,
     alignContent: "center",
