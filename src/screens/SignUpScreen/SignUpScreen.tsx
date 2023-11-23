@@ -15,7 +15,7 @@ import AuthContext from "../../contexts/auth";
 
 const SignUpScreen = ({ navigation }) => {
   const { signUp } = useContext(AuthContext);
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(0);
 
   const [nome, setNome] = useState<string | null>();
   const [sobrenome, setSobrenome] = useState<string | null>();
