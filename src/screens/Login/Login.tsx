@@ -11,20 +11,22 @@ import SecurityIcon from "../../assents/Login/SecurityIcon";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
 import React from "react";
 import AuthContext from "../../contexts/auth";
+import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
 
 const Login = ({ navigation }) => {
-  const { signIn } = useContext(AuthContext);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const { signIn, user } = useContext(AuthContext);
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
   const handleEmail = (email: string) => {
     setEmail(email);
   };
+  const [text, setText] = useState<string>();
   const handlePassword = (password: string) => {
     setPassword(password);
   };
   const handleLogin = async () => {
-    const response = await signIn(email, password);
-    console.log(response);
+    const oi = await signIn(email, password);
+    console.log(oi);
   };
 
   const redirectToSignUp = () => {
@@ -47,6 +49,9 @@ const Login = ({ navigation }) => {
             <Texto weight="regular" style={styles.smallTitle}>
               Acesse a sua conta:
             </Texto>
+            <ErrorAlert isAlert={text != null} styles={styles.errorText}>
+              {text}
+            </ErrorAlert>
           </View>
           <View style={styles.inputContainer}>
             <InputLogin

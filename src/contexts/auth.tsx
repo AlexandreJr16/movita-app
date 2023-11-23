@@ -21,6 +21,11 @@ interface SignUpInfo {
   bairro: string;
   cidade: string;
 }
+interface ResponseAuthLogin {
+  user?: object;
+  token?: string;
+  message?: string;
+}
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -30,9 +35,9 @@ export const AuthProvider = ({ children }) => {
   async function signIn(email: string, senha: string) {
     try {
       const response = await auth.signIn(email, senha);
-      setUser(response.user);
+      if (response.user && response.token) setUser(response);
+      else return response;
     } catch (error) {
-      // Lide com erros de login, se necessário
       console.error("Erro no login:", error);
     }
   }
@@ -40,6 +45,7 @@ export const AuthProvider = ({ children }) => {
   async function signUp(userInfo: SignUpInfo) {
     try {
       const response = await auth.signUp(userInfo);
+      console.log(response);
     } catch (error) {
       console.error("Erro no cadastro:", error);
     }

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: "5%",
-    marginBottom: 60,
+    marginBottom: 40,
   },
   forgetPContainer: {
     paddingHorizontal: 12,
@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
   signIn: {
     color: "#fff",
     marginRight: 5,
+  },
+  errorText: {
+    color: "#C63818",
+    fontSize: 16,
   },
 });
 export default styles;

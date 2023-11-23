@@ -1,14 +1,5 @@
-interface Response {
-  access_token: string;
-  user: {};
-}
-interface SignUpResponse {
-  success: boolean;
-  message: string;
-}
-
-export function signIn(email: string, senha: string): Promise<Response> {
-  const url = "http://192.168.0.77:3000/auth/signin";
+export function signIn(email: string, senha: string) {
+  const url = "http://172.17.208.1:3000/auth/signin";
   const data = {
     email: email,
     senha: senha,
@@ -21,21 +12,11 @@ export function signIn(email: string, senha: string): Promise<Response> {
     },
     body: JSON.stringify(data),
   };
-
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then(async (resp) => {
-      const responseData = await resp.json();
-      console.log("Resposta da API:", responseData);
-      return responseData;
-    })
+  return fetch(url, options)
+    .then(async (resp) => resp.json())
+    .then((data) => data)
     .catch((error) => {
-      console.error("Erro na requisição:", error);
+      return console.log(error + "oi");
     });
 }
 
@@ -63,7 +44,7 @@ export function signUp({
   estado: string;
   bairro: string;
   cidade: string;
-}): Promise<SignUpResponse> {
+}) {
   const url = "http://192.168.0.77:3000/auth/signup"; // Verifique se a URL está correta
   const data = {
     email,
