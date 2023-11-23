@@ -1,4 +1,14 @@
-export function signIn(email: string, senha: string) {
+type ErroResponse = {
+  error: string;
+  message: string;
+  status: number;
+};
+type UserResponse = {
+  token: string;
+  user: object;
+};
+
+export const signIn = (email: string, senha: string): Promise<UserResponse> => {
   const url = "http://172.17.208.1:3000/auth/signin";
   const data = {
     email: email,
@@ -18,7 +28,7 @@ export function signIn(email: string, senha: string) {
     .catch((error) => {
       return console.log(error + "oi");
     });
-}
+};
 
 export function signUp({
   email,

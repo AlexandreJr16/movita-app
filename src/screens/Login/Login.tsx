@@ -14,19 +14,28 @@ import AuthContext from "../../contexts/auth";
 import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
 
 const Login = ({ navigation }) => {
-  const { signIn, user } = useContext(AuthContext);
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const { signIn } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [text, setText] = useState("");
+
   const handleEmail = (email: string) => {
     setEmail(email);
   };
-  const [text, setText] = useState<string>();
   const handlePassword = (password: string) => {
     setPassword(password);
   };
   const handleLogin = async () => {
-    const oi = await signIn(email, password);
-    if (oi != undefined) console.log("vai se foder caua");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email == "" || password == "") {
+      setText("Email/Senha inválidos");
+      return;
+    } else if (!emailRegex.test(email)) {
+      setText("Digite um email");
+      return;
+    } else setText("");
+    const response = await signIn(email, password);
+    if (response.message) setText(response.message);
   };
 
   const redirectToSignUp = () => {
@@ -70,7 +79,10 @@ const Login = ({ navigation }) => {
                 Esqueceu a senha?
               </Texto>
               <Pressable onPress={redirectToForgetPassword}>
-                <Texto weight="regular" style={styles.blueForgetPassword}>
+                <Texto
+                  weight="regular"
+                  style={text == "" ? styles.blueSignUp : styles.errorText}
+                >
                   Clique Aqui.
                 </Texto>
               </Pressable>
@@ -83,7 +95,10 @@ const Login = ({ navigation }) => {
               Não possui conta?
             </Texto>
             <Pressable onPress={redirectToSignUp}>
-              <Texto weight="regular" style={styles.blueSignUp}>
+              <Texto
+                weight="regular"
+                style={text == "" ? styles.blueSignUp : styles.errorText}
+              >
                 Cadastre-se.
               </Texto>
             </Pressable>

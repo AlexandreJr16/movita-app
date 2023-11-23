@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "#C63818",
-    fontSize: 16,
   },
 });
 export default styles;

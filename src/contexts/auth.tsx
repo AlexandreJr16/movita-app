@@ -1,13 +1,6 @@
 import React, { createContext, useState } from "react";
 import * as auth from "../service/auth";
 
-interface AuthContextData {
-  signIn(email: string, senha: string): Promise<void>;
-  signUp(userInfo: SignUpInfo): Promise<void>;
-  user: object | null;
-  signed: boolean;
-}
-
 interface SignUpInfo {
   email: string;
   senha: string;
@@ -21,22 +14,37 @@ interface SignUpInfo {
   bairro: string;
   cidade: string;
 }
-interface ResponseAuthLogin {
-  user?: object;
-  token?: string;
-  message?: string;
-}
 
+type SignInResponse = {
+  message: string;
+  token: string;
+  user: object;
+};
+
+interface AuthContextData {
+  signIn(email: string, senha: string): Promise<SignInResponse>;
+  signUp(userInfo: SignUpInfo): Promise<void>;
+  user: object | null;
+  signed: boolean;
+  token: string;
+}
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<object | null>(null);
+  const [token, setToken] = useState<string>();
 
-  async function signIn(email: string, senha: string) {
+  async function signIn(
+    email: string,
+    senha: string
+  ): Promise<SignInResponse | any> {
     try {
       const response = await auth.signIn(email, senha);
-      if (response.user && response.token) console.log("oi");
-      else return response;
+
+      if (response.user && response.token) {
+        setUser(response.user);
+        setToken(response.token);
+      } else return response;
     } catch (error) {
       console.error("Erro no login:", error);
     }
@@ -52,7 +60,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, signIn, signUp }}>
+    <AuthContext.Provider
+      value={{ signed: !!user, user, signIn, signUp, token }}
+    >
       {children}
     </AuthContext.Provider>
   );
