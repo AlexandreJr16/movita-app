@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   async function signIn(email: string, senha: string) {
     try {
       const response = await auth.signIn(email, senha);
-      if (response.user && response.token) setUser(response);
+      if (response.user && response.token) console.log("oi");
       else return response;
     } catch (error) {
       console.error("Erro no login:", error);

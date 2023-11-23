@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
   };
   const handleLogin = async () => {
     const oi = await signIn(email, password);
-    console.log(oi);
+    if (oi != undefined) console.log("vai se foder caua");
   };
 
   const redirectToSignUp = () => {
