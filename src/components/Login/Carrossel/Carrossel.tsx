@@ -5,6 +5,7 @@ import GaveteiroAzul from "../../../assents/Login/GaveteiroAzul";
 import GaveteiroCreme from "../../../assents/Login/GaveteiroCreme";
 import GaveteiroVermelho from "../../../assents/Login/GaveteiroVermelho";
 import Texto from "../../texto/Texto";
+import { carousel } from "./data";
 
 const SLIDER_WIDTH = Dimensions.get("window").width;
 const SLIDER_HEIGHT = Dimensions.get("window").height;
@@ -31,22 +32,6 @@ const Item = ({ item }: { item: { color: string; img: any } }) => {
 };
 
 export const Carrossel = () => {
-  const carousel = [
-    {
-      color: "#A64029",
-      img: <GaveteiroVermelho />,
-    },
-    {
-      color: "#36A5BF",
-      img: <GaveteiroAzul />,
-    },
-
-    {
-      color: "#BF9969",
-      img: <GaveteiroCreme />,
-    },
-  ];
-
   return (
     <View>
       <Carousel
@@ -59,6 +44,8 @@ export const Carrossel = () => {
         itemHeight={ITEM_HEIGHT}
         loop={true}
         inactiveSlideOpacity={1}
+        autoplay={true}
+        autoplayInterval={5000}
       />
     </View>
   );
