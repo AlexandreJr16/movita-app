@@ -3,7 +3,7 @@ import Texto from "../../components/texto/Texto";
 import styles from "./styles";
 import { useState, useContext } from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
-import Logo from "../../assents/Login/Logo";
+import Logo from "../../components/Logo/Logo";
 import { SafeAreaView } from "react-native-safe-area-context";
 import InputLogin from "../../components/Login/Input/InputLogin";
 import UserIcon from "../../assents/Login/UserIcon";

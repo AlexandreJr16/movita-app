@@ -49,6 +49,7 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
     "Visualize móveis em seu ambiente.",
     "Acompanhe o progresso de seu móvel.",
   ];
+
   const updateImage = (page: number) => {
     switch (page) {
       case 1:
@@ -65,6 +66,7 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
         break;
     }
   };
+
   const updateImageProgress = (page: number) => {
     switch (page) {
       case 1:
@@ -96,7 +98,6 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
   const { bg, textColor, btnFontColor, btnBgColor } = pages[page % 3];
 
   return (
-    <SafeAreaView>
       <View style={[styles.container, { backgroundColor: bg }]}>
         {img}
         <View style={styles.textView}>
@@ -118,6 +119,5 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
           </Button>
         </View>
       </View>
-    </SafeAreaView>
   );
 }

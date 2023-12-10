@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Logo from "../../assents/Login/Logo";
+import Logo from "../../components/Logo/Logo";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import styles from "./styles";
 import Texto from "../../components/texto/Texto";
