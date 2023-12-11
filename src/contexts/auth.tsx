@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import * as auth from "../service/auth";
+import { Use } from "react-native-svg";
 
 interface SignUpInfo {
   email: string;
@@ -13,6 +14,7 @@ interface SignUpInfo {
   estado: string;
   bairro: string;
   cidade: string;
+  tipo_usuario: string;
 }
 
 type SignInResponse = {
@@ -21,17 +23,25 @@ type SignInResponse = {
   user: object;
 };
 
+interface User {
+  id: number;
+  email: string;
+  nome: string;
+  sobrenome: string;
+  telefone: string;
+  tipo: string;
+}
 interface AuthContextData {
   signIn(email: string, senha: string): Promise<SignInResponse>;
   signUp(userInfo: SignUpInfo): Promise<void>;
-  user: object | null;
+  user: User | null;
   signed: boolean;
   token: string;
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string>();
 
   async function signIn(
@@ -40,9 +50,10 @@ export const AuthProvider = ({ children }) => {
   ): Promise<SignInResponse | any> {
     try {
       const response = await auth.signIn(email, senha);
+      console.log(response.user);
 
       if (response.user && response.token) {
-        setUser(response.user);
+        setUser(response.user as User | null);
         setToken(response.token);
       } else return response;
     } catch (error) {

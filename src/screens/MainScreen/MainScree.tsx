@@ -8,13 +8,14 @@ import Logo from "../../components/Logo/Logo";
 
 export default function MainScrenn() {
   const { token, user } = useContext(AuthContext);
+  const { nome } = user;
   return (
     <View style={styles.background}>
       <SafeAreaView>
         <Logo color="#FFFFFF" size="50"></Logo>
         <View>
           <Texto weight="bold" style={styles.titleMessage}>
-            Olá, Fulano
+            Olá, {nome}
           </Texto>
           <Texto weight="bold" style={styles.subtitleMessage}>
             Seja bem-vindo(a) ao Movita!

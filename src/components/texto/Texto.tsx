@@ -18,7 +18,7 @@ interface CustomViewStyle extends ViewStyle {
 }
 
 interface TextProps {
-  children: string;
+  children: any;
   weight: StyleOptions;
   style?: CustomViewStyle | null;
 }

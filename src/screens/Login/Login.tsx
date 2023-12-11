@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
       return;
     } else setText("");
     const response = await signIn(email, password);
-    if (response.message) setText(response.message);
+    // if (response.message != undefined) setText(response.message);
   };
 
   const redirectToSignUp = () => {
