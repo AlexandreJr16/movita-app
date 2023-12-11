@@ -1,3 +1,5 @@
+import { API_URL } from "../../configs";
+
 type ErroResponse = {
   error: string;
   message: string;
@@ -9,7 +11,7 @@ type UserResponse = {
 };
 
 export const signIn = (email: string, senha: string): Promise<UserResponse> => {
-  const url = "http://172.17.208.1:3000/auth/signin";
+  const url = API_URL + "/auth/signin";
   const data = {
     email: email,
     senha: senha,
@@ -33,6 +35,7 @@ export const signIn = (email: string, senha: string): Promise<UserResponse> => {
 export function signUp({
   email,
   senha,
+  tipo_usuario,
   nome,
   telefone,
   cpf,
@@ -45,6 +48,7 @@ export function signUp({
 }: {
   email: string;
   senha: string;
+  tipo_usuario: string;
   nome: string;
   telefone: string;
   cpf: string;
@@ -55,10 +59,11 @@ export function signUp({
   bairro: string;
   cidade: string;
 }) {
-  const url = "http://192.168.0.77:3000/auth/signup"; // Verifique se a URL está correta
+  const url = API_URL + "/auth/signup";
   const data = {
     email,
     senha,
+    tipo_usuario,
     nome,
     telefone,
     cpf,

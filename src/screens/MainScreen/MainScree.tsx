@@ -6,16 +6,19 @@ import styles from "./styles";
 import Texto from "../../components/texto/Texto";
 import Logo from "../../components/Logo/Logo";
 
-
 export default function MainScrenn() {
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   return (
     <View style={styles.background}>
       <SafeAreaView>
-        <Logo color='#FFFFFF' size='50'></Logo>
+        <Logo color="#FFFFFF" size="50"></Logo>
         <View>
-          <Texto weight="bold" style={styles.titleMessage}>Olá, Fulano</Texto>
-          <Texto weight="bold" style={styles.subtitleMessage}>Seja bem-vindo(a) ao Movita!</Texto>
+          <Texto weight="bold" style={styles.titleMessage}>
+            Olá, Fulano
+          </Texto>
+          <Texto weight="bold" style={styles.subtitleMessage}>
+            Seja bem-vindo(a) ao Movita!
+          </Texto>
         </View>
       </SafeAreaView>
     </View>
