@@ -41,7 +41,14 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>({
+    email: "xandinhosapequinha@gmail.com",
+    id: 69,
+    nome: "Xandinho",
+    sobrenome: "Pederasta",
+    telefone: "92988012728",
+    tipo: "cliente",
+  });
   const [token, setToken] = useState<string>();
 
   async function signIn(
