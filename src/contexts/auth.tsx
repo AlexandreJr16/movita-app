@@ -33,7 +33,7 @@ interface User {
 }
 interface AuthContextData {
   signIn(email: string, senha: string): Promise<SignInResponse>;
-  signUp(userInfo: SignUpInfo): Promise<void>;
+  signUp(userInfo: SignUpInfo): any;
   user: User | null;
   signed: boolean;
   token: string;
@@ -41,14 +41,7 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState<User | null>({
-    email: "xandinhosapequinha@gmail.com",
-    id: 69,
-    nome: "Xandinho",
-    sobrenome: "Pederasta",
-    telefone: "92988012728",
-    tipo: "cliente",
-  });
+  const [user, setUser] = useState<User | null>();
   const [token, setToken] = useState<string>();
 
   async function signIn(
@@ -71,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   async function signUp(userInfo: SignUpInfo) {
     try {
       const response = await auth.signUp(userInfo);
-      console.log(response);
+      //Tá aqui po
     } catch (error) {
       console.error("Erro no cadastro:", error);
     }

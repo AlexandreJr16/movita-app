@@ -65,7 +65,6 @@ const SignUpScreen = ({ navigation }) => {
       };
 
       const response = signUp(obj);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

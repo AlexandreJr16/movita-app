@@ -83,16 +83,15 @@ export function signUp({
     body: JSON.stringify(data),
   };
 
-  // Retorna a promise da requisição
-  return fetch(url, options)
+  const user = fetch(url, options)
     .then(async (resp) => {
       const responseData = await resp.json();
       console.log("Resposta da API:", responseData);
-      return responseData;
+      return { id: responseData.id };
     })
     .catch((error) => {
       console.error("Erro na requisição:", error);
-      // Se ocorrer um erro, você pode decidir como lidar com isso aqui
       return { success: false, message: "Erro na requisição" };
     });
+  return user;
 }
