@@ -64,12 +64,13 @@ export const AuthProvider = ({ children }) => {
   async function signUp(userInfo: SignUpInfo) {
     try {
       const response = await auth.signUp(userInfo);
-      //Tá aqui po
+      if (response) {
+        setToken("Non-Resp-butCad");
+      }
     } catch (error) {
       console.error("Erro no cadastro:", error);
     }
   }
-
   return (
     <AuthContext.Provider
       value={{ signed: !!user, user, signIn, signUp, token }}

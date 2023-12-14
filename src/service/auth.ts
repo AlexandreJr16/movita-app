@@ -1,34 +1,50 @@
+import axios, { AxiosError } from "axios";
 import { API_URL } from "../../configs";
 
-type ErroResponse = {
+type ErrorResponse = {
   error: string;
   message: string;
   status: number;
 };
+
 type UserResponse = {
   token: string;
   user: object;
 };
 
+const handleApiError = (error: AxiosError<ErrorResponse>) => {
+  if (error.response) {
+    console.error(`Erro na requisição. Status: ${error.response.status}`);
+    console.error("Detalhes:", error.response.data);
+    throw error.response.data;
+  } else if (error.request) {
+    console.error("Não houve resposta da API. Verifique sua conexão.");
+    throw { success: false, message: "Erro de conexão com a API" };
+  } else {
+    // Ocorreu um erro ao configurar a requisição
+    console.error("Erro ao configurar a requisição para a API.");
+    throw { success: false, message: "Erro na configuração da requisição" };
+  }
+};
+
 export const signIn = (email: string, senha: string): Promise<UserResponse> => {
-  const url = API_URL + "/auth/signin";
+  const url = `${API_URL}/auth/signin`;
   const data = {
     email: email,
     senha: senha,
   };
 
   const options = {
-    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
   };
-  return fetch(url, options)
-    .then(async (resp) => resp.json())
-    .then((data) => data)
-    .catch((error) => {
-      return console.log(error + "oi");
+
+  return axios
+    .post(url, data, options)
+    .then((resp) => resp.data)
+    .catch((error: AxiosError<ErrorResponse>) => {
+      handleApiError(error);
     });
 };
 
@@ -59,7 +75,7 @@ export function signUp({
   bairro: string;
   cidade: string;
 }) {
-  const url = API_URL + "/auth/signup";
+  const url = `${API_URL}/auth/signup`;
   const data = {
     email,
     senha,
@@ -76,22 +92,18 @@ export function signUp({
   };
 
   const options = {
-    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
   };
-
-  const user = fetch(url, options)
-    .then(async (resp) => {
-      const responseData = await resp.json();
-      console.log("Resposta da API:", responseData);
-      return { id: responseData.id };
+  const user = axios
+    .post(url, data, options)
+    .then((resp) => {
+      const responseData = resp.data;
+      if (responseData.id) return true;
     })
-    .catch((error) => {
-      console.error("Erro na requisição:", error);
-      return { success: false, message: "Erro na requisição" };
+    .catch((error: AxiosError<ErrorResponse>) => {
+      handleApiError(error);
     });
   return user;
 }
