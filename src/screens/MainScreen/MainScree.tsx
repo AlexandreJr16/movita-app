@@ -8,12 +8,11 @@ import Logo from "../../components/Logo/Logo";
 import HeaderMain from "../../components/Main/Header";
 
 export default function MainScrenn() {
-  const { token, user } = useContext(AuthContext);
-  const { nome } = user;
+  const {} = useContext(AuthContext);
   return (
     <View style={styles.background}>
       <SafeAreaView>
-        <HeaderMain image={user.imagem} name={nome} />
+        <HeaderMain />
       </SafeAreaView>
     </View>
   );
