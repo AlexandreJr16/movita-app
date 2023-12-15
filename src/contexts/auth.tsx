@@ -25,11 +25,11 @@ type SignInResponse = {
 
 interface User {
   id: number;
-  email: string;
   nome: string;
-  sobrenome: string;
-  telefone: string;
+  email: string;
   tipo: string;
+  endereco: any;
+  imagem: any;
 }
 interface AuthContextData {
   signIn(email: string, senha: string): Promise<SignInResponse>;
@@ -37,6 +37,7 @@ interface AuthContextData {
   user: User | null;
   signed: boolean;
   token: string;
+  getUser: any;
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -50,10 +51,10 @@ export const AuthProvider = ({ children }) => {
   ): Promise<SignInResponse | any> {
     try {
       const response = await auth.signIn(email, senha);
-      console.log(response.user);
+      if (response.token) {
+        const baseUser = await getUser(response.token);
+        if (baseUser.id) setUser(baseUser);
 
-      if (response.user && response.token) {
-        setUser(response.user as User | null);
         setToken(response.token);
       } else return response;
     } catch (error) {
@@ -71,9 +72,17 @@ export const AuthProvider = ({ children }) => {
       console.error("Erro no cadastro:", error);
     }
   }
+  async function getUser(token: string): Promise<any> {
+    try {
+      const response = await auth.getUser(token);
+      return response;
+    } catch (error) {
+      throw Error("errado");
+    }
+  }
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signUp, token }}
+      value={{ signed: !!user, user, signIn, signUp, token, getUser }}
     >
       {children}
     </AuthContext.Provider>

@@ -107,3 +107,21 @@ export function signUp({
     });
   return user;
 }
+export const getUser = async (token: string): Promise<any> => {
+  const url = `${API_URL}/user`;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+
+  const user = await axios
+    .get(url, options)
+    .then((resp) => resp.data)
+    .catch((error: AxiosError<ErrorResponse>) => {
+      handleApiError(error);
+    });
+  return user;
+};
