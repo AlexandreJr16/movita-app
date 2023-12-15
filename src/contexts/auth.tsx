@@ -29,7 +29,7 @@ interface User {
   email: string;
   tipo: string;
   endereco: any;
-  imagem: any;
+  img: any;
 }
 interface AuthContextData {
   signIn(email: string, senha: string): Promise<SignInResponse>;
@@ -37,7 +37,6 @@ interface AuthContextData {
   user: User | null;
   signed: boolean;
   token: string;
-  getUser: any;
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -52,8 +51,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await auth.signIn(email, senha);
       if (response.token) {
-        const baseUser = await getUser(response.token);
-        if (baseUser.id) setUser(baseUser);
+        await getUser(response.token);
 
         setToken(response.token);
       } else return response;
@@ -75,14 +73,19 @@ export const AuthProvider = ({ children }) => {
   async function getUser(token: string): Promise<any> {
     try {
       const response = await auth.getUser(token);
-      return response;
+      if (response.img) {
+        setUser(response);
+        console.log("tudo ok");
+      } else {
+        console.log("nada ok");
+      }
     } catch (error) {
       throw Error("errado");
     }
   }
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signUp, token, getUser }}
+      value={{ signed: !!user, user, signIn, signUp, token }}
     >
       {children}
     </AuthContext.Provider>
