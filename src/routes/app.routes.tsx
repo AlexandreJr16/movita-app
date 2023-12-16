@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../screens/Login/Login";
-import MainScrenn from "../screens/MainScreen/MainScree";
+import MainScrenn from "../screens/MainScreen/MainScreen";
 
 const AppRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();

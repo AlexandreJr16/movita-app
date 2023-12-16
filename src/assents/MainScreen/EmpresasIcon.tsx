@@ -1,12 +1,12 @@
-import * as React from "react"
-import Svg, { Circle, Path, Defs, Pattern, Use, Image } from "react-native-svg"
+import * as React from "react";
+import Svg, { Circle, Path, Defs, Pattern, Use, Image } from "react-native-svg";
 
-function EmpresasIcon(props) {
+function EmpresaIcon(props) {
   return (
     <Svg
-      width={80}
+      width={81}
       height={80}
-      viewBox="0 0 80 80"
+      viewBox="0 0 81 80"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -31,7 +31,7 @@ function EmpresasIcon(props) {
         />
       </Defs>
     </Svg>
-  )
+  );
 }
 
-export default EmpresasIcon
+export default EmpresaIcon;

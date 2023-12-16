@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 20,
     backgroundColor: "#1F1F1F",
-    borderRadius: 20,
+    borderBottomLeftRadius: 50,
   },
   logo: {
     marginVertical: 10,

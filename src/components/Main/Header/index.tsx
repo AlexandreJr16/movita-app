@@ -16,13 +16,14 @@ const HeaderMain = () => {
       <View style={styles.infoContainer}>
         <View style={styles.welcome}>
           <Texto weight="bold" style={styles.titleMessage}>
-            Olá, {user.nome}
+            {/* Olá, {user.nome} */}
+            Olá, Ale
           </Texto>
           <Texto weight="bold" style={styles.subtitleMessage}>
             Seja bem-vindo(a) ao Movita!
           </Texto>
         </View>
-        <ImagemBuffer imgBuffer={user.img} style={styles.img} />
+        {/* <ImagemBuffer imgBuffer={user.img} style={styles.img} /> */}
       </View>
     </View>
   );
