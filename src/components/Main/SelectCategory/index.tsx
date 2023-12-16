@@ -5,16 +5,26 @@ import ProjetosIcon from "../../../assents/MainScreen/ProjetosIcon";
 import styles from "./styles";
 
 const SelectCategory = () => {
+  const color = ["#36A5BF", "#A64029", "#BF9969"];
   return (
     <View style={styles.selectContainer}>
-      <Pressable>
-        <EmpresasIcon />
+      <Pressable
+        onPress={() => {}}
+        style={{ ...styles.btn, backgroundColor: color[0] }}
+      >
+        <ProjetosIcon style={styles.img} />
       </Pressable>
-      <Pressable>
-        <ModelosIcon />
+      <Pressable
+        onPress={() => {}}
+        style={{ ...styles.btn, backgroundColor: color[1] }}
+      >
+        <EmpresasIcon style={styles.img} />
       </Pressable>
-      <Pressable>
-        <ProjetosIcon />
+      <Pressable
+        onPress={() => {}}
+        style={{ ...styles.btn, backgroundColor: color[2] }}
+      >
+        <ModelosIcon style={styles.img} />
       </Pressable>
     </View>
   );

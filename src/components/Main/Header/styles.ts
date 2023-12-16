@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   },
   welcome: {
     width: "80%",
+    gap: -10,
   },
   img: {
     width: 60,
