@@ -11,7 +11,7 @@ export default function MainScrenn() {
   const {} = useContext(AuthContext);
   return (
     <View style={styles.background}>
-      <SafeAreaView>
+      <SafeAreaView style={{ backgroundColor: "#1f1f1f" }}>
         <HeaderMain />
       </SafeAreaView>
     </View>

@@ -75,9 +75,6 @@ export const AuthProvider = ({ children }) => {
       const response = await auth.getUser(token);
       if (response.img) {
         setUser(response);
-        console.log("tudo ok");
-      } else {
-        console.log("nada ok");
       }
     } catch (error) {
       throw Error("errado");

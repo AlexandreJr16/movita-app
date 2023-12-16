@@ -8,14 +8,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 10,
     paddingVertical: 20,
+    backgroundColor: "#1F1F1F",
+    borderRadius: 20,
+  },
+  logo: {
+    marginVertical: 10,
   },
   titleMessage: {
-    fontSize: 32,
+    fontSize: 30,
     color: "#FFFFFF",
   },
 
   subtitleMessage: {
-    fontSize: 20,
+    fontSize: 17,
     color: "#FFFFFF",
   },
   infoContainer: {
@@ -23,8 +28,16 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
   },
-  sla: { width: 50, height: 50 },
+  welcome: {
+    width: "80%",
+  },
+  img: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+  },
 });
 
 export default styles;
