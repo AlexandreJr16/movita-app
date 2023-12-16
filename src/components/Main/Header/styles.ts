@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  sla: { width: 50, height: 50 },
 });
 
 export default styles;
