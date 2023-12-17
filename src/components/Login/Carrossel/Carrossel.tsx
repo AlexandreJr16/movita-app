@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+//import { View, Image, StatusBar, Text, Dimensions } from "react-native";
 import { View, Image, StatusBar, Text, Dimensions } from "react-native";
+
 import Carousel from "react-native-snap-carousel";
 import GaveteiroAzul from "../../../assents/Login/GaveteiroAzul";
 import GaveteiroCreme from "../../../assents/Login/GaveteiroCreme";

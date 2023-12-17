@@ -9,11 +9,10 @@ import SelectCategory from "../../components/Main/SelectCategory";
 export default function MainScren() {
   const {} = useContext(AuthContext);
   return (
-    <SafeAreaView style={{ backgroundColor: "#1f1f1f" }}>
+    
       <View style={styles.background}>
         <HeaderMain />
         <SelectCategory />
       </View>
-    </SafeAreaView>
   );
 }
