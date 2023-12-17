@@ -6,13 +6,12 @@ import styles from "./styles";
 import HeaderMain from "../../components/Main/Header";
 import SelectCategory from "../../components/Main/SelectCategory";
 
-export default function MainScren() {
+export default function MainScreen() {
   const {} = useContext(AuthContext);
   return (
-    
-      <View style={styles.background}>
-        <HeaderMain />
-        <SelectCategory />
-      </View>
+    <View style={styles.background}>
+      <HeaderMain />
+      <SelectCategory />
+    </View>
   );
 }
