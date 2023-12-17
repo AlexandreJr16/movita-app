@@ -25,15 +25,15 @@ type SignInResponse = {
 
 interface User {
   id: number;
-  email: string;
   nome: string;
-  sobrenome: string;
-  telefone: string;
+  email: string;
   tipo: string;
+  endereco: any;
+  img: any;
 }
 interface AuthContextData {
   signIn(email: string, senha: string): Promise<SignInResponse>;
-  signUp(userInfo: SignUpInfo): Promise<void>;
+  signUp(userInfo: SignUpInfo): any;
   user: User | null;
   signed: boolean;
   token: string;
@@ -41,14 +41,7 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState<User | null>({
-    email: "xandinhosapequinha@gmail.com",
-    id: 69,
-    nome: "Xandinho",
-    sobrenome: "Pederasta",
-    telefone: "92988012728",
-    tipo: "cliente",
-  });
+  const [user, setUser] = useState<User | null>();
   const [token, setToken] = useState<string>();
 
   async function signIn(
@@ -57,10 +50,9 @@ export const AuthProvider = ({ children }) => {
   ): Promise<SignInResponse | any> {
     try {
       const response = await auth.signIn(email, senha);
-      console.log(response.user);
+      if (response.token) {
+        await getUser(response.token);
 
-      if (response.user && response.token) {
-        setUser(response.user as User | null);
         setToken(response.token);
       } else return response;
     } catch (error) {
@@ -71,12 +63,23 @@ export const AuthProvider = ({ children }) => {
   async function signUp(userInfo: SignUpInfo) {
     try {
       const response = await auth.signUp(userInfo);
-      console.log(response);
+      if (response) {
+        setToken("Non-Resp-butCad");
+      }
     } catch (error) {
       console.error("Erro no cadastro:", error);
     }
   }
-
+  async function getUser(token: string): Promise<any> {
+    try {
+      const response = await auth.getUser(token);
+      if (response.img) {
+        setUser(response);
+      }
+    } catch (error) {
+      throw Error("errado");
+    }
+  }
   return (
     <AuthContext.Provider
       value={{ signed: !!user, user, signIn, signUp, token }}

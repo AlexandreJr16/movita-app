@@ -34,11 +34,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         gap: 4,
     },
-
-    titleMessage :{
-        fontSize: 32,
-        color: '#FFFFFF' 
-    },
+  titleMessage: {
+    fontSize: 32,
+    color: "#FFFFFF",
+  },
 
     subtitleMessage :{
         fontSize: 20,

@@ -14,7 +14,7 @@ import AuthContext from "../../contexts/auth";
 import { valorMesParaNumero } from "./functions";
 
 const SignUpScreen = ({ navigation }) => {
-  const { signUp } = useContext(AuthContext);
+  const { signUp, token } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     nome: "",
     sobrenome: "",
@@ -65,7 +65,10 @@ const SignUpScreen = ({ navigation }) => {
       };
 
       const response = signUp(obj);
-      console.log(response);
+
+      if (token == "Non-Resp-butCad") {
+        navigation.navigate("Login");
+      }
     } catch (error) {
       console.log(error);
     }
