@@ -9,11 +9,12 @@ const styles = StyleSheet.create({
   modalContent: {
     width: 200,
     padding: 20,
-    backgroundColor: "white",
+    backgroundColor: "#2b2b2b",
     borderRadius: 10,
     alignItems: "center",
   },
   loadingText: {
+    color: "white",
     marginTop: 10,
   },
 });

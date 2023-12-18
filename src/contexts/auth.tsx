@@ -69,12 +69,10 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await auth.signUp(userInfo);
-      if (response) {
-        setToken("Non-Resp-butCad");
-      }
     } catch (error) {
       console.error("Erro no cadastro:", error);
     } finally {
+      setToken("Non-Resp-butCad");
       setLoading(false);
     }
   }
