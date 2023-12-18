@@ -12,20 +12,26 @@ const HeaderMain = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <SafeAreaView style={styles.headerCard}>
-      <Logo color="#FFFFFF" size="35" style={styles.logo}></Logo>
-      <View style={styles.infoContainer}>
-        <View style={styles.welcome}>
-          <Texto weight="bold" style={styles.titleMessage}>
-            Olá, {user.nome}
-          </Texto>
-          <Texto weight="bold" style={styles.subtitleMessage}>
-            Seja bem-vindo(a) ao Movita!
-          </Texto>
+    <View style={styles.headerCard}>
+      <SafeAreaView style={styles.headerCard}>
+        <Logo color="#FFFFFF" size="35" style={styles.logo}></Logo>
+        <View style={styles.infoContainer}>
+          <View style={styles.welcome}>
+            <Texto weight="bold" style={styles.titleMessage}>
+              {/* Olá, {user.nome} */}
+              {user ? `Olá, ${user.nome}` : "Olá, Cliente"}
+            </Texto>
+            <Texto weight="bold" style={styles.subtitleMessage}>
+              Seja bem-vindo(a) ao Movita!
+            </Texto>
+          </View>
+          {/* <ImagemBuffer imgBuffer={user.img} style={styles.img} /> */}
+          {user.img ? (
+            <ImagemBuffer imgBuffer={user.img} style={styles.img} />
+          ) : null}
         </View>
-         <ImagemBuffer imgBuffer={user.img} style={styles.img}/>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </View>
   );
 };
 
