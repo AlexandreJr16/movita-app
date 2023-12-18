@@ -12,9 +12,10 @@ import { meses, estadosBrasil, sexoArr } from "./data";
 import DropDCadastro from "../../components/Cadastro/DropDown/DropDownCad";
 import AuthContext from "../../contexts/auth";
 import { valorMesParaNumero } from "./functions";
+import LoadingIndicator from "../../components/Loading";
 
 const SignUpScreen = ({ navigation }) => {
-  const { signUp, token } = useContext(AuthContext);
+  const { signUp, token, loading } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     nome: "",
     sobrenome: "",
@@ -204,6 +205,7 @@ const SignUpScreen = ({ navigation }) => {
           </View>
 
           <LoginButton text={pages[page].text} func={handlePages} />
+          <LoadingIndicator visible={loading} />
         </View>
       </ScrollView>
     </SafeAreaView>
