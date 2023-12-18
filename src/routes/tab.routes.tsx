@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import MainScreen from "../screens/MainScreen/MainScreen";
@@ -8,6 +10,11 @@ import Home from "../assents/NavBar/NoSelected/Home";
 import Message from "../assents/NavBar/NoSelected/Message";
 import Perfil from "../assents/NavBar/NoSelected/Perfil";
 import Search from "../assents/NavBar/NoSelected/Search";
+import React from "react";
+import MessageSelected from "../assents/NavBar/Selected/SelectedMessage";
+import SearchSelected from "../assents/NavBar/Selected/SelectedSearch";
+import PerfilSelected from "../assents/NavBar/Selected/SelectedPerfil";
+import HomeSelected from "../assents/NavBar/Selected/SelectedHome";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,28 +22,40 @@ export default function TabRoutes() {
   return (
     <Tab.Navigator
       initialRouteName="main"
-      screenOptions={{ headerShown: false }}
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarStyle: styles.tabBar,
+        tabBarItemStyle: styles.tabBarItem,
+        tabBarLabel: () => null,
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "main") {
+            iconName = focused ? <HomeSelected /> : <Home />;
+          } else if (route.name === "chat") {
+            iconName = focused ? <MessageSelected /> : <Message />;
+          } else if (route.name === "search") {
+            iconName = focused ? <SearchSelected /> : <Search />;
+          } else if (route.name === "perfil") {
+            iconName = focused ? <PerfilSelected /> : <Perfil />;
+          }
+
+          return iconName;
+        },
+      })}
     >
-      <Tab.Screen
-        name="main"
-        component={MainScreen}
-        options={{ tabBarIcon: () => <Home /> }}
-      ></Tab.Screen>
-      <Tab.Screen
-        name="chat"
-        component={ChatScreen}
-        options={{ tabBarIcon: () => <Message /> }}
-      ></Tab.Screen>
-      <Tab.Screen
-        name="search"
-        component={SearchScreen}
-        options={{ tabBarIcon: () => <Search /> }}
-      ></Tab.Screen>
-      <Tab.Screen
-        name="perfil"
-        component={PerfilScreen}
-        options={{ tabBarIcon: () => <Perfil /> }}
-      ></Tab.Screen>
+      <Tab.Screen name="main" component={MainScreen}></Tab.Screen>
+      <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
+      <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
+      <Tab.Screen name="perfil" component={PerfilScreen}></Tab.Screen>
     </Tab.Navigator>
   );
 }
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: "#1f1f1f",
+    height: "7%",
+    paddingBottom: "3%",
+  },
+  tabBarItem: {},
+});
