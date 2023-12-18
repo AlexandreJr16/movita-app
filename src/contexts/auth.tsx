@@ -37,18 +37,21 @@ interface AuthContextData {
   user: User | null;
   signed: boolean;
   token: string;
+  loading: boolean;
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User | null>();
   const [token, setToken] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function signIn(
     email: string,
     senha: string
   ): Promise<SignInResponse | any> {
     try {
+      setLoading(true);
       const response = await auth.signIn(email, senha);
       if (response.token) {
         await getUser(response.token);
@@ -57,17 +60,22 @@ export const AuthProvider = ({ children }) => {
       } else return response;
     } catch (error) {
       console.error("Erro no login:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
   async function signUp(userInfo: SignUpInfo) {
     try {
+      setLoading(true);
       const response = await auth.signUp(userInfo);
       if (response) {
         setToken("Non-Resp-butCad");
       }
     } catch (error) {
       console.error("Erro no cadastro:", error);
+    } finally {
+      setLoading(false);
     }
   }
   async function getUser(token: string): Promise<any> {
@@ -82,7 +90,7 @@ export const AuthProvider = ({ children }) => {
   }
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signUp, token }}
+      value={{ signed: !!user, user, signIn, signUp, token, loading }}
     >
       {children}
     </AuthContext.Provider>

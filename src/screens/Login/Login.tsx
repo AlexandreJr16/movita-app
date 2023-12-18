@@ -12,9 +12,10 @@ import LoginButton from "../../components/Login/LoginButton/LoginButton";
 import React from "react";
 import AuthContext from "../../contexts/auth";
 import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
+import LoadingIndicator from "../../components/Loading";
 
 const Login = ({ navigation }) => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loading } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [text, setText] = useState("");
@@ -102,6 +103,7 @@ const Login = ({ navigation }) => {
                 Cadastre-se.
               </Texto>
             </Pressable>
+            <LoadingIndicator visible={loading} />
           </View>
         </View>
       </ScrollView>
