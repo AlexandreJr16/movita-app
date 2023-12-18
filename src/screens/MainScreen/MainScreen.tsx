@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
-import { View, Text } from "react-native";
+import { View, ScrollView } from "react-native";
 import AuthContext from "../../contexts/auth";
 import styles from "./styles";
 import HeaderMain from "../../components/Main/Header";
 import SelectCategory from "../../components/Main/SelectCategory";
-import SearchSelected from "../../assents/NavBar/Selected/SelectedPerfil";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MainScreen() {
   const {} = useContext(AuthContext);
   return (
-    <View style={styles.background}>
-      <HeaderMain />
-      <SelectCategory />
-    </View>
+    <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
+      <ScrollView style={styles.background}>
+        <HeaderMain />
+        <SelectCategory />
+      </ScrollView>
+    </SafeAreaView>
   );
 }

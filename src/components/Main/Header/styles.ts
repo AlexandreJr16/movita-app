@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   logo: {
-    marginVertical: 10,
+    marginBottom: 15,
   },
   titleMessage: {
     fontSize: 30,
