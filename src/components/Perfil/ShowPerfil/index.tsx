@@ -1,0 +1,24 @@
+import AuthContext from "../../../contexts/auth";
+import React, { useContext } from "react";
+import styles from "./styles";
+import { View } from "react-native";
+import ImagemBuffer from "../../Imagem";
+import Texto from "../../texto/Texto";
+
+const ShowPerfil = () => {
+  const { user } = useContext(AuthContext);
+  return (
+    <View style={styles.container}>
+      {user.img ? (
+        <ImagemBuffer imgBuffer={user.img} style={styles.img} />
+      ) : null}
+      <View style={styles.textContainer}>
+        <Texto style={styles.title} weight={"bold"}>
+          {user.nome}
+        </Texto>
+      </View>
+    </View>
+  );
+};
+
+export default ShowPerfil;

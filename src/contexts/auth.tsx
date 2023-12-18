@@ -54,14 +54,15 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       const response = await auth.signIn(email, senha);
       if (response.token) {
-        await getUser(response.token);
-
         setToken(response.token);
-      } else return response;
+        await getUser(response.token);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        return response;
+      }
     } catch (error) {
       console.error("Erro no login:", error);
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -72,8 +73,8 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Erro no cadastro:", error);
     } finally {
-      setToken("Non-Resp-butCad");
       setLoading(false);
+      setToken("Non-Resp-butCad");
     }
   }
   async function getUser(token: string): Promise<any> {
