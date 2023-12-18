@@ -6,7 +6,10 @@ import TabRoutes from "./tab.routes";
 
 const Routes: React.FC = () => {
   const { signed } = useContext(AuthContext);
+
   /* return signed ? <AppRoutes /> : <AuthRoutes />; */
   return signed ? <TabRoutes /> : <AuthRoutes />; //rota alterada para não precisar de autenticação para ida ao menu
+  
+  
 };
 export default Routes;
