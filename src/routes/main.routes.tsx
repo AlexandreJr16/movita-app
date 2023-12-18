@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../screens/Login/Login";
 import MainScrenn from "../screens/MainScreen/MainScreen";
 
-const AppRoutes: React.FC = () => {
+const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
 
   return (
@@ -16,4 +16,4 @@ const AppRoutes: React.FC = () => {
   );
 };
 
-export default AppRoutes;
+export default MainRoutes;

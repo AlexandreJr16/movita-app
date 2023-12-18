@@ -1,4 +1,4 @@
-import AppRoutes from "./app.routes";
+import AppRoutes from "./main.routes";
 import React, { useContext } from "react";
 import AuthContext from "../contexts/auth";
 import AuthRoutes from "./auth.routes";
@@ -9,7 +9,5 @@ const Routes: React.FC = () => {
 
   /* return signed ? <AppRoutes /> : <AuthRoutes />; */
   return signed ? <TabRoutes /> : <AuthRoutes />; //rota alterada para não precisar de autenticação para ida ao menu
-  
-  
 };
 export default Routes;

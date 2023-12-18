@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import MainScreen from "../screens/MainScreen/MainScreen";
+import MainRoutes from "./main.routes";
 import ChatScreen from "../screens/ChatScreen";
 import SearchScreen from "../screens/SearchScreen";
 import PerfilScreen from "../screens/PerfilScreen";
@@ -15,6 +15,7 @@ import MessageSelected from "../assents/NavBar/Selected/SelectedMessage";
 import SearchSelected from "../assents/NavBar/Selected/SelectedSearch";
 import PerfilSelected from "../assents/NavBar/Selected/SelectedPerfil";
 import HomeSelected from "../assents/NavBar/Selected/SelectedHome";
+import PerfilRoutes from "./perfil.routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -44,10 +45,10 @@ export default function TabRoutes() {
         },
       })}
     >
-      <Tab.Screen name="main" component={MainScreen}></Tab.Screen>
+      <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
       <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
       <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
-      <Tab.Screen name="perfil" component={PerfilScreen}></Tab.Screen>
+      <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
     </Tab.Navigator>
   );
 }
