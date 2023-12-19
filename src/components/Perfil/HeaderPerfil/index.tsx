@@ -1,12 +1,22 @@
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import Arrow from "../../../assents/Perfil/Arrow";
 import LogoWhiteBlack from "../../../assents/Perfil/Logo";
 import styles from "./styles";
 
-const HeaderPerfil = () => {
+const HeaderPerfil = ({ navigation }: { navigation?: any }) => {
   return (
     <View style={styles.header}>
-      <Arrow />
+      <Pressable
+        onPress={() => {
+          try {
+            navigation.goBack();
+          } catch (error) {
+            console.log("Apenas tentou voltar mais que podia");
+          }
+        }}
+      >
+        <Arrow />
+      </Pressable>
       <LogoWhiteBlack />
     </View>
   );

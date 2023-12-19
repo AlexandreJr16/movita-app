@@ -14,6 +14,7 @@ import WhiteArrowPerfil from "../../assents/Perfil/ArrowWhite";
 import SignOutPerfil from "../../assents/Perfil/SignOut";
 import HeartPerfil from "../../assents/Perfil/Heart";
 import AuthContext from "../../contexts/auth";
+import UpdateSenha from "./UpdateSenha";
 
 const PerfilScreen = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
@@ -39,6 +40,9 @@ const PerfilScreen = ({ navigation }) => {
             arrow={<BlackArrowPerfil />}
             fontColor={"#000"}
             bgColor={"#fff"}
+            onPress={() => {
+              navigation.navigate("updateSenha");
+            }}
           >
             Alterar Senha
           </SelectButton>

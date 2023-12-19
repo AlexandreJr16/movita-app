@@ -5,6 +5,7 @@ import PerfilScreen from "../screens/PerfilScreen";
 import Arrow from "../assents/Perfil/Arrow";
 import LogoWhiteBlack from "../assents/Perfil/Logo";
 import UpdatePerfil from "../screens/PerfilScreen/UpdatePerfil";
+import UpdateSenha from "../screens/PerfilScreen/UpdateSenha";
 
 const PerfilRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ const PerfilRoutes: React.FC = () => {
     >
       <Stack.Screen name="main" component={PerfilScreen} />
       <Stack.Screen name="updatePerfil" component={UpdatePerfil} />
+      <Stack.Screen name="updateSenha" component={UpdateSenha} />
     </Stack.Navigator>
   );
 };

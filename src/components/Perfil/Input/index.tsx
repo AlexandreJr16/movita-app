@@ -7,10 +7,12 @@ const InputPerfil = ({
   title,
   func,
   secureText,
+  value,
 }: {
   title?: string;
   func?: any;
   secureText?: boolean;
+  value?: any;
 }) => {
   return (
     <View style={styles.container}>
@@ -23,6 +25,7 @@ const InputPerfil = ({
         secureTextEntry={secureText}
         placeholder="Digite Aqui"
         placeholderTextColor={"#9f9f9f"}
+        value={value}
       ></TextInput>
     </View>
   );
