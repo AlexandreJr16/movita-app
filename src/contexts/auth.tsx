@@ -24,16 +24,18 @@ type SignInResponse = {
 };
 
 interface User {
-  id: number;
   nome: string;
+  cpf: string;
+  telefone: string;
   email: string;
   tipo: string;
-  endereco: any;
+  endereco: { cidade: string; cep: string; estado: string; bairro: string };
   img: any;
 }
 interface AuthContextData {
   signIn(email: string, senha: string): Promise<SignInResponse>;
   signUp(userInfo: SignUpInfo): any;
+  logout(): any;
   user: User | null;
   signed: boolean;
   token: string;
@@ -65,6 +67,9 @@ export const AuthProvider = ({ children }) => {
       console.error("Erro no login:", error);
     }
   }
+  async function logout() {
+    setUser(null);
+  }
 
   async function signUp(userInfo: SignUpInfo) {
     try {
@@ -89,7 +94,7 @@ export const AuthProvider = ({ children }) => {
   }
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signUp, token, loading }}
+      value={{ signed: !!user, user, signIn, signUp, token, loading, logout }}
     >
       {children}
     </AuthContext.Provider>

@@ -16,6 +16,15 @@ const ShowPerfil = () => {
         <Texto style={styles.title} weight={"bold"}>
           {user.nome}
         </Texto>
+        <Texto weight="regular" style={styles.subtitle}>
+          {user.email}
+        </Texto>
+        <Texto weight="regular" style={styles.subtitle}>
+          {user.cpf}
+        </Texto>
+        <Texto weight="regular" style={styles.subtitle}>
+          {user.endereco.cidade} - {user.endereco.estado}
+        </Texto>
       </View>
     </View>
   );

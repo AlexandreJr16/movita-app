@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  header: {
+  background: {
     width: "100%",
+    height: "100%",
+    backgroundColor: "#1f1f1f",
+  },
+  bg: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 15,
   },
 });
 export default styles;
