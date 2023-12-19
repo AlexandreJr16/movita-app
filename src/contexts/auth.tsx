@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
         return response;
       }
     } catch (error) {
+      setLoading(false);
       console.error("Erro no login:", error);
     }
   }
@@ -77,6 +78,7 @@ export const AuthProvider = ({ children }) => {
       const response = await auth.signUp(userInfo);
     } catch (error) {
       console.error("Erro no cadastro:", error);
+      setLoading(false);
     } finally {
       setLoading(false);
       setToken("Non-Resp-butCad");

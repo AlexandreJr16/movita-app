@@ -2,6 +2,8 @@ import { SafeAreaView, ScrollView, View } from "react-native";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
 import styles from "./styles";
+import TitleTextPerfil from "../../../components/Perfil/TitleText";
+import InputPerfil from "../../../components/Perfil/Input";
 
 const UpdatePerfil = () => {
   return (
@@ -9,7 +11,14 @@ const UpdatePerfil = () => {
       <ScrollView style={styles.bg}>
         <HeaderPerfil />
         <ShowPerfil />
-        <View></View>
+        <View style={styles.container}>
+          <TitleTextPerfil>Detalhes da conta</TitleTextPerfil>
+          <InputPerfil title="Nome:" func={() => {}} />
+          <InputPerfil title="E-mail:" func={() => {}} />
+          <InputPerfil title="Telefone:" func={() => {}} />
+          <InputPerfil title="Endereço:" func={() => {}} />
+          <InputPerfil title="CPF/CNPJ:" func={() => {}} />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

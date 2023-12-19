@@ -28,6 +28,9 @@ const PerfilScreen = ({ navigation }) => {
             arrow={<BlackArrowPerfil />}
             fontColor={"#000"}
             bgColor={"#fff"}
+            onPress={() => {
+              navigation.navigate("updatePerfil");
+            }}
           >
             Detalhes da conta
           </SelectButton>

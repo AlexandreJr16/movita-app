@@ -54,9 +54,10 @@ export default function TabRoutes() {
 }
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: "#1f1f1f",
+    backgroundColor: "#151515",
     height: "7%",
     paddingBottom: "3%",
+    borderColor: "#151515",
   },
   tabBarItem: {},
 });

@@ -8,6 +8,18 @@ const styles = StyleSheet.create({
   },
   bg: {
     display: "flex",
+    marginTop: 20,
+  },
+  container: {
+    backgroundColor: "#2f2f2f",
+    width: "100%",
+    borderRadius: 30,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    gap: 12,
   },
 });
 export default styles;
