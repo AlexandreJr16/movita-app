@@ -47,7 +47,7 @@ export default function TabRoutes() {
             return iconName;
           },
           tabBarIconStyle:
-            Platform.OS === "ios" ? styles.iconAndroid : styles.iconIOS,
+            Platform.OS === "ios" ? styles.iconIOS : styles.iconAndroid,
         })}
       >
         <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
