@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MainRoutes from "./main.routes";
@@ -8,7 +9,6 @@ import Home from "../assents/NavBar/NoSelected/Home";
 import Message from "../assents/NavBar/NoSelected/Message";
 import Perfil from "../assents/NavBar/NoSelected/Perfil";
 import Search from "../assents/NavBar/NoSelected/Search";
-import React from "react";
 import MessageSelected from "../assents/NavBar/Selected/SelectedMessage";
 import SearchSelected from "../assents/NavBar/Selected/SelectedSearch";
 import PerfilSelected from "../assents/NavBar/Selected/SelectedPerfil";
@@ -18,52 +18,71 @@ import PerfilRoutes from "./perfil.routes";
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
-  return (
-    <View
-      style={
-        Platform.OS === "ios" ? styles.containerIOS : styles.containerAndroid
-      }
-    >
-      <Tab.Navigator
-        initialRouteName="main"
-        screenOptions={({ route }) => ({
-          headerShown: false,
-          tabBarStyle:
-            Platform.OS === "ios" ? styles.tabBarIOS : styles.tabBarAndroid,
-          tabBarLabel: () => null,
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+  const isIos = Platform.OS === "ios";
 
-            if (route.name === "main") {
-              iconName = focused ? <HomeSelected /> : <Home />;
-            } else if (route.name === "chat") {
-              iconName = focused ? <MessageSelected /> : <Message />;
-            } else if (route.name === "search") {
-              iconName = focused ? <SearchSelected /> : <Search />;
-            } else if (route.name === "perfil") {
-              iconName = focused ? <PerfilSelected /> : <Perfil />;
-            }
-
-            return iconName;
-          },
-          tabBarIconStyle:
-            Platform.OS === "ios" ? styles.iconIOS : styles.iconAndroid,
-        })}
-      >
-        <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
-        <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
-        <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
-        <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
-      </Tab.Navigator>
-    </View>
+  return isIos ? (
+    <View style={[styles.outBar, styles.containerIOS]}>{renderContent()}</View>
+  ) : (
+    renderContent()
   );
+
+  function renderContent() {
+    return (
+      <View style={styles.container}>
+        <Tab.Navigator
+          initialRouteName="main"
+          screenOptions={({ route }) => ({
+            headerShown: false,
+            tabBarStyle: isIos ? styles.tabBarIOS : styles.tabBarAndroid,
+            tabBarItemStyle: isIos
+              ? styles.tabBarItemIOS
+              : styles.tabBarItemAndroid,
+            tabBarLabel: () => null,
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+
+              if (route.name === "main") {
+                iconName = focused ? <HomeSelected /> : <Home />;
+              } else if (route.name === "chat") {
+                iconName = focused ? <MessageSelected /> : <Message />;
+              } else if (route.name === "search") {
+                iconName = focused ? <SearchSelected /> : <Search />;
+              } else if (route.name === "perfil") {
+                iconName = focused ? <PerfilSelected /> : <Perfil />;
+              }
+
+              return iconName;
+            },
+          })}
+        >
+          <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
+          <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
+          <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
+          <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
+        </Tab.Navigator>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
+  outBar: {
+    flex: 1,
+    backgroundColor: "#1F1F1F",
+    paddingBottom: 35,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
   containerAndroid: {
     height: "100%",
     width: "100%",
     justifyContent: "flex-end",
+    backgroundColor: "#151515",
+  },
+  containerIOS: {
+    flex: 1,
     backgroundColor: "#151515",
   },
   tabBarAndroid: {
@@ -79,10 +98,13 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     elevation: 0,
   },
-  iconAndroid: {
+  tabBarIOS: {
+    height: 60,
+    backgroundColor: "#151515",
+    width: "100%",
+  },
+  tabBarItemAndroid: {
     marginBottom: 23,
   },
-  containerIOS: {},
-  tabBarIOS: {},
-  iconIOS: {},
+  tabBarItemIOS: {},
 });
