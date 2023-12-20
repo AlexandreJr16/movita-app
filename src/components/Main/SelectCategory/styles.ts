@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   selectContainer: {
-    width: "100%",
+    width: 'auto',
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 20,
+    margin: 20,
     flexDirection: "row",
   },
   img: {},

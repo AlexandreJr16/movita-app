@@ -9,11 +9,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function MainScreen() {
   const {} = useContext(AuthContext);
   return (
-    <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
       <ScrollView style={styles.background}>
         <HeaderMain />
         <SelectCategory />
       </ScrollView>
-    </SafeAreaView>
   );
 }

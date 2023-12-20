@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -18,46 +18,59 @@ import HomeSelected from "../assents/NavBar/Selected/SelectedHome";
 import PerfilRoutes from "./perfil.routes";
 
 const Tab = createBottomTabNavigator();
-
 export default function TabRoutes() {
   return (
-    <Tab.Navigator
-      initialRouteName="main"
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarStyle: styles.tabBar,
-        tabBarItemStyle: styles.tabBarItem,
-        tabBarLabel: () => null,
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <View style={styles.outBar}>
+      <View style={styles.container}>
+        <Tab.Navigator
+          initialRouteName="main"
+          screenOptions={({ route }) => ({
+            headerShown: false,
+            tabBarStyle: styles.tabBar,
+            tabBarItemStyle: styles.tabBarItem,
+            tabBarLabel: () => null,
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
 
-          if (route.name === "main") {
-            iconName = focused ? <HomeSelected /> : <Home />;
-          } else if (route.name === "chat") {
-            iconName = focused ? <MessageSelected /> : <Message />;
-          } else if (route.name === "search") {
-            iconName = focused ? <SearchSelected /> : <Search />;
-          } else if (route.name === "perfil") {
-            iconName = focused ? <PerfilSelected /> : <Perfil />;
-          }
+              if (route.name === "main") {
+                iconName = focused ? <HomeSelected /> : <Home />;
+              } else if (route.name === "chat") {
+                iconName = focused ? <MessageSelected /> : <Message />;
+              } else if (route.name === "search") {
+                iconName = focused ? <SearchSelected /> : <Search />;
+              } else if (route.name === "perfil") {
+                iconName = focused ? <PerfilSelected /> : <Perfil />;
+              }
 
-          return iconName;
-        },
-      })}
-    >
-      <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
-      <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
-      <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
-      <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
-    </Tab.Navigator>
+              return iconName;
+            },
+          })}
+        >
+          <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
+          <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
+          <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
+          <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
+        </Tab.Navigator>
+      </View>
+    </View>
   );
 }
+
 const styles = StyleSheet.create({
+  outBar: {
+    flex: 1,
+    backgroundColor: "#1F1F1F",
+    paddingBottom: 35
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
   tabBar: {
-    backgroundColor: "#151515",
-    height: "7%",
-    paddingBottom: "3%",
-    borderColor: "#151515",
+    backgroundColor: "#1F1F1F",
+    width: '100%',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
   },
   tabBarItem: {},
 });
