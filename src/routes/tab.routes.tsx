@@ -19,13 +19,17 @@ const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        Platform.OS === "ios" ? styles.containerIOS : styles.containerAndroid
+      }
+    >
       <Tab.Navigator
         initialRouteName="main"
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarStyle: styles.tabBar,
-          tabBarItemStyle: styles.tabBarItem,
+          tabBarStyle:
+            Platform.OS === "ios" ? styles.tabBarIOS : styles.tabBarAndroid,
           tabBarLabel: () => null,
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -42,7 +46,8 @@ export default function TabRoutes() {
 
             return iconName;
           },
-          tabBarIconStyle: styles.icon,
+          tabBarIconStyle:
+            Platform.OS === "ios" ? styles.iconAndroid : styles.iconIOS,
         })}
       >
         <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
@@ -55,13 +60,13 @@ export default function TabRoutes() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerAndroid: {
     height: "100%",
     width: "100%",
     justifyContent: "flex-end",
     backgroundColor: "#151515",
   },
-  tabBar: {
+  tabBarAndroid: {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "flex-start",
@@ -71,11 +76,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     height: 70,
     padding: 0,
-    marginBottom: Platform.OS === "ios" ? 10 : 0,
+    marginBottom: 0,
     elevation: 0,
   },
-  icon: {
+  iconAndroid: {
     marginBottom: 23,
   },
-  tabBarItem: {},
+  containerIOS: {},
+  tabBarIOS: {},
+  iconIOS: {},
 });
