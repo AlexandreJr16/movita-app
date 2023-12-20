@@ -1,7 +1,5 @@
-import { StyleSheet, View } from "react-native";
-
+import { StyleSheet, View, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import MainRoutes from "./main.routes";
 import ChatScreen from "../screens/ChatScreen";
 import SearchScreen from "../screens/SearchScreen";
@@ -18,59 +16,66 @@ import HomeSelected from "../assents/NavBar/Selected/SelectedHome";
 import PerfilRoutes from "./perfil.routes";
 
 const Tab = createBottomTabNavigator();
+
 export default function TabRoutes() {
   return (
-    <View style={styles.outBar}>
-      <View style={styles.container}>
-        <Tab.Navigator
-          initialRouteName="main"
-          screenOptions={({ route }) => ({
-            headerShown: false,
-            tabBarStyle: styles.tabBar,
-            tabBarItemStyle: styles.tabBarItem,
-            tabBarLabel: () => null,
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
+    <View style={styles.container}>
+      <Tab.Navigator
+        initialRouteName="main"
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarStyle: styles.tabBar,
+          tabBarItemStyle: styles.tabBarItem,
+          tabBarLabel: () => null,
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-              if (route.name === "main") {
-                iconName = focused ? <HomeSelected /> : <Home />;
-              } else if (route.name === "chat") {
-                iconName = focused ? <MessageSelected /> : <Message />;
-              } else if (route.name === "search") {
-                iconName = focused ? <SearchSelected /> : <Search />;
-              } else if (route.name === "perfil") {
-                iconName = focused ? <PerfilSelected /> : <Perfil />;
-              }
+            if (route.name === "main") {
+              iconName = focused ? <HomeSelected /> : <Home />;
+            } else if (route.name === "chat") {
+              iconName = focused ? <MessageSelected /> : <Message />;
+            } else if (route.name === "search") {
+              iconName = focused ? <SearchSelected /> : <Search />;
+            } else if (route.name === "perfil") {
+              iconName = focused ? <PerfilSelected /> : <Perfil />;
+            }
 
-              return iconName;
-            },
-          })}
-        >
-          <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
-          <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
-          <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
-          <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
-        </Tab.Navigator>
-      </View>
+            return iconName;
+          },
+          tabBarIconStyle: styles.icon,
+        })}
+      >
+        <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
+        <Tab.Screen name="chat" component={ChatScreen}></Tab.Screen>
+        <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
+        <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
+      </Tab.Navigator>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  outBar: {
-    flex: 1,
-    backgroundColor: "#1F1F1F",
-    paddingBottom: 35
-  },
   container: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    height: "100%",
+    width: "100%",
+    justifyContent: "flex-end",
+    backgroundColor: "#151515",
   },
   tabBar: {
-    backgroundColor: "#1F1F1F",
-    width: '100%',
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    backgroundColor: "#151515",
+    width: "100%",
     borderTopWidth: 0,
     borderBottomWidth: 0,
+    height: 70,
+    padding: 0,
+    marginBottom: Platform.OS === "ios" ? 10 : 0,
+    elevation: 0,
+  },
+  icon: {
+    marginBottom: 23,
   },
   tabBarItem: {},
 });
