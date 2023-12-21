@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   tabBarIOS: {
-    height: 60,
     backgroundColor: "#151515",
     width: "100%",
   },

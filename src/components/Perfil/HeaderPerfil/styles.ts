@@ -9,5 +9,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
   },
+  logo: {},
 });
 export default styles;

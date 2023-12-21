@@ -2,6 +2,7 @@ import { Pressable, View } from "react-native";
 import Arrow from "../../../assents/Perfil/Arrow";
 import LogoWhiteBlack from "../../../assents/Perfil/Logo";
 import styles from "./styles";
+import Logo from "../../Logo/Logo";
 
 const HeaderPerfil = ({ navigation }: { navigation?: any }) => {
   return (
@@ -17,7 +18,7 @@ const HeaderPerfil = ({ navigation }: { navigation?: any }) => {
       >
         <Arrow />
       </Pressable>
-      <LogoWhiteBlack />
+      <Logo color="#FFFFFF" size="35" style={styles.logo}></Logo>
     </View>
   );
 };

@@ -8,13 +8,18 @@ import { Buffer } from "buffer";
 import ImagemBuffer from "../../Imagem";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const HeaderMain = () => {
+const HeaderMain = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
 
   return (
     <View style={styles.headerCard}>
       <SafeAreaView style={styles.headerCard}>
-        <Logo color="#FFFFFF" size="35" style={styles.logo}></Logo>
+        <Logo
+          color="#FFFFFF"
+          size="35"
+          style={styles.logo}
+          navigation={navigation}
+        ></Logo>
         <View style={styles.infoContainer}>
           <View style={styles.welcome}>
             <Texto weight="bold" style={styles.titleMessage}>

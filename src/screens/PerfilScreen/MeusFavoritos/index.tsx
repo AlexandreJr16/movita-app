@@ -1,27 +1,18 @@
-import React, { useContext } from "react";
 import { ScrollView, View } from "react-native";
+import Texto from "../../../components/texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
-import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
-import ShowPerfil from "../../components/Perfil/ShowPerfil";
-import SelectButton from "../../components/Perfil/SelectButton";
-import Lock from "../../assents/Perfil/Lock";
-import BlackArrowPerfil from "../../assents/Perfil/BlackArrow";
-import DocumentPerfil from "../../assents/Perfil/Document";
-import CrossPerfil from "../../assents/Perfil/Cross";
-import WhiteArrow from "../../assents/Splash/WhiteArrow";
-import WhiteArrowPerfil from "../../assents/Perfil/ArrowWhite";
-import SignOutPerfil from "../../assents/Perfil/SignOut";
-import HeartPerfil from "../../assents/Perfil/Heart";
-import AuthContext from "../../contexts/auth";
-import UpdateSenha from "./UpdateSenha";
+import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
+import ShowPerfil from "../../../components/Perfil/ShowPerfil";
+import BlackArrowPerfil from "../../../assents/Perfil/BlackArrow";
+import SelectButton from "../../../components/Perfil/SelectButton";
+import Lock from "../../../assents/Perfil/Lock";
 
-const PerfilScreen = ({ navigation }) => {
-  const { logout } = useContext(AuthContext);
+const MeusFavoritos = ({ navigation }: { navigation: any }) => {
   return (
     <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
       <ScrollView style={styles.bg}>
-        <HeaderPerfil />
+        <HeaderPerfil navigation={navigation} />
         <ShowPerfil />
         <View style={styles.container}>
           <SelectButton
@@ -41,56 +32,58 @@ const PerfilScreen = ({ navigation }) => {
             fontColor={"#000"}
             bgColor={"#fff"}
             onPress={() => {
-              navigation.navigate("updateSenha");
+              navigation.navigate("updatePerfil");
             }}
           >
-            Alterar Senha
+            Detalhes da conta
           </SelectButton>
           <SelectButton
-            icon={<HeartPerfil />}
+            icon={<Lock />}
             arrow={<BlackArrowPerfil />}
             fontColor={"#000"}
             bgColor={"#fff"}
             onPress={() => {
-              navigation.navigate("meusFavoritos");
+              navigation.navigate("updatePerfil");
             }}
           >
-            Meus favoritos
+            Detalhes da conta
           </SelectButton>
           <SelectButton
-            icon={<DocumentPerfil />}
+            icon={<Lock />}
             arrow={<BlackArrowPerfil />}
             fontColor={"#000"}
             bgColor={"#fff"}
             onPress={() => {
-              navigation.navigate("meusProjetos");
+              navigation.navigate("updatePerfil");
             }}
           >
-            Meus Projetos
+            Detalhes da conta
           </SelectButton>
           <SelectButton
-            icon={<CrossPerfil />}
+            icon={<Lock />}
             arrow={<BlackArrowPerfil />}
             fontColor={"#000"}
             bgColor={"#fff"}
             onPress={() => {
-              logout();
+              navigation.navigate("updatePerfil");
             }}
           >
-            Sair da conta
+            Detalhes da conta
           </SelectButton>
           <SelectButton
-            icon={<SignOutPerfil />}
-            arrow={<WhiteArrowPerfil />}
-            fontColor={"#fff"}
-            bgColor={"#CF654D"}
+            icon={<Lock />}
+            arrow={<BlackArrowPerfil />}
+            fontColor={"#000"}
+            bgColor={"#fff"}
+            onPress={() => {
+              navigation.navigate("updatePerfil");
+            }}
           >
-            Delete sua conta
+            Detalhes da conta
           </SelectButton>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-export default PerfilScreen;
+export default MeusFavoritos;

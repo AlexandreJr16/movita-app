@@ -3,7 +3,7 @@ import Svg, { Path } from "react-native-svg";
 
 function Logo(props) {
   const { color, size } = props || {}; //propriedade color
-  const fillColor = color ? color : '#36A5BF';
+  const fillColor = color ? color : "#36A5BF";
   const logoSize = size ? size : 30; // Tamanho padrão: 30, caso não seja fornecido
 
   return (

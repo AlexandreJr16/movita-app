@@ -6,12 +6,12 @@ import HeaderMain from "../../components/Main/Header";
 import SelectCategory from "../../components/Main/SelectCategory";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function MainScreen() {
+export default function MainScreen({ navigation }) {
   const {} = useContext(AuthContext);
   return (
-      <ScrollView style={styles.background}>
-        <HeaderMain />
-        <SelectCategory />
-      </ScrollView>
+    <ScrollView style={styles.background}>
+      <HeaderMain navigation={navigation} />
+      <SelectCategory />
+    </ScrollView>
   );
 }
