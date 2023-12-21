@@ -18,9 +18,10 @@ interface SignUpInfo {
 }
 
 type SignInResponse = {
-  message: string;
-  token: string;
-  user: object;
+  message?: string;
+  token?: string;
+  user?: object;
+  status: string;
 };
 
 interface User {
@@ -65,7 +66,6 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       setLoading(false);
-      console.error("Erro no login:", error);
     }
   }
   async function logout() {

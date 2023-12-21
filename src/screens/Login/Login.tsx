@@ -29,14 +29,16 @@ const Login = ({ navigation }) => {
   const handleLogin = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email == "" || password == "") {
-      setText("Email/Senha inválidos");
+      setText("Email/Senha não podem ser nulos");
       return;
     } else if (!emailRegex.test(email)) {
-      setText("Digite um email");
+      setText("Digite um email válido");
       return;
     } else setText("");
     const response = await signIn(email, password);
-    // if (response.message != undefined) setText(response.message);
+    if (response.status == "bad") {
+      setText(response.message);
+    }
   };
 
   const redirectToSignUp = () => {

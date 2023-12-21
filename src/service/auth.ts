@@ -8,15 +8,15 @@ type ErrorResponse = {
 };
 
 type UserResponse = {
-  token: string;
-  user: object;
+  token?: string;
+  user?: object;
+  message?: string;
+  status: string;
 };
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
   if (error.response) {
-    console.error(`Erro na requisição. Status: ${error.response.status}`);
-    console.error("Detalhes:", error.response.data);
-    throw error.response.data;
+    return { message: "Erro na requisição" };
   } else if (error.request) {
     console.error("Não houve resposta da API. Verifique sua conexão.");
     throw { success: false, message: "Erro de conexão com a API" };
@@ -44,7 +44,7 @@ export const signIn = (email: string, senha: string): Promise<UserResponse> => {
     .post(url, data, options)
     .then((resp) => resp.data)
     .catch((error: AxiosError<ErrorResponse>) => {
-      handleApiError(error);
+      return { message: error };
     });
 };
 
