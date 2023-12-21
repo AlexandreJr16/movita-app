@@ -4,10 +4,17 @@ import LogoWhiteBlack from "../../../assents/Perfil/Logo";
 import styles from "./styles";
 import Logo from "../../Logo/Logo";
 
-const HeaderPerfil = ({ navigation }: { navigation?: any }) => {
+const HeaderPerfil = ({
+  navigation,
+  visibleLogo,
+}: {
+  navigation?: any;
+  visibleLogo?: boolean;
+}) => {
   return (
     <View style={styles.header}>
       <Pressable
+        style={visibleLogo ? { opacity: 0 } : {}}
         onPress={() => {
           try {
             navigation.goBack();

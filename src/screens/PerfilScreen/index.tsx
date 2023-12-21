@@ -21,7 +21,7 @@ const PerfilScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
       <ScrollView style={styles.bg}>
-        <HeaderPerfil />
+        <HeaderPerfil visibleLogo={true} />
         <ShowPerfil />
         <View style={styles.container}>
           <SelectButton
