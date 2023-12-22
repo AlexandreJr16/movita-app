@@ -1,18 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { API_URL } from "../../configs";
-
-type ErrorResponse = {
-  error: string;
-  message: string;
-  status: number;
-};
-
-type UserResponse = {
-  token?: string;
-  user?: object;
-  message?: string;
-  status: string;
-};
+import { API_URL } from "../../../configs";
+import { ErrorResponse, UserResponse } from "./dto/requestDTO";
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
   if (error.response) {
@@ -33,23 +21,6 @@ export const signIn = (email: string, senha: string): Promise<UserResponse> => {
     email: email,
     senha: senha,
   };
-
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  return axios
-    .post(url, data, options)
-    .then((resp) => resp.data)
-    .catch((error: AxiosError<ErrorResponse>) => {
-      return { message: error };
-    });
-};
-export const updateUser = (dto): Promise<UserResponse> => {
-  const url = `${API_URL}/auth/signin`;
-  const data = {};
 
   const options = {
     headers: {
@@ -124,21 +95,3 @@ export function signUp({
     });
   return user;
 }
-export const getUser = async (token: string): Promise<any> => {
-  const url = `${API_URL}/user`;
-
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  };
-
-  const user = await axios
-    .get(url, options)
-    .then((resp) => resp.data)
-    .catch((error: AxiosError<ErrorResponse>) => {
-      handleApiError(error);
-    });
-  return user;
-};

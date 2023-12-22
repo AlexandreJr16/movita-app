@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import * as auth from "../service/auth";
+import * as auth from "../service/index";
 import { Use } from "react-native-svg";
 
 interface SignUpInfo {
