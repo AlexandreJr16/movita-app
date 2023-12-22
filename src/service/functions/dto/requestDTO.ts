@@ -16,3 +16,8 @@ export type UpdateUserResponse = {
   endereco?: any;
   message: string;
 };
+export type updateSenhaDTO = {
+  status: string;
+  message?: string;
+  user?: any;
+};

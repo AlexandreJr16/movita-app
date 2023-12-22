@@ -22,6 +22,11 @@ type SignInResponse = {
   user?: object;
   status: string;
 };
+type updateSenha = {
+  message?: string;
+  status: string;
+  user?: any;
+};
 
 interface User {
   nome: string;
@@ -41,6 +46,11 @@ interface AuthContextData {
   token: string;
   loading: boolean;
   updateUser(dto: { user?: any; cliente?: any; empresa?: any; endereco?: any });
+  updateSenha(dto: {
+    senhaAtual: string;
+    novaSenha: string;
+    confirmSenha: string;
+  });
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -101,14 +111,33 @@ export const AuthProvider = ({ children }) => {
     endereco?: any;
   }) {
     try {
+      setLoading(true);
       const user = await auth.updateUser(dto, token);
       getUser(token);
       return user;
     } catch (error) {
+      setLoading(false);
       throw new Error(error);
+    } finally {
+      setLoading(false);
     }
   }
-
+  async function updateSenha(dto: {
+    senhaAtual: string;
+    novaSenha: string;
+    confirmSenha: string;
+  }): Promise<updateSenha> {
+    try {
+      setLoading(true);
+      const updateUser = await auth.updateSenha(dto, token);
+      return updateUser;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -120,6 +149,7 @@ export const AuthProvider = ({ children }) => {
         loading,
         logout,
         updateUser,
+        updateSenha,
       }}
     >
       {children}

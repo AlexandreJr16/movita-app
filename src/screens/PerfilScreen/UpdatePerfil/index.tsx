@@ -7,9 +7,10 @@ import InputPerfil from "../../../components/Perfil/Input";
 import { useContext, useState } from "react";
 import AuthContext from "../../../contexts/auth";
 import ButtonPerfil from "../../../components/Perfil/Button";
+import LoadingIndicator from "../../../components/Loading";
 
 const UpdatePerfil = ({ navigation }) => {
-  const { user, updateUser } = useContext(AuthContext);
+  const { user, updateUser, loading } = useContext(AuthContext);
   const [nome, setNome] = useState<string>(user.nome);
   const [email, setEmail] = useState<string>(user.email);
   const [telefone, setTelefone] = useState<string>(user.telefone);
@@ -96,6 +97,7 @@ const UpdatePerfil = ({ navigation }) => {
           />
           <ButtonPerfil onPress={handleUpdate} />
         </View>
+        <LoadingIndicator visible={loading} />
       </ScrollView>
     </SafeAreaView>
   );

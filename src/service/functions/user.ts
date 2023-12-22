@@ -4,6 +4,7 @@ import {
   ErrorResponse,
   UpdateUserResponse,
   UserResponse,
+  updateSenhaDTO,
 } from "./dto/requestDTO";
 import { useContext } from "react";
 
@@ -49,6 +50,39 @@ export const updateUser = async (
       options
     );
     console.log(response.data);
+    return response.data;
+  } catch (error) {
+    // Ensure that 'handleApiError' is defined
+    handleApiError(error as AxiosError<ErrorResponse>);
+    // You might want to throw the error again if you don't handle it completely here
+    throw error;
+  }
+};
+
+export const updateSenha = async (
+  dto: {
+    senhaAtual: string;
+    novaSenha: string;
+    confirmSenha: string;
+  },
+  token: string
+): Promise<updateSenhaDTO> => {
+  try {
+    const url = `${API_URL}/user/senha`;
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    };
+
+    const response: AxiosResponse<updateSenhaDTO> = await axios.put(
+      url,
+      dto,
+      options
+    );
+
     return response.data;
   } catch (error) {
     // Ensure that 'handleApiError' is defined

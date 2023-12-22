@@ -6,11 +6,14 @@ import TitleTextPerfil from "../../../components/Perfil/TitleText";
 import InputPerfil from "../../../components/Perfil/Input";
 import { useContext, useState } from "react";
 import AuthContext from "../../../contexts/auth";
+import LoadingIndicator from "../../../components/Loading";
+import ButtonPerfil from "../../../components/Perfil/Button";
 
 const UpdateSenha = ({ navigation }) => {
-  const [senhaAntiga, setSenhaAntiga] = useState();
-  const [senhaNova, setSenhaNova] = useState();
-  const [confirmSenha, setConfirmSenha] = useState();
+  const { updateSenha, loading } = useContext(AuthContext);
+  const [senhaAntiga, setSenhaAntiga] = useState<string>();
+  const [senhaNova, setSenhaNova] = useState<string>();
+  const [confirmSenha, setConfirmSenha] = useState<string>();
 
   const handleSenhaAntiga = (value: any) => {
     setSenhaAntiga(value);
@@ -20,6 +23,17 @@ const UpdateSenha = ({ navigation }) => {
   };
   const handleConfirmSenha = (value: any) => {
     setConfirmSenha(value);
+  };
+  const handleSubmit = async () => {
+    const dto = {
+      senhaAtual: senhaAntiga,
+      novaSenha: senhaNova,
+      confirmSenha: confirmSenha,
+    };
+    const updateUser = await updateSenha(dto);
+    if (updateUser.status == "ok") {
+      navigation.goBack();
+    }
   };
 
   return (
@@ -50,7 +64,9 @@ const UpdateSenha = ({ navigation }) => {
             }}
             value={confirmSenha}
           />
+          <ButtonPerfil onPress={handleSubmit} />
         </View>
+        <LoadingIndicator visible={loading} />
       </ScrollView>
     </SafeAreaView>
   );
