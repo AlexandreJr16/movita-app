@@ -13,7 +13,7 @@ import WhiteArrow from "../../assents/Splash/WhiteArrow";
 import WhiteArrowPerfil from "../../assents/Perfil/ArrowWhite";
 import SignOutPerfil from "../../assents/Perfil/SignOut";
 import HeartPerfil from "../../assents/Perfil/Heart";
-import AuthContext from "../../contexts/auth";
+import AuthContext from "../../contexts";
 import UpdateSenha from "./UpdateSenha";
 
 const PerfilScreen = ({ navigation }) => {

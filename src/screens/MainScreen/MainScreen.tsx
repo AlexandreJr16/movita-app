@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { View, ScrollView } from "react-native";
-import AuthContext from "../../contexts/auth";
+import AuthContext from "../../contexts";
 import styles from "./styles";
 import HeaderMain from "../../components/Main/Header";
 import SelectCategory from "../../components/Main/SelectCategory";

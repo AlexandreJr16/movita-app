@@ -10,7 +10,7 @@ import UserIcon from "../../assents/Login/UserIcon";
 import SecurityIcon from "../../assents/Login/SecurityIcon";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
 import React from "react";
-import AuthContext from "../../contexts/auth";
+import AuthContext from "../../contexts";
 import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
 import LoadingIndicator from "../../components/Loading";
 
@@ -36,6 +36,7 @@ const Login = ({ navigation }) => {
       return;
     } else setText("");
     const response = await signIn(email, password);
+    if (response.status == "ok") return;
     if (response.status == "bad") {
       setText(response.message);
     }

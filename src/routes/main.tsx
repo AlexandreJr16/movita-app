@@ -1,6 +1,6 @@
 import AppRoutes from "./main.routes";
 import React, { useContext } from "react";
-import AuthContext from "../contexts/auth";
+import AuthContext from "../contexts";
 import AuthRoutes from "./auth.routes";
 import TabRoutes from "./tab.routes";
 

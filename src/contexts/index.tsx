@@ -1,57 +1,13 @@
 import React, { createContext, useState } from "react";
 import * as auth from "../service/index";
+import {
+  AuthContextData,
+  User,
+  SignInResponse,
+  SignUpInfo,
+  UpdateSenhaDTO,
+} from "./dto/contextDTO";
 
-interface SignUpInfo {
-  email: string;
-  senha: string;
-  nome: string;
-  telefone: string;
-  cpf: string;
-  sexo: string;
-  nascimento: string;
-  cep: string;
-  estado: string;
-  bairro: string;
-  cidade: string;
-  tipo_usuario: string;
-}
-
-type SignInResponse = {
-  message?: string;
-  token?: string;
-  user?: object;
-  status: string;
-};
-type updateSenha = {
-  message?: string;
-  status: string;
-  user?: any;
-};
-
-interface User {
-  nome: string;
-  cpf: string;
-  telefone: string;
-  email: string;
-  tipo: string;
-  endereco: { cidade: string; cep: string; estado: string; bairro: string };
-  img: any;
-}
-interface AuthContextData {
-  signIn(email: string, senha: string): Promise<SignInResponse>;
-  signUp(userInfo: SignUpInfo): any;
-  logout(): any;
-  user: User | null;
-  signed: boolean;
-  token: string;
-  loading: boolean;
-  updateUser(dto: { user?: any; cliente?: any; empresa?: any; endereco?: any });
-  updateSenha(dto: {
-    senhaAtual: string;
-    novaSenha: string;
-    confirmSenha: string;
-  });
-}
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
@@ -126,7 +82,7 @@ export const AuthProvider = ({ children }) => {
     senhaAtual: string;
     novaSenha: string;
     confirmSenha: string;
-  }): Promise<updateSenha> {
+  }): Promise<UpdateSenhaDTO> {
     try {
       setLoading(true);
       const updateUser = await auth.updateSenha(dto, token);
@@ -138,18 +94,29 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }
-  return (
+  const signed = !!user;
+  return signed ? (
     <AuthContext.Provider
       value={{
-        signed: !!user,
+        signed,
         user,
-        signIn,
-        signUp,
         token,
         loading,
         logout,
         updateUser,
         updateSenha,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  ) : (
+    <AuthContext.Provider
+      value={{
+        signed,
+        user,
+        signIn,
+        signUp,
+        loading,
       }}
     >
       {children}

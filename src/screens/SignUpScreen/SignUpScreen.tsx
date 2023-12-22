@@ -10,7 +10,7 @@ import BlueBack from "../../assents/Cadastro/BlueBack";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
 import { meses, estadosBrasil, sexoArr } from "./data";
 import DropDCadastro from "../../components/Cadastro/DropDown/DropDownCad";
-import AuthContext from "../../contexts/auth";
+import AuthContext from "../../contexts";
 import { valorMesParaNumero } from "./functions";
 import LoadingIndicator from "../../components/Loading";
 
