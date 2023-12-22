@@ -40,6 +40,7 @@ interface AuthContextData {
   signed: boolean;
   token: string;
   loading: boolean;
+  updateUser(dto: { user?: any; cliente?: any; empresa?: any; endereco?: any });
 }
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -99,13 +100,27 @@ export const AuthProvider = ({ children }) => {
     empresa?: any;
     endereco?: any;
   }) {
-    const user = await auth.updateUser(dto);
-    return user;
+    try {
+      const user = await auth.updateUser(dto, token);
+      getUser(token);
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signIn, signUp, token, loading, logout }}
+      value={{
+        signed: !!user,
+        user,
+        signIn,
+        signUp,
+        token,
+        loading,
+        logout,
+        updateUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { API_URL } from "../../../configs";
 import {
   ErrorResponse,
@@ -6,7 +6,6 @@ import {
   UserResponse,
 } from "./dto/requestDTO";
 import { useContext } from "react";
-import AuthContext from "../../contexts/auth";
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
   if (error.response) {
@@ -21,15 +20,20 @@ const handleApiError = (error: AxiosError<ErrorResponse>) => {
   }
 };
 
-export const updateUser = async (dto: {
-  user?: any;
-  cliente?: any;
-  empresa?: any;
-  endereco?: any;
-}): Promise<UpdateUserResponse> => {
-  const url = `${API_URL}/auth/signin`;
-  const data = {};
-  const { token } = useContext(AuthContext);
+export const updateUser = async (
+  dto: {
+    user?: any; // Replace with specific type if possible
+    cliente?: any; // Replace with specific type if possible
+    empresa?: any; // Replace with specific type if possible
+    endereco?: any; // Replace with specific type if possible
+  },
+  token: string
+): Promise<UpdateUserResponse> => {
+  const url = `${API_URL}/user`;
+  // Assuming you need to send data in the request body, populate the 'data' object
+  const data = {
+    /* populate with necessary data */
+  };
 
   const options = {
     headers: {
@@ -38,13 +42,20 @@ export const updateUser = async (dto: {
     },
   };
 
-  const user = await axios
-    .put(API_URL, data, options)
-    .then((resp) => resp.data)
-    .catch((error: AxiosError<ErrorResponse>) => {
-      handleApiError(error);
-    });
-  return user;
+  try {
+    const response: AxiosResponse<UpdateUserResponse> = await axios.put(
+      url,
+      dto,
+      options
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    // Ensure that 'handleApiError' is defined
+    handleApiError(error as AxiosError<ErrorResponse>);
+    // You might want to throw the error again if you don't handle it completely here
+    throw error;
+  }
 };
 
 export const getUser = async (token: string): Promise<any> => {

@@ -9,7 +9,7 @@ import AuthContext from "../../../contexts/auth";
 import ButtonPerfil from "../../../components/Perfil/Button";
 
 const UpdatePerfil = ({ navigation }) => {
-  const { user } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
   const [nome, setNome] = useState<string>(user.nome);
   const [email, setEmail] = useState<string>(user.email);
   const [telefone, setTelefone] = useState<string>(user.telefone);
@@ -43,7 +43,12 @@ const UpdatePerfil = ({ navigation }) => {
       cpf == "" ||
       !emailRegex.test(email)
     ) {
-      return;
+      throw new Error("Campos inválidos");
+    }
+    if (user.tipo == "empresa") {
+    } else {
+      const dto = { user: { email }, cliente: { nome, telefone, cpf } };
+      const us = updateUser(dto);
     }
   };
 

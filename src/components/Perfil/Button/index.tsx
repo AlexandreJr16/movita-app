@@ -2,9 +2,9 @@ import Texto from "../../texto/Texto";
 import styles from "./styles";
 import { Pressable, View } from "react-native";
 
-const ButtonPerfil = ({ onPress }: { onPress?: Function }) => {
+const ButtonPerfil = ({ onPress }: { onPress?: any }) => {
   return (
-    <Pressable style={styles.btn}>
+    <Pressable onPress={onPress} style={styles.btn}>
       <Texto weight="bold" style={styles.txt}>
         Alterar
       </Texto>
