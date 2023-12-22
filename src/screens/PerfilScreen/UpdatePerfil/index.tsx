@@ -6,13 +6,14 @@ import TitleTextPerfil from "../../../components/Perfil/TitleText";
 import InputPerfil from "../../../components/Perfil/Input";
 import { useContext, useState } from "react";
 import AuthContext from "../../../contexts/auth";
+import ButtonPerfil from "../../../components/Perfil/Button";
 
 const UpdatePerfil = ({ navigation }) => {
   const { user } = useContext(AuthContext);
-  const [nome, setNome] = useState(user.nome);
-  const [email, setEmail] = useState(user.email);
-  const [telefone, setTelefone] = useState(user.telefone);
-  const [endereco, setEndereco] = useState(
+  const [nome, setNome] = useState<string>(user.nome);
+  const [email, setEmail] = useState<string>(user.email);
+  const [telefone, setTelefone] = useState<string>(user.telefone);
+  const [endereco, setEndereco] = useState<string>(
     `${user.endereco.bairro} - ${user.endereco.cidade} - ${user.endereco.estado}`
   );
   const [cpf, setCpf] = useState(user.cpf);
@@ -31,6 +32,19 @@ const UpdatePerfil = ({ navigation }) => {
   };
   const handleCpf = (value: any) => {
     setCpf(value);
+  };
+  const handleUpdate = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (
+      email == "" ||
+      email == "" ||
+      telefone == "" ||
+      endereco == "" ||
+      cpf == "" ||
+      !emailRegex.test(email)
+    ) {
+      return;
+    }
   };
 
   return (
@@ -75,6 +89,7 @@ const UpdatePerfil = ({ navigation }) => {
             }}
             value={cpf}
           />
+          <ButtonPerfil onPress={handleUpdate} />
         </View>
       </ScrollView>
     </SafeAreaView>

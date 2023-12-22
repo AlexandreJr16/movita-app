@@ -47,6 +47,23 @@ export const signIn = (email: string, senha: string): Promise<UserResponse> => {
       return { message: error };
     });
 };
+export const updateUser = (dto): Promise<UserResponse> => {
+  const url = `${API_URL}/auth/signin`;
+  const data = {};
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  return axios
+    .post(url, data, options)
+    .then((resp) => resp.data)
+    .catch((error: AxiosError<ErrorResponse>) => {
+      return { message: error };
+    });
+};
 
 export function signUp({
   email,
