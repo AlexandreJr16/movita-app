@@ -9,3 +9,10 @@ export type ErrorResponse = {
   message: string;
   status: number;
 };
+export type UpdateUserResponse = {
+  user?: any;
+  cliente?: any;
+  empresa?: any;
+  endereco?: any;
+  message: string;
+};

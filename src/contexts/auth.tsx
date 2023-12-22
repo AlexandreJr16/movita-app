@@ -1,6 +1,5 @@
 import React, { createContext, useState } from "react";
 import * as auth from "../service/index";
-import { Use } from "react-native-svg";
 
 interface SignUpInfo {
   email: string;
@@ -94,6 +93,16 @@ export const AuthProvider = ({ children }) => {
       throw Error("errado");
     }
   }
+  async function updateUser(dto: {
+    user?: any;
+    cliente?: any;
+    empresa?: any;
+    endereco?: any;
+  }) {
+    const user = await auth.updateUser(dto);
+    return user;
+  }
+
   return (
     <AuthContext.Provider
       value={{ signed: !!user, user, signIn, signUp, token, loading, logout }}
