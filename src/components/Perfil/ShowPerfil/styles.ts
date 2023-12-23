@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   img: {
-    width: 150,
-    height: 150,
+    width: 130,
+    height: 130,
     borderRadius: 1000,
   },
   textContainer: {

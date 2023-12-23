@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 15,
   },
   logo: {},
 });

@@ -25,7 +25,7 @@ const HeaderPerfil = ({
       >
         <Arrow />
       </Pressable>
-      <Logo color="#FFFFFF" size="35" style={styles.logo}></Logo>
+      <Logo color="#FFFFFF" size="30" style={styles.logo}></Logo>
     </View>
   );
 };
