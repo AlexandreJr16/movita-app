@@ -53,4 +53,5 @@ export interface AuthContextData {
     novaSenha: string;
     confirmSenha: string;
   });
+  getTopProjects?(num: number);
 }

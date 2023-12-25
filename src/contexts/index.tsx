@@ -94,6 +94,18 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }
+  async function getTopProjects(num: number): Promise<any> {
+    try {
+      setLoading(true);
+      const prods = await auth.getTopProjects(num);
+      return prods;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const signed = !!user;
   return signed ? (
     <AuthContext.Provider
@@ -105,6 +117,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         updateUser,
         updateSenha,
+        getTopProjects,
       }}
     >
       {children}
