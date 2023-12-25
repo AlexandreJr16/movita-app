@@ -9,7 +9,7 @@ const Produto = ({ produto }) => {
     <View style={styles.produtoContainer}>
       <ImagemBuffer imgBuffer={produto.imagem} style={styles.imagemProduto} />
       <Texto weight="regular" style={styles.nomeProduto}>
-        {produto.nome}
+        {produto.titulo}
       </Texto>
     </View>
   );

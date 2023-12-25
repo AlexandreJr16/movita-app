@@ -12,6 +12,22 @@ export const getTopProjects = async (num: number): Promise<any> => {
 
   try {
     const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const getAllProjetosByCliente = async (num: number): Promise<any> => {
+  const url = `${API_URL}/projeto/allcontratante/${num}`;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await axios.get(url, options);
     console.log(response.data);
     return response.data;
   } catch (error) {

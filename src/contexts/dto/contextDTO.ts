@@ -26,6 +26,7 @@ export type UpdateSenhaDTO = {
 };
 
 export interface User {
+  id: number;
   nome: string;
   cpf: string;
   telefone: string;
@@ -54,4 +55,5 @@ export interface AuthContextData {
     confirmSenha: string;
   });
   getTopProjects?(num: number);
+  getAllProjetosByCliente?(num: number);
 }

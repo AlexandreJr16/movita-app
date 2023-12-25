@@ -106,6 +106,19 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }
+  async function getAllProjetosByCliente(num: number): Promise<any> {
+    try {
+      setLoading(true);
+      const prods = await auth.getAllProjetosByCliente(1);
+      console.log(prods);
+      return prods;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const signed = !!user;
   return signed ? (
     <AuthContext.Provider
@@ -118,6 +131,7 @@ export const AuthProvider = ({ children }) => {
         updateUser,
         updateSenha,
         getTopProjects,
+        getAllProjetosByCliente,
       }}
     >
       {children}
