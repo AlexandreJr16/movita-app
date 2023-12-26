@@ -11,5 +11,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   logo: {},
+  img: {
+    width: 43,
+    height: 43,
+    borderRadius: 5000,
+  },
 });
 export default styles;

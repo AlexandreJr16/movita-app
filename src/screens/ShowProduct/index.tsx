@@ -5,6 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import React from "react";
 import ImagemBuffer from "../../components/Imagem";
+import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
 
 type Produto = {
   id: number;
@@ -25,25 +26,17 @@ type Produto = {
   };
 };
 
-const ShowProduct = ({ route }) => {
+const ShowProduct = ({ route, navigation }) => {
   const produto: Produto = route.params.produto;
 
   return (
     <SafeAreaView style={{ ...styles.container, backgroundColor: "#1f1f1f" }}>
       <ScrollView style={styles.container}>
-        <ImagemBuffer imgBuffer={produto.imagem} style={styles.img} />
-        <Texto weight="bold" style={{ color: "white" }}>
-          Titulo: {produto.titulo}
-        </Texto>
-        <Texto weight="bold" style={{ color: "white" }}>
-          Descrição: {produto.descricao}
-        </Texto>
-        <Texto weight="bold" style={{ color: "white" }}>
-          Nota: {produto.nota}
-        </Texto>
-        <Texto weight="bold" style={{ color: "white" }}>
-          Feito por: {produto.empresa.nomeFantasia}
-        </Texto>
+        <HeaderPerfil
+          color="#36A5BF"
+          navigation={navigation}
+          visiblePerfil={true}
+        />
       </ScrollView>
     </SafeAreaView>
   );

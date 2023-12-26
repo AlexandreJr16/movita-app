@@ -13,7 +13,7 @@ function Arrow(props) {
     >
       <Path
         d="M12 7L2 17l10 10"
-        stroke="#fff"
+        stroke={props.color ? props.color : "#fff"}
         strokeWidth={3}
         strokeLinecap="round"
         strokeLinejoin="round"
