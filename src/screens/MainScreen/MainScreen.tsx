@@ -25,7 +25,7 @@ export default function MainScreen({ navigation }) {
       <ScrollView style={styles.background}>
         <HeaderMain navigation={navigation} />
         <SelectCategory />
-        <ShowProductsCarousel produtos={produtos} />
+        <ShowProductsCarousel navigation={navigation} produtos={produtos} />
         <LoadingIndicator visible={loading} />
       </ScrollView>
     </SafeAreaView>

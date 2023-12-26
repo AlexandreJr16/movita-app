@@ -3,8 +3,15 @@ import Texto from "../texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Produto from "./Product";
 import styles from "./styles";
+import React from "react";
 
-const ShowProductsCarousel = ({ produtos }: { produtos: any }) => {
+const ShowProductsCarousel = ({
+  produtos,
+  navigation,
+}: {
+  produtos: any;
+  navigation: any;
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -20,7 +27,9 @@ const ShowProductsCarousel = ({ produtos }: { produtos: any }) => {
         keyExtractor={(item) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <Produto produto={item} />}
+        renderItem={({ item }) => (
+          <Produto navigation={navigation} produto={item} />
+        )}
       />
     </View>
   );
