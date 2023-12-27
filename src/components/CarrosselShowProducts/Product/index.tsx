@@ -5,10 +5,9 @@ import Texto from "../../texto/Texto";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
-const Produto = ({ produto, navigation }) => {
+const Produto = ({ produto, navigation, color }) => {
   const navigateToProduct = () => {
-    console.log("ola mundo");
-    navigation.navigate("Product", { produto: produto });
+    navigation.navigate("Product", { produto: produto, color: color });
     // navigation.navigate("Product");
   };
 

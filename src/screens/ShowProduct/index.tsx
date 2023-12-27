@@ -28,15 +28,19 @@ type Produto = {
 
 const ShowProduct = ({ route, navigation }) => {
   const produto: Produto = route.params.produto;
+  const color = route.params.color;
 
   return (
-    <SafeAreaView style={{ ...styles.container, backgroundColor: "#1f1f1f" }}>
+    <SafeAreaView style={{ backgroundColor: "#1f1f1f", flex: 1 }}>
       <ScrollView style={styles.container}>
-        <HeaderPerfil
-          color="#36A5BF"
-          navigation={navigation}
-          visiblePerfil={true}
-        />
+        <View style={styles.itensContent}>
+          <HeaderPerfil
+            color={color}
+            navigation={navigation}
+            visiblePerfil={true}
+          />
+          <ImagemBuffer imgBuffer={produto.imagem} style={styles.img} />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

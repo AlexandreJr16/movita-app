@@ -8,6 +8,7 @@ import UpdatePerfil from "../screens/PerfilScreen/UpdatePerfil";
 import UpdateSenha from "../screens/PerfilScreen/UpdateSenha";
 import MeusProjetos from "../screens/PerfilScreen/MeusProjetos";
 import MeusFavoritos from "../screens/PerfilScreen/MeusFavoritos";
+import ShowProduct from "../screens/ShowProduct";
 
 const PerfilRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -24,6 +25,7 @@ const PerfilRoutes: React.FC = () => {
       <Stack.Screen name="updateSenha" component={UpdateSenha} />
       <Stack.Screen name="meusFavoritos" component={MeusFavoritos} />
       <Stack.Screen name="meusProjetos" component={MeusProjetos} />
+      <Stack.Screen name="Product" component={ShowProduct} />
     </Stack.Navigator>
   );
 };

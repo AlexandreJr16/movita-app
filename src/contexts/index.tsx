@@ -110,7 +110,6 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const prods = await auth.getAllProjetosByCliente(1);
-      console.log(prods);
       return prods;
     } catch (error) {
       setLoading(false);

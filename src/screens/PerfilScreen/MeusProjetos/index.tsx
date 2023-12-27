@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, StatusBar, View } from "react-native";
 import Texto from "../../../components/texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
@@ -8,6 +8,7 @@ import TitleTextPerfil from "../../../components/Perfil/TitleText";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../contexts";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
+import React from "react";
 
 const MeusProjetos = ({ navigation }: { navigation: any }) => {
   const { getAllProjetosByCliente, user } = useContext(AuthContext);
@@ -24,12 +25,21 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
   }, []);
   return (
     <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
+      <StatusBar
+        translucent={true}
+        backgroundColor={"#1f1f1f"}
+        barStyle="light-content"
+      />
       <ScrollView style={styles.bg}>
         <HeaderPerfil navigation={navigation} />
         <ShowPerfil />
         <View style={styles.container}>
           <TitleTextPerfil>Meus Projetos</TitleTextPerfil>
-          <ShowProductsCarousel produtos={produtos} />
+          <ShowProductsCarousel
+            color={"#36A5BF"}
+            produtos={produtos}
+            navigation={navigation}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

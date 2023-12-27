@@ -9,6 +9,7 @@ import SplashImage3 from "../../assents/Splash/SplashImage3";
 import ImageProgress from "../../assents/Splash/ImageProgress";
 import ImageProgress2 from "../../assents/Splash/ImageProgress2";
 import ImageProgress3 from "../../assents/Splash/ImageProgress3";
+import { StatusBar } from "expo-status-bar";
 
 //Eu quero colocar alguma função pra quando apertar na seta de voltar do celular decremente a page (Simples)
 interface Page {
@@ -98,6 +99,8 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
   const { bg, textColor, btnFontColor, btnBgColor } = pages[page % 3];
 
   return (
+    <SafeAreaView>
+      <StatusBar translucent={true} />
       <View style={[styles.container, { backgroundColor: bg }]}>
         {img}
         <View style={styles.textView}>
@@ -119,5 +122,6 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
           </Button>
         </View>
       </View>
+    </SafeAreaView>
   );
 }

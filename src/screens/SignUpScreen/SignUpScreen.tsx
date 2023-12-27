@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { Pressable, ScrollView, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Logo from "../../components/Logo/Logo";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
@@ -160,6 +160,7 @@ const SignUpScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <StatusBar translucent={true} barStyle="light-content" />
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <View style={styles.logo1}>

@@ -8,9 +8,11 @@ import React from "react";
 const ShowProductsCarousel = ({
   produtos,
   navigation,
+  color = "#fff",
 }: {
   produtos: any;
   navigation: any;
+  color?: any;
 }) => {
   return (
     <View style={styles.container}>
@@ -28,7 +30,7 @@ const ShowProductsCarousel = ({
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <Produto navigation={navigation} produto={item} />
+          <Produto color={color} navigation={navigation} produto={item} />
         )}
       />
     </View>

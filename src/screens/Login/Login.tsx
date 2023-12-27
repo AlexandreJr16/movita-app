@@ -1,4 +1,4 @@
-import { View, Image, ScrollView, Pressable } from "react-native";
+import { View, Image, ScrollView, Pressable, StatusBar } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
 import { useState, useContext } from "react";
@@ -15,7 +15,7 @@ import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
 import LoadingIndicator from "../../components/Loading";
 
 const Login = ({ navigation }) => {
-  const { signIn, loading } = useContext(AuthContext);
+  const { signIn, loading, signed } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [text, setText] = useState("");
@@ -36,9 +36,12 @@ const Login = ({ navigation }) => {
       return;
     } else setText("");
     const response = await signIn(email, password);
-    if (response.status == "ok") return;
-    if (response.status == "bad") {
+    if (response && response.message) {
       setText(response.message);
+    }
+
+    if (!signed) {
+      return;
     }
   };
 
@@ -50,6 +53,7 @@ const Login = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <StatusBar translucent={true} barStyle="light-content" />
         <View style={styles.container}>
           <Logo style={styles.logo} />
           <View style={styles.carrossel}>

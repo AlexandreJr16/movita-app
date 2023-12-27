@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, StatusBar, View } from "react-native";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
 import styles from "./styles";
@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import AuthContext from "../../../contexts";
 import LoadingIndicator from "../../../components/Loading";
 import ButtonPerfil from "../../../components/Perfil/Button";
+import React from "react";
 
 const UpdateSenha = ({ navigation }) => {
   const { updateSenha, loading } = useContext(AuthContext);
@@ -38,6 +39,11 @@ const UpdateSenha = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
+      <StatusBar
+        translucent={true}
+        backgroundColor={"#1f1f1f"}
+        barStyle="light-content"
+      />
       <ScrollView style={styles.bg}>
         <HeaderPerfil navigation={navigation} />
         <ShowPerfil />

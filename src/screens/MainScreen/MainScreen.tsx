@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, StatusBar } from "react-native";
 import AuthContext from "../../contexts";
 import styles from "./styles";
 import HeaderMain from "../../components/Main/Header";
@@ -21,7 +21,12 @@ export default function MainScreen({ navigation }) {
     fetchTopProjects();
   }, []);
   return (
-    <SafeAreaView style={{ backgroundColor: "#1f1f1f" }}>
+    <SafeAreaView>
+      <StatusBar
+        translucent={true}
+        backgroundColor={"#1f1f1f"}
+        barStyle="light-content"
+      />
       <ScrollView style={styles.background}>
         <HeaderMain navigation={navigation} />
         <SelectCategory />

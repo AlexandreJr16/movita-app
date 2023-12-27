@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
@@ -20,6 +20,11 @@ const PerfilScreen = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
   return (
     <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
+      <StatusBar
+        translucent={true}
+        backgroundColor={"#1f1f1f"}
+        barStyle="light-content"
+      />
       <ScrollView style={styles.bg}>
         <HeaderPerfil visibleLogo={true} />
         <ShowPerfil />
