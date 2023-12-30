@@ -22,8 +22,12 @@ const ChatComponent = ({
   }>({ id: "oi", text: "errou", time: "1:76", user: "Ale" });
 
   //👇🏻 Retrieves the last message in the array from the item prop
+
   useLayoutEffect(() => {
-    setMessages(item.messages[item.messages.length - 1]);
+    // if (item.messages.length - 1 > 4) {
+    //   setMessages(item.messages[item.messages.length - 1]);
+    // } else
+    setMessages({ id: "1", text: "Ola", time: "12:98", user: "Ale" });
   }, []);
 
   ///👇🏻 Navigates to the Messaging screen

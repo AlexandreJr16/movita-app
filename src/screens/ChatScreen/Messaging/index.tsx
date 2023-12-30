@@ -1,9 +1,10 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { View, TextInput, Text, FlatList, Pressable } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MessageComponent from "../../../components/Chat/MessageComponent/index";
 import { styles } from "../../.././utils/styles";
 import socket from "../../../utils/socket";
+import AuthContext from "../../../contexts";
 
 const Messaging = ({ route, navigation }) => {
   const [chatMessages, setChatMessages] = useState([
@@ -25,18 +26,6 @@ const Messaging = ({ route, navigation }) => {
 
   //👇🏻 Access the chatroom's name and id
   const { name, id } = route.params;
-
-  //👇🏻 This function gets the username saved on AsyncStorage
-  const getUsername = async () => {
-    try {
-      const value = await AsyncStorage.getItem("username");
-      if (value !== null) {
-        setUser(value);
-      }
-    } catch (e) {
-      console.log("Error while loading username!");
-    }
-  };
 
   //👇🏻 Sets the header title to the name chatroom's name
   useLayoutEffect(() => {
@@ -63,7 +52,7 @@ const Messaging = ({ route, navigation }) => {
     socket.emit("newMessage", {
       message,
       room_id: id,
-      user,
+      user: name,
       timestamp: { hour, mins },
     });
   };

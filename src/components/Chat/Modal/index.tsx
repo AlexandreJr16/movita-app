@@ -9,7 +9,7 @@ const ChatModal = ({ setVisible }) => {
 
   const handleCreateRoom = () => {
     //👇🏻 sends a message containing the group name to the server
-    socket.emit("createRoom", groupName);
+    socket.emit("createRoom", { userId1: 1, userId2: 2 });
     closeModal();
   };
   return (

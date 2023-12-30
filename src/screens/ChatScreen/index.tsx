@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import ChatModal from "../../components/Chat/Modal";
@@ -6,8 +6,10 @@ import ChatComponent from "../../components/Chat/ChatComponent/index";
 import { styles } from "../../utils/styles";
 import socket from "../../utils/socket";
 import { API_URL } from "../../../configs";
+import AuthContext from "../../contexts";
 
 const Chat = ({ navigation }) => {
+  const { user } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
 
   //👇🏻 Dummy list of rooms
@@ -17,13 +19,7 @@ const Chat = ({ navigation }) => {
 
   //👇🏻 Runs whenever there is new trigger from the backend
   useLayoutEffect(() => {
-    function fetchGroups() {
-      fetch(API_URL)
-        .then((res) => res.json())
-        .then((data) => setRooms(data))
-        .catch((err) => console.error(err));
-    }
-    fetchGroups();
+    socket.emit("roomList", { id: 1 });
   }, []);
 
   //👇🏻 Runs whenever there is new trigger from the backend
@@ -31,7 +27,7 @@ const Chat = ({ navigation }) => {
     socket.on("roomsList", (rooms) => {
       setRooms(rooms);
     });
-  }, [socket]);
+  });
 
   return (
     <SafeAreaView style={styles.chatscreen}>
