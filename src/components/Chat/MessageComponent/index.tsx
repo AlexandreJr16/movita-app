@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "../../.././utils/styles";
 import AuthContext from "../../../contexts";
 
 export default function MessageComponent({ item }) {
   const { user } = useContext(AuthContext);
-  const status = item.user !== user.nome;
+  const status = item.userName !== user.nome;
 
   return (
     <View>

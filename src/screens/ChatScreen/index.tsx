@@ -1,59 +1,74 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  SafeAreaView,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 import ChatModal from "../../components/Chat/Modal";
 import ChatComponent from "../../components/Chat/ChatComponent/index";
 import { styles } from "../../utils/styles";
 import socket from "../../utils/socket";
-import { API_URL } from "../../../configs";
 import AuthContext from "../../contexts";
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
-
-  //👇🏻 Dummy list of rooms
   const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  //👇🏻 Runs when the component mounts
+  useEffect(() => {
+    // Função para tratar a atualização da lista de salas
+    const handleRoomsList = (newRooms) => {
+      setRooms(newRooms);
+      setLoading(false);
+    };
 
-  //👇🏻 Runs whenever there is new trigger from the backend
-  useLayoutEffect(() => {
-    socket.emit("roomList", { id: 1 });
+    // Emitir o evento "roomList" assim que o componente for montado
+    socket.emit("roomList", { id: user.id });
+
+    // Adicionar o ouvinte de eventos "roomsList"
+    socket.on("roomsList", handleRoomsList);
+
+    // Detach event listener when component unmounts
+    return () => {
+      socket.off("roomsList", handleRoomsList);
+    };
+    console.log(rooms);
   }, []);
 
-  //👇🏻 Runs whenever there is new trigger from the backend
-  useEffect(() => {
-    socket.on("roomsList", (rooms) => {
-      setRooms(rooms);
-    });
-  });
+  const openChatModal = () => {
+    setVisible(true);
+  };
+
+  const keyExtractor = (item) => item.id.toString();
+
+  const renderChatItem = ({ item }) => (
+    <ChatComponent navigation={navigation} item={item} />
+  );
 
   return (
     <SafeAreaView style={styles.chatscreen}>
       <View style={styles.chattopContainer}>
         <View style={styles.chatheader}>
           <Text style={styles.chatheading}>Chats</Text>
-
-          {/* 👇🏻 Logs "ButtonPressed" to the console when the icon is clicked */}
-          <Pressable
-            onPress={() => {
-              setVisible(true);
-            }}
-          >
+          <Pressable onPress={openChatModal}>
             <Feather name="edit" size={24} color="green" />
           </Pressable>
         </View>
       </View>
 
       <View style={styles.chatlistContainer}>
-        {rooms.length > 0 ? (
+        {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : rooms.length > 0 ? (
           <FlatList
             data={rooms}
-            renderItem={({ item }) => (
-              <ChatComponent navigation={navigation} item={item} />
-            )}
-            keyExtractor={(item) => item.id}
+            renderItem={renderChatItem}
+            keyExtractor={keyExtractor}
           />
         ) : (
           <View style={styles.chatemptyContainer}>
@@ -62,7 +77,8 @@ const Chat = ({ navigation }) => {
           </View>
         )}
       </View>
-      {visible ? <ChatModal setVisible={setVisible} /> : ""}
+
+      {visible && <ChatModal setVisible={setVisible} />}
     </SafeAreaView>
   );
 };

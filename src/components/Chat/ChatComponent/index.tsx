@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../../../utils/styles";
 import ChatRoutes from "../../../routes/chat.routes";
+import socket from "../../../utils/socket";
 
 const ChatComponent = ({
   item,
@@ -36,6 +37,7 @@ const ChatComponent = ({
       id: item.id,
       name: item.name,
     });
+    socket.emit("joinRoom", item.id);
   };
 
   return (

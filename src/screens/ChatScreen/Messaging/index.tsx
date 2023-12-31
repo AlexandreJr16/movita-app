@@ -1,14 +1,7 @@
-import React, {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { View, TextInput, Text, FlatList, Pressable } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import MessageComponent from "../../../components/Chat/MessageComponent/index";
-import { styles } from "../../.././utils/styles";
+import { styles } from "../../../utils/styles";
 import socket from "../../../utils/socket";
 import AuthContext from "../../../contexts";
 
@@ -20,49 +13,67 @@ const Messaging = ({ route, navigation }) => {
 
   const { name, id } = route.params;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    // ComponentDidMount
     navigation.setOptions({ title: name });
-    socket.emit("findRoom", id);
-    socket.on("foundRoom", (roomChats) => {
+
+    const handleFoundRoom = (roomChats) => {
       setChatMessages(roomChats);
       scrollToBottom();
-    });
+    };
+
+    // Emit only when the component mounts
+    socket.emit("findRoom", id);
+    socket.on("foundRoom", handleFoundRoom);
+
+    return () => {
+      socket.off("foundRoom", handleFoundRoom);
+    };
   }, [id, navigation]);
 
   useEffect(() => {
-    socket.on("foundRoom", (roomChats) => {
-      setChatMessages(roomChats);
+    // Update the chat when a new message is received
+    const handleNewMessageReceived = (newMessage) => {
+      // Update the state by adding the new message to the existing messages
+      setChatMessages((prevMessages) => [...prevMessages, newMessage]);
       scrollToBottom();
-    });
+    };
 
-    // Cleanup function to remove the socket listener when the component unmounts
+    socket.on("newMessageReceived", handleNewMessageReceived);
+
     return () => {
-      socket.off("foundRoom");
+      socket.off("newMessageReceived", handleNewMessageReceived);
     };
   }, []);
 
   const handleNewMessage = () => {
-    const hour = new Date().getHours().toString().padStart(2, "0");
-    const mins = new Date().getMinutes().toString().padStart(2, "0");
+    if (message === "") return;
+
+    const timestamp = new Date();
+    const hour = timestamp.getHours().toString().padStart(2, "0");
+    const mins = timestamp.getMinutes().toString().padStart(2, "0");
 
     const newMessage = {
-      id: `${Date.now()}`, // Use a unique identifier like timestamp
-      text: message,
+      id: `${Date.now()}`,
+      message: message,
       time: `${hour}:${mins}`,
-      user: user.nome,
+      roomId: id,
+      userName: user.nome,
     };
 
+    // Update the state by adding the new message to the existing messages
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
 
+    // Send the new message to the server
     socket.emit("newMessage", {
       room_id: id,
       message,
       user: user.nome,
       timestamp: { hour, mins },
     });
-    socket.emit("findRoom", id);
 
     setMessage("");
+    scrollToBottom(); // Scroll to bottom after sending the message
   };
 
   const scrollToBottom = () => {
