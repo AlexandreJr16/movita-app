@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { View, TextInput, Text, FlatList, Pressable } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MessageComponent from "../../../components/Chat/MessageComponent/index";
@@ -7,54 +13,62 @@ import socket from "../../../utils/socket";
 import AuthContext from "../../../contexts";
 
 const Messaging = ({ route, navigation }) => {
-  const [chatMessages, setChatMessages] = useState([
-    {
-      id: "1",
-      text: "Hello guys, welcome!",
-      time: "07:50",
-      user: "Tomer",
-    },
-    {
-      id: "2",
-      text: "Hi Tomer, thank you! 😇",
-      time: "08:50",
-      user: "David",
-    },
-  ]);
+  const { user } = useContext(AuthContext);
+  const [chatMessages, setChatMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [user, setUser] = useState("");
+  const flatListRef = useRef(null);
 
-  //👇🏻 Access the chatroom's name and id
   const { name, id } = route.params;
 
-  //👇🏻 Sets the header title to the name chatroom's name
   useLayoutEffect(() => {
     navigation.setOptions({ title: name });
     socket.emit("findRoom", id);
-    socket.on("foundRoom", (roomChats) => setChatMessages(roomChats));
+    socket.on("foundRoom", (roomChats) => {
+      setChatMessages(roomChats);
+      scrollToBottom();
+    });
+  }, [id, navigation]);
+
+  useEffect(() => {
+    socket.on("foundRoom", (roomChats) => {
+      setChatMessages(roomChats);
+      scrollToBottom();
+    });
+
+    // Cleanup function to remove the socket listener when the component unmounts
+    return () => {
+      socket.off("foundRoom");
+    };
   }, []);
 
-  //👇🏻 This runs when the messages are updated.
-  useEffect(() => {
-    socket.on("foundRoom", (roomChats) => setChatMessages(roomChats));
-  }, [socket]);
   const handleNewMessage = () => {
-    const hour =
-      new Date().getHours() < 10
-        ? `0${new Date().getHours()}`
-        : `${new Date().getHours()}`;
+    const hour = new Date().getHours().toString().padStart(2, "0");
+    const mins = new Date().getMinutes().toString().padStart(2, "0");
 
-    const mins =
-      new Date().getMinutes() < 10
-        ? `0${new Date().getMinutes()}`
-        : `${new Date().getMinutes()}`;
+    const newMessage = {
+      id: `${Date.now()}`, // Use a unique identifier like timestamp
+      text: message,
+      time: `${hour}:${mins}`,
+      user: user.nome,
+    };
+
+    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
 
     socket.emit("newMessage", {
-      message,
       room_id: id,
-      user: name,
+      message,
+      user: user.nome,
       timestamp: { hour, mins },
     });
+    socket.emit("findRoom", id);
+
+    setMessage("");
+  };
+
+  const scrollToBottom = () => {
+    if (flatListRef.current) {
+      flatListRef.current.scrollToEnd({ animated: true });
+    }
   };
 
   return (
@@ -65,22 +79,18 @@ const Messaging = ({ route, navigation }) => {
           { paddingVertical: 15, paddingHorizontal: 10 },
         ]}
       >
-        {chatMessages[0] ? (
-          <FlatList
-            data={chatMessages}
-            renderItem={({ item }) => (
-              <MessageComponent item={item} user={user} />
-            )}
-            keyExtractor={(item) => item.id}
-          />
-        ) : (
-          ""
-        )}
+        <FlatList
+          ref={flatListRef}
+          data={chatMessages}
+          renderItem={({ item }) => <MessageComponent item={item} />}
+          keyExtractor={(item) => item.id}
+        />
       </View>
 
       <View style={styles.messaginginputContainer}>
         <TextInput
           style={styles.messaginginput}
+          value={message}
           onChangeText={(value) => setMessage(value)}
         />
         <Pressable
