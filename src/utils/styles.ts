@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
   },
   chatscreen: {
-    backgroundColor: "#F7F7F7",
+    backgroundColor: "#1f1f1f",
     flex: 1,
     padding: 10,
     position: "relative",
@@ -164,6 +164,8 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   cavatar: {
+    width: 50,
+    height: 50,
     marginRight: 15,
   },
   cusername: {

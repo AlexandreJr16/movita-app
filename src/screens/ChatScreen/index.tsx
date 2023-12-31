@@ -10,9 +10,12 @@ import {
 import { Feather } from "@expo/vector-icons";
 import ChatModal from "../../components/Chat/Modal";
 import ChatComponent from "../../components/Chat/ChatComponent/index";
-import { styles } from "../../utils/styles";
+import styles from "./styles";
 import socket from "../../utils/socket";
 import AuthContext from "../../contexts";
+import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
+import Texto from "../../components/texto/Texto";
+import { TextInput } from "react-native-gesture-handler";
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
@@ -51,15 +54,15 @@ const Chat = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.chatscreen}>
-      <View style={styles.chattopContainer}>
-        <View style={styles.chatheader}>
-          <Text style={styles.chatheading}>Chats</Text>
-          <Pressable onPress={openChatModal}>
-            <Feather name="edit" size={24} color="green" />
-          </Pressable>
+      <View style={styles.header}>
+        <HeaderPerfil visibleLogo={true} visiblePerfil={true} />
+        <Texto style={styles.titleMessage} weight="bold">
+          Mensagens
+        </Texto>
+        <View style={styles.boxInput}>
+          <TextInput style={styles.textInput}></TextInput>
         </View>
       </View>
-
       <View style={styles.chatlistContainer}>
         {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />

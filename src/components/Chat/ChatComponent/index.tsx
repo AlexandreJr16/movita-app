@@ -1,34 +1,51 @@
 import { View, Text, Pressable } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { styles } from "../../../utils/styles";
+import styles from "./styles";
 import ChatRoutes from "../../../routes/chat.routes";
 import socket from "../../../utils/socket";
+import ImagemBuffer from "../../Imagem";
+import AuthContext from "../../../contexts";
+import Texto from "../../texto/Texto";
 
 const ChatComponent = ({
   item,
   navigation,
-  user,
 }: {
   item: any;
   navigation: any;
-  user?: any;
 }) => {
+  const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState<{
     id: string;
-    text: string;
+    messagem: string;
     time: string;
     user: string;
-  }>({ id: "oi", text: "errou", time: "1:76", user: "Ale" });
+  }>({ id: "oi", messagem: "errou", time: "1:76", user: "Ale" });
 
   //👇🏻 Retrieves the last message in the array from the item prop
 
   useLayoutEffect(() => {
-    // if (item.messages.length - 1 > 4) {
-    //   setMessages(item.messages[item.messages.length - 1]);
-    // } else
-    setMessages({ id: "1", text: "Ola", time: "12:98", user: "Ale" });
+    const lastMessage = item.Message[item.Message.length - 1];
+
+    if (lastMessage != undefined) {
+      const createdAtDate = new Date(lastMessage.createAt);
+
+      const formattedTime = `${createdAtDate.getHours()}:${createdAtDate
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}`;
+
+      setMessages({
+        user: lastMessage.userName,
+        messagem: lastMessage.message,
+        time: formattedTime,
+        id: lastMessage.roomId,
+      });
+    } else {
+      setMessages({ id: "1", messagem: "Ola", time: "12:98", user: "Ale" });
+    }
   }, []);
 
   ///👇🏻 Navigates to the Messaging screen
@@ -42,25 +59,25 @@ const ChatComponent = ({
 
   return (
     <Pressable style={styles.cchat} onPress={handleNavigation}>
-      <Ionicons
-        name="person-circle-outline"
-        size={45}
-        color="black"
+      <ImagemBuffer
+        imgBuffer={item.img[0]}
         style={styles.cavatar}
-      />
+      ></ImagemBuffer>
 
       <View style={styles.crightContainer}>
         <View>
-          <Text style={styles.cusername}>{item.name}</Text>
+          <Texto weight="bold" style={styles.cusername}>
+            {messages.user}
+          </Texto>
 
-          <Text style={styles.cmessage}>
-            {messages?.text ? messages.text : "Tap to start chatting"}
-          </Text>
+          <Texto weight="regular" style={styles.cmessage}>
+            {messages?.messagem ? messages.messagem : "Tap to start chatting"}
+          </Texto>
         </View>
-        <View>
-          <Text style={styles.ctime}>
+        <View style={styles.timeStyle}>
+          <Texto weight="regular" style={styles.ctime}>
             {messages?.time ? messages.time : "now"}
-          </Text>
+          </Texto>
         </View>
       </View>
     </Pressable>
