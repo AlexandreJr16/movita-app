@@ -28,6 +28,7 @@ const Messaging = ({ route, navigation }) => {
 
     return () => {
       socket.off("foundRoom", handleFoundRoom);
+      socket.emit("disconnectFromSpecificRoom", id);
     };
   }, [id, navigation]);
 

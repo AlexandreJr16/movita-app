@@ -37,8 +37,7 @@ const Chat = ({ navigation }) => {
     return () => {
       socket.off("roomsList", handleRoomsList);
     };
-    console.log(rooms);
-  }, []);
+  }, []); // Dependência vazia para garantir que este useEffect seja executado apenas uma vez, sem depender de variáveis externas
 
   const openChatModal = () => {
     setVisible(true);
