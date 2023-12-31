@@ -15,7 +15,7 @@ import socket from "../../utils/socket";
 import AuthContext from "../../contexts";
 import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
 import Texto from "../../components/texto/Texto";
-import { TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);

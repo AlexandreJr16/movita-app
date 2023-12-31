@@ -7,12 +7,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     paddingHorizontal: 15,
-    marginBottom: 17,
+    marginTop: 17,
   },
   cavatar: {
-    width: 55,
-    height: 55,
+    width: 60,
+    height: 60,
     marginRight: 20,
+    borderRadius: 3000,
   },
   crightContainer: {
     flexDirection: "row",

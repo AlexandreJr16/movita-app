@@ -39,7 +39,6 @@ const UpdatePerfil = ({ navigation }) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (
       email == "" ||
-      email == "" ||
       telefone == "" ||
       endereco == "" ||
       cpf == "" ||
@@ -48,6 +47,11 @@ const UpdatePerfil = ({ navigation }) => {
       throw new Error("Campos inválidos");
     }
     if (user.tipo == "empresa") {
+      const dto = {
+        user: { email },
+        empresa: { nomeFantasia: nome, telefone },
+      };
+      const us = updateUser(dto);
     } else {
       const dto = { user: { email }, cliente: { nome, telefone, cpf } };
       const us = updateUser(dto);

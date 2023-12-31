@@ -18,17 +18,11 @@ export default function MessageComponent({ item }) {
         }
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Ionicons
-            name="person-circle-outline"
-            size={30}
-            color="black"
-            style={styles.cavatar} //pode ser mavatar
-          />
           <View
             style={
               status
                 ? styles.mmessage
-                : [styles.mmessage, { backgroundColor: "rgb(194, 243, 194)" }]
+                : [styles.mmessage, { backgroundColor: "#7b7b7b" }]
             }
           >
             <Text>{item.message}</Text>

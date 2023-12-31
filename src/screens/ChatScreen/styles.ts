@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     backgroundColor: "#1f1f1f",
     borderBottomRightRadius: 50,
-    marginBottom: 30,
   },
   titleMessage: {
     marginTop: 20,
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   chatlistContainer: {
-    width: "100%",
+    flex: 1,
   },
   chatemptyContainer: {},
   chatemptyText: {},

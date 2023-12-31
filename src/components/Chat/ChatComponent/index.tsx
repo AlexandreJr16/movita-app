@@ -67,7 +67,7 @@ const ChatComponent = ({
       <View style={styles.crightContainer}>
         <View>
           <Texto weight="bold" style={styles.cusername}>
-            {messages.user}
+            {item.name}
           </Texto>
 
           <Texto weight="regular" style={styles.cmessage}>
