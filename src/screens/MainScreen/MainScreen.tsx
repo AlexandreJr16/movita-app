@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, ScrollView, StatusBar } from "react-native";
+import { View, ScrollView, StatusBar, ActivityIndicator } from "react-native";
 import AuthContext from "../../contexts";
 import styles from "./styles";
 import HeaderMain from "../../components/Main/Header";
@@ -9,16 +9,29 @@ import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 import LoadingIndicator from "../../components/Loading";
 
 export default function MainScreen({ navigation }) {
-  const { getTopProjects, loading } = useContext(AuthContext);
+  const { getTopProjects, loading, getRandomProjects } =
+    useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
-    const fetchTopProjects = async () => {
-      const topProjects = await getTopProjects(10);
-      setProdutos(topProjects);
+    const fetchData = async () => {
+      try {
+        const topProjects = await getTopProjects(10);
+        const randomProjects = await getRandomProjects(2);
+        // Combina os projetos dos carrosséis em um único array
+        const arr = randomProjects.map((projects) => {
+          return projects.produtos.map((item) => ({
+            ...item,
+            imagem: item.imagem[0],
+          }));
+        });
+        setProdutos([topProjects, ...arr]); // Define o estad
+      } catch (error) {
+        console.error("Erro ao obter os projetos:", error);
+      }
     };
 
-    fetchTopProjects();
+    fetchData();
   }, []);
   return (
     <SafeAreaView>
@@ -28,10 +41,22 @@ export default function MainScreen({ navigation }) {
         barStyle="light-content"
       />
       <ScrollView style={styles.background}>
-        <HeaderMain navigation={navigation} />
-        <SelectCategory />
-        <ShowProductsCarousel navigation={navigation} produtos={produtos} />
-        <LoadingIndicator visible={loading} />
+        <View>
+          <HeaderMain navigation={navigation} />
+          <SelectCategory />
+
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : (
+            produtos.map((item, index) => (
+              <ShowProductsCarousel
+                key={index}
+                navigation={navigation}
+                produtos={item}
+              />
+            ))
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

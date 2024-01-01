@@ -43,6 +43,7 @@ export interface AuthContextData {
   signed?: boolean;
   token?: string;
   loading?: boolean;
+
   updateUser?(dto: {
     user?: any;
     cliente?: any;
@@ -56,4 +57,5 @@ export interface AuthContextData {
   });
   getTopProjects?(num: number);
   getAllProjetosByCliente?(num: number);
+  getRandomProjects?(num: number);
 }
