@@ -16,6 +16,7 @@ import AuthContext from "../../contexts";
 import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
 import Texto from "../../components/texto/Texto";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
+import LoadingIndicator from "../../components/Loading";
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
@@ -65,7 +66,7 @@ const Chat = ({ navigation }) => {
       </View>
       <View style={styles.chatlistContainer}>
         {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
+          <LoadingIndicator visible={loading} />
         ) : rooms.length > 0 ? (
           <FlatList
             data={rooms}

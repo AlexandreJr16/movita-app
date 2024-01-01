@@ -1,11 +1,13 @@
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   selectContainer: {
-    width: 'auto',
+    width: "auto",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    margin: 20,
+    marginHorizontal: 20,
+    marginTop: 15,
+    marginBottom: 5,
     flexDirection: "row",
   },
   img: {},
@@ -13,8 +15,8 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     borderRadius: 50,
   },
 });
