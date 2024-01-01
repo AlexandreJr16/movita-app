@@ -115,6 +115,9 @@ const Messaging = ({ route, navigation }) => {
           renderItem={({ item }) => <MessageComponent item={item} />}
           keyExtractor={(item) => item.id}
           style={{ paddingHorizontal: 15 }}
+          onContentSizeChange={() => {
+            scrollToBottom();
+          }}
         />
         <View style={styles.messaginginputContainer}>
           <View style={styles.messaginginput}>

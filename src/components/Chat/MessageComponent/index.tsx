@@ -1,10 +1,11 @@
 import { View, Text } from "react-native";
-import React, { useContext, useLayoutEffect } from "react";
+import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { styles } from "../../.././utils/styles";
+import { styles } from "./styles";
 import AuthContext from "../../../contexts";
+import Texto from "../../texto/Texto";
 
-export default function MessageComponent({ item }) {
+export default function MessageComponent({ item }: { item: any }) {
   const { user } = useContext(AuthContext);
   const status = item.userName !== user.nome;
 
@@ -25,10 +26,15 @@ export default function MessageComponent({ item }) {
                 : [styles.mmessage, { backgroundColor: "#7b7b7b" }]
             }
           >
-            <Text>{item.message}</Text>
+            <Texto weight="regular" style={{ color: "white" }}>
+              {" "}
+              {item.message}
+            </Texto>
           </View>
         </View>
-        <Text style={{ marginLeft: 40 }}>{item.time}</Text>
+        <Texto weight="regular" style={{ marginLeft: 40, color: "#000" }}>
+          {item.time}
+        </Texto>
       </View>
     </View>
   );

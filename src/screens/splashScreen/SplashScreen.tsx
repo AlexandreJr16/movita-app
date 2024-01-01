@@ -99,29 +99,31 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
   const { bg, textColor, btnFontColor, btnBgColor } = pages[page % 3];
 
   return (
-    <SafeAreaView>
-      <StatusBar translucent={true} />
-      <View style={[styles.container, { backgroundColor: bg }]}>
-        {img}
-        <View style={styles.textView}>
-          <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
-            {texts[page]}
-          </Texto>
-          <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
-            O Movita oferece a solução.
-          </Texto>
-          {imageProgress}
+    <View style={{ flex: 1 }}>
+      <SafeAreaView>
+        <StatusBar translucent={true} />
+        <View style={[styles.container, { backgroundColor: bg }]}>
+          {img}
+          <View style={styles.textView}>
+            <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
+              {texts[page]}
+            </Texto>
+            <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
+              O Movita oferece a solução.
+            </Texto>
+            {imageProgress}
+          </View>
+          <View style={styles.lastView}>
+            <Button
+              colorBg={btnBgColor}
+              color={btnFontColor}
+              onPress={handlePages}
+            >
+              PULAR
+            </Button>
+          </View>
         </View>
-        <View style={styles.lastView}>
-          <Button
-            colorBg={btnBgColor}
-            color={btnFontColor}
-            onPress={handlePages}
-          >
-            PULAR
-          </Button>
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </View>
   );
 }

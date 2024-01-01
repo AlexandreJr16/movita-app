@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
   },
   textTitle: {
-    color: "#f2f2f2",
+    color: "#fff",
     fontSize: 25,
     lineHeight: 28.75,
     letterSpacing: 0.25,
   },
   messaContainer: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#f2f2f2",
     paddingTop: 40,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
@@ -30,12 +30,14 @@ const styles = StyleSheet.create({
   messaginginputContainer: {
     backgroundColor: "#36A5BF",
     display: "flex",
-    width: "100%",
+    alignSelf: "center",
+    width: "95%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
     padding: 15,
+    marginBottom: 8,
   },
   messaginginput: {
     width: "90%",
