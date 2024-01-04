@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     maxWidth: "100%",
     borderRadius: 15,
     marginBottom: 10,
+    gap: 10,
   },
   filterBtn: {
     backgroundColor: "#fff",

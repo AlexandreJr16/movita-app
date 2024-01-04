@@ -7,6 +7,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import HeaderMyProduct from "../../components/MeusProjetos/Header";
 import AuthContext from "../../contexts";
 import ShowProductsCarousel from "../../components/CarrosselShowProducts";
+import TextoInput from "../../components/texto/TextoInput";
 
 const EmpresasSearchScreen = ({ navigation }) => {
   const { getTopProjects, loading, getTopEmpresas } = useContext(AuthContext);
@@ -15,9 +16,8 @@ const EmpresasSearchScreen = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const topProjects = await getTopProjects(10);
         const topEmpresas = await getTopEmpresas(10);
-        setProdutos([topProjects, topEmpresas]);
+        setProdutos([topEmpresas]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }
@@ -30,7 +30,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
       <ScrollView style={styles.background}>
         <HeaderMyProduct
           navigation={navigation}
-          color={"blue"}
+          color={"red"}
           title="Projetos Anteriores"
         />
         <ShowProductsCarousel

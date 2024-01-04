@@ -16,8 +16,7 @@ const MeusProjetosScreen = ({ navigation }) => {
     const fetchData = async () => {
       try {
         const topProjects = await getTopProjects(10);
-        const topEmpresas = await getTopEmpresas(10);
-        setProdutos([topProjects, topEmpresas]);
+        setProdutos([topProjects]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }

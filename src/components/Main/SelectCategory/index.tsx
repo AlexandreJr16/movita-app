@@ -13,7 +13,7 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
     <View style={styles.selectContainer}>
       <Pressable
         onPress={() => {
-          navigation.navigate("MyProducts");
+          navigation.navigate("ProjetoSearch");
         }}
         style={{ gap: 10 }}
       >
@@ -28,7 +28,12 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
         </Texto>
       </Pressable>
 
-      <Pressable onPress={() => {}} style={{ gap: 10 }}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("EmpresaSearch");
+        }}
+        style={{ gap: 10 }}
+      >
         <View style={{ ...styles.btn, backgroundColor: color[1] }}>
           <EmpresasIcon style={styles.img} />
         </View>

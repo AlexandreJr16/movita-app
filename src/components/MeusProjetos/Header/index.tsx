@@ -13,6 +13,7 @@ import FiltroRed from "../../../assents/MeusProjetos/FiltroRed";
 import LupaAzul from "../../../assents/MeusProjetos/LupaAzul";
 import LupaRed from "../../../assents/MeusProjetos/LupaRed";
 import { Pressable } from "react-native";
+import TextoInput from "../../texto/TextoInput";
 
 const HeaderMyProduct = ({
   navigation,
@@ -33,11 +34,12 @@ const HeaderMyProduct = ({
       </Texto>
       <View style={styles.boxInput}>
         <View style={styles.textInput}>
-          <TextInput
+          <TextoInput
+            weight="regular"
             placeholder={
               color == "blue" ? "Pesquise Projetos..." : "Pesquise Empresas..."
             }
-            placeholderTextColor={color == "blue" ? "#36A5BF" : "#A64029"}
+            placeholderColor={color == "blue" ? "#36A5BF" : "#A64029"}
             style={
               color == "blue"
                 ? {
@@ -45,17 +47,18 @@ const HeaderMyProduct = ({
                     letterSpacing: 0.16,
                     fontSize: 16,
                     color: "#36A5BF",
+                    flex: 1,
                   }
                 : {
                     lineHeight: 18.4,
                     letterSpacing: 0.16,
                     fontSize: 16,
                     color: "#A64029",
+                    flex: 1,
                   }
             }
-          ></TextInput>
-
-          {color == "blue" ? <LupaAzul /> : <LupaRed />}
+          ></TextoInput>
+          <Pressable>{color == "blue" ? <LupaAzul /> : <LupaRed />}</Pressable>
         </View>
         <Pressable
           style={styles.filterBtn}
