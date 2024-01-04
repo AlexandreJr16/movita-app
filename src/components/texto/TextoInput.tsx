@@ -20,6 +20,7 @@ interface TextInputProps {
   weight: "regular" | "bold";
   style?: CustomTextStyle | null;
   placeholderColor?: any;
+  secureTextEntry?: boolean;
 }
 
 export default function TextoInput({
@@ -28,7 +29,8 @@ export default function TextoInput({
   onChangeText,
   weight,
   style,
-  placeholderColor = "#1f1f1f",
+  placeholderColor = "#7A7979",
+  secureTextEntry = false,
   ...restProps
 }: TextInputProps) {
   const [fontsLoaded] = useFonts({
@@ -52,6 +54,7 @@ export default function TextoInput({
       onChangeText={onChangeText}
       style={[textInputStyle, style]}
       placeholderTextColor={placeholderColor}
+      secureTextEntry={secureTextEntry}
       {...restProps}
     />
   );

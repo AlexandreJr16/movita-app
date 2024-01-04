@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
   inputMessage: {
+    flex: 1,
     padding: 10,
   },
 });

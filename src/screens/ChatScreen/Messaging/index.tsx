@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Texto from "../../../components/texto/Texto";
 import Logo from "../../../components/Logo/Logo";
 import SendMessage from "../../../assents/Chat/SendMessage";
+import TextoInput from "../../../components/texto/TextoInput";
 
 const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
@@ -121,9 +122,11 @@ const Messaging = ({ route, navigation }) => {
         />
         <View style={styles.messaginginputContainer}>
           <View style={styles.messaginginput}>
-            <TextInput
+            <TextoInput
+              weight="regular"
               style={styles.inputMessage}
               value={message}
+              placeholderColor={"#7A7979"}
               onChangeText={(value) => setMessage(value)}
               placeholder="Digite aqui"
             />

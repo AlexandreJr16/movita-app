@@ -2,6 +2,8 @@ import { TextInput, View } from "react-native";
 import Texto from "../../texto/Texto";
 import InputLogin from "../../Login/Input/InputLogin";
 import styles from "./styles";
+import React from "react";
+import TextoInput from "../../texto/TextoInput";
 
 const InputPerfil = ({
   title,
@@ -19,14 +21,15 @@ const InputPerfil = ({
       <Texto weight="bold" style={styles.text}>
         {title}
       </Texto>
-      <TextInput
+      <TextoInput
+        weight="regular"
         onChangeText={func}
         style={styles.input}
         secureTextEntry={secureText}
         placeholder="Digite Aqui"
-        placeholderTextColor={"#9f9f9f"}
+        placeholderColor={"#9f9f9f"}
         value={value}
-      ></TextInput>
+      ></TextoInput>
     </View>
   );
 };
