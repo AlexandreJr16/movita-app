@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       const response = await auth.signIn(email, senha);
       if (response.token) {
         setToken(response.token);
-        await getUser(response.token);
+        const user = await getUser(response.token);
         setLoading(false);
       } else {
         setLoading(false);

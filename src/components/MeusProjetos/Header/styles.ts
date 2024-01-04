@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   headerCard: {
     width: "100%",
+    height: 250,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   titleMessage: {
-    maxWidth: "60%",
+    maxWidth: "70%",
     marginTop: 20,
     alignSelf: "flex-start",
     paddingHorizontal: 20,

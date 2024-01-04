@@ -51,7 +51,12 @@ const ChatComponent = ({
         id: lastMessage.roomId,
       });
     } else {
-      setMessages({ id: "1", messagem: "Ola", time: "12:98", user: "Ale" });
+      setMessages({
+        id: "1",
+        messagem: `Diga olá para ${item.name}`,
+        time: "",
+        user: "Ale",
+      });
     }
   }, []);
 
@@ -82,7 +87,7 @@ const ChatComponent = ({
         </View>
         <View style={styles.timeStyle}>
           <Texto weight="regular" style={styles.ctime}>
-            {messages?.time ? messages.time : "now"}
+            {messages?.time ? messages.time : ""}
           </Texto>
         </View>
       </View>

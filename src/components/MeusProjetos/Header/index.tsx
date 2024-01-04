@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Image, TextInput } from "react-native";
+import { View, Image, TextInput, TouchableOpacity } from "react-native";
 import Logo from "../../Logo/Logo";
 import Texto from "../../texto/Texto";
 import styles from "./styles";
@@ -27,7 +27,7 @@ const HeaderMyProduct = ({
   const { user } = useContext(AuthContext);
 
   return (
-    <View style={styles.headerCard}>
+    <View style={{ ...styles.headerCard, paddingTop: 10 }}>
       <HeaderPerfil visiblePerfil={true} navigation={navigation} />
       <Texto style={styles.titleMessage} weight="bold">
         {title}

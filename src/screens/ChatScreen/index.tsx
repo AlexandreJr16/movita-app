@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   FlatList,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import ChatModal from "../../components/Chat/Modal";
@@ -17,12 +18,20 @@ import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
 import Texto from "../../components/texto/Texto";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import LoadingIndicator from "../../components/Loading";
+import TextoInput from "../../components/texto/TextoInput";
+import HeaderMyProduct from "../../components/MeusProjetos/Header";
+import Plus from "../../assents/Chat/plus";
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState();
+
+  const handleSearch = (value) => {
+    setSearch(value);
+  };
 
   useEffect(() => {
     // Função para tratar a atualização da lista de salas
@@ -55,33 +64,39 @@ const Chat = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.chatscreen}>
-      <View style={styles.header}>
-        <HeaderPerfil visibleLogo={true} visiblePerfil={true} />
-        <Texto style={styles.titleMessage} weight="bold">
-          Mensagens
-        </Texto>
-        <View style={styles.boxInput}>
-          <TextInput style={styles.textInput}></TextInput>
+      <View style={{ ...styles.chatscreen, paddingTop: 20 }}>
+        <HeaderMyProduct
+          navigation={navigation}
+          color={"blue"}
+          title={"Mensagens"}
+        />
+        <View style={styles.chatlistContainer}>
+          {loading ? (
+            <LoadingIndicator visible={loading} />
+          ) : rooms.length > 0 ? (
+            <FlatList
+              data={rooms}
+              renderItem={renderChatItem}
+              keyExtractor={keyExtractor}
+            />
+          ) : (
+            <View style={styles.chatemptyContainer}>
+              <Text style={styles.chatemptyText}>No rooms created!</Text>
+              <Text>Click the icon above to create a Chat room</Text>
+            </View>
+          )}
         </View>
-      </View>
-      <View style={styles.chatlistContainer}>
-        {loading ? (
-          <LoadingIndicator visible={loading} />
-        ) : rooms.length > 0 ? (
-          <FlatList
-            data={rooms}
-            renderItem={renderChatItem}
-            keyExtractor={keyExtractor}
-          />
-        ) : (
-          <View style={styles.chatemptyContainer}>
-            <Text style={styles.chatemptyText}>No rooms created!</Text>
-            <Text>Click the icon above to create a Chat room</Text>
-          </View>
-        )}
-      </View>
 
-      {visible && <ChatModal setVisible={setVisible} />}
+        {visible && <ChatModal setVisible={setVisible} visible={visible} />}
+      </View>
+      <TouchableOpacity
+        style={styles.createButton}
+        onPress={() => {
+          openChatModal();
+        }}
+      >
+        <Plus />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

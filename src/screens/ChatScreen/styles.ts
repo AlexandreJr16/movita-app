@@ -42,6 +42,17 @@ const styles = StyleSheet.create({
   },
   chatemptyContainer: {},
   chatemptyText: {},
+  createButton: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    bottom: 30,
+    right: 30,
+    backgroundColor: "#36A5BF",
+    padding: 5,
+    borderRadius: 100,
+  },
 });
 
 export default styles;
