@@ -130,6 +130,19 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }
+
+  async function getTopEmpresas(num: number): Promise<any> {
+    try {
+      setLoading(true);
+      const empresas = await auth.getRandomEmpresas(num);
+      return empresas;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const signed = !!user;
   return signed ? (
     <AuthContext.Provider
@@ -144,6 +157,7 @@ export const AuthProvider = ({ children }) => {
         getTopProjects,
         getAllProjetosByCliente,
         getRandomProjects,
+        getTopEmpresas,
       }}
     >
       {children}

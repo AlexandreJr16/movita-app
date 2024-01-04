@@ -9,59 +9,15 @@ import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 import LoadingIndicator from "../../components/Loading";
 
 export default function MainScreen({ navigation }) {
-  const { getTopProjects, loading, getRandomProjects } =
-    useContext(AuthContext);
+  const { getTopProjects, loading, getTopEmpresas } = useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
-  const [count, setCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1); // Added currentPage state
-  const maxPages = 1; // Set your desired maximum number of pages
-
-  const handleLoadMore = async () => {
-    const limit = 1; // Change this value based on your requirements
-    try {
-      if (currentPage <= maxPages) {
-        const newProjects = await getRandomProjects(limit);
-        // Map and format the new projects to match your existing data structure
-        const formattedProjects = newProjects.map((projects) => {
-          return projects.produtos.map((item) => ({
-            ...item,
-            imagem: item.imagem[0],
-          }));
-        });
-        setProdutos([...produtos, ...formattedProjects]);
-        setCount(count + limit);
-        setCurrentPage(currentPage + 1);
-      }
-    } catch (error) {
-      console.error("Erro ao obter os projetos:", error);
-    }
-  };
-
-  const handleScroll = (event) => {
-    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    const paddingToBottom = 20; // Adjust this value based on your layout
-    if (
-      layoutMeasurement.height + contentOffset.y >=
-        contentSize.height - paddingToBottom &&
-      currentPage <= maxPages
-    ) {
-      handleLoadMore();
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const topProjects = await getTopProjects(10);
-        const randomProjects = await getRandomProjects(2);
-        // Combina os projetos dos carrosséis em um único array
-        const arr = randomProjects.map((projects) => {
-          return projects.produtos.map((item) => ({
-            ...item,
-            imagem: item.imagem[0],
-          }));
-        });
-        setProdutos([topProjects, ...arr]); // Define o estado
+        const topEmpresas = await getTopEmpresas(10);
+        setProdutos([topProjects, topEmpresas]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }
@@ -72,7 +28,7 @@ export default function MainScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.background}>
-      <ScrollView onScroll={handleScroll} style={styles.background}>
+      <ScrollView style={styles.background}>
         <StatusBar
           translucent={true}
           backgroundColor={"#1f1f1f"}
@@ -80,15 +36,18 @@ export default function MainScreen({ navigation }) {
         />
         <View style={styles.background}>
           <HeaderMain navigation={navigation} />
-          <SelectCategory />
+          <SelectCategory navigation={navigation} />
 
-          {produtos.map((item, index) => (
-            <ShowProductsCarousel
-              key={index.toString()}
-              navigation={navigation}
-              produtos={item}
-            />
-          ))}
+          <ShowProductsCarousel
+            navigation={navigation}
+            title={"Projetos bem avaliados:"}
+            produtos={produtos[0]}
+          />
+          <ShowProductsCarousel
+            navigation={navigation}
+            title={"Empresas bem avaliados:"}
+            produtos={produtos[1]}
+          />
           {loading && <ActivityIndicator size="large" color="#0000ff" />}
         </View>
       </ScrollView>

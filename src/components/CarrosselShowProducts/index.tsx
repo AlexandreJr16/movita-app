@@ -9,16 +9,18 @@ const ShowProductsCarousel = ({
   produtos,
   navigation,
   color = "#fff",
+  title = "Outros",
 }: {
   produtos: any;
   navigation: any;
   color?: any;
+  title?: any;
 }) => {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <Texto weight="regular" style={styles.title}>
-          Projetos recomendados:
+          {title}
         </Texto>
         <Texto weight="regular" style={styles.blueText}>
           Ver mais

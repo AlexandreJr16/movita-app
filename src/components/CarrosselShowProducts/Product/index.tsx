@@ -16,7 +16,10 @@ const Produto = ({ produto, navigation, color }) => {
       onPress={navigateToProduct}
       style={styles.produtoContainer}
     >
-      <ImagemBuffer imgBuffer={produto.imagem} style={styles.imagemProduto} />
+      <ImagemBuffer
+        imgBuffer={produto.imagem[0]}
+        style={styles.imagemProduto}
+      />
       <Texto weight="regular" style={styles.nomeProduto}>
         {produto.titulo}
       </Texto>

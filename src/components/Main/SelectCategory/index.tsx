@@ -5,12 +5,18 @@ import ProjetosIcon from "../../../assents/MainScreen/ProjetosIcon";
 import styles from "./styles";
 import Texto from "../../texto/Texto";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
-const SelectCategory = () => {
+const SelectCategory = ({ navigation }: { navigation?: any }) => {
   const color = ["#36A5BF", "#A64029", "#BF9969"];
   return (
     <View style={styles.selectContainer}>
-      <Pressable onPress={() => {}} style={{ gap: 10 }}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("MyProducts");
+        }}
+        style={{ gap: 10 }}
+      >
         <View style={{ ...styles.btn, backgroundColor: color[0] }}>
           <ProjetosIcon style={styles.img} />
         </View>
