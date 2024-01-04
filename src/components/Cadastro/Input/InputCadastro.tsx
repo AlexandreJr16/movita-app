@@ -3,6 +3,7 @@ import Texto from "../../texto/Texto";
 import styles from "./styles";
 import InputDTO from "./InputDTO";
 import React from "react";
+import TextoInput from "../../texto/TextoInput";
 
 const InputCadastro = ({
   children,
@@ -16,13 +17,13 @@ const InputCadastro = ({
       <Texto weight="regular" style={styles.text}>
         {children}
       </Texto>
-      <TextInput
+      <TextoInput
+        weight="regular"
         onChangeText={func}
         style={styles.input}
         secureTextEntry={secureText}
-      >
-        {text}
-      </TextInput>
+        value={text}
+      />
     </View>
   );
 };
