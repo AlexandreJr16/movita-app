@@ -17,7 +17,7 @@ interface TextInputProps {
   placeholder?: string;
   value?: string;
   onChangeText?: (text: string) => void;
-  weight: "regular" | "bold";
+  weight?: "regular" | "bold";
   style?: CustomTextStyle | null;
   placeholderColor?: any;
   secureTextEntry?: boolean;
@@ -27,7 +27,7 @@ export default function TextoInput({
   placeholder,
   value,
   onChangeText,
-  weight,
+  weight = "regular",
   style,
   placeholderColor = "#7A7979",
   secureTextEntry = false,

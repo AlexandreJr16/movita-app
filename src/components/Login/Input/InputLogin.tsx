@@ -8,6 +8,7 @@ import {
   Poppins_500Medium,
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
+import TextoInput from "../../texto/TextoInput";
 
 const InputLogin = ({ Icon, placeholder, func, secureText }: InputDTO) => {
   const [textLoaded] = useFonts({
@@ -20,13 +21,14 @@ const InputLogin = ({ Icon, placeholder, func, secureText }: InputDTO) => {
   return (
     <View style={styles.container}>
       {Icon}
-      <TextInput
+      <TextoInput
+        weight="regular"
         onChangeText={func}
         style={styles.input}
         placeholder={placeholder}
-        placeholderTextColor={"#878787"}
+        placeholderColor={"#878787"}
         secureTextEntry={secureText}
-      ></TextInput>
+      ></TextoInput>
     </View>
   );
 };
