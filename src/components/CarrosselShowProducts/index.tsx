@@ -3,7 +3,8 @@ import Texto from "../texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Produto from "./Product";
 import styles from "./styles";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import AuthContext from "../../contexts";
 
 const ShowProductsCarousel = ({
   produtos,
@@ -18,6 +19,7 @@ const ShowProductsCarousel = ({
   title?: any;
   tipo?: "projeto" | "empresa";
 }) => {
+  useEffect(() => {}, []);
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>

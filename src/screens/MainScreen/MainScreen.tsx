@@ -43,6 +43,7 @@ export default function MainScreen({ navigation }) {
             title={"Projetos bem avaliados:"}
             produtos={produtos[0]}
             tipo="projeto"
+            color={"#36A5BF"}
           />
           <ShowProductsCarousel
             navigation={navigation}

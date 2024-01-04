@@ -7,7 +7,11 @@ import styles from "./styles";
 
 const Produto = ({ produto, navigation, color }) => {
   const navigateToProduct = () => {
-    navigation.navigate("Product", { produto: produto, color: color });
+    try {
+      navigation.navigate("Product", { id: produto.id, color: color });
+    } catch (error) {
+      throw new Error(error);
+    }
     // navigation.navigate("Product");
   };
 

@@ -3,11 +3,14 @@ import Texto from "../../components/texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ImagemBuffer from "../../components/Imagem";
 import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
+import AuthContext from "../../contexts";
+import HeaderShowItem from "../../components/ShowItem/Header";
+import LoadingIndicator from "../../components/Loading";
 
-type Produto = {
+type Projeto = {
   id: number;
   titulo: string;
   descricao: string;
@@ -27,20 +30,52 @@ type Produto = {
 };
 
 const ShowProduct = ({ route, navigation }) => {
-  const produto: Produto = route.params.produto;
+  const id = route.params.id;
   const color = route.params.color;
+  const [projeto, setProjeto] = useState<Projeto>();
+  const { getProject, loading } = useContext(AuthContext);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const proj = await getProject(id);
+        setProjeto(proj);
+      } catch (error) {
+        console.error("Erro ao obter o projeto:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <SafeAreaView style={{ backgroundColor: "#1f1f1f", flex: 1 }}>
       <ScrollView style={styles.container}>
-        <View style={styles.itensContent}>
-          <HeaderPerfil
-            color={color}
-            navigation={navigation}
-            visiblePerfil={true}
-          />
-          <ImagemBuffer imgBuffer={produto.imagem} style={styles.img} />
-        </View>
+        {projeto && (
+          <View style={styles.itensContent}>
+            <HeaderPerfil
+              color={color}
+              navigation={navigation}
+              visiblePerfil={true}
+            />
+            <ImagemBuffer imgBuffer={projeto.imagem[0]} style={styles.img} />
+            <View style={styles.card}>
+              <HeaderShowItem
+                data={{
+                  madeBy: projeto.empresa.nomeFantasia,
+                  title: projeto.titulo,
+                }}
+              />
+              <Texto weight="regular" style={styles.description}>
+                {/* {projeto.descricao}: */}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
+                tempore, ab neque voluptatem numquam molestiae perspiciatis
+                necessitatibus iure temporibus aperiam aliquid libero
+                consectetur, atque architecto deleniti rerum, sequi labore vel.
+              </Texto>
+            </View>
+          </View>
+        )}
+        <LoadingIndicator visible={loading} />
       </ScrollView>
     </SafeAreaView>
   );
