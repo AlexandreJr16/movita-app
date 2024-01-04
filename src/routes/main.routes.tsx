@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../screens/Login/Login";
 import MainScrenn from "../screens/MainScreen/MainScreen";
 import ShowProduct from "../screens/ShowProduct";
-import MyProjectsRoutes from "./my-projects.routes";
+import MeusProjetosScreen from "../screens/ProjetosSearch";
+import EmpresasSearchScreen from "../screens/EmpresasSearch";
 
 const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -15,7 +16,8 @@ const MainRoutes: React.FC = () => {
     >
       <Stack.Screen name="Main" component={MainScrenn} />
       <Stack.Screen name="Product" component={ShowProduct} />
-      <Stack.Screen name="MyProducts" component={MyProjectsRoutes} />
+      <Stack.Screen name="MyProducts" component={MeusProjetosScreen} />
+      <Stack.Screen name="EmpresaSearch" component={EmpresasSearchScreen} />
     </Stack.Navigator>
   );
 };

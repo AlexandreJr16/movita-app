@@ -42,11 +42,13 @@ export default function MainScreen({ navigation }) {
             navigation={navigation}
             title={"Projetos bem avaliados:"}
             produtos={produtos[0]}
+            tipo="projeto"
           />
           <ShowProductsCarousel
             navigation={navigation}
             title={"Empresas bem avaliados:"}
             produtos={produtos[1]}
+            tipo="empresa"
           />
           {loading && <ActivityIndicator size="large" color="#0000ff" />}
         </View>

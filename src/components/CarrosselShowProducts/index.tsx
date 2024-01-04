@@ -10,11 +10,13 @@ const ShowProductsCarousel = ({
   navigation,
   color = "#fff",
   title = "Outros",
+  tipo = "projeto",
 }: {
   produtos: any;
   navigation: any;
   color?: any;
   title?: any;
+  tipo?: "projeto" | "empresa";
 }) => {
   return (
     <View style={styles.container}>
@@ -33,6 +35,7 @@ const ShowProductsCarousel = ({
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <Produto color={color} navigation={navigation} produto={item} />
+          //Futuramente mudar para enviar para outro tipo de tela
         )}
       />
     </View>
