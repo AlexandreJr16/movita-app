@@ -28,14 +28,25 @@ const ChatComponent = ({
 
   useLayoutEffect(() => {
     const lastMessage = item.Message[item.Message.length - 1];
+    console.log(item.Message);
 
     if (lastMessage != undefined) {
       const createdAtDate = new Date(lastMessage.createAt);
+      const now = new Date();
+      const timeDifference = now.getTime() - createdAtDate.getTime();
+      let formattedTime;
 
-      const formattedTime = `${createdAtDate.getHours()}:${createdAtDate
-        .getMinutes()
-        .toString()
-        .padStart(2, "0")}`;
+      if (timeDifference < 86400000) {
+        // Less than 24 hours ago
+        formattedTime = `${createdAtDate.getHours()}:${createdAtDate
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`;
+      } else {
+        // More than 24 hours ago
+        const daysAgo = Math.floor(timeDifference / 86400000);
+        formattedTime = `há ${daysAgo} dias`;
+      }
 
       setMessages({
         user: lastMessage.userName,
