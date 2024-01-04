@@ -9,9 +9,10 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../contexts";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import React from "react";
+import LoadingIndicator from "../../../components/Loading";
 
 const MeusProjetos = ({ navigation }: { navigation: any }) => {
-  const { getAllProjetosByCliente, user } = useContext(AuthContext);
+  const { getAllProjetosByCliente, user, loading } = useContext(AuthContext);
 
   const [produtos, setProdutos] = useState([]);
 
@@ -41,6 +42,7 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
             navigation={navigation}
           />
         </View>
+        <LoadingIndicator visible={loading} />
       </ScrollView>
     </SafeAreaView>
   );
