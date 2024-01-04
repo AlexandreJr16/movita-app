@@ -16,7 +16,6 @@ const ChatComponent = ({
   item: any;
   navigation: any;
 }) => {
-  const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState<{
     id: string;
     messagem: string;
@@ -28,7 +27,6 @@ const ChatComponent = ({
 
   useLayoutEffect(() => {
     const lastMessage = item.Message[item.Message.length - 1];
-    console.log(item.Message);
 
     if (lastMessage != undefined) {
       const createdAtDate = new Date(lastMessage.createAt);
@@ -37,13 +35,11 @@ const ChatComponent = ({
       let formattedTime;
 
       if (timeDifference < 86400000) {
-        // Less than 24 hours ago
         formattedTime = `${createdAtDate.getHours()}:${createdAtDate
           .getMinutes()
           .toString()
           .padStart(2, "0")}`;
       } else {
-        // More than 24 hours ago
         const daysAgo = Math.floor(timeDifference / 86400000);
         formattedTime = `há ${daysAgo} dias`;
       }
@@ -59,7 +55,6 @@ const ChatComponent = ({
     }
   }, []);
 
-  ///👇🏻 Navigates to the Messaging screen
   const handleNavigation = () => {
     navigation.navigate("Message", {
       id: item.id,
