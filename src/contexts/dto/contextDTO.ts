@@ -59,4 +59,5 @@ export interface AuthContextData {
   getAllProjetosByCliente?(num: number);
   getRandomProjects?(num: number);
   getTopEmpresas?(num: number);
+  getProject?(num: number);
 }
