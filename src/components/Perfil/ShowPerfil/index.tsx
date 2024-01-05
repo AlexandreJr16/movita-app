@@ -6,6 +6,7 @@ import ImagemBuffer from "../../Imagem";
 import Texto from "../../texto/Texto";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
+import { Buffer } from "buffer";
 
 const ShowPerfil = () => {
   const { user, addImageUser } = useContext(AuthContext);
@@ -16,21 +17,14 @@ const ShowPerfil = () => {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
-        aspect: [4, 3],
+        aspect: [1, 1],
         quality: 1,
+        base64: true,
       });
 
-      if (
-        !result.canceled &&
-        result.assets &&
-        result.assets.length > 0 &&
-        result.assets[0].uri
-      ) {
-        setImage(result.assets[0].uri);
-        await addImageUser(result);
-      }
-    } catch (error) {
-      console.error("Erro ao escolher imagem:", error);
+      addImageUser(result);
+    } catch (e) {
+      console.log(e);
     }
   };
 

@@ -159,6 +159,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const image = await auth.uploadImagemUser(dto, token);
+      getUser(token);
       return image;
     } catch (error) {
       setLoading(false);

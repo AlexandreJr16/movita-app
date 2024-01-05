@@ -110,40 +110,16 @@ export const getUser = async (token: string): Promise<any> => {
     });
   return user;
 };
-
 export const uploadImagemUser = async (dto, token) => {
-  const { assets } = dto;
   const url = `${API_URL}/user/imagem`;
 
-  if (assets.length === 0) {
-    console.error("Nenhum arquivo fornecido para upload.");
-    return;
-  }
-
-  const file = assets[0];
-
   try {
-    const response = await axios.post(
-      url,
-      {
-        imagem: {
-          fieldname: "imagem",
-          originalname: file.uri.split("/").pop(),
-          encoding: "7bit",
-          mimetype: "image/jpeg",
-          buffer: Buffer.from(file.base64, "base64"),
-          size: Buffer.from(file.base64, "base64").length,
-        },
+    const response = await axios.post(url, dto, {
+      headers: {
+        Authorization: token,
+        "Content-Type": "multipart/form-data",
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    console.log("Resposta da API:", response.data);
+    });
   } catch (error) {
     console.error("Erro ao fazer upload da imagem:", error);
   }
