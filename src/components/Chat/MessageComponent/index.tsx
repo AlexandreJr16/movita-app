@@ -27,7 +27,6 @@ export default function MessageComponent({ item }: { item: any }) {
             }
           >
             <Texto weight="regular" style={{ color: "white" }}>
-              {" "}
               {item.message}
             </Texto>
           </View>
