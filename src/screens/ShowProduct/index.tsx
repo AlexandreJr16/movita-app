@@ -9,6 +9,7 @@ import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
 import AuthContext from "../../contexts";
 import HeaderShowItem from "../../components/ShowItem/Header";
 import LoadingIndicator from "../../components/Loading";
+import FeedBackShowProduct from "../../components/ShowItem/Feedback";
 
 type Projeto = {
   id: number;
@@ -27,6 +28,16 @@ type Projeto = {
     nomeFantasia: string;
     telefone: string;
   };
+  Feedback: [
+    {
+      descricao: string;
+      empresaId: number;
+      id: number;
+      nota: number;
+      projetoId: number;
+      userId: number;
+    }
+  ];
 };
 
 const ShowProduct = ({ route, navigation }) => {
@@ -72,6 +83,13 @@ const ShowProduct = ({ route, navigation }) => {
                 necessitatibus iure temporibus aperiam aliquid libero
                 consectetur, atque architecto deleniti rerum, sequi labore vel.
               </Texto>
+              {projeto.Feedback[0] ? (
+                <FeedBackShowProduct feedback={projeto.Feedback[0]} />
+              ) : (
+                <Texto weight={"bold"} style={{ color: "#fff" }}>
+                  Ainda não há nada aqui
+                </Texto>
+              )}
             </View>
           </View>
         )}
