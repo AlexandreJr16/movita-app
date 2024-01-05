@@ -60,4 +60,5 @@ export interface AuthContextData {
   getRandomProjects?(num: number);
   getTopEmpresas?(num: number);
   getProject?(num: number);
+  addImageUser?(dto: any);
 }

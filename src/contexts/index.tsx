@@ -155,6 +155,18 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }
+  async function addImageUser(dto: any): Promise<any> {
+    try {
+      setLoading(true);
+      const image = await auth.uploadImagemUser(dto, token);
+      return image;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const signed = !!user;
   return signed ? (
     <AuthContext.Provider
@@ -171,6 +183,7 @@ export const AuthProvider = ({ children }) => {
         getRandomProjects,
         getTopEmpresas,
         getProject,
+        addImageUser,
       }}
     >
       {children}
