@@ -26,31 +26,36 @@ const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
   const [rooms, setRooms] = useState([]);
+  const [savedRooms, setSavedRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState();
 
   const handleSearch = (value) => {
+    filterRooms(value);
     setSearch(value);
+  };
+  const filterRooms = (searchString) => {
+    const filteredRooms = savedRooms.filter((savedRooms) =>
+      savedRooms.name.toLowerCase().includes(searchString.toLowerCase())
+    );
+    setRooms(filteredRooms);
   };
 
   useEffect(() => {
-    // Função para tratar a atualização da lista de salas
     const handleRoomsList = (newRooms) => {
       setRooms(newRooms);
+      setSavedRooms(newRooms);
       setLoading(false);
     };
 
-    // Emitir o evento "roomList" assim que o componente for montado
     socket.emit("roomList", { id: user.id });
 
-    // Adicionar o ouvinte de eventos "roomsList"
     socket.on("roomsList", handleRoomsList);
 
-    // Detach event listener when component unmounts
     return () => {
       socket.off("roomsList", handleRoomsList);
     };
-  }, []); // Dependência vazia para garantir que este useEffect seja executado apenas uma vez, sem depender de variáveis externas
+  }, []);
 
   const openChatModal = () => {
     setVisible(true);
@@ -69,6 +74,7 @@ const Chat = ({ navigation }) => {
           navigation={navigation}
           color={"blue"}
           title={"Mensagens"}
+          handleSearch={handleSearch}
         />
         <View style={styles.chatlistContainer}>
           {loading ? (
@@ -81,8 +87,9 @@ const Chat = ({ navigation }) => {
             />
           ) : (
             <View style={styles.chatemptyContainer}>
-              <Text style={styles.chatemptyText}>No rooms created!</Text>
-              <Text>Click the icon above to create a Chat room</Text>
+              <Texto weight="bold" style={styles.chatemptyText}>
+                Nenhum contato encontrada.
+              </Texto>
             </View>
           )}
         </View>

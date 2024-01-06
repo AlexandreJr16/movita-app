@@ -19,10 +19,12 @@ const HeaderMyProduct = ({
   navigation,
   color,
   title,
+  handleSearch,
 }: {
   navigation: any;
   color: "blue" | "red";
   title: any;
+  handleSearch: any;
 }) => {
   const { user } = useContext(AuthContext);
 
@@ -35,6 +37,7 @@ const HeaderMyProduct = ({
       <View style={styles.boxInput}>
         <View style={styles.textInput}>
           <TextoInput
+            onChangeText={handleSearch}
             weight="regular"
             placeholder={
               color == "blue" ? "Pesquise Projetos..." : "Pesquise Empresas..."

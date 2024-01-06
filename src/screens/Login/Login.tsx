@@ -48,7 +48,9 @@ const Login = ({ navigation }) => {
   const redirectToSignUp = () => {
     navigation.navigate("SignUp");
   };
-  const redirectToForgetPassword = () => {};
+  const redirectToForgetPassword = () => {
+    navigation.navigate("Forgot");
+  };
 
   return (
     <SafeAreaView style={styles.container}>

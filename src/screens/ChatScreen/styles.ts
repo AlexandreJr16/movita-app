@@ -40,8 +40,16 @@ const styles = StyleSheet.create({
   chatlistContainer: {
     flex: 1,
   },
-  chatemptyContainer: {},
-  chatemptyText: {},
+  chatemptyContainer: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  chatemptyText: {
+    fontSize: 16,
+    color: "#fff",
+  },
   createButton: {
     display: "flex",
     alignItems: "center",
