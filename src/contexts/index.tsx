@@ -168,6 +168,49 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }
+  async function verifyCodeForgot(dto: {
+    code: string;
+    email: string;
+  }): Promise<any> {
+    try {
+      setLoading(true);
+      const code = await auth.verificarCodigoForgot(dto);
+      return code;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  async function updateSenhaForgot(dto: {
+    email: string;
+    confirmSenha: string;
+    senha: string;
+  }): Promise<any> {
+    try {
+      setLoading(true);
+      const senha = await auth.updateSenhaForgot(dto);
+      return senha;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  async function sendEmailForgot(dto: { to: string }): Promise<any> {
+    try {
+      setLoading(true);
+      const email = await auth.enviarEmailForgot(dto);
+      return email;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const signed = !!user;
   return signed ? (
     <AuthContext.Provider
@@ -197,6 +240,9 @@ export const AuthProvider = ({ children }) => {
         signIn,
         signUp,
         loading,
+        updateSenhaForgot,
+        sendEmailForgot,
+        verifyCodeForgot,
       }}
     >
       {children}

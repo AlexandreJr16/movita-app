@@ -61,4 +61,11 @@ export interface AuthContextData {
   getTopEmpresas?(num: number);
   getProject?(num: number);
   addImageUser?(dto: any);
+  updateSenhaForgot?(dto: {
+    email: string;
+    confirmSenha: string;
+    senha: string;
+  });
+  verifyCodeForgot?(dto: { code: string; email: string });
+  sendEmailForgot?(dto: { to: string });
 }

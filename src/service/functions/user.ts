@@ -124,3 +124,85 @@ export const uploadImagemUser = async (dto, token) => {
     console.error("Erro ao fazer upload da imagem:", error);
   }
 };
+export const enviarEmailForgot = async (dto: {
+  to: string;
+}): Promise<updateSenhaDTO> => {
+  try {
+    const url = `${API_URL}/auth/sendEmailForget`;
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response: AxiosResponse<updateSenhaDTO> = await axios.post(
+      url,
+      dto,
+      options
+    );
+
+    return response.data;
+  } catch (error) {
+    // Ensure that 'handleApiError' is defined
+    handleApiError(error as AxiosError<ErrorResponse>);
+    // You might want to throw the error again if you don't handle it completely here
+    throw error;
+  }
+};
+
+export const verificarCodigoForgot = async (dto: {
+  code: string;
+  email: string;
+}): Promise<updateSenhaDTO> => {
+  try {
+    const url = `${API_URL}/auth/sendCodeToForget`;
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response: AxiosResponse<updateSenhaDTO> = await axios.post(
+      url,
+      dto,
+      options
+    );
+
+    return response.data;
+  } catch (error) {
+    // Ensure that 'handleApiError' is defined
+    handleApiError(error as AxiosError<ErrorResponse>);
+    // You might want to throw the error again if you don't handle it completely here
+    throw error;
+  }
+};
+export const updateSenhaForgot = async (dto: {
+  email: string;
+  senha: string;
+  confirmSenha: string;
+}): Promise<updateSenhaDTO> => {
+  try {
+    const url = `${API_URL}/user/updateSenhaWithoutAuth`;
+
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response: AxiosResponse<updateSenhaDTO> = await axios.post(
+      url,
+      dto,
+      options
+    );
+
+    return response.data;
+  } catch (error) {
+    // Ensure that 'handleApiError' is defined
+    handleApiError(error as AxiosError<ErrorResponse>);
+    // You might want to throw the error again if you don't handle it completely here
+    throw error;
+  }
+};
