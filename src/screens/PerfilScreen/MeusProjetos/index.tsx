@@ -25,12 +25,8 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
     fetchTopProjects();
   }, []);
   return (
-    <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
-      <StatusBar
-        translucent={true}
-        backgroundColor={"#1f1f1f"}
-        barStyle="light-content"
-      />
+    <View style={styles.background}>
+      <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
       <ScrollView style={styles.bg}>
         <HeaderPerfil navigation={navigation} />
         <ShowPerfil />
@@ -44,7 +40,7 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
         </View>
         <LoadingIndicator visible={loading} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 export default MeusProjetos;
