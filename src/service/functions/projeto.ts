@@ -66,3 +66,44 @@ export const getProject = async (num: number): Promise<any> => {
     throw error;
   }
 };
+export const deleteLikeProject = async (
+  projetoId: number,
+  token: string
+): Promise<any> => {
+  const url = `${API_URL}/like/${projetoId}`;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+
+  try {
+    const response = await axios.delete(url, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const likeProject = async (
+  projetoId: number,
+  token: string
+): Promise<any> => {
+  const url = `${API_URL}/like`;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+  const data = { projetoId, token };
+
+  try {
+    const response = await axios.post(url, data, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

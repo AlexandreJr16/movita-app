@@ -68,4 +68,6 @@ export interface AuthContextData {
   });
   verifyCodeForgot?(dto: { code: string; email: string });
   sendEmailForgot?(dto: { to: string });
+  deleteLikeProject?(projetoId: number);
+  likeProject?(projetoId: number);
 }

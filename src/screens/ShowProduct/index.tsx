@@ -44,12 +44,17 @@ const ShowProduct = ({ route, navigation }) => {
   const id = route.params.id;
   const color = route.params.color;
   const [projeto, setProjeto] = useState<Projeto>();
-  const { getProject, loading } = useContext(AuthContext);
+  const { getProject, loading, user } = useContext(AuthContext);
+  const userId = user.id;
+  const [liked, setLiked] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const proj = await getProject(id);
+        proj.Like.map((liked) => {
+          if (liked.userId == userId) setLiked(true);
+        });
         setProjeto(proj);
       } catch (error) {
         console.error("Erro ao obter o projeto:", error);
@@ -58,6 +63,7 @@ const ShowProduct = ({ route, navigation }) => {
 
     fetchData();
   }, []);
+
   return (
     <ScrollView style={styles.container}>
       {projeto && (
@@ -73,14 +79,12 @@ const ShowProduct = ({ route, navigation }) => {
               data={{
                 madeBy: projeto.empresa.nomeFantasia,
                 title: projeto.titulo,
+                id,
+                liked,
               }}
             />
             <Texto weight="regular" style={styles.description}>
-              {/* {projeto.descricao}: */}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-              tempore, ab neque voluptatem numquam molestiae perspiciatis
-              necessitatibus iure temporibus aperiam aliquid libero consectetur,
-              atque architecto deleniti rerum, sequi labore vel.
+              {projeto.descricao}:
             </Texto>
             {projeto.Feedback[0] ? (
               <FeedBackShowProduct feedback={projeto.Feedback[0]} />

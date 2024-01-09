@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
       const storageToken = await AsyncStorage.getItem("@RNAuth:token");
       if (storageToken && storageUser) {
         setUser(JSON.parse(storageUser));
+        setToken(storageToken);
         setLoading(false);
       }
       await SplashScreen.hideAsync();
@@ -232,6 +233,24 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }
+
+  async function likeProject(projetoId: number): Promise<any> {
+    try {
+      const email = await auth.likeProject(projetoId, token);
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+    }
+  }
+
+  async function deleteLikeProject(projetoId: number): Promise<any> {
+    try {
+      const email = await auth.deleteLikeProject(projetoId, token);
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+    }
+  }
   const signed = !!user;
 
   return signed ? (
@@ -250,6 +269,8 @@ export const AuthProvider = ({ children }) => {
         getTopEmpresas,
         getProject,
         addImageUser,
+        deleteLikeProject,
+        likeProject,
       }}
     >
       {children}
