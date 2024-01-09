@@ -1,10 +1,9 @@
-import { View, Image, ScrollView, Pressable, StatusBar } from "react-native";
+import { View, ScrollView, Pressable, StatusBar } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./styles";
 import { useState, useContext } from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import Logo from "../../components/Logo/Logo";
-import { SafeAreaView } from "react-native-safe-area-context";
 import InputLogin from "../../components/Login/Input/InputLogin";
 import UserIcon from "../../assents/Login/UserIcon";
 import SecurityIcon from "../../assents/Login/SecurityIcon";
@@ -53,9 +52,9 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
-        <StatusBar translucent={true} barStyle="light-content" />
+        <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
         <View style={styles.container}>
           <Logo style={styles.logo} />
           <View style={styles.carrossel}>
@@ -116,7 +115,7 @@ const Login = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 export default Login;

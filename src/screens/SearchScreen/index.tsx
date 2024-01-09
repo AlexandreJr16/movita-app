@@ -6,9 +6,7 @@ import React from "react";
 const SearchScreen = () => {
   return (
     <View>
-      <SafeAreaView>
-        <Texto weight={"bold"}>Search</Texto>
-      </SafeAreaView>
+      <Texto weight={"bold"}>Search</Texto>
     </View>
   );
 };

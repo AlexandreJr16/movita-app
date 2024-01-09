@@ -7,18 +7,18 @@ import React from "react";
 
 const MeusFavoritos = ({ navigation }: { navigation: any }) => {
   return (
-    <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
+    <View style={styles.background}>
       <StatusBar
         translucent={true}
         backgroundColor={"#1f1f1f"}
         barStyle="light-content"
       />
-      <ScrollView style={styles.bg}>
+      <ScrollView>
         <HeaderPerfil navigation={navigation} />
         <ShowPerfil />
         <View style={styles.container}></View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 export default MeusFavoritos;

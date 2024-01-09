@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { View, TextInput, Text, FlatList, Pressable } from "react-native";
+import { View, FlatList, Pressable, StatusBar } from "react-native";
 import MessageComponent from "../../../components/Chat/MessageComponent/index";
 import styles from "./styles";
 import socket from "../../../utils/socket";
 import AuthContext from "../../../contexts";
 import Arrow from "../../../assents/Perfil/Arrow";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Texto from "../../../components/texto/Texto";
 import Logo from "../../../components/Logo/Logo";
 import SendMessage from "../../../assents/Chat/SendMessage";
@@ -20,14 +19,11 @@ const Messaging = ({ route, navigation }) => {
   const { name, id } = route.params;
 
   useEffect(() => {
-    // ComponentDidMount
-
     const handleFoundRoom = (roomChats) => {
       setChatMessages(roomChats);
       scrollToBottom();
     };
 
-    // Emit only when the component mounts
     socket.emit("findRoom", id);
     socket.on("foundRoom", handleFoundRoom);
 
@@ -38,9 +34,7 @@ const Messaging = ({ route, navigation }) => {
   }, [id, navigation]);
 
   useEffect(() => {
-    // Update the chat when a new message is received
     const handleNewMessageReceived = (newMessage) => {
-      // Update the state by adding the new message to the existing messages
       setChatMessages((prevMessages) => [...prevMessages, newMessage]);
       scrollToBottom();
     };
@@ -67,10 +61,8 @@ const Messaging = ({ route, navigation }) => {
       userName: user.nome,
     };
 
-    // Update the state by adding the new message to the existing messages
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
 
-    // Send the new message to the server
     socket.emit("newMessage", {
       room_id: id,
       message,
@@ -89,9 +81,8 @@ const Messaging = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView
-      style={{ ...styles.messagingscreen, backgroundColor: "#1f1f1f" }}
-    >
+    <View style={{ ...styles.messagingscreen }}>
+      <StatusBar barStyle="light-content" backgroundColor={"#1f1f1f"} />
       <View style={styles.header}>
         <Pressable
           onPress={() => {
@@ -139,7 +130,7 @@ const Messaging = ({ route, navigation }) => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

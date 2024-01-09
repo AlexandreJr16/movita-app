@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StatusBar, View } from "react-native";
+import { ScrollView, StatusBar, View } from "react-native";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
 import styles from "./styles";
@@ -59,13 +59,9 @@ const UpdatePerfil = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
-      <StatusBar
-        translucent={true}
-        backgroundColor={"#1f1f1f"}
-        barStyle="light-content"
-      />
-      <ScrollView style={styles.bg}>
+    <View style={styles.background}>
+      <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
+      <ScrollView>
         <HeaderPerfil navigation={navigation} />
         <ShowPerfil />
         <View style={styles.container}>
@@ -109,7 +105,7 @@ const UpdatePerfil = ({ navigation }) => {
         </View>
         <LoadingIndicator visible={loading} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 export default UpdatePerfil;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, SafeAreaView } from "react-native";
+import { View, StatusBar } from "react-native";
 import Texto from "../../components/texto/Texto";
 import styles from "./style";
 import Button from "../../components/splashScreenComponents/button/Button";
@@ -9,7 +9,6 @@ import SplashImage3 from "../../assents/Splash/SplashImage3";
 import ImageProgress from "../../assents/Splash/ImageProgress";
 import ImageProgress2 from "../../assents/Splash/ImageProgress2";
 import ImageProgress3 from "../../assents/Splash/ImageProgress3";
-import { StatusBar } from "expo-status-bar";
 
 //Eu quero colocar alguma função pra quando apertar na seta de voltar do celular decremente a page (Simples)
 interface Page {
@@ -100,30 +99,31 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView>
-        <StatusBar translucent={true} />
-        <View style={[styles.container, { backgroundColor: bg }]}>
-          {img}
-          <View style={styles.textView}>
-            <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
-              {texts[page]}
-            </Texto>
-            <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
-              O Movita oferece a solução.
-            </Texto>
-            {imageProgress}
-          </View>
-          <View style={styles.lastView}>
-            <Button
-              colorBg={btnBgColor}
-              color={btnFontColor}
-              onPress={handlePages}
-            >
-              PULAR
-            </Button>
-          </View>
+      <StatusBar
+        backgroundColor={bg}
+        barStyle={page == 0 ? "dark-content" : "light-content"}
+      />
+      <View style={[styles.container, { backgroundColor: bg }]}>
+        {img}
+        <View style={styles.textView}>
+          <Texto weight="bold" style={{ fontSize: 36, color: textColor }}>
+            {texts[page]}
+          </Texto>
+          <Texto weight="regular" style={{ fontSize: 25, color: textColor }}>
+            O Movita oferece a solução.
+          </Texto>
+          {imageProgress}
         </View>
-      </SafeAreaView>
+        <View style={styles.lastView}>
+          <Button
+            colorBg={btnBgColor}
+            color={btnFontColor}
+            onPress={handlePages}
+          >
+            PULAR
+          </Button>
+        </View>
+      </View>
     </View>
   );
 }

@@ -24,12 +24,12 @@ const HeaderMyProduct = ({
   navigation: any;
   color: "blue" | "red";
   title: any;
-  handleSearch: any;
+  handleSearch?: any;
 }) => {
   const { user } = useContext(AuthContext);
 
   return (
-    <View style={{ ...styles.headerCard, paddingTop: 10 }}>
+    <View style={{ ...styles.headerCard }}>
       <HeaderPerfil visiblePerfil={true} navigation={navigation} />
       <Texto style={styles.titleMessage} weight="bold">
         {title}

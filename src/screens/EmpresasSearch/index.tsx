@@ -10,7 +10,7 @@ import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 import TextoInput from "../../components/texto/TextoInput";
 
 const EmpresasSearchScreen = ({ navigation }) => {
-  const { getTopProjects, loading, getTopEmpresas } = useContext(AuthContext);
+  const { getTopEmpresas } = useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
     fetchData();
   }, []);
   return (
-    <SafeAreaView style={styles.background}>
+    <View style={styles.background}>
       <ScrollView style={styles.background}>
         <HeaderMyProduct
           navigation={navigation}
@@ -39,7 +39,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
           produtos={produtos[0]}
         />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 export default EmpresasSearchScreen;

@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   messagingscreen: {
     flex: 1,
+    backgroundColor: "#1f1f1f",
   },
   header: {
     width: "100%",

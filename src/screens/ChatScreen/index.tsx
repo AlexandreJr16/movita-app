@@ -1,13 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  SafeAreaView,
-  FlatList,
-  ActivityIndicator,
-  TouchableOpacity,
-} from "react-native";
+import { View, FlatList, TouchableOpacity, StatusBar } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import ChatModal from "../../components/Chat/Modal";
 import ChatComponent from "../../components/Chat/ChatComponent/index";
@@ -68,34 +60,34 @@ const Chat = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.chatscreen}>
-      <View style={{ ...styles.chatscreen, paddingTop: 20 }}>
-        <HeaderMyProduct
-          navigation={navigation}
-          color={"blue"}
-          title={"Mensagens"}
-          handleSearch={handleSearch}
-        />
-        <View style={styles.chatlistContainer}>
-          {loading ? (
-            <LoadingIndicator visible={loading} />
-          ) : rooms.length > 0 ? (
-            <FlatList
-              data={rooms}
-              renderItem={renderChatItem}
-              keyExtractor={keyExtractor}
-            />
-          ) : (
-            <View style={styles.chatemptyContainer}>
-              <Texto weight="bold" style={styles.chatemptyText}>
-                Nenhum contato encontrada.
-              </Texto>
-            </View>
-          )}
-        </View>
+    <View style={styles.chatscreen}>
+      <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
+      <HeaderMyProduct
+        navigation={navigation}
+        color={"blue"}
+        title={"Mensagens"}
+        handleSearch={handleSearch}
+      />
 
-        {visible && <ChatModal setVisible={setVisible} visible={visible} />}
+      <View style={styles.chatlistContainer}>
+        {loading ? (
+          <LoadingIndicator visible={loading} />
+        ) : rooms.length > 0 ? (
+          <FlatList
+            data={rooms}
+            renderItem={renderChatItem}
+            keyExtractor={keyExtractor}
+          />
+        ) : (
+          <View style={styles.chatemptyContainer}>
+            <Texto weight="bold" style={styles.chatemptyText}>
+              Nenhum contato encontrada.
+            </Texto>
+          </View>
+        )}
       </View>
+
+      {visible && <ChatModal setVisible={setVisible} visible={visible} />}
       <TouchableOpacity
         style={styles.createButton}
         onPress={() => {
@@ -104,7 +96,7 @@ const Chat = ({ navigation }) => {
       >
         <Plus />
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 

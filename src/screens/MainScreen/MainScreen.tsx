@@ -29,11 +29,7 @@ export default function MainScreen({ navigation }) {
   return (
     <View style={styles.background}>
       <ScrollView style={styles.background}>
-        <StatusBar
-          translucent={true}
-          backgroundColor={"#1f1f1f"}
-          barStyle="light-content"
-        />
+        <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
         <View style={styles.background}>
           <HeaderMain navigation={navigation} />
           <SelectCategory navigation={navigation} />

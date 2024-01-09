@@ -25,9 +25,8 @@ export const AuthProvider = ({ children }) => {
       if (storageToken && storageUser) {
         setUser(JSON.parse(storageUser));
         setLoading(false);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        await SplashScreen.hideAsync();
       }
+      await SplashScreen.hideAsync();
       setLoading(false);
     }
     loadStorageData();

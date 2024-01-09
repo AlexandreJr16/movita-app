@@ -19,82 +19,76 @@ import UpdateSenha from "./UpdateSenha";
 const PerfilScreen = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
   return (
-    <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
-      <StatusBar
-        translucent={true}
-        backgroundColor={"#1f1f1f"}
-        barStyle="light-content"
-      />
-      <ScrollView style={styles.bg}>
-        <HeaderPerfil visibleLogo={true} />
-        <ShowPerfil />
-        <View style={styles.container}>
-          <SelectButton
-            icon={<Lock />}
-            arrow={<BlackArrowPerfil />}
-            fontColor={"#000"}
-            bgColor={"#fff"}
-            onPress={() => {
-              navigation.navigate("updatePerfil");
-            }}
-          >
-            Detalhes da conta
-          </SelectButton>
-          <SelectButton
-            icon={<Lock />}
-            arrow={<BlackArrowPerfil />}
-            fontColor={"#000"}
-            bgColor={"#fff"}
-            onPress={() => {
-              navigation.navigate("updateSenha");
-            }}
-          >
-            Alterar Senha
-          </SelectButton>
-          <SelectButton
-            icon={<HeartPerfil />}
-            arrow={<BlackArrowPerfil />}
-            fontColor={"#000"}
-            bgColor={"#fff"}
-            onPress={() => {
-              navigation.navigate("meusFavoritos");
-            }}
-          >
-            Meus favoritos
-          </SelectButton>
-          <SelectButton
-            icon={<DocumentPerfil />}
-            arrow={<BlackArrowPerfil />}
-            fontColor={"#000"}
-            bgColor={"#fff"}
-            onPress={() => {
-              navigation.navigate("meusProjetos");
-            }}
-          >
-            Meus Projetos
-          </SelectButton>
-          <SelectButton
-            icon={<CrossPerfil />}
-            arrow={<BlackArrowPerfil />}
-            fontColor={"#000"}
-            bgColor={"#fff"}
-            onPress={() => {
-              logout();
-            }}
-          >
-            Sair da conta
-          </SelectButton>
-          <SelectButton
-            icon={<SignOutPerfil />}
-            arrow={<WhiteArrowPerfil />}
-            fontColor={"#fff"}
-            bgColor={"#CF654D"}
-          >
-            Delete sua conta
-          </SelectButton>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.bg}>
+      <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
+      <HeaderPerfil visibleLogo={true} />
+      <ShowPerfil />
+      <View style={styles.container}>
+        <SelectButton
+          icon={<Lock />}
+          arrow={<BlackArrowPerfil />}
+          fontColor={"#000"}
+          bgColor={"#fff"}
+          onPress={() => {
+            navigation.navigate("updatePerfil");
+          }}
+        >
+          Detalhes da conta
+        </SelectButton>
+        <SelectButton
+          icon={<Lock />}
+          arrow={<BlackArrowPerfil />}
+          fontColor={"#000"}
+          bgColor={"#fff"}
+          onPress={() => {
+            navigation.navigate("updateSenha");
+          }}
+        >
+          Alterar Senha
+        </SelectButton>
+        <SelectButton
+          icon={<HeartPerfil />}
+          arrow={<BlackArrowPerfil />}
+          fontColor={"#000"}
+          bgColor={"#fff"}
+          onPress={() => {
+            navigation.navigate("meusFavoritos");
+          }}
+        >
+          Meus favoritos
+        </SelectButton>
+        <SelectButton
+          icon={<DocumentPerfil />}
+          arrow={<BlackArrowPerfil />}
+          fontColor={"#000"}
+          bgColor={"#fff"}
+          onPress={() => {
+            navigation.navigate("meusProjetos");
+          }}
+        >
+          Meus Projetos
+        </SelectButton>
+        <SelectButton
+          icon={<CrossPerfil />}
+          arrow={<BlackArrowPerfil />}
+          fontColor={"#000"}
+          bgColor={"#fff"}
+          onPress={() => {
+            logout();
+          }}
+        >
+          Sair da conta
+        </SelectButton>
+        <SelectButton
+          icon={<SignOutPerfil />}
+          arrow={<WhiteArrowPerfil />}
+          fontColor={"#fff"}
+          bgColor={"#CF654D"}
+        >
+          Delete sua conta
+        </SelectButton>
+      </View>
+    </ScrollView>
   );
 };
 

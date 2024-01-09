@@ -158,7 +158,7 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <StatusBar translucent={true} barStyle="light-content" />
         <View style={styles.container}>
@@ -209,7 +209,7 @@ const SignUpScreen = ({ navigation }) => {
           <LoadingIndicator visible={loading} />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

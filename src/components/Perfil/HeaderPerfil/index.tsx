@@ -22,7 +22,7 @@ const HeaderPerfil = ({
   return (
     <View style={styles.header}>
       <Pressable
-        style={visibleLogo ? { opacity: 0 } : {}}
+        style={visibleLogo ? { opacity: 0 } : { ...styles.logo }}
         onPress={() => {
           try {
             navigation.goBack();
@@ -33,7 +33,9 @@ const HeaderPerfil = ({
       >
         <Arrow color={color} />
       </Pressable>
-      <Logo color={color} size="30" style={styles.logo}></Logo>
+      <Pressable style={styles.logo}>
+        <Logo color={color}></Logo>
+      </Pressable>
       {visiblePerfil ? (
         <ImagemBuffer imgBuffer={user.img} style={styles.img} />
       ) : (

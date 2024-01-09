@@ -38,13 +38,13 @@ const UpdateSenha = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ ...styles.background, backgroundColor: "#1f1f1f" }}>
+    <View style={styles.background}>
       <StatusBar
         translucent={true}
         backgroundColor={"#1f1f1f"}
         barStyle="light-content"
       />
-      <ScrollView style={styles.bg}>
+      <ScrollView>
         <HeaderPerfil navigation={navigation} />
         <ShowPerfil />
         <View style={styles.container}>
@@ -74,7 +74,7 @@ const UpdateSenha = ({ navigation }) => {
         </View>
         <LoadingIndicator visible={loading} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 export default UpdateSenha;

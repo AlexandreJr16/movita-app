@@ -59,43 +59,41 @@ const ShowProduct = ({ route, navigation }) => {
     fetchData();
   }, []);
   return (
-    <SafeAreaView style={{ backgroundColor: "#1f1f1f", flex: 1 }}>
-      <ScrollView style={styles.container}>
-        {projeto && (
-          <View style={styles.itensContent}>
-            <HeaderPerfil
-              color={color}
-              navigation={navigation}
-              visiblePerfil={true}
+    <ScrollView style={styles.container}>
+      {projeto && (
+        <View style={styles.itensContent}>
+          <HeaderPerfil
+            color={color}
+            navigation={navigation}
+            visiblePerfil={true}
+          />
+          <ImagemBuffer imgBuffer={projeto.imagem[0]} style={styles.img} />
+          <View style={styles.card}>
+            <HeaderShowItem
+              data={{
+                madeBy: projeto.empresa.nomeFantasia,
+                title: projeto.titulo,
+              }}
             />
-            <ImagemBuffer imgBuffer={projeto.imagem[0]} style={styles.img} />
-            <View style={styles.card}>
-              <HeaderShowItem
-                data={{
-                  madeBy: projeto.empresa.nomeFantasia,
-                  title: projeto.titulo,
-                }}
-              />
-              <Texto weight="regular" style={styles.description}>
-                {/* {projeto.descricao}: */}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                tempore, ab neque voluptatem numquam molestiae perspiciatis
-                necessitatibus iure temporibus aperiam aliquid libero
-                consectetur, atque architecto deleniti rerum, sequi labore vel.
+            <Texto weight="regular" style={styles.description}>
+              {/* {projeto.descricao}: */}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
+              tempore, ab neque voluptatem numquam molestiae perspiciatis
+              necessitatibus iure temporibus aperiam aliquid libero consectetur,
+              atque architecto deleniti rerum, sequi labore vel.
+            </Texto>
+            {projeto.Feedback[0] ? (
+              <FeedBackShowProduct feedback={projeto.Feedback[0]} />
+            ) : (
+              <Texto weight={"bold"} style={{ color: "#fff" }}>
+                Ainda não há nada aqui
               </Texto>
-              {projeto.Feedback[0] ? (
-                <FeedBackShowProduct feedback={projeto.Feedback[0]} />
-              ) : (
-                <Texto weight={"bold"} style={{ color: "#fff" }}>
-                  Ainda não há nada aqui
-                </Texto>
-              )}
-            </View>
+            )}
           </View>
-        )}
-        <LoadingIndicator visible={loading} />
-      </ScrollView>
-    </SafeAreaView>
+        </View>
+      )}
+      <LoadingIndicator visible={loading} />
+    </ScrollView>
   );
 };
 export default ShowProduct;

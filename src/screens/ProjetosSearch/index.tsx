@@ -9,7 +9,7 @@ import AuthContext from "../../contexts";
 import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 
 const MeusProjetosScreen = ({ navigation }) => {
-  const { getTopProjects, loading, getTopEmpresas } = useContext(AuthContext);
+  const { getTopProjects } = useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
@@ -25,20 +25,19 @@ const MeusProjetosScreen = ({ navigation }) => {
     fetchData();
   }, []);
   return (
-    <SafeAreaView style={styles.background}>
-      <ScrollView style={styles.background}>
-        <HeaderMyProduct
-          navigation={navigation}
-          color={"blue"}
-          title="Projetos Anteriores"
-        />
-        <ShowProductsCarousel
-          navigation={navigation}
-          title={"Projetos bem avaliados:"}
-          produtos={produtos[0]}
-        />
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.background}>
+      <HeaderMyProduct
+        navigation={navigation}
+        color={"blue"}
+        title="Projetos Anteriores"
+        handleSearch={undefined}
+      />
+      <ShowProductsCarousel
+        navigation={navigation}
+        title={"Projetos bem avaliados:"}
+        produtos={produtos[0]}
+      />
+    </ScrollView>
   );
 };
 export default MeusProjetosScreen;
