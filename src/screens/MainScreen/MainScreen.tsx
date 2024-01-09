@@ -27,7 +27,7 @@ export default function MainScreen({ navigation }) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.background}>
+    <View style={styles.background}>
       <ScrollView style={styles.background}>
         <StatusBar
           translucent={true}
@@ -54,6 +54,6 @@ export default function MainScreen({ navigation }) {
           {loading && <ActivityIndicator size="large" color="#0000ff" />}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
