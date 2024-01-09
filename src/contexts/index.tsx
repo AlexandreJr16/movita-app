@@ -1,5 +1,7 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import * as auth from "../service/index";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SplashScreen from "expo-splash-screen";
 import {
   AuthContextData,
   User,
@@ -9,11 +11,27 @@ import {
 } from "./dto/contextDTO";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+SplashScreen.preventAutoHideAsync();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User | null>();
   const [token, setToken] = useState<string>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function loadStorageData() {
+      const storageUser = await AsyncStorage.getItem("@RNAuth:user");
+      const storageToken = await AsyncStorage.getItem("@RNAuth:token");
+      if (storageToken && storageUser) {
+        setUser(JSON.parse(storageUser));
+        setLoading(false);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await SplashScreen.hideAsync();
+      }
+      setLoading(false);
+    }
+    loadStorageData();
+  }, []);
 
   async function signIn(
     email: string,
@@ -24,7 +42,8 @@ export const AuthProvider = ({ children }) => {
       const response = await auth.signIn(email, senha);
       if (response.token) {
         setToken(response.token);
-        const user = await getUser(response.token);
+        await getUser(response.token);
+        await AsyncStorage.setItem("@RNAuth:token", response.token);
         setLoading(false);
       } else {
         setLoading(false);
@@ -35,7 +54,9 @@ export const AuthProvider = ({ children }) => {
     }
   }
   async function logout() {
-    setUser(null);
+    await AsyncStorage.clear().then(() => {
+      setUser(null);
+    });
   }
 
   async function signUp(userInfo: SignUpInfo) {
@@ -55,6 +76,7 @@ export const AuthProvider = ({ children }) => {
       const response = await auth.getUser(token);
       if (response.img) {
         setUser(response);
+        await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response));
       }
     } catch (error) {
       throw Error("errado");
@@ -212,6 +234,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
   const signed = !!user;
+
   return signed ? (
     <AuthContext.Provider
       value={{
