@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   tabBarIOS: {
     backgroundColor: "#151515",
-    width: "100%",
+    width: "100%",borderBottomWidth: 0, borderTopWidth: 0,
   },
   tabBarItemAndroid: {
     marginBottom: 23,
