@@ -1,11 +1,14 @@
 import { ScrollView, StatusBar, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
-import React from "react";
+import React, { useEffect } from "react";
+import TitleTextPerfil from "../../../components/Perfil/TitleText";
+import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 
 const MeusFavoritos = ({ navigation }: { navigation: any }) => {
+  useEffect(() => {}, []);
+
   return (
     <View style={styles.background}>
       <StatusBar
@@ -16,7 +19,14 @@ const MeusFavoritos = ({ navigation }: { navigation: any }) => {
       <ScrollView>
         <HeaderPerfil navigation={navigation} />
         <ShowPerfil />
-        <View style={styles.container}></View>
+        <View style={styles.container}>
+          <TitleTextPerfil>Detalhes da conta</TitleTextPerfil>
+          <ShowProductsCarousel
+            navigation={navigation}
+            produtos={undefined}
+            title={"Produtos favoritos"}
+          />
+        </View>
       </ScrollView>
     </View>
   );
