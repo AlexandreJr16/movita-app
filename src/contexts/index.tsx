@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     await SplashScreen.hideAsync();
     setLoading(false);
   };
+
   // Funções auth --------------------------------------------------------------------------------------
   const signIn = async (
     email: string,
