@@ -2,8 +2,6 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import PerfilScreen from "../screens/PerfilScreen";
-import Arrow from "../assents/Perfil/Arrow";
-import LogoWhiteBlack from "../assents/Perfil/Logo";
 import UpdatePerfil from "../screens/PerfilScreen/UpdatePerfil";
 import UpdateSenha from "../screens/PerfilScreen/UpdateSenha";
 import MeusProjetos from "../screens/PerfilScreen/MeusProjetos";

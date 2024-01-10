@@ -58,3 +58,4 @@ const ForgotScreen = ({ navigation }) => {
     </View>
   );
 };
+export default ForgotScreen;
