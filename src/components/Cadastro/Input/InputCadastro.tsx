@@ -1,9 +1,9 @@
 import { View, TextInput } from "react-native";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import InputDTO from "./InputDTO";
 import React from "react";
-import TextoInput from "../../texto/TextoInput";
+import TextoInput from "../../Default/texto/TextoInput";
 
 const InputCadastro = ({
   children,

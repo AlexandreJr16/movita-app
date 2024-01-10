@@ -3,7 +3,7 @@ import EmpresasIcon from "../../../assents/MainScreen/EmpresasIcon";
 import ModelosIcon from "../../../assents/MainScreen/ModelosIcon";
 import ProjetosIcon from "../../../assents/MainScreen/ProjetosIcon";
 import styles from "./styles";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 

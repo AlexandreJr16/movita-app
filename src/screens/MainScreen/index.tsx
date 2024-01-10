@@ -6,7 +6,7 @@ import HeaderMain from "../../components/Main/Header";
 import SelectCategory from "../../components/Main/SelectCategory";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ShowProductsCarousel from "../../components/CarrosselShowProducts";
-import LoadingIndicator from "../../components/Loading";
+import LoadingIndicator from "../../components/Default/Loading";
 
 export default function MainScreen({ navigation }) {
   const { getTopProjects, loading, getTopEmpresas } = useContext(AuthContext);

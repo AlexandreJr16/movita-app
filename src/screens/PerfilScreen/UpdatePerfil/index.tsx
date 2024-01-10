@@ -7,7 +7,7 @@ import InputPerfil from "../../../components/Perfil/Input";
 import { useContext, useState } from "react";
 import AuthContext from "../../../contexts";
 import ButtonPerfil from "../../../components/Perfil/Button";
-import LoadingIndicator from "../../../components/Loading";
+import LoadingIndicator from "../../../components/Default/Loading";
 import React from "react";
 
 const UpdatePerfil = ({ navigation }) => {

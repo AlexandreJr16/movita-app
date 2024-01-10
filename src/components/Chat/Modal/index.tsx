@@ -2,8 +2,8 @@ import { View, Text, TextInput, Pressable, Modal } from "react-native";
 import React, { useContext, useState } from "react";
 import styles from "./styles";
 import socket from "../../../utils/socket";
-import Texto from "../../texto/Texto";
-import TextoInput from "../../texto/TextoInput";
+import Texto from "../../Default/texto/Texto";
+import TextoInput from "../../Default/texto/TextoInput";
 import AuthContext from "../../../contexts";
 
 const ChatModal = ({ setVisible, visible }) => {

@@ -6,7 +6,7 @@ import Carousel from "react-native-snap-carousel";
 import GaveteiroAzul from "../../../assents/Login/GaveteiroAzul";
 import GaveteiroCreme from "../../../assents/Login/GaveteiroCreme";
 import GaveteiroVermelho from "../../../assents/Login/GaveteiroVermelho";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 import { carousel } from "./data";
 
 const SLIDER_WIDTH = Dimensions.get("window").width;

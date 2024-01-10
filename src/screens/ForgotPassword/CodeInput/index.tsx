@@ -2,7 +2,7 @@ import { Pressable, View, StatusBar } from "react-native";
 import React, { useState, useContext } from "react";
 import styles from "./styles";
 import HeaderCodeInputForgot from "../../../components/Forgot/Header";
-import Texto from "../../../components/texto/Texto";
+import Texto from "../../../components/Default/texto/Texto";
 import InputCadastro from "../../../components/Cadastro/Input/InputCadastro";
 import LoginButton from "../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../contexts";

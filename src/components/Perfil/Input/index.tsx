@@ -1,9 +1,9 @@
 import { TextInput, View } from "react-native";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 import InputLogin from "../../Login/Input/InputLogin";
 import styles from "./styles";
 import React from "react";
-import TextoInput from "../../texto/TextoInput";
+import TextoInput from "../../Default/texto/TextoInput";
 
 const InputPerfil = ({
   title,

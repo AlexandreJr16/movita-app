@@ -5,10 +5,10 @@ import styles from "./styles";
 import socket from "../../../utils/socket";
 import AuthContext from "../../../contexts";
 import Arrow from "../../../assents/Perfil/Arrow";
-import Texto from "../../../components/texto/Texto";
-import Logo from "../../../components/Logo/Logo";
+import Texto from "../../../components/Default/texto/Texto";
+import Logo from "../../../components/Default/Logo/Logo";
 import SendMessage from "../../../assents/Chat/SendMessage";
-import TextoInput from "../../../components/texto/TextoInput";
+import TextoInput from "../../../components/Default/texto/TextoInput";
 
 const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);

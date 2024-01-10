@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import Texto from "../../components/texto/Texto";
+import Texto from "../../components/Default/texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles";

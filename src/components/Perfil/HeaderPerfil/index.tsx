@@ -2,9 +2,9 @@ import { Pressable, View } from "react-native";
 import Arrow from "../../../assents/Perfil/Arrow";
 import LogoWhiteBlack from "../../../assents/Perfil/Logo";
 import styles from "./styles";
-import Logo from "../../Logo/Logo";
+import Logo from "../../Default/Logo/Logo";
 import React, { useContext } from "react";
-import ImagemBuffer from "../../Imagem";
+import ImagemBuffer from "../../Default/Imagem";
 import AuthContext from "../../../contexts";
 
 const HeaderPerfil = ({

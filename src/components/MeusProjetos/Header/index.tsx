@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Image, TextInput, TouchableOpacity } from "react-native";
-import Logo from "../../Logo/Logo";
-import Texto from "../../texto/Texto";
+import Logo from "../../Default/Logo/Logo";
+import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import AuthContext from "../../../contexts";
 import { Buffer } from "buffer";
-import ImagemBuffer from "../../Imagem";
+import ImagemBuffer from "../../Default/Imagem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderPerfil from "../../Perfil/HeaderPerfil";
 import FiltroBlue from "../../../assents/MeusProjetos/FiltroBlue";
@@ -13,7 +13,7 @@ import FiltroRed from "../../../assents/MeusProjetos/FiltroRed";
 import LupaAzul from "../../../assents/MeusProjetos/LupaAzul";
 import LupaRed from "../../../assents/MeusProjetos/LupaRed";
 import { Pressable } from "react-native";
-import TextoInput from "../../texto/TextoInput";
+import TextoInput from "../../Default/texto/TextoInput";
 
 const HeaderMyProduct = ({
   navigation,

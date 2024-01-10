@@ -3,7 +3,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import styles from "./styles";
 import DDCadDTO from "./DDCadDTO";
 import { View } from "react-native";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 
 const DropDCadastro = ({
   data,

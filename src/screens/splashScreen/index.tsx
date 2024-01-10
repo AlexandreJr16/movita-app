@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, StatusBar } from "react-native";
-import Texto from "../../components/texto/Texto";
+import Texto from "../../components/Default/texto/Texto";
 import styles from "./style";
-import Button from "../../components/splashScreenComponents/button/Button";
+import Button from "../../components/splashScreen/button/Button";
 import SplashImage from "../../assents/Splash/SplashImage";
 import SplashImage2 from "../../assents/Splash/SplashImage2";
 import SplashImage3 from "../../assents/Splash/SplashImage3";

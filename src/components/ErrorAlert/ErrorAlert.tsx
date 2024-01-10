@@ -1,4 +1,4 @@
-import Texto from "../texto/Texto";
+import Texto from "../Default/texto/Texto";
 
 const ErrorAlert = ({ children, styles, isAlert }) => {
   return isAlert == true ? (

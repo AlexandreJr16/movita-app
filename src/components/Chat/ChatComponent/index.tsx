@@ -5,9 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import ChatRoutes from "../../../routes/tab/chat.routes";
 import socket from "../../../utils/socket";
-import ImagemBuffer from "../../Imagem";
+import ImagemBuffer from "../../Default/Imagem";
 import AuthContext from "../../../contexts";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 
 const ChatComponent = ({
   item,

@@ -1,13 +1,13 @@
 import { View, StatusBar } from "react-native";
-import Texto from "../../components/texto/Texto";
+import Texto from "../../components/Default/texto/Texto";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
-import ImagemBuffer from "../../components/Imagem";
+import ImagemBuffer from "../../components/Default/Imagem";
 import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
 import AuthContext from "../../contexts";
 import HeaderShowItem from "../../components/ShowItem/Header";
-import LoadingIndicator from "../../components/Loading";
+import LoadingIndicator from "../../components/Default/Loading";
 import FeedBackShowProduct from "../../components/ShowItem/Feedback";
 
 type Projeto = {

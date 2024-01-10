@@ -1,5 +1,5 @@
 import { ScrollView, StatusBar, View } from "react-native";
-import Texto from "../../../components/texto/Texto";
+import Texto from "../../../components/Default/texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../contexts";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import React from "react";
-import LoadingIndicator from "../../../components/Loading";
+import LoadingIndicator from "../../../components/Default/Loading";
 
 const MeusProjetos = ({ navigation }: { navigation: any }) => {
   const { getAllProjetosByCliente, user, loading } = useContext(AuthContext);

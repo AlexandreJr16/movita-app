@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, TouchableOpacity } from "react-native";
-import ImagemBuffer from "../../Imagem";
-import Texto from "../../texto/Texto";
+import ImagemBuffer from "../../Default/Imagem";
+import Texto from "../../Default/texto/Texto";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 

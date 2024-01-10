@@ -1,5 +1,5 @@
 import { Pressable, View } from "react-native";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 
 const SelectButton = ({

@@ -6,7 +6,7 @@ import TitleTextPerfil from "../../../components/Perfil/TitleText";
 import InputPerfil from "../../../components/Perfil/Input";
 import { useContext, useState } from "react";
 import AuthContext from "../../../contexts";
-import LoadingIndicator from "../../../components/Loading";
+import LoadingIndicator from "../../../components/Default/Loading";
 import ButtonPerfil from "../../../components/Perfil/Button";
 import React from "react";
 

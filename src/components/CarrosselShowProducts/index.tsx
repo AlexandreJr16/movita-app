@@ -1,5 +1,5 @@
 import { View, ScrollView, FlatList } from "react-native";
-import Texto from "../texto/Texto";
+import Texto from "../Default/texto/Texto";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Produto from "./Product";
 import styles from "./styles";

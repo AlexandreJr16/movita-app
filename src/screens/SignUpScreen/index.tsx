@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Pressable, ScrollView, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Logo from "../../components/Logo/Logo";
+import Logo from "../../components/Default/Logo/Logo";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import styles from "./styles";
-import Texto from "../../components/texto/Texto";
+import Texto from "../../components/Default/texto/Texto";
 import InputCadastro from "../../components/Cadastro/Input/InputCadastro";
 import BlueBack from "../../assents/Cadastro/BlueBack";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
@@ -12,7 +12,7 @@ import { meses, estadosBrasil, sexoArr } from "./data";
 import DropDCadastro from "../../components/Cadastro/DropDown/DropDownCad";
 import AuthContext from "../../contexts";
 import { valorMesParaNumero } from "./functions";
-import LoadingIndicator from "../../components/Loading";
+import LoadingIndicator from "../../components/Default/Loading";
 
 const SignUpScreen = ({ navigation }) => {
   const { signUp, token, loading } = useContext(AuthContext);

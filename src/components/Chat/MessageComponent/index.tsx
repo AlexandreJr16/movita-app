@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./styles";
 import AuthContext from "../../../contexts";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 
 export default function MessageComponent({ item }: { item: any }) {
   const { user } = useContext(AuthContext);

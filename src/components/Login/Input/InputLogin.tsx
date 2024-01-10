@@ -1,5 +1,5 @@
 import { View, TextInput } from "react-native";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import InputDTO from "./InputDTO";
 import React, { useState } from "react";
@@ -8,7 +8,7 @@ import {
   Poppins_500Medium,
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
-import TextoInput from "../../texto/TextoInput";
+import TextoInput from "../../Default/texto/TextoInput";
 
 const InputLogin = ({ Icon, placeholder, func, secureText }: InputDTO) => {
   const [textLoaded] = useFonts({

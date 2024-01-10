@@ -1,5 +1,5 @@
 import { View, StatusBar } from "react-native";
-import Texto from "../../components/texto/Texto";
+import Texto from "../../components/Default/texto/Texto";
 import React, { useState, useContext } from "react";
 import styles from "./styles";
 import HeaderForgotScreen from "../../components/Forgot/Header";

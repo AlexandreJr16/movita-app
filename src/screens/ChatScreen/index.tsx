@@ -7,10 +7,10 @@ import styles from "./styles";
 import socket from "../../utils/socket";
 import AuthContext from "../../contexts";
 import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
-import Texto from "../../components/texto/Texto";
+import Texto from "../../components/Default/texto/Texto";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
-import LoadingIndicator from "../../components/Loading";
-import TextoInput from "../../components/texto/TextoInput";
+import LoadingIndicator from "../../components/Default/Loading";
+import TextoInput from "../../components/Default/texto/TextoInput";
 import HeaderMyProduct from "../../components/MeusProjetos/Header";
 import Plus from "../../assents/Chat/plus";
 

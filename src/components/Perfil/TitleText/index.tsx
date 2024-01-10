@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styles from "./styles";
-import Texto from "../../texto/Texto";
+import Texto from "../../Default/texto/Texto";
 import EditarPerfil from "../../../assents/Perfil/Editar";
 const TitleTextPerfil = ({ children }: { children?: any }) => {
   return (
