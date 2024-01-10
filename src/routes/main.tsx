@@ -1,7 +1,7 @@
-import AppRoutes from "./main.routes";
+import AppRoutes from "./tab/main.routes";
 import React, { useContext } from "react";
 import AuthContext from "../contexts";
-import AuthRoutes from "./auth.routes";
+import AuthRoutes from "./auth/auth.routes";
 import TabRoutes from "./tab.routes";
 
 const Routes: React.FC = () => {

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "../screens/Login";
-import MainScrenn from "../screens/MainScreen";
-import ShowProduct from "../screens/ShowProduct";
-import MeusProjetosScreen from "../screens/ProjetosSearch";
-import EmpresasSearchScreen from "../screens/EmpresasSearch";
+import Login from "../../screens/Login";
+import MainScrenn from "../../screens/MainScreen";
+import ShowProduct from "../../screens/ShowProduct";
+import MeusProjetosScreen from "../../screens/ProjetosSearch";
+import EmpresasSearchScreen from "../../screens/EmpresasSearch";
 
 const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();

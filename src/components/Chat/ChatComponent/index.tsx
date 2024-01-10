@@ -3,7 +3,7 @@ import React, { useContext, useLayoutEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
-import ChatRoutes from "../../../routes/chat.routes";
+import ChatRoutes from "../../../routes/tab/chat.routes";
 import socket from "../../../utils/socket";
 import ImagemBuffer from "../../Imagem";
 import AuthContext from "../../../contexts";

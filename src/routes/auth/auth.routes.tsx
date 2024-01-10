@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SplashScreen from "../screens/SplashScreen";
-import Login from "../screens/Login";
-import SignUpScreen from "../screens/SignUpScreen";
+import SplashScreen from "../../screens/SplashScreen";
+import Login from "../../screens/Login";
+import SignUpScreen from "../../screens/SignUpScreen";
 import ForgotRoutes from "./forgot.routes";
 const Stack = createNativeStackNavigator();
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MainRoutes from "./main.routes";
+import MainRoutes from "./tab/main.routes";
 import ChatScreen from "../screens/ChatScreen";
 import SearchScreen from "../screens/SearchScreen";
 import PerfilScreen from "../screens/PerfilScreen";
@@ -13,8 +13,8 @@ import MessageSelected from "../assents/NavBar/Selected/SelectedMessage";
 import SearchSelected from "../assents/NavBar/Selected/SelectedSearch";
 import PerfilSelected from "../assents/NavBar/Selected/SelectedPerfil";
 import HomeSelected from "../assents/NavBar/Selected/SelectedHome";
-import PerfilRoutes from "./perfil.routes";
-import ChatRoutes from "./chat.routes";
+import PerfilRoutes from "./tab/perfil.routes";
+import ChatRoutes from "./tab/chat.routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -101,7 +101,9 @@ const styles = StyleSheet.create({
   },
   tabBarIOS: {
     backgroundColor: "#151515",
-    width: "100%",borderBottomWidth: 0, borderTopWidth: 0,
+    width: "100%",
+    borderBottomWidth: 0,
+    borderTopWidth: 0,
   },
   tabBarItemAndroid: {
     marginBottom: 23,
