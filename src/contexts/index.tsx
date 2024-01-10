@@ -96,18 +96,11 @@ export const AuthProvider = ({ children }) => {
     return await projectsFunctions.getFavProjects(token, setLoading);
   };
 
-  async function getTopEmpresas(num: number): Promise<any> {
-    try {
-      setLoading(true);
-      const empresas = await auth.getRandomEmpresas(num);
-      return empresas;
-    } catch (error) {
-      setLoading(false);
-      throw new Error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  // Funções Empresas ----------------------------------------------------------------------------------------
+  const getTopEmpresas = async (num: number) => {
+    return await projectsFunctions.getFavProjects(num, setLoading);
+  };
+
   // Funções Forgot Password  ---------------------------------------------------------------------------------
   const verifyCodeForgot = async (dto: { code: string; email: string }) => {
     return await forgotFunctions.verifyCodeForgot(dto, setLoading);
