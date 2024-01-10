@@ -91,7 +91,7 @@ const ShowProduct = ({ route, navigation }) => {
               <FeedBackShowProduct feedback={projeto.Feedback[0]} />
             ) : (
               <Texto weight={"bold"} style={{ color: "#fff" }}>
-                Ainda não há nada aqui
+                Ainda não há nenhum feedback do cliente
               </Texto>
             )}
           </View>
