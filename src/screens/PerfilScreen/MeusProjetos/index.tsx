@@ -16,12 +16,11 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
 
   const [produtos, setProdutos] = useState([]);
 
+  const fetchTopProjects = async () => {
+    const topProjects = await getAllProjetosByCliente(user.id);
+    setProdutos(topProjects);
+  };
   useEffect(() => {
-    const fetchTopProjects = async () => {
-      const topProjects = await getAllProjetosByCliente(user.id);
-      setProdutos(topProjects);
-    };
-
     fetchTopProjects();
   }, []);
   return (

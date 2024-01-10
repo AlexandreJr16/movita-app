@@ -1,6 +1,5 @@
-import { View } from "react-native";
+import { View, StatusBar } from "react-native";
 import Texto from "../../components/texto/Texto";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
@@ -66,6 +65,7 @@ const ShowProduct = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar backgroundColor={"#2f2f2f"} barStyle="light-content" />
       {projeto && (
         <View style={styles.itensContent}>
           <HeaderPerfil
@@ -73,6 +73,7 @@ const ShowProduct = ({ route, navigation }) => {
             navigation={navigation}
             visiblePerfil={true}
           />
+
           <ImagemBuffer imgBuffer={projeto.imagem[0]} style={styles.img} />
           <View style={styles.card}>
             <HeaderShowItem

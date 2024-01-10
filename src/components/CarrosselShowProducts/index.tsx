@@ -19,27 +19,47 @@ const ShowProductsCarousel = ({
   title?: any;
   tipo?: "projeto" | "empresa";
 }) => {
-  useEffect(() => {}, []);
+  useEffect(() => {});
   return (
     <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Texto weight="regular" style={styles.title}>
-          {title}
-        </Texto>
-        <Texto weight="regular" style={styles.blueText}>
-          Ver mais
-        </Texto>
-      </View>
-      <FlatList
-        data={produtos}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <Produto color={color} navigation={navigation} produto={item} />
-          //Futuramente mudar para enviar para outro tipo de tela
-        )}
-      />
+      {produtos == undefined ? null : (
+        <React.Fragment>
+          <View style={styles.textContainer}>
+            <Texto weight="regular" style={styles.title}>
+              {title}
+            </Texto>
+            <Texto weight="regular" style={styles.blueText}>
+              Ver mais
+            </Texto>
+          </View>
+          {produtos[0] != null ? (
+            <FlatList
+              data={produtos}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <Produto color={color} navigation={navigation} produto={item} />
+                //Futuramente mudar para enviar para outro tipo de tela
+              )}
+            />
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 25,
+              }}
+            >
+              <Texto weight="bold" style={{ color: "#fff" }}>
+                Nenhum item
+              </Texto>
+            </View>
+          )}
+        </React.Fragment>
+      )}
     </View>
   );
 };

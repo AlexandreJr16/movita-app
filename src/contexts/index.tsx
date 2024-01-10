@@ -234,9 +234,22 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  async function getFavProjects(): Promise<any> {
+    try {
+      setLoading(true);
+      const projeto = await auth.getFavProject(token);
+      return projeto;
+    } catch (error) {
+      setLoading(false);
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function likeProject(projetoId: number): Promise<any> {
     try {
-      const email = await auth.likeProject(projetoId, token);
+      await auth.likeProject(projetoId, token);
     } catch (error) {
       throw new Error(error);
     } finally {
@@ -245,12 +258,13 @@ export const AuthProvider = ({ children }) => {
 
   async function deleteLikeProject(projetoId: number): Promise<any> {
     try {
-      const email = await auth.deleteLikeProject(projetoId, token);
+      await auth.deleteLikeProject(projetoId, token);
     } catch (error) {
       throw new Error(error);
     } finally {
     }
   }
+
   const signed = !!user;
 
   return signed ? (
@@ -271,6 +285,7 @@ export const AuthProvider = ({ children }) => {
         addImageUser,
         deleteLikeProject,
         likeProject,
+        getFavProjects,
       }}
     >
       {children}

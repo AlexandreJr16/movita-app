@@ -70,4 +70,5 @@ export interface AuthContextData {
   sendEmailForgot?(dto: { to: string });
   deleteLikeProject?(projetoId: number);
   likeProject?(projetoId: number);
+  getFavProjects?();
 }

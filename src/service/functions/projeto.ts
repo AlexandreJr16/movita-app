@@ -76,9 +76,10 @@ export const getFavProject = async (token: string): Promise<any> => {
       Authorization: token,
     },
   };
+  const data = {};
 
   try {
-    const response = await axios.post(url, options);
+    const response = await axios.post(url, data, options);
     return response.data;
   } catch (error) {
     throw error;
