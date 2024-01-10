@@ -58,11 +58,3 @@ const ForgotScreen = ({ navigation }) => {
     </View>
   );
 };
-export default ForgotScreen;
-function useCotext(
-  AuthContext: React.Context<
-    import("../../contexts/dto/contextDTO").AuthContextData
-  >
-) {
-  throw new Error("Function not implemented.");
-}
