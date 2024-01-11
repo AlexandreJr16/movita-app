@@ -1,5 +1,8 @@
 import * as auth from "../../service/index";
-export async function likeProject(projetoId: number, token): Promise<any> {
+export async function likeProject(
+  projetoId: number,
+  token: string
+): Promise<any> {
   try {
     await auth.likeProject(projetoId, token);
   } catch (error) {

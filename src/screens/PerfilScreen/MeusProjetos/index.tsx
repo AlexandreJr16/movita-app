@@ -18,7 +18,17 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
 
   const fetchTopProjects = async () => {
     const topProjects = await getAllProjetosByCliente(user.id);
-    setProdutos(topProjects);
+    const esperandoProj = topProjects.filter(
+      (proj) => proj.status == "Esperando confirmação"
+    );
+    const andamentoProj = topProjects.filter(
+      (proj) => proj.status == "Andamento"
+    );
+    const concluidoProj = topProjects.filter(
+      (proj) => proj.status == "Concluído"
+    );
+
+    setProdutos([esperandoProj, andamentoProj, concluidoProj]);
   };
   useEffect(() => {
     fetchTopProjects();
@@ -33,7 +43,20 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
           <TitleTextPerfil>Meus Projetos</TitleTextPerfil>
           <ShowProductsCarousel
             color={"#36A5BF"}
-            produtos={produtos}
+            title={"Projetos em Espera"}
+            produtos={produtos[0]}
+            navigation={navigation}
+          />
+          <ShowProductsCarousel
+            color={"#36A5BF"}
+            title={"Projetos em Andamento"}
+            produtos={produtos[1]}
+            navigation={navigation}
+          />
+          <ShowProductsCarousel
+            color={"#36A5BF"}
+            title={"Projetos Concluídos"}
+            produtos={produtos[2]}
             navigation={navigation}
           />
         </View>

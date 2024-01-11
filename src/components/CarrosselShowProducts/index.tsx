@@ -19,7 +19,7 @@ const ShowProductsCarousel = ({
   title?: any;
   tipo?: "projeto" | "empresa";
 }) => {
-  useEffect(() => {});
+  useEffect(() => {}, []);
   return (
     <View style={styles.container}>
       {produtos == undefined ? null : (
@@ -39,7 +39,12 @@ const ShowProductsCarousel = ({
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
-                <Produto color={color} navigation={navigation} produto={item} />
+                <Produto
+                  color={color}
+                  navigation={navigation}
+                  produto={item}
+                  tipo={tipo}
+                />
                 //Futuramente mudar para enviar para outro tipo de tela
               )}
             />

@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     padding: 10,
     gap: 10,
     borderRadius: 15,
+    marginBottom: 10,
   },
   topFeedback: {
     width: "100%",

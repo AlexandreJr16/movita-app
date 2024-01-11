@@ -5,6 +5,8 @@ import MainScrenn from "../../screens/MainScreen";
 import ShowProduct from "../../screens/ShowProduct";
 import MeusProjetosScreen from "../../screens/ProjetosSearch";
 import EmpresasSearchScreen from "../../screens/EmpresasSearch";
+import ShowAnotherPerfil from "../../screens/ShowEmpresa";
+import ShowEmpresaPerfil from "../../screens/ShowEmpresa";
 
 const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -16,6 +18,7 @@ const MainRoutes: React.FC = () => {
     >
       <Stack.Screen name="Main" component={MainScrenn} />
       <Stack.Screen name="Product" component={ShowProduct} />
+      <Stack.Screen name="Perfil" component={ShowEmpresaPerfil} />
       <Stack.Screen name="ProjetoSearch" component={MeusProjetosScreen} />
       <Stack.Screen name="EmpresaSearch" component={EmpresasSearchScreen} />
     </Stack.Navigator>

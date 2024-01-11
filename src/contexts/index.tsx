@@ -9,35 +9,36 @@ import { UpdateSenhaDTO } from "./dto/updateSenha.dto";
 import * as authFunctions from "./functions/authFunctions";
 import * as userFunctions from "./functions/userFunctions";
 import * as forgotFunctions from "./functions/forgotFunctions";
-import * as likeFunctions from "./functions/likeFunction";
 import * as projectsFunctions from "./functions/projectFunction";
+import * as likeFunctions from "./functions/likeFunction";
+import * as empresas from "./functions/empresaFunction";
 import { SignInResponse } from "./dto/signInResponse.dto";
 import { updateUserDTO } from "./dto/updateUser.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
+import { User } from "./dto/user.dto";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
 
 export const AuthProvider = ({ children }) => {
-  const { user, token, loading, setUser, setToken, setLoading } = useAuth();
+  const [user, setUser] = useState<User | null>();
+  const [token, setToken] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    loadStorageData();
-  }, []);
-
-  // Função permanência do usuário
-  const loadStorageData = async () => {
-    const storageUser = await AsyncStorage.getItem("@RNAuth:user");
-    const storageToken = await AsyncStorage.getItem("@RNAuth:token");
-    if (storageToken && storageUser) {
-      setUser(JSON.parse(storageUser));
-      setToken(storageToken);
+    async function loadStorageData() {
+      const storageUser = await AsyncStorage.getItem("@RNAuth:user");
+      const storageToken = await AsyncStorage.getItem("@RNAuth:token");
+      if (storageToken && storageUser) {
+        setUser(JSON.parse(storageUser));
+        setToken(storageToken);
+        setLoading(false);
+      }
+      await SplashScreen.hideAsync();
       setLoading(false);
     }
-    await SplashScreen.hideAsync();
-    setLoading(false);
-  };
-
+    loadStorageData();
+  }, []);
   // Funções auth --------------------------------------------------------------------------------------
   const signIn = async (
     email: string,
@@ -98,7 +99,10 @@ export const AuthProvider = ({ children }) => {
 
   // Funções Empresas ----------------------------------------------------------------------------------------
   const getTopEmpresas = async (num: number) => {
-    return await projectsFunctions.getFavProjects(num, setLoading);
+    return await empresas.getTopEmpresas(num, setLoading);
+  };
+  const getEmpresasById = async (id: number) => {
+    return await empresas.getEmpresaById(id, setLoading);
   };
 
   // Funções Forgot Password  ---------------------------------------------------------------------------------
@@ -147,6 +151,7 @@ export const AuthProvider = ({ children }) => {
     deleteLikeProject,
     likeProject,
     getFavProjects,
+    getEmpresasById,
   };
 
   return (

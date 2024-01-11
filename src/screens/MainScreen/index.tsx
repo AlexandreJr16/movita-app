@@ -17,6 +17,7 @@ export default function MainScreen({ navigation }) {
       try {
         const topProjects = await getTopProjects(10);
         const topEmpresas = await getTopEmpresas(10);
+
         setProdutos([topProjects, topEmpresas]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);

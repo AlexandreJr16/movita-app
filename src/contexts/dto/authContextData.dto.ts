@@ -38,4 +38,5 @@ export interface AuthContextData {
   deleteLikeProject?(projetoId: number);
   likeProject?(projetoId: number);
   getFavProjects?();
+  getEmpresasById?(id: number);
 }

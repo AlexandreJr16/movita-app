@@ -12,3 +12,15 @@ export async function getTopEmpresas(num: number, setLoading): Promise<any> {
     setLoading(false);
   }
 }
+export async function getEmpresaById(num: number, setLoading): Promise<any> {
+  try {
+    setLoading(true);
+    const empresas = await auth.getEmpresaById(num);
+    return empresas;
+  } catch (error) {
+    setLoading(false);
+    throw new Error(error);
+  } finally {
+    setLoading(false);
+  }
+}

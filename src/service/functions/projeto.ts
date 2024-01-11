@@ -69,7 +69,6 @@ export const getProject = async (num: number): Promise<any> => {
 
 export const getFavProject = async (token: string): Promise<any> => {
   const url = `${API_URL}/projeto/favoritos`;
-
   const options = {
     headers: {
       "Content-Type": "application/json",
@@ -89,7 +88,7 @@ export const deleteLikeProject = async (
   projetoId: number,
   token: string
 ): Promise<any> => {
-  const url = `${API_URL}/like/${projetoId}`;
+  const url = `${API_URL}/like/projeto/${projetoId}`;
 
   const options = {
     headers: {
@@ -109,8 +108,8 @@ export const likeProject = async (
   projetoId: number,
   token: string
 ): Promise<any> => {
-  const url = `${API_URL}/like`;
-
+  const url = `${API_URL}/like/projeto`;
+  // console.log(projetoId, token);
   const options = {
     headers: {
       "Content-Type": "application/json",
