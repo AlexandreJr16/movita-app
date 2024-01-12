@@ -9,16 +9,19 @@ import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 import LoadingIndicator from "../../components/Default/Loading";
 
 export default function MainScreen({ navigation }) {
-  const { getTopProjects, loading, getTopEmpresas } = useContext(AuthContext);
+  const { getTopProjects, loading, getTopEmpresas, getRandomProjects } =
+    useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const topProjects = await getTopProjects(10);
-        const topEmpresas = await getTopEmpresas(10);
+        const topProjects = await getTopProjects(4);
+        const topEmpresas = await getTopEmpresas(4);
+        const aleatorioProdutos = await getRandomProjects(4);
 
-        setProdutos([topProjects, topEmpresas]);
+        await setProdutos([topProjects, topEmpresas, aleatorioProdutos[0]]);
+        console.log(produtos[2].produtos);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }
@@ -35,21 +38,28 @@ export default function MainScreen({ navigation }) {
           <HeaderMain navigation={navigation} />
           <SelectCategory navigation={navigation} />
           {!loading && (
-            <ShowProductsCarousel
-              navigation={navigation}
-              title={"Projetos bem avaliados:"}
-              produtos={produtos[0]}
-              tipo="projeto"
-              color={"#36A5BF"}
-            />
-          )}
-          {!loading && (
-            <ShowProductsCarousel
-              navigation={navigation}
-              title={"Empresas bem avaliados:"}
-              produtos={produtos[1]}
-              tipo="empresa"
-            />
+            <React.Fragment>
+              <ShowProductsCarousel
+                navigation={navigation}
+                title={"Projetos bem avaliados:"}
+                produtos={produtos[0]}
+                tipo="projeto"
+                color={"#36A5BF"}
+              />
+              <ShowProductsCarousel
+                navigation={navigation}
+                title={"Empresas bem avaliados:"}
+                produtos={produtos[1]}
+                tipo="empresa"
+              />
+              <ShowProductsCarousel
+                navigation={navigation}
+                title={"Outros:"}
+                produtos={produtos[2].produtos}
+                tipo="projeto"
+                color={"#36A5BF"}
+              />
+            </React.Fragment>
           )}
           {loading && <ActivityIndicator size="large" color="#0000ff" />}
         </View>

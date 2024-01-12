@@ -29,6 +29,7 @@ export const signUp = async (userInfo, setLoading, setToken) => {
   try {
     setLoading(true);
     const response = await auth.signUp(userInfo);
+    return response;
   } catch (error) {
     console.error("Erro no cadastro:", error);
     setLoading(false);

@@ -40,7 +40,7 @@ const SignUpScreen = ({ navigation }) => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     try {
       if (formData.senha !== formData.confirmaSenha) return;
 
@@ -65,8 +65,8 @@ const SignUpScreen = ({ navigation }) => {
         tipo_usuario: "cliente",
       };
 
-      const response = signUp(obj);
-
+      const response = await signUp(obj);
+      console.log(response, "Retorno");
       if (token == "Non-Resp-butCad") {
         navigation.navigate("Login");
       }

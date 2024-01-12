@@ -45,7 +45,7 @@ const ShowEmpresaPerfil = ({ route, navigation }) => {
                 </Texto>
               </View>
               <ScrollView style={{ flex: 1, width: "100%" }}>
-                {user.feedback.map((item, i) => (
+                {user.feedback.map((item: any, i: number) => (
                   <FeedBackShowProduct key={i} feedback={item} />
                 ))}
               </ScrollView>

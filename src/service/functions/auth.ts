@@ -36,7 +36,7 @@ export const signIn = (email: string, senha: string): Promise<UserResponse> => {
     });
 };
 
-export function signUp({
+export async function signUp({
   email,
   senha,
   tipo_usuario,
@@ -84,7 +84,7 @@ export function signUp({
       "Content-Type": "application/json",
     },
   };
-  const user = axios
+  const user = await axios
     .post(url, data, options)
     .then((resp) => {
       const responseData = resp.data;
