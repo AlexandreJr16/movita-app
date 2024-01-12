@@ -1,10 +1,11 @@
+import React from "react";
 import Texto from "../Default/texto/Texto";
 
 const ErrorAlert = ({ children, styles, isAlert }) => {
-  return isAlert == true ? (
-    <Texto weight="regular" style={styles}>
+  return (
+    <Texto weight="regular" style={isAlert ? styles : { opacity: 0 }}>
       {children}
     </Texto>
-  ) : null;
+  );
 };
 export default ErrorAlert;

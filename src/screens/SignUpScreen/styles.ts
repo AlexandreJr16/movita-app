@@ -53,5 +53,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 0,
   },
+  errorText: {
+    color: "#C63818",
+  },
 });
 export default styles;

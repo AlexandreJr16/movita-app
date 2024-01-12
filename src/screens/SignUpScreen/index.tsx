@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Pressable, ScrollView, StatusBar, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Logo from "../../components/Default/Logo/Logo";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import styles from "./styles";
@@ -8,153 +7,26 @@ import Texto from "../../components/Default/texto/Texto";
 import InputCadastro from "../../components/Cadastro/Input/InputCadastro";
 import BlueBack from "../../assents/Cadastro/BlueBack";
 import LoginButton from "../../components/Login/LoginButton/LoginButton";
-import { meses, estadosBrasil, sexoArr } from "./data";
 import DropDCadastro from "../../components/Cadastro/DropDown/DropDownCad";
 import AuthContext from "../../contexts";
-import { valorMesParaNumero } from "./functions";
 import LoadingIndicator from "../../components/Default/Loading";
+import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
 
 const SignUpScreen = ({ navigation }) => {
-  const { signUp, token, loading } = useContext(AuthContext);
-  const [formData, setFormData] = useState({
-    nome: "",
-    sobrenome: "",
-    email: "",
-    telefone: "",
-    cpf: "",
-    sexo: "",
-    dia: "",
-    mes: "",
-    ano: "",
-    cep: "",
-    estado: "",
-    bairro: "",
-    cidade: "",
-    senha: "",
-    confirmaSenha: "",
-    tipoUser: "cliente",
-  });
-  const [page, setPage] = useState(0);
+  const { loading } = useContext(AuthContext);
+  const [nome, setNome] = useState("");
+  const [sobrenome, setSobrenome] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleInputChange = (name, value) => {
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSignUp = async () => {
-    try {
-      if (formData.senha !== formData.confirmaSenha) return;
-
-      const data = new Date(
-        Number(formData.ano),
-        valorMesParaNumero(formData.mes) + 1,
-        Number(formData.dia)
-      );
-      const formatedData = data.toISOString();
-      const obj = {
-        email: formData.email,
-        senha: formData.senha,
-        nome: formData.nome,
-        telefone: formData.telefone,
-        cpf: formData.cpf,
-        sexo: formData.sexo,
-        nascimento: formatedData,
-        cep: formData.cep,
-        estado: formData.estado,
-        bairro: formData.bairro,
-        cidade: formData.cidade,
-        tipo_usuario: "cliente",
-      };
-
-      const response = await signUp(obj);
-      console.log(response, "Retorno");
-      if (token == "Non-Resp-butCad") {
-        navigation.navigate("Login");
-      }
-    } catch (error) {
-      console.log(error);
+  const handleNome = (value) => setNome(value);
+  const handleSobrenome = (value) => setSobrenome(value);
+  const handleSubmit = () => {
+    const isError = nome == "" || sobrenome == "";
+    if (isError) {
+      setError("Nome ou Sobrenome inválidos.");
+    } else {
+      navigation.navigate("signup2");
     }
-  };
-
-  const pages = [
-    {
-      title: "Informe seu nome completo:",
-      firstInput: {
-        label: "Nome:",
-        name: "nome",
-      },
-      secondInput: {
-        label: "Sobrenome:",
-        name: "sobrenome",
-      },
-      text: "PRÓXIMO",
-    },
-    {
-      title: "Informe seu e-mail e telefone:",
-      firstInput: {
-        label: "E-mail:",
-        name: "email",
-      },
-      secondInput: {
-        label: "Telefone:",
-        name: "telefone",
-      },
-      text: "PRÓXIMO",
-    },
-    {
-      title: "Informe seu CPF ou CNPJ:",
-      firstInput: {
-        label: "CPF/CNPJ:",
-        name: "cpf",
-      },
-      secondInput: null,
-      text: "PRÓXIMO",
-    },
-    {
-      title: "Informe o seu sexoArr e data de nascimento",
-      firstInput: {
-        label: "Sexo:",
-        name: "sexo",
-      },
-      secondInput: {
-        label: "Data de Nascimento:",
-        name: "dataNascimento",
-      },
-      text: "PRÓXIMO",
-    },
-    {
-      title: "Informe seu \nendereço:",
-      firstInput: {
-        label: "CEP:",
-        name: "cep",
-      },
-      secondInput: {
-        label: "Estado:",
-        name: "estado",
-      },
-      text: "PRÓXIMO",
-    },
-    {
-      title: "Informe seu e-mail e telefone:",
-      firstInput: {
-        label: "Senha:",
-        name: "senha",
-      },
-      secondInput: {
-        label: "Confirmar Senha:",
-        name: "confirmaSenha",
-      },
-      text: "FINALIZAR",
-    },
-  ];
-
-  const handlePages = () => {
-    if (page < pages.length - 1) setPage(page + 1);
-    else handleSignUp();
-  };
-
-  const handleBackPages = () => {
-    if (page > 0) setPage(page - 1);
-    else navigation.navigate("Login");
   };
 
   return (
@@ -164,7 +36,11 @@ const SignUpScreen = ({ navigation }) => {
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <View style={styles.logo1}>
-              <Pressable onPress={handleBackPages}>
+              <Pressable
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
                 <BlueBack />
               </Pressable>
             </View>
@@ -177,35 +53,37 @@ const SignUpScreen = ({ navigation }) => {
           </View>
           <View style={styles.textContainer}>
             <Texto weight="regular" style={styles.title}>
-              {pages[page].title}
+              Informe seu nome completo{" "}
             </Texto>
+            <ErrorAlert isAlert={!!error} styles={styles.errorText}>
+              {error}
+            </ErrorAlert>
           </View>
           <View style={styles.inputContainer}>
-            {pages[page].firstInput && (
-              <InputCadastro
-                styleContainer={{ width: "100%" }}
-                text={formData[pages[page].firstInput.name]}
-                func={(value) =>
-                  handleInputChange(pages[page].firstInput.name, value)
-                }
-              >
-                {pages[page].firstInput.label}
-              </InputCadastro>
-            )}
-            {pages[page].secondInput && (
-              <InputCadastro
-                styleContainer={{ width: "100%" }}
-                text={formData[pages[page].secondInput.name]}
-                func={(value) =>
-                  handleInputChange(pages[page].secondInput.name, value)
-                }
-              >
-                {pages[page].secondInput.label}
-              </InputCadastro>
-            )}
+            <InputCadastro
+              styleContainer={{ width: "100%" }}
+              text={nome}
+              func={(value) => {
+                handleNome(value);
+                if (!!error) setError(null);
+              }}
+            >
+              Nome:
+            </InputCadastro>
+
+            <InputCadastro
+              styleContainer={{ width: "100%" }}
+              text={sobrenome}
+              func={(value) => {
+                handleSobrenome(value);
+                if (!!error) setError(null);
+              }}
+            >
+              Sobrenome:
+            </InputCadastro>
           </View>
 
-          <LoginButton text={pages[page].text} func={handlePages} />
+          <LoginButton text={"Próximo"} func={handleSubmit} />
           <LoadingIndicator visible={loading} />
         </View>
       </ScrollView>
@@ -214,3 +92,35 @@ const SignUpScreen = ({ navigation }) => {
 };
 
 export default SignUpScreen;
+
+// const handleSignUp = async () => {
+//   try {
+//     if (formData.senha !== formData.confirmaSenha) return;
+
+//     const data = new Date(
+//       Number(formData.ano),
+//       valorMesParaNumero(formData.mes) + 1,
+//       Number(formData.dia)
+//     );
+
+//     const formatedData = data.toISOString();
+//     const obj = {
+//       email: formData.email,
+//       senha: formData.senha,
+//       nome: formData.nome,
+//       telefone: formData.telefone,
+//       cpf: formData.cpf,
+//       sexo: formData.sexo,
+//       nascimento: formatedData,
+//       cep: formData.cep,
+//       estado: formData.estado,
+//       bairro: formData.bairro,
+//       cidade: formData.cidade,
+//       tipo_usuario: "cliente",
+//     };
+
+//     const response = await signUp(obj);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

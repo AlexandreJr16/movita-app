@@ -4,6 +4,7 @@ import SplashScreen from "../../screens/SplashScreen";
 import Login from "../../screens/Login";
 import SignUpScreen from "../../screens/SignUpScreen";
 import ForgotRoutes from "./forgot.routes";
+import SignUpRoutes from "./signup";
 const Stack = createNativeStackNavigator();
 
 const AuthRoutes: React.FC = () => {
@@ -14,7 +15,7 @@ const AuthRoutes: React.FC = () => {
     >
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="SignUp" component={SignUpRoutes} />
       <Stack.Screen name="Forgot" component={ForgotRoutes} />
     </Stack.Navigator>
   );
