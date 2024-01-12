@@ -10,27 +10,26 @@ import Carrossel from "../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../contexts";
 import styles from "../../styles";
-
+import { cpf, cnpj } from "cpf-cnpj-validator";
 const SignUpScreen3 = ({ navigation }) => {
   const { loading } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState("");
+  const [cpfs, setCpf] = useState("");
   const [error, setError] = useState(null);
 
-  const handleEmail = (value) => setEmail(value);
-  const handleTelefone = (value) => setTelefone(value);
+  const handleCpf = (value) => setCpf(value);
   const handleSubmit = () => {
-    const isError = email == "" || telefone == "" || !verifyEmail(email);
-    if (isError) {
-      setError("Email ou Telefone inválidos.");
+    const cpfLimpo = cpfs.replace(/[^\d]/g, "");
+    const isError = cpf.isValid(cpfLimpo) || cnpj.isValid(cpfLimpo);
+    console.log(!isError);
+    if (!isError) {
+      setError("CPF inválido.");
     } else {
-      navigation.navigate("signup2");
+      const isCpf = cpf.isValid(cpfLimpo)
+        ? cpf.format(cpfLimpo)
+        : cnpj.format(cpfLimpo);
+      setCpf(isCpf);
+      navigation.navigate("signup4");
     }
-  };
-
-  const verifyEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
   };
 
   return (
@@ -55,6 +54,7 @@ const SignUpScreen3 = ({ navigation }) => {
           <View style={styles.carrossel}>
             <Carrossel />
           </View>
+
           <View style={styles.textContainer}>
             <Texto weight="regular" style={styles.title}>
               Informe seu CPF ou CNPJ
@@ -63,27 +63,23 @@ const SignUpScreen3 = ({ navigation }) => {
               {error}
             </ErrorAlert>
           </View>
-          <View style={styles.inputContainer}>
-            <InputCadastro
-              styleContainer={{ width: "100%" }}
-              text={email}
-              func={(value) => {
-                handleEmail(value);
-                if (!!error) setError(null);
-              }}
-            >
-              Email:
-            </InputCadastro>
 
+          <View
+            style={{
+              ...styles.inputContainer,
+              flex: 1,
+              justifyContent: "space-between",
+            }}
+          >
             <InputCadastro
               styleContainer={{ width: "100%" }}
-              text={telefone}
+              text={cpfs}
               func={(value) => {
-                handleTelefone(value);
+                handleCpf(value);
                 if (!!error) setError(null);
               }}
             >
-              Telefone:
+              CPF/CNPJ:
             </InputCadastro>
           </View>
 

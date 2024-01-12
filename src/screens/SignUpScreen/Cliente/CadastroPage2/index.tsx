@@ -24,7 +24,7 @@ const SignUpScreen2 = ({ navigation }) => {
     if (isError) {
       setError("Email ou Telefone inválidos.");
     } else {
-      navigation.navigate("signup2");
+      navigation.navigate("signup3");
     }
   };
 

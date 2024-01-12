@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   smallTitle: { color: "#fff", fontSize: 20, lineHeight: 23 },
 
   inputContainer: {
+    flex: 1,
     width: "100%",
     display: "flex",
     alignItems: "center",
