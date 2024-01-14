@@ -45,7 +45,6 @@ const ShowProductsCarousel = ({
                   produto={item}
                   tipo={tipo}
                 />
-                //Futuramente mudar para enviar para outro tipo de tela
               )}
             />
           ) : (

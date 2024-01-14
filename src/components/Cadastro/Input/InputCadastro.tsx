@@ -11,18 +11,22 @@ const InputCadastro = ({
   text,
   styleContainer,
   secureText,
+  inputMode,
 }: InputDTO) => {
   return (
     <View style={[styles.container, styleContainer]}>
-      <Texto weight="regular" style={styles.text}>
-        {children}
-      </Texto>
+      {children != undefined ? (
+        <Texto weight="regular" style={styles.text}>
+          {children}
+        </Texto>
+      ) : null}
       <TextoInput
         weight="regular"
         onChangeText={func}
         style={styles.input}
         secureTextEntry={secureText}
         value={text}
+        inputMode={inputMode}
       />
     </View>
   );

@@ -4,6 +4,7 @@ type InputDTO = {
   text?: any;
   styleContainer?: any;
   secureText?: any;
+  inputMode?: any;
 };
 
 export default InputDTO;

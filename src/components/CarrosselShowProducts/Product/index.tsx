@@ -27,9 +27,6 @@ const Produto = ({
     // navigation.navigate("Product");
   };
 
-  useEffect(() => {
-    if (produto.imagem[0] == undefined) console.log(produto);
-  }, []);
   return (
     <TouchableOpacity
       onPress={navigateToProduct}

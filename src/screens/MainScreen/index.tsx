@@ -20,8 +20,11 @@ export default function MainScreen({ navigation }) {
         const topEmpresas = await getTopEmpresas(4);
         const aleatorioProdutos = await getRandomProjects(4);
 
-        await setProdutos([topProjects, topEmpresas, aleatorioProdutos[0]]);
-        console.log(produtos[2].produtos);
+        await setProdutos([
+          topProjects,
+          topEmpresas,
+          aleatorioProdutos[0].produtos,
+        ]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }
@@ -55,7 +58,7 @@ export default function MainScreen({ navigation }) {
               <ShowProductsCarousel
                 navigation={navigation}
                 title={"Outros:"}
-                produtos={produtos[2].produtos}
+                produtos={produtos[2]}
                 tipo="projeto"
                 color={"#36A5BF"}
               />

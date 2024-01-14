@@ -21,6 +21,7 @@ interface TextInputProps {
   style?: CustomTextStyle | null;
   placeholderColor?: any;
   secureTextEntry?: boolean;
+  inputMode?: any;
 }
 
 export default function TextoInput({
@@ -31,6 +32,7 @@ export default function TextoInput({
   style,
   placeholderColor = "#7A7979",
   secureTextEntry = false,
+  inputMode = null,
   ...restProps
 }: TextInputProps) {
   const [fontsLoaded] = useFonts({
@@ -49,6 +51,7 @@ export default function TextoInput({
 
   return (
     <TextInput
+      inputMode={inputMode}
       placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}

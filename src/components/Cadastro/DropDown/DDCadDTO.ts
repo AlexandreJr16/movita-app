@@ -4,6 +4,7 @@ type DDCadDTO = {
   children?: string;
   func?: any;
   selectedValue?: any;
+  text?: any;
 };
 
 export default DDCadDTO;

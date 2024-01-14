@@ -1,17 +1,39 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Pressable, ScrollView, StatusBar, View } from "react-native";
 import BlueBack from "../../../../assents/Cadastro/BlueBack";
-import styles from "../../styles";
 import Logo from "../../../../assents/Perfil/Logo";
 import InputCadastro from "../../../../components/Cadastro/Input/InputCadastro";
 import LoadingIndicator from "../../../../components/Default/Loading";
 import Texto from "../../../../components/Default/texto/Texto";
+import ErrorAlert from "../../../../components/ErrorAlert/ErrorAlert";
 import Carrossel from "../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../contexts";
+import styles from "../../styles";
+import { TextInput } from "react-native-gesture-handler";
 
 const SignUpScreen5 = ({ navigation }) => {
   const { loading } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [error, setError] = useState(null);
+
+  const handleEmail = (value) => setEmail(value);
+  const handleTelefone = (value) => setTelefone(value);
+  const handleSubmit = () => {
+    const isError = email == "" || telefone == "" || !verifyEmail(email);
+    if (isError) {
+      setError("Email ou Telefone inválidos.");
+    } else {
+      navigation.navigate("signup3");
+    }
+  };
+
+  const verifyEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -19,7 +41,11 @@ const SignUpScreen5 = ({ navigation }) => {
         <View style={styles.container}>
           <View style={styles.logoContainer}>
             <View style={styles.logo1}>
-              <Pressable onPress={undefined}>
+              <Pressable
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
                 <BlueBack />
               </Pressable>
             </View>
@@ -32,28 +58,39 @@ const SignUpScreen5 = ({ navigation }) => {
           </View>
           <View style={styles.textContainer}>
             <Texto weight="regular" style={styles.title}>
-              Sei lá oq
+              Informe seu Email completo{" "}
             </Texto>
+            <ErrorAlert isAlert={!!error} styles={styles.errorText}>
+              {error}
+            </ErrorAlert>
           </View>
           <View style={styles.inputContainer}>
             <InputCadastro
+              inputMode={"email"}
               styleContainer={{ width: "100%" }}
-              text={"Não sei oq"}
-              func={(value) => () => {}}
+              text={email}
+              func={(value) => {
+                handleEmail(value);
+                if (!!error) setError(null);
+              }}
             >
-              Não sei oq
+              Email:
             </InputCadastro>
 
             <InputCadastro
+              inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
-              text={"Nao sei oq"}
-              func={(value) => () => {}}
+              text={telefone}
+              func={(value) => {
+                handleTelefone(value);
+                if (!!error) setError(null);
+              }}
             >
-              nao sei oq
+              Telefone:
             </InputCadastro>
           </View>
 
-          <LoginButton text="nao sei oq" func={() => {}} />
+          <LoginButton text={"Próximo"} func={handleSubmit} />
           <LoadingIndicator visible={loading} />
         </View>
       </ScrollView>

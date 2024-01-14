@@ -5,6 +5,7 @@ export const signIn = async (email, senha, setToken, getUser, setLoading) => {
   try {
     setLoading(true);
     const response = await auth.signIn(email, senha);
+    console.log(response);
     if (response.token) {
       setToken(response.token);
       await getUser(response.token);

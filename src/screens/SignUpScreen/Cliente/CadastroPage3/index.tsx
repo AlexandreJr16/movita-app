@@ -17,10 +17,9 @@ const SignUpScreen3 = ({ navigation }) => {
   const [error, setError] = useState(null);
 
   const handleCpf = (value) => setCpf(value);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const cpfLimpo = cpfs.replace(/[^\d]/g, "");
     const isError = cpf.isValid(cpfLimpo) || cnpj.isValid(cpfLimpo);
-    console.log(!isError);
     if (!isError) {
       setError("CPF inválido.");
     } else {
@@ -72,6 +71,7 @@ const SignUpScreen3 = ({ navigation }) => {
             }}
           >
             <InputCadastro
+              inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
               text={cpfs}
               func={(value) => {

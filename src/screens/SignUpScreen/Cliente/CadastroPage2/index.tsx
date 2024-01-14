@@ -10,6 +10,7 @@ import Carrossel from "../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../contexts";
 import styles from "../../styles";
+import { TextInput } from "react-native-gesture-handler";
 
 const SignUpScreen2 = ({ navigation }) => {
   const { loading } = useContext(AuthContext);
@@ -65,6 +66,7 @@ const SignUpScreen2 = ({ navigation }) => {
           </View>
           <View style={styles.inputContainer}>
             <InputCadastro
+              inputMode={"email"}
               styleContainer={{ width: "100%" }}
               text={email}
               func={(value) => {
@@ -76,6 +78,7 @@ const SignUpScreen2 = ({ navigation }) => {
             </InputCadastro>
 
             <InputCadastro
+              inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
               text={telefone}
               func={(value) => {

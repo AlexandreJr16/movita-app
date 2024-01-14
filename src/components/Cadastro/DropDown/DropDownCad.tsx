@@ -11,29 +11,26 @@ const DropDCadastro = ({
   children,
   func,
   selectedValue,
+  text,
 }: DDCadDTO) => {
-  const [value, setValue] = useState(null);
-
   // Atualiza o valor interno quando a propriedade selectedValue muda
-  useEffect(() => {
-    setValue(selectedValue);
-  }, [selectedValue]);
+  useEffect(() => {}, [selectedValue]);
 
-  const handleChange = (item) => {
-    setValue(item.value);
+  // const handleChange = (item) => {
+  //   setValue(item.value);
 
-    // Verifica se a propriedade func foi passada e se é uma função antes de chamar
-    if (func && typeof func === "function") {
-      func(item.value);
-    }
-    console.log(item.value);
-  };
+  //   if (func && typeof func === "function") {
+  //     func(item.value);
+  //   }
+  // };
 
   return (
     <View style={styleContainer}>
-      <Texto weight="regular" style={styles.text}>
-        {children}
-      </Texto>
+      {children != undefined ? (
+        <Texto weight="regular" style={styles.text}>
+          {children}
+        </Texto>
+      ) : null}
       <Dropdown
         style={styles.dropdown}
         data={data}
@@ -41,12 +38,13 @@ const DropDCadastro = ({
         itemContainerStyle={styles.itemContainer}
         selectedTextStyle={styles.selectedTextStyle}
         itemTextStyle={styles.itemText}
+        activeColor="#1f1f1f"
         maxHeight={300}
         placeholder=""
         labelField="label"
         valueField="value"
-        value={value}
-        onChange={handleChange}
+        value={text}
+        onChange={func}
       />
     </View>
   );
