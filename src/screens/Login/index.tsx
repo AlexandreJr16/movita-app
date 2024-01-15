@@ -35,7 +35,6 @@ const Login = ({ navigation }) => {
       return;
     } else setText("");
     const response = await signIn(email, password);
-    console.log(response);
     if (response && response.message) {
       setText(response.message);
     }

@@ -1,10 +1,8 @@
-import * as auth from "../service/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
 import { useAuth } from "./providersContext";
 import { AuthContextData } from "./dto/authContextData.dto";
 import { SignUpInfo } from "./dto/signUpInfo.dto";
-import { UpdateSenhaDTO } from "./dto/updateSenha.dto";
 import * as authFunctions from "./functions/authFunctions";
 import * as userFunctions from "./functions/userFunctions";
 import * as forgotFunctions from "./functions/forgotFunctions";
@@ -15,7 +13,7 @@ import { SignInResponse } from "./dto/signInResponse.dto";
 import { updateUserDTO } from "./dto/updateUser.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
 import { User } from "./dto/user.dto";
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
@@ -72,7 +70,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const addImageUser = async (dto: any) => {
-    return await userFunctions.addImageUser(dto, token, setLoading, setUser);
+    return await userFunctions.addImageUser(dto, token, setLoading, getUser);
   };
 
   const updateSenha = async (dto: any) => {

@@ -6,6 +6,8 @@ import {
   UserResponse,
   updateSenhaDTO,
 } from "./dto/requestDTO";
+import { Buffer } from "buffer";
+
 import { useContext } from "react";
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
@@ -112,11 +114,11 @@ export const getUser = async (token: string): Promise<any> => {
 };
 
 export const uploadImagemUser = async (dto, token) => {
-  const url = `${API_URL}/user/imagem`;
+  const url = `${API_URL}/user/imagem/app`;
   try {
     const response = await axios.post(url, dto, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
         Authorization: token,
       },
     });

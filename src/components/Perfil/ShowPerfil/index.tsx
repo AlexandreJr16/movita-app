@@ -9,6 +9,11 @@ import { TouchableOpacity } from "react-native";
 import { Buffer } from "buffer";
 import React from "react";
 
+type ImageInfo = {
+  buffer: ArrayBuffer;
+  name: string;
+};
+
 const ShowPerfil = () => {
   const { user, addImageUser } = useContext(AuthContext);
   const [image, setImage] = useState(null);
@@ -16,13 +21,15 @@ const ShowPerfil = () => {
   const pickImage = async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
         quality: 1,
         base64: true,
       });
-      addImageUser(result.assets[0]);
+      if (!result.canceled) {
+        addImageUser(result.assets[0]);
+      }
     } catch (e) {
       console.log(e);
     }
