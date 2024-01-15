@@ -49,8 +49,9 @@ export async function addImageUser(
 ): Promise<any> {
   try {
     setLoading(true);
+    // console.log(dto);
     const image = await auth.uploadImagemUser(dto, token);
-    getUser(token);
+    // getUser(token);
     return image;
   } catch (error) {
     setLoading(false);

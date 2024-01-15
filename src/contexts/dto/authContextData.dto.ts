@@ -39,4 +39,6 @@ export interface AuthContextData {
   likeProject?(projetoId: number);
   getFavProjects?();
   getEmpresasById?(id: number);
+  signupUser?: signupUser;
+  setSignupUser?(user: signupUser);
 }

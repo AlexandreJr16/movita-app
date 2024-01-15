@@ -110,18 +110,19 @@ export const getUser = async (token: string): Promise<any> => {
     });
   return user;
 };
+
 export const uploadImagemUser = async (dto, token) => {
   const url = `${API_URL}/user/imagem`;
-
   try {
     const response = await axios.post(url, dto, {
       headers: {
-        Authorization: token,
         "Content-Type": "multipart/form-data",
+        Authorization: token,
       },
     });
+    return response;
   } catch (error) {
-    console.error("Erro ao fazer upload da imagem:", error);
+    throw new Error(error);
   }
 };
 export const enviarEmailForgot = async (dto: {
@@ -200,9 +201,7 @@ export const updateSenhaForgot = async (dto: {
 
     return response.data;
   } catch (error) {
-    // Ensure that 'handleApiError' is defined
     handleApiError(error as AxiosError<ErrorResponse>);
-    // You might want to throw the error again if you don't handle it completely here
     throw error;
   }
 };

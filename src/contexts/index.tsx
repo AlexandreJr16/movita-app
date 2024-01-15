@@ -1,4 +1,3 @@
-import React, { createContext, useState, useEffect } from "react";
 import * as auth from "../service/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
@@ -16,6 +15,7 @@ import { SignInResponse } from "./dto/signInResponse.dto";
 import { updateUserDTO } from "./dto/updateUser.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
 import { User } from "./dto/user.dto";
+import { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User | null>();
   const [token, setToken] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [signupUser, setSignupUser] = useState<signupUser>({} as signupUser);
 
   useEffect(() => {
     async function loadStorageData() {
@@ -133,6 +134,8 @@ export const AuthProvider = ({ children }) => {
     updateSenhaForgot,
     sendEmailForgot,
     verifyCodeForgot,
+    signupUser,
+    setSignupUser,
   };
   const didLogin = {
     signed,

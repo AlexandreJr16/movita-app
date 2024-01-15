@@ -86,12 +86,10 @@ export async function signUp({
   };
   const user = await axios
     .post(url, data, options)
-    .then((resp) => {
-      const responseData = resp.data;
-      if (responseData.id) return true;
-    })
+    .then((resp) => resp.data)
     .catch((error: AxiosError<ErrorResponse>) => {
       handleApiError(error);
+      return { status: "bad" };
     });
   return user;
 }

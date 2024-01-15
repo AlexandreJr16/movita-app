@@ -1,5 +1,5 @@
 import AuthContext from "../../../contexts";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./styles";
 import { View } from "react-native";
 import ImagemBuffer from "../../Default/Imagem";
@@ -7,6 +7,7 @@ import Texto from "../../Default/texto/Texto";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
 import { Buffer } from "buffer";
+import React from "react";
 
 const ShowPerfil = () => {
   const { user, addImageUser } = useContext(AuthContext);
@@ -21,13 +22,11 @@ const ShowPerfil = () => {
         quality: 1,
         base64: true,
       });
-
-      addImageUser(result);
+      addImageUser(result.assets[0]);
     } catch (e) {
       console.log(e);
     }
   };
-
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
@@ -45,9 +44,9 @@ const ShowPerfil = () => {
         <Texto weight="regular" style={styles.subtitle}>
           {user.cpf}
         </Texto>
-        <Texto weight="regular" style={styles.subtitle}>
+        {/* <Texto weight="regular" style={styles.subtitle}>
           {user.endereco.cidade} - {user.endereco.estado}
-        </Texto>
+        </Texto> */}
       </View>
     </View>
   );

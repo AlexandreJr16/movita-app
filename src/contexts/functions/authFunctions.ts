@@ -36,7 +36,6 @@ export const signUp = async (userInfo, setLoading, setToken) => {
     setLoading(false);
   } finally {
     setLoading(false);
-    console.log("Ola");
     setToken("Non-Resp-butCad");
   }
 };
