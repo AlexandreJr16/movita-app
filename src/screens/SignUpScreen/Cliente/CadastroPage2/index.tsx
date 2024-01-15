@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Pressable, ScrollView, StatusBar, View } from "react-native";
 import BlueBack from "../../../../assents/Cadastro/BlueBack";
-import Logo from "../../../../assents/Perfil/Logo";
 import InputCadastro from "../../../../components/Cadastro/Input/InputCadastro";
 import LoadingIndicator from "../../../../components/Default/Loading";
 import Texto from "../../../../components/Default/texto/Texto";
@@ -11,17 +10,22 @@ import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../contexts";
 import styles from "../../styles";
 import { TextInput } from "react-native-gesture-handler";
+import Logo from "../../../../components/Default/Logo/Logo";
 
 const SignUpScreen2 = ({ navigation }) => {
+  const { signupUser, setSignupUser } = useContext(AuthContext);
+
   const { loading } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState("");
   const [error, setError] = useState(null);
 
-  const handleEmail = (value) => setEmail(value);
-  const handleTelefone = (value) => setTelefone(value);
+  const handleEmail = (value) => setSignupUser({ ...signupUser, email: value });
+  const handleTelefone = (value) =>
+    setSignupUser({ ...signupUser, telefone: value });
   const handleSubmit = () => {
-    const isError = email == "" || telefone == "" || !verifyEmail(email);
+    const isError =
+      signupUser.email == undefined ||
+      signupUser.telefone == undefined ||
+      !verifyEmail(signupUser.email);
     if (isError) {
       setError("Email ou Telefone inválidos.");
     } else {
@@ -68,7 +72,7 @@ const SignUpScreen2 = ({ navigation }) => {
             <InputCadastro
               inputMode={"email"}
               styleContainer={{ width: "100%" }}
-              text={email}
+              text={signupUser.email}
               func={(value) => {
                 handleEmail(value);
                 if (!!error) setError(null);
@@ -80,7 +84,7 @@ const SignUpScreen2 = ({ navigation }) => {
             <InputCadastro
               inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
-              text={telefone}
+              text={signupUser.telefone}
               func={(value) => {
                 handleTelefone(value);
                 if (!!error) setError(null);

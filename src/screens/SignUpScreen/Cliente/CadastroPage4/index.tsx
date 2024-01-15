@@ -15,45 +15,30 @@ import TextoInput from "../../../../components/Default/texto/TextoInput";
 import Logo from "../../../../components/Default/Logo/Logo";
 
 const SignUpScreen4 = ({ navigation }) => {
-  const { loading } = useContext(AuthContext);
-  const [sexo, setSexo] = useState<
-    | undefined
-    | {
-        _index: number;
-        value: string;
-        label: string;
-      }
-  >(undefined);
-  const [mes, setMes] = useState<
-    | undefined
-    | {
-        _index: number;
-        value: string;
-        label: string;
-      }
-  >(undefined);
-  const [dia, setDia] = useState("");
+  const { signupUser, setSignupUser } = useContext(AuthContext);
 
-  const [ano, setAno] = useState("");
+  const { loading } = useContext(AuthContext);
+
   const [error, setError] = useState(null);
-  const handleDia = (value) => setDia(value);
-  const handleMes = (value) => setMes(value);
-  const handleAno = (value) => setAno(value);
-  const handleSexo = (value) => setSexo(value);
+  const handleDia = (value) => setSignupUser({ ...signupUser, dia: value });
+  const handleMes = (value) => setSignupUser({ ...signupUser, mes: value });
+  const handleAno = (value) => setSignupUser({ ...signupUser, ano: value });
+  const handleSexo = (value) => setSignupUser({ ...signupUser, sexo: value });
   const handleSubmit = () => {
     const isError =
-      sexo == undefined || ano == "" || mes == undefined || dia == "";
+      signupUser.sexo == undefined ||
+      signupUser.ano == undefined ||
+      signupUser.mes == undefined ||
+      signupUser.dia == undefined;
     if (isError) {
-      console.log("eeror");
       setError("Sexo ou Data de Nascimento inválidos.");
     } else {
-      const dataFormatada = `${ano}-${(mes._index + 1)
+      const dataFormatada = `${signupUser.ano}-${(signupUser.mes._index + 1)
         .toString()
-        .padStart(2, "0")}-${dia.toString().padStart(2, "0")}T00:00:00.000Z`;
-
-      console.log(dataFormatada);
-      console.log(sexo.label);
-
+        .padStart(2, "0")}-${signupUser.dia
+        .toString()
+        .padStart(2, "0")}T00:00:00.000Z`;
+      setSignupUser({ ...signupUser, data: dataFormatada });
       navigation.navigate("signup5");
     }
   };
@@ -91,9 +76,12 @@ const SignUpScreen4 = ({ navigation }) => {
           <View style={styles.inputContainer}>
             <DropDCadastro
               data={sexoArr}
-              func={handleSexo}
+              func={(value) => {
+                handleSexo(value);
+                if (!!error) setError(null);
+              }}
               selectedValue={"M"}
-              text={sexo}
+              text={signupUser.sexo}
               styleContainer={{ width: "100%" }}
             >
               Sexo:
@@ -125,21 +113,30 @@ const SignUpScreen4 = ({ navigation }) => {
               }}
             >
               <InputCadastro
-                func={handleDia}
-                text={dia}
+                func={(value) => {
+                  handleDia(value);
+                  if (!!error) setError(null);
+                }}
+                text={signupUser.dia}
                 inputMode={"numeric"}
                 styleContainer={{ width: "32%", marginBottom: 10 }}
               ></InputCadastro>
               <DropDCadastro
-                text={mes}
-                func={handleMes}
+                text={signupUser.mes}
+                func={(value) => {
+                  handleMes(value);
+                  if (!!error) setError(null);
+                }}
                 data={meses}
                 selectedValue={"JAN"}
                 styleContainer={{ width: "30%" }}
               />
               <InputCadastro
-                func={handleAno}
-                text={ano}
+                func={(value) => {
+                  handleAno(value);
+                  if (!!error) setError(null);
+                }}
+                text={signupUser.ano}
                 inputMode={"numeric"}
                 styleContainer={{ width: "32%", marginBottom: 10 }}
               ></InputCadastro>

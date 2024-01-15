@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Pressable, ScrollView, StatusBar, View } from "react-native";
 import BlueBack from "../../../../assents/Cadastro/BlueBack";
-import Logo from "../../../../assents/Perfil/Logo";
+import Logo from "../../../../components/Default/Logo/Logo";
 import InputCadastro from "../../../../components/Cadastro/Input/InputCadastro";
 import LoadingIndicator from "../../../../components/Default/Loading";
 import Texto from "../../../../components/Default/texto/Texto";
@@ -12,13 +12,13 @@ import AuthContext from "../../../../contexts";
 import styles from "../../styles";
 import { cpf, cnpj } from "cpf-cnpj-validator";
 const SignUpScreen3 = ({ navigation }) => {
-  const { loading } = useContext(AuthContext);
-  const [cpfs, setCpf] = useState("");
+  const { signupUser, setSignupUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
+  const { loading } = useContext(AuthContext);
 
-  const handleCpf = (value) => setCpf(value);
+  const handleCpf = (value) => setSignupUser({ ...signupUser, cpf: value });
   const handleSubmit = async () => {
-    const cpfLimpo = cpfs.replace(/[^\d]/g, "");
+    const cpfLimpo = signupUser.cpf.replace(/[^\d]/g, "");
     const isError = cpf.isValid(cpfLimpo) || cnpj.isValid(cpfLimpo);
     if (!isError) {
       setError("CPF inválido.");
@@ -26,7 +26,7 @@ const SignUpScreen3 = ({ navigation }) => {
       const isCpf = cpf.isValid(cpfLimpo)
         ? cpf.format(cpfLimpo)
         : cnpj.format(cpfLimpo);
-      setCpf(isCpf);
+      setSignupUser({ ...signupUser, cpf: isCpf });
       navigation.navigate("signup4");
     }
   };
@@ -73,7 +73,7 @@ const SignUpScreen3 = ({ navigation }) => {
             <InputCadastro
               inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
-              text={cpfs}
+              text={signupUser.cpf}
               func={(value) => {
                 handleCpf(value);
                 if (!!error) setError(null);

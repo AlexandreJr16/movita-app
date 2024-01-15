@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Pressable, ScrollView, StatusBar, View } from "react-native";
 import Logo from "../../components/Default/Logo/Logo";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
@@ -13,15 +13,16 @@ import LoadingIndicator from "../../components/Default/Loading";
 import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
 
 const SignUpScreen = ({ navigation }) => {
+  const { signupUser, setSignupUser } = useContext(AuthContext);
   const { loading } = useContext(AuthContext);
-  const [nome, setNome] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
   const [error, setError] = useState(null);
 
-  const handleNome = (value) => setNome(value);
-  const handleSobrenome = (value) => setSobrenome(value);
+  const handleNome = (value) => setSignupUser({ ...signupUser, nome: value });
+  const handleSobrenome = (value) =>
+    setSignupUser({ ...signupUser, sobrenome: value });
   const handleSubmit = () => {
-    const isError = nome == "" || sobrenome == "";
+    const isError =
+      signupUser.nome == undefined || signupUser.sobrenome == undefined;
     if (isError) {
       setError("Nome ou Sobrenome inválidos.");
     } else {
@@ -62,7 +63,7 @@ const SignUpScreen = ({ navigation }) => {
           <View style={styles.inputContainer}>
             <InputCadastro
               styleContainer={{ width: "100%" }}
-              text={nome}
+              text={signupUser.nome}
               func={(value) => {
                 handleNome(value);
                 if (!!error) setError(null);
@@ -73,7 +74,7 @@ const SignUpScreen = ({ navigation }) => {
 
             <InputCadastro
               styleContainer={{ width: "100%" }}
-              text={sobrenome}
+              text={signupUser.sobrenome}
               func={(value) => {
                 handleSobrenome(value);
                 if (!!error) setError(null);
@@ -92,35 +93,3 @@ const SignUpScreen = ({ navigation }) => {
 };
 
 export default SignUpScreen;
-
-// const handleSignUp = async () => {
-//   try {
-//     if (formData.senha !== formData.confirmaSenha) return;
-
-//     const data = new Date(
-//       Number(formData.ano),
-//       valorMesParaNumero(formData.mes) + 1,
-//       Number(formData.dia)
-//     );
-
-//     const formatedData = data.toISOString();
-//     const obj = {
-//       email: formData.email,
-//       senha: formData.senha,
-//       nome: formData.nome,
-//       telefone: formData.telefone,
-//       cpf: formData.cpf,
-//       sexo: formData.sexo,
-//       nascimento: formatedData,
-//       cep: formData.cep,
-//       estado: formData.estado,
-//       bairro: formData.bairro,
-//       cidade: formData.cidade,
-//       tipo_usuario: "cliente",
-//     };
-
-//     const response = await signUp(obj);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
