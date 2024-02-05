@@ -1,10 +1,10 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SplashScreen from "../../screens/SplashScreen";
 import Login from "../../screens/Login";
 import SignUpScreen from "../../screens/SignUpScreen";
 import ForgotRoutes from "./forgot.routes";
 import SignUpRoutes from "./signup";
+import SplashScreen from "../../screens/splashScreen";
 const Stack = createNativeStackNavigator();
 
 const AuthRoutes: React.FC = () => {
