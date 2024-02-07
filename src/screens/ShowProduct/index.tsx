@@ -9,6 +9,7 @@ import AuthContext from "../../contexts";
 import HeaderShowItem from "../../components/ShowItem/Header";
 import LoadingIndicator from "../../components/Default/Loading";
 import FeedBackShowProduct from "../../components/ShowItem/Feedback";
+import AddModel from "../../components/Modelo3D/AddModel";
 
 type Projeto = {
   id: number;
@@ -94,6 +95,7 @@ const ShowProduct = ({ route, navigation }) => {
                 Ainda não há nenhum feedback do cliente
               </Texto>
             )}
+            <AddModel id={projeto.id} />
           </View>
         </View>
       )}

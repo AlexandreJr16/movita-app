@@ -115,7 +115,6 @@ const Login = ({ navigation }) => {
             </Pressable>
             <LoadingIndicator visible={loading} />
           </View>
-          <AddModel />
         </View>
       </ScrollView>
     </View>

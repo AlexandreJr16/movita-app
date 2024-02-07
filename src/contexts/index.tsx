@@ -6,6 +6,7 @@ import { SignUpInfo } from "./dto/signUpInfo.dto";
 import * as authFunctions from "./functions/authFunctions";
 import * as userFunctions from "./functions/userFunctions";
 import * as forgotFunctions from "./functions/forgotFunctions";
+import * as modelo3d from "./functions/modelos3dFunctions";
 import * as projectsFunctions from "./functions/projectFunction";
 import * as likeFunctions from "./functions/likeFunction";
 import * as empresas from "./functions/empresaFunction";
@@ -122,6 +123,16 @@ export const AuthProvider = ({ children }) => {
     return await likeFunctions.deleteLikeProject(projetoId, token);
   };
 
+  // Modelo 3d ------------------------------------------------------------------------------------------------
+  const addModel = async (dto: { modeloBin: string; projetoId: number }) => {
+    return await modelo3d.addModelo(
+      dto.modeloBin,
+      dto.projetoId,
+      token,
+      setLoading
+    );
+  };
+
   const signed = !!user;
   const notSigned = {
     signed,
@@ -153,6 +164,7 @@ export const AuthProvider = ({ children }) => {
     likeProject,
     getFavProjects,
     getEmpresasById,
+    addModel,
   };
 
   return (

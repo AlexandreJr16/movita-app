@@ -76,12 +76,11 @@ export const getFavProject = async (token: string): Promise<any> => {
     },
   };
   const data = {};
-
   try {
     const response = await axios.post(url, data, options);
     return response.data;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 export const deleteLikeProject = async (
@@ -116,7 +115,7 @@ export const likeProject = async (
       Authorization: token,
     },
   };
-  const data = { projetoId, token };
+  const data = { id: projetoId, token };
 
   try {
     const response = await axios.post(url, data, options);

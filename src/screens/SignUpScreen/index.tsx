@@ -39,6 +39,7 @@ const SignUpScreen = ({ navigation }) => {
             <View style={styles.logo1}>
               <Pressable
                 onPress={() => {
+                  setSignupUser({} as signupUser);
                   navigation.goBack();
                 }}
               >

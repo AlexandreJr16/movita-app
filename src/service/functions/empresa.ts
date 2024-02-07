@@ -66,7 +66,7 @@ export const likeEmpresa = async (
       Authorization: token,
     },
   };
-  const data = { empresaId };
+  const data = { id: empresaId };
 
   try {
     const response = await axios.post(url, data, options);

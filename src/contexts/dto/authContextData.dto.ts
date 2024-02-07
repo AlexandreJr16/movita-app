@@ -41,4 +41,5 @@ export interface AuthContextData {
   getEmpresasById?(id: number);
   signupUser?: signupUser;
   setSignupUser?(user: signupUser);
+  addModel?(dto: { modeloBin: any; projetoId: number });
 }

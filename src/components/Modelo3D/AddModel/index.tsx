@@ -1,21 +1,26 @@
 import * as DocumentPicker from "expo-document-picker";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Pressable } from "react-native";
 import styles from "./styles";
 import Texto from "../../Default/texto/Texto";
+import AuthContext from "../../../contexts";
 
-const AddModel = () => {
-  const [imageData, setImageData] = useState(null); // Estado para armazenar dados da imagem em base64
+interface Params {
+  id: number;
+}
 
+const AddModel = (dto: Params) => {
+  const { addModel } = useContext(AuthContext);
+  const [imageData, setImageData] = useState(null);
   const picker = async () => {
     try {
       const doc = await DocumentPicker.getDocumentAsync();
 
       if (!doc.canceled) {
-        // Se o documento foi selecionado com sucesso
         const base64Data = await convertUriToBase64(doc.assets[0].uri);
         setImageData(base64Data);
-        console.log("Base64 Data:", base64Data);
+        const data = { modeloBin: base64Data, projetoId: dto.id };
+        const oi = await addModel(data);
       }
     } catch (error) {
       console.log(error);
