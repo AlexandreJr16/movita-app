@@ -4,6 +4,7 @@ import { Pressable } from "react-native";
 import styles from "./styles";
 import Texto from "../../Default/texto/Texto";
 import AuthContext from "../../../contexts";
+import * as FileSystem from "expo-file-system";
 
 interface Params {
   id: number;
@@ -14,12 +15,17 @@ const AddModel = (dto: Params) => {
   const [imageData, setImageData] = useState(null);
   const picker = async () => {
     try {
-      const doc = await DocumentPicker.getDocumentAsync();
-
+      const doc = await DocumentPicker.getDocumentAsync({
+        multiple: false,
+        copyToCacheDirectory: true,
+      });
       if (!doc.canceled) {
-        const base64Data = await convertUriToBase64(doc.assets[0].uri);
-        setImageData(base64Data);
-        const data = { modeloBin: base64Data, projetoId: dto.id };
+        // const base64Data = await convertUriToBase64(doc.assets[0].uri);
+        const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        // setImageData(base64Data);
+        const data = { modeloBin: base64, projetoId: dto.id };
         const oi = await addModel(data);
       }
     } catch (error) {

@@ -7,8 +7,9 @@ export const signIn = async (email, senha, setToken, getUser, setLoading) => {
     const response = await auth.signIn(email, senha);
     if (response.token) {
       setToken(response.token);
-      await getUser(response.token);
       await AsyncStorage.setItem("@RNAuth:token", response.token);
+
+      await getUser(response.token);
       setLoading(false);
     } else {
       setLoading(false);
