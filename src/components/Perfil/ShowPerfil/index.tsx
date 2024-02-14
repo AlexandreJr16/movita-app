@@ -8,6 +8,7 @@ import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native";
 import { Buffer } from "buffer";
 import React from "react";
+import UserDefault from "../../../assents/defaults/User";
 
 type ImageInfo = {
   buffer: ArrayBuffer;
@@ -37,19 +38,21 @@ const ShowPerfil = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
-        {user.img ? (
-          <ImagemBuffer imgBuffer={user.img} style={styles.img} />
-        ) : null}
+        {user.imagem ? (
+          <ImagemBuffer imgBuffer={user.imagem} style={styles.img} />
+        ) : (
+          <UserDefault />
+        )}
       </TouchableOpacity>
       <View style={styles.textContainer}>
         <Texto style={styles.title} weight={"bold"}>
-          {user.nome}
+          {user.Cliente[0].nome}
         </Texto>
         <Texto weight="regular" style={styles.subtitle}>
           {user.email}
         </Texto>
         <Texto weight="regular" style={styles.subtitle}>
-          {user.cpf}
+          {user.Cliente[0].cpf}
         </Texto>
         {/* <Texto weight="regular" style={styles.subtitle}>
           {user.endereco.cidade} - {user.endereco.estado}

@@ -4,6 +4,8 @@ import ImagemBuffer from "../../Default/Imagem";
 import Texto from "../../Default/texto/Texto";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
+import MovelDefault from "../../../assents/defaults/Projeto";
+import DefaultMiniProjeto from "../../../assents/defaults/MiniProjeto";
 
 const Produto = ({
   produto,
@@ -32,10 +34,20 @@ const Produto = ({
       onPress={navigateToProduct}
       style={styles.produtoContainer}
     >
-      <ImagemBuffer
-        imgBuffer={produto.imagem[0]}
-        style={styles.imagemProduto}
-      />
+      {tipo == "projeto" ? (
+        produto.imagem[0] ? (
+          <ImagemBuffer
+            imgBuffer={produto.imagem[0]}
+            style={styles.imagemProduto}
+          />
+        ) : (
+          <DefaultMiniProjeto />
+        )
+      ) : produto.imagem ? (
+        <ImagemBuffer imgBuffer={produto.imagem} style={styles.imagemProduto} />
+      ) : (
+        <DefaultMiniProjeto />
+      )}
       <Texto weight="regular" style={styles.nomeProduto}>
         {produto.titulo}
       </Texto>

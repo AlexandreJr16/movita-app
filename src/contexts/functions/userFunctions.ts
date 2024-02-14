@@ -4,7 +4,8 @@ import * as auth from "../../service/index";
 export const getUser = async (token, setUser, setLoading) => {
   try {
     const response = await auth.getUser(token);
-    if (response.img) {
+    console.log(response);
+    if (response.id) {
       setUser(response);
       await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response));
     }

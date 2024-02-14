@@ -12,13 +12,13 @@ import React from "react";
 
 const UpdatePerfil = ({ navigation }) => {
   const { user, updateUser, loading } = useContext(AuthContext);
-  const [nome, setNome] = useState<string>(user.nome);
+  const [nome, setNome] = useState<string>(user.Cliente[0].nome);
   const [email, setEmail] = useState<string>(user.email);
-  const [telefone, setTelefone] = useState<string>(user.telefone);
+  const [telefone, setTelefone] = useState<string>(user.Cliente[0].telefone);
   const [endereco, setEndereco] = useState<string>(
-    `${user.endereco.bairro} - ${user.endereco.cidade} - ${user.endereco.estado}`
+    `${user.Cliente[0].Endereco.bairro} - ${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
   );
-  const [cpf, setCpf] = useState(user.cpf);
+  const [cpf, setCpf] = useState(user.Cliente[0].cpf);
 
   const handleNome = (value: any) => {
     setNome(value);
@@ -46,7 +46,7 @@ const UpdatePerfil = ({ navigation }) => {
     ) {
       throw new Error("Campos inválidos");
     }
-    if (user.tipo == "empresa") {
+    if (user.tipoUser == "empresa") {
       const dto = {
         user: { email },
         empresa: { nomeFantasia: nome, telefone },

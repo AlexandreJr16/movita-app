@@ -9,7 +9,7 @@ import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 import LoadingIndicator from "../../components/Default/Loading";
 
 export default function MainScreen({ navigation }) {
-  const { getTopProjects, loading, getTopEmpresas, getRandomProjects } =
+  const { getTopProjects, loading, getTopEmpresas, getRandomProjects, user } =
     useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
@@ -25,6 +25,7 @@ export default function MainScreen({ navigation }) {
           topEmpresas,
           aleatorioProdutos[0].produtos,
         ]);
+        console.log(produtos[2]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }

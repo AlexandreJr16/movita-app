@@ -1,10 +1,12 @@
+import { ClienteDTO } from "./cliente.dto";
+import EmpresaDTO from "./empresa.dto";
+
 export interface User {
   id: number;
-  nome: string;
-  cpf: string;
-  telefone: string;
   email: string;
-  tipo: string;
-  endereco: { cidade: string; cep: string; estado: string; bairro: string };
-  img: any;
+  recoverPassword: string;
+  tipoUser: string;
+  imagem: any;
+  Cliente?: ClienteDTO[];
+  Empresa?: EmpresaDTO[];
 }

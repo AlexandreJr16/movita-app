@@ -15,7 +15,10 @@ const handleApiError = (error: AxiosError<ErrorResponse>) => {
   }
 };
 
-export const signIn = (email: string, senha: string): Promise<UserResponse> => {
+export const signIn = async (
+  email: string,
+  senha: string
+): Promise<UserResponse> => {
   const url = `${API_URL}/auth/signin`;
   const data = {
     email: email,
@@ -28,7 +31,7 @@ export const signIn = (email: string, senha: string): Promise<UserResponse> => {
     },
   };
 
-  return axios
+  return await axios
     .post(url, data, options)
     .then((resp) => resp.data)
     .catch((error: AxiosError<ErrorResponse>) => {

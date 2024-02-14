@@ -19,7 +19,6 @@ const ShowProductsCarousel = ({
   title?: any;
   tipo?: "projeto" | "empresa";
 }) => {
-  useEffect(() => {}, []);
   return (
     <View style={styles.container}>
       {produtos == undefined ? null : (

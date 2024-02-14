@@ -10,6 +10,7 @@ import HeaderShowItem from "../../components/ShowItem/Header";
 import LoadingIndicator from "../../components/Default/Loading";
 import FeedBackShowProduct from "../../components/ShowItem/Feedback";
 import AddModel from "../../components/Modelo3D/AddModel";
+import MovelDefault from "../../assents/defaults/Projeto";
 
 type Projeto = {
   id: number;
@@ -74,8 +75,11 @@ const ShowProduct = ({ route, navigation }) => {
             navigation={navigation}
             visiblePerfil={true}
           />
-
-          <ImagemBuffer imgBuffer={projeto.imagem[0]} style={styles.img} />
+          {projeto.imagem[0] ? (
+            <ImagemBuffer imgBuffer={projeto.imagem} style={styles.img} />
+          ) : (
+            <MovelDefault />
+          )}
           <View style={styles.card}>
             <HeaderShowItem
               data={{
