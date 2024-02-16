@@ -25,7 +25,6 @@ export default function MainScreen({ navigation }) {
           topEmpresas,
           aleatorioProdutos[0].produtos,
         ]);
-        console.log(produtos[2]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }

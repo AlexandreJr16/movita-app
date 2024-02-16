@@ -114,15 +114,18 @@ export const getUser = async (token: string): Promise<any> => {
 };
 
 export const uploadImagemUser = async (dto, token) => {
-  const url = `${API_URL}/user/imagem/app`;
+  const url = `${API_URL}/user/image`;
   try {
-    const response = await axios.post(url, dto, {
+    const data = { dto };
+    console.log("Oi");
+    const options = {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
       },
-    });
-    return response;
+    };
+    const response = await axios.post(url, data, options);
+    // return response;
   } catch (error) {
     throw new Error(error);
   }

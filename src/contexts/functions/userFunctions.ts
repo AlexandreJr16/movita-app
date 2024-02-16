@@ -3,8 +3,8 @@ import * as auth from "../../service/index";
 
 export const getUser = async (token, setUser, setLoading) => {
   try {
+    setLoading(true);
     const response = await auth.getUser(token);
-    console.log(response);
     if (response.id) {
       setUser(response);
       await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response));
@@ -50,7 +50,6 @@ export async function addImageUser(
 ): Promise<any> {
   try {
     setLoading(true);
-    // console.log(dto);
     const image = await auth.uploadImagemUser(dto, token);
     getUser(token);
     return image;

@@ -9,6 +9,7 @@ import { TouchableOpacity } from "react-native";
 import { Buffer } from "buffer";
 import React from "react";
 import UserDefault from "../../../assents/defaults/User";
+import ImagePickerModal from "../../ImageModal";
 
 type ImageInfo = {
   buffer: ArrayBuffer;
@@ -16,24 +17,11 @@ type ImageInfo = {
 };
 
 const ShowPerfil = () => {
-  const { user, addImageUser } = useContext(AuthContext);
-  const [image, setImage] = useState(null);
+  const { user } = useContext(AuthContext);
+  const [visible, setVisible] = useState(false);
 
-  const pickImage = async () => {
-    try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-        base64: true,
-      });
-      if (!result.canceled) {
-        addImageUser(result.assets[0]);
-      }
-    } catch (e) {
-      console.log(e);
-    }
+  const pickImage = () => {
+    visible ? setVisible(false) : setVisible(true);
   };
   return (
     <View style={styles.container}>
@@ -57,6 +45,7 @@ const ShowPerfil = () => {
         {/* <Texto weight="regular" style={styles.subtitle}>
           {user.endereco.cidade} - {user.endereco.estado}
         </Texto> */}
+        <ImagePickerModal visible={visible} imagePicker={pickImage} />
       </View>
     </View>
   );

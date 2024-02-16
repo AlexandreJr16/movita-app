@@ -22,20 +22,22 @@ SplashScreen.preventAutoHideAsync();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User | null>();
   const [token, setToken] = useState<string>();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>();
   const [signupUser, setSignupUser] = useState<signupUser>({} as signupUser);
 
   useEffect(() => {
     async function loadStorageData() {
-      const storageUser = await AsyncStorage.getItem("@RNAuth:user");
-      const storageToken = await AsyncStorage.getItem("@RNAuth:token");
-      if (storageToken && storageUser) {
-        setUser(JSON.parse(storageUser));
-        setToken(storageToken);
-        setLoading(false);
+      try {
+        const storageToken = await AsyncStorage.getItem("@RNAuth:token");
+        if (storageToken) {
+          setToken(storageToken);
+          await getUser(storageToken);
+        }
+      } catch (e) {
+      } finally {
+        console.log("Presidente do equador");
+        await SplashScreen.hideAsync();
       }
-      await SplashScreen.hideAsync();
-      setLoading(false);
     }
     loadStorageData();
   }, []);

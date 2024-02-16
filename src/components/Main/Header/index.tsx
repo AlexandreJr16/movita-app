@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const HeaderMain = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
+  useEffect(() => {}, []);
 
   return (
     <View style={styles.headerCard}>
