@@ -22,7 +22,7 @@ SplashScreen.preventAutoHideAsync();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User | null>();
   const [token, setToken] = useState<string>();
-  const [loading, setLoading] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [signupUser, setSignupUser] = useState<signupUser>({} as signupUser);
 
   useEffect(() => {
@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
         }
       } catch (e) {
       } finally {
-        console.log("Presidente do equador");
         await SplashScreen.hideAsync();
       }
     }
@@ -97,6 +96,9 @@ export const AuthProvider = ({ children }) => {
   };
   const getFavProjects = async () => {
     return await projectsFunctions.getFavProjects(token, setLoading);
+  };
+  const addImageProj = async (dto: { bin: any; id: number }) => {
+    return await projectsFunctions.addImageProj(dto, token);
   };
 
   // Funções Empresas ----------------------------------------------------------------------------------------
@@ -167,6 +169,7 @@ export const AuthProvider = ({ children }) => {
     getFavProjects,
     getEmpresasById,
     addModel,
+    addImageProj,
   };
 
   return (

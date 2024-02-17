@@ -64,3 +64,16 @@ export async function getRandomProjects(num: number, setLoading): Promise<any> {
     setLoading(false);
   }
 }
+
+export async function addImageProj(
+  dto: { bin: any; id: number },
+  token: string
+): Promise<any> {
+  try {
+    const prods = await auth.addImageProj(token, dto);
+    return prods;
+  } catch (error) {
+    throw new Error(error);
+  } finally {
+  }
+}

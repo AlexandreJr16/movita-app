@@ -9,9 +9,11 @@ import AuthContext from "../../contexts";
 const ImagePickerModal = ({
   visible,
   imagePicker,
+  uploadFunction,
 }: {
   visible: any;
   imagePicker: any;
+  uploadFunction: any;
 }) => {
   const { addImageUser } = useContext(AuthContext);
   const pickImageFromGalery = async () => {
@@ -24,8 +26,7 @@ const ImagePickerModal = ({
         base64: true,
       });
       if (!result.canceled) {
-        imagePicker();
-        addImageUser(result.assets[0].base64);
+        uploadFunction(result.assets[0].base64);
       }
     } catch (e) {
       console.log(e);
@@ -41,8 +42,7 @@ const ImagePickerModal = ({
         base64: true,
       });
       if (!result.canceled) {
-        imagePicker();
-        addImageUser(result.assets[0].base64);
+        uploadFunction(result.assets[0].base64);
         // addImageUser(result.assets[0]);
       }
     } catch (e) {
@@ -64,12 +64,14 @@ const ImagePickerModal = ({
           <ButtonImageModalPicker
             text="Tirar foto"
             onPress={() => {
+              imagePicker();
               pickImageFromCamera();
             }}
           />
           <ButtonImageModalPicker
             text="Buscar na galeria"
             onPress={() => {
+              imagePicker();
               pickImageFromGalery();
             }}
           />

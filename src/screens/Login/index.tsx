@@ -1,7 +1,7 @@
 import { View, ScrollView, Pressable, StatusBar } from "react-native";
 import Texto from "../../components/Default/texto/Texto";
 import styles from "./styles";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Carrossel from "../../components/Login/Carrossel/Carrossel";
 import Logo from "../../components/Default/Logo/Logo";
 import InputLogin from "../../components/Login/Input/InputLogin";

@@ -11,8 +11,9 @@ const MeusFavoritos = ({ navigation }: { navigation: any }) => {
   const { getFavProjects } = useContext(AuthContext);
   const [projetos, setProjetos] = useState();
   const getFav = async () => {
-    const projetos = await getFavProjects();
-    setProjetos(projetos);
+    const likes = await getFavProjects();
+    const proj = likes ? likes.map((obj) => obj.projeto) : null;
+    setProjetos(proj);
   };
   useEffect(() => {
     getFav();

@@ -83,6 +83,26 @@ export const getFavProject = async (token: string): Promise<any> => {
     console.log(error);
   }
 };
+
+export const addImageProj = async (
+  token: string,
+  dto: { bin: any; id: number }
+): Promise<any> => {
+  const url = `${API_URL}/projeto/imagem`;
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+  try {
+    const response = await axios.post(url, dto, options);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const deleteLikeProject = async (
   projetoId: number,
   token: string

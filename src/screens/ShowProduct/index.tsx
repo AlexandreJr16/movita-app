@@ -1,4 +1,4 @@
-import { View, StatusBar } from "react-native";
+import { View, StatusBar, Pressable, TouchableOpacity } from "react-native";
 import Texto from "../../components/Default/texto/Texto";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
@@ -11,6 +11,7 @@ import LoadingIndicator from "../../components/Default/Loading";
 import FeedBackShowProduct from "../../components/ShowItem/Feedback";
 import AddModel from "../../components/Modelo3D/AddModel";
 import MovelDefault from "../../assents/defaults/Projeto";
+import ImagePickerModal from "../../components/ImageModal";
 
 type Projeto = {
   id: number;
@@ -45,10 +46,12 @@ const ShowProduct = ({ route, navigation }) => {
   const id = route.params.id;
   const color = route.params.color;
   const [projeto, setProjeto] = useState<Projeto>();
-  const { getProject, loading, user } = useContext(AuthContext);
+  const { getProject, loading, user, addImageProj } = useContext(AuthContext);
   const userId = user.id;
   const [liked, setLiked] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
 
+  const imagePicker = () => (visible ? setVisible(false) : setVisible(true));
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -100,9 +103,17 @@ const ShowProduct = ({ route, navigation }) => {
               </Texto>
             )}
             <AddModel id={projeto.id} />
+            <TouchableOpacity onPress={imagePicker}>
+              <Texto weight="bold">Adicione a foto ao projeto</Texto>
+            </TouchableOpacity>
           </View>
         </View>
       )}
+      <ImagePickerModal
+        imagePicker={imagePicker}
+        visible={visible}
+        uploadFunction={addImageProj}
+      />
       <LoadingIndicator visible={loading} />
     </ScrollView>
   );

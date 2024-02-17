@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   carrossel: {
-    maxHeight: 310,
+    maxHeight: 300,
   },
   textContainer: {
     width: "100%",
     display: "flex",
     alignItems: "flex-start",
     paddingHorizontal: 25,
-    margin: 10,
+    margin: 5,
   },
   title: { color: "#fff", fontSize: 32, lineHeight: 36 },
   smallTitle: { color: "#fff", fontSize: 20, lineHeight: 23 },

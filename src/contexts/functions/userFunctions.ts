@@ -7,7 +7,6 @@ export const getUser = async (token, setUser, setLoading) => {
     const response = await auth.getUser(token);
     if (response.id) {
       setUser(response);
-      await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response));
     }
   } catch (error) {
     throw new Error("errado");
@@ -49,14 +48,11 @@ export async function addImageUser(
   getUser
 ): Promise<any> {
   try {
-    setLoading(true);
     const image = await auth.uploadImagemUser(dto, token);
     getUser(token);
     return image;
   } catch (error) {
-    setLoading(false);
     throw new Error(error);
   } finally {
-    setLoading(false);
   }
 }

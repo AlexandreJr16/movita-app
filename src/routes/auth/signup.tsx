@@ -13,7 +13,16 @@ const SignUpRoutes: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName="signup"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: true,
+        gestureDirection: "horizontal", // Set the initial gesture direction
+        fullScreenGestureEnabled: true,
+        customAnimationOnGesture: true,
+        animation: "fade_from_bottom", // Try a different animation type
+        animationDuration: 1100, // Experiment with animation duration
+        animationTypeForReplace: "pop",
+      }}
     >
       <Stack.Screen name="signup" component={SignUpScreen} />
       <Stack.Screen name="signup2" component={SignUpScreen2} />

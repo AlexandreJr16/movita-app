@@ -42,4 +42,5 @@ export interface AuthContextData {
   signupUser?: signupUser;
   setSignupUser?(user: signupUser);
   addModel?(doc: any);
+  addImageProj?(dto: { bin: any; id: number });
 }

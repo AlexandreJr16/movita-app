@@ -17,7 +17,7 @@ type ImageInfo = {
 };
 
 const ShowPerfil = () => {
-  const { user } = useContext(AuthContext);
+  const { user, addImageUser } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
 
   const pickImage = () => {
@@ -45,7 +45,11 @@ const ShowPerfil = () => {
         {/* <Texto weight="regular" style={styles.subtitle}>
           {user.endereco.cidade} - {user.endereco.estado}
         </Texto> */}
-        <ImagePickerModal visible={visible} imagePicker={pickImage} />
+        <ImagePickerModal
+          visible={visible}
+          imagePicker={pickImage}
+          uploadFunction={addImageUser}
+        />
       </View>
     </View>
   );
