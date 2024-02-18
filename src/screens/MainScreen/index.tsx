@@ -36,7 +36,11 @@ export default function MainScreen({ navigation }) {
   return (
     <View style={styles.background}>
       <ScrollView style={styles.background}>
-        <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
+        <StatusBar
+          backgroundColor={"#2f2f2f"}
+          barStyle="light-content"
+          translucent={true}
+        />
         <View style={styles.background}>
           <HeaderMain navigation={navigation} />
           <SelectCategory navigation={navigation} />
@@ -49,12 +53,14 @@ export default function MainScreen({ navigation }) {
                 tipo="projeto"
                 color={"#36A5BF"}
               />
-              <ShowProductsCarousel
+              {/* <ShowProductsCarousel
                 navigation={navigation}
                 title={"Empresas bem avaliados:"}
                 produtos={produtos[1]}
                 tipo="empresa"
-              />
+
+                Fazer carrossel apenas para empresas
+              /> */}
               <ShowProductsCarousel
                 navigation={navigation}
                 title={"Outros:"}

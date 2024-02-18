@@ -12,13 +12,7 @@ const ForgotRoutes: React.FC = () => {
       initialRouteName="Main"
       screenOptions={{
         headerShown: false,
-        gestureEnabled: true,
-        gestureDirection: "horizontal", // Set the initial gesture direction
-        fullScreenGestureEnabled: true,
-        customAnimationOnGesture: true,
-        animation: "slide_from_right", // Try a different animation type
-        animationDuration: 1100, // Experiment with animation duration
-        animationTypeForReplace: "pop",
+        animation: "slide_from_right",
       }}
     >
       <Stack.Screen name="Main" component={ForgotScreen} />

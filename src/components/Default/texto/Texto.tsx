@@ -21,12 +21,15 @@ interface TextProps {
   children: any;
   weight: StyleOptions;
   style?: CustomViewStyle | null;
+  numberOfLines?: number;
 }
 
 export default function Texto({
   children,
   weight,
   style,
+  numberOfLines,
+
   ...restProps
 }: TextProps) {
   const [textLoaded] = useFonts({
@@ -41,7 +44,11 @@ export default function Texto({
   const textStyle = weight === "bold" ? styles.bold : styles.regular;
 
   return (
-    <Text style={[textStyle, style]} {...restProps}>
+    <Text
+      style={[textStyle, style]}
+      numberOfLines={numberOfLines}
+      {...restProps}
+    >
       {children}
     </Text>
   );

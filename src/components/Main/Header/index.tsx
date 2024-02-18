@@ -16,7 +16,7 @@ const HeaderMain = ({ navigation }: { navigation: any }) => {
     <View style={styles.headerCard}>
       <Logo
         color="#FFFFFF"
-        size="35"
+        size="30"
         style={styles.logo}
         navigation={navigation}
       ></Logo>
@@ -28,7 +28,7 @@ const HeaderMain = ({ navigation }: { navigation: any }) => {
               : "Olá, Cliente"}
           </Texto>
           <Texto weight="bold" style={styles.subtitleMessage}>
-            Seja bem-vindo(a) ao Movita!
+            SEJA BEM-VINDO AO MOVITA
           </Texto>
         </View>
         {user.imagem ? (

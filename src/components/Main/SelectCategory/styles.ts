@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginHorizontal: 20,
-    marginTop: 15,
-    marginBottom: 5,
+    marginTop: 20,
+    marginBottom: 25,
     flexDirection: "row",
   },
   img: {},
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 70,
     height: 70,
-    borderRadius: 50,
+    borderRadius: 16,
   },
 });
 export default styles;

@@ -16,13 +16,11 @@ const Produto = ({
   produto: any;
   navigation: any;
   color: any;
-  tipo?: "projeto" | "empresa";
+  tipo?: "projeto";
 }) => {
   const navigateToProduct = () => {
     try {
-      tipo == "projeto"
-        ? navigation.navigate("Product", { id: produto.id, color: color })
-        : navigation.navigate("Perfil", { id: produto.id, color: color });
+      navigation.navigate("Product", { id: produto.id, color: color });
     } catch (error) {
       throw new Error(error);
     }
@@ -34,22 +32,26 @@ const Produto = ({
       onPress={navigateToProduct}
       style={styles.produtoContainer}
     >
-      {tipo == "projeto" ? (
-        produto.imagem[0] ? (
-          <ImagemBuffer
-            imgBuffer={produto.imagem[0]}
-            style={styles.imagemProduto}
-          />
-        ) : (
-          <DefaultMiniProjeto />
-        )
-      ) : produto.imagem ? (
-        <ImagemBuffer imgBuffer={produto.imagem} style={styles.imagemProduto} />
+      {produto.imagem[0] ? (
+        <ImagemBuffer
+          imgBuffer={produto.imagem[0]}
+          style={styles.imagemProduto}
+        />
       ) : (
         <DefaultMiniProjeto />
       )}
-      <Texto weight="regular" style={styles.nomeProduto}>
+      <Texto weight="bold" style={styles.title}>
         {produto.titulo}
+      </Texto>
+      <Texto weight="regular" style={styles.status}>
+        {/* {produto.status} */}Cozinha
+      </Texto>
+      <Texto weight="regular" style={styles.description} numberOfLines={1}>
+        {/* {produto.descricao} */}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque in
+        nam, ut asperiores pariatur cumque aperiam et rerum alias deleniti
+        inventore quisquam sunt quae magni suscipit, nulla laborum voluptates
+        exercitationem!
       </Texto>
     </TouchableOpacity>
   );

@@ -7,32 +7,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 10,
-    backgroundColor: "#1F1F1F",
-    borderBottomLeftRadius: 50,
-    paddingVertical: 25,
+    paddingTop: 25,
+    paddingBottom: 5,
     gap: 20,
   },
   logo: {
     marginBottom: 15,
   },
   titleMessage: {
-    fontSize: 30,
+    fontSize: 33,
     color: "#FFFFFF",
   },
 
   subtitleMessage: {
-    fontSize: 17,
-    color: "#FFFFFF",
+    fontSize: 16,
+    color: "#FFC501",
+    letterSpacing: -0.3,
   },
   infoContainer: {
     width: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     flexDirection: "row",
+    paddingHorizontal: 10,
   },
   welcome: {
-    width: "80%",
+    width: "60%",
     gap: -10,
   },
   img: {

@@ -17,7 +17,7 @@ const ShowProductsCarousel = ({
   navigation: any;
   color?: any;
   title?: any;
-  tipo?: "projeto" | "empresa";
+  tipo?: "projeto";
 }) => {
   return (
     <View style={styles.container}>
@@ -27,12 +27,13 @@ const ShowProductsCarousel = ({
             <Texto weight="regular" style={styles.title}>
               {title}
             </Texto>
-            <Texto weight="regular" style={styles.blueText}>
+            <Texto weight="regular" style={styles.yellowText}>
               Ver mais
             </Texto>
           </View>
           {produtos[0] != null ? (
             <FlatList
+              style={{ width: "100%" }}
               data={produtos}
               keyExtractor={(item) => item.id}
               horizontal

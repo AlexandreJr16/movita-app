@@ -33,6 +33,7 @@ export default function TabRoutes() {
         <Tab.Navigator
           initialRouteName="main"
           screenOptions={({ route }) => ({
+            lazy: true,
             headerShown: false,
             tabBarStyle: isIos ? styles.tabBarIOS : styles.tabBarAndroid,
             tabBarItemStyle: isIos

@@ -8,7 +8,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 const SelectCategory = ({ navigation }: { navigation?: any }) => {
-  const color = ["#36A5BF", "#A64029", "#BF9969"];
+  const color = "#1966C0";
   return (
     <View style={styles.selectContainer}>
       <Pressable
@@ -17,12 +17,12 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
         }}
         style={{ gap: 10 }}
       >
-        <View style={{ ...styles.btn, backgroundColor: color[0] }}>
+        <View style={{ ...styles.btn, backgroundColor: color }}>
           <ProjetosIcon style={styles.img} />
         </View>
         <Texto
           weight="bold"
-          style={{ color: "#FFFFFF", alignSelf: "center", fontSize: 16 }}
+          style={{ color: "#FFFFFF", alignSelf: "center", fontSize: 13 }}
         >
           Projetos
         </Texto>
@@ -34,24 +34,24 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
         }}
         style={{ gap: 10 }}
       >
-        <View style={{ ...styles.btn, backgroundColor: color[1] }}>
+        <View style={{ ...styles.btn, backgroundColor: color }}>
           <EmpresasIcon style={styles.img} />
         </View>
         <Texto
           weight="bold"
-          style={{ color: "#FFFFFF", alignSelf: "center", fontSize: 16 }}
+          style={{ color: "#FFFFFF", alignSelf: "center", fontSize: 13 }}
         >
           Empresas
         </Texto>
       </Pressable>
 
       <Pressable onPress={() => {}} style={{ gap: 10 }}>
-        <View style={{ ...styles.btn, backgroundColor: color[2] }}>
+        <View style={{ ...styles.btn, backgroundColor: color }}>
           <ModelosIcon style={styles.img} />
         </View>
         <Texto
           weight="bold"
-          style={{ color: "#FFFFFF", alignSelf: "center", fontSize: 16 }}
+          style={{ color: "#FFFFFF", alignSelf: "center", fontSize: 13 }}
         >
           Modelos
         </Texto>

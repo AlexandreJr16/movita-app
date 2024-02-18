@@ -15,13 +15,9 @@ const SignUpRoutes: React.FC = () => {
       initialRouteName="signup"
       screenOptions={{
         headerShown: false,
-        gestureEnabled: true,
-        gestureDirection: "horizontal", // Set the initial gesture direction
-        fullScreenGestureEnabled: true,
-        customAnimationOnGesture: true,
-        animation: "fade_from_bottom", // Try a different animation type
-        animationDuration: 1100, // Experiment with animation duration
-        animationTypeForReplace: "pop",
+
+        animation: "simple_push",
+        animationDuration: 100,
       }}
     >
       <Stack.Screen name="signup" component={SignUpScreen} />

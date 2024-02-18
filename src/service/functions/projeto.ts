@@ -97,7 +97,6 @@ export const addImageProj = async (
   };
   try {
     const response = await axios.post(url, dto, options);
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);

@@ -5,6 +5,7 @@ import SignUpScreen from "../../screens/SignUpScreen";
 import ForgotRoutes from "./forgot.routes";
 import SignUpRoutes from "./signup";
 import SplashScreen from "../../screens/splashScreen";
+import SplashRoutes from "./splash.routes";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,12 +19,12 @@ const AuthRoutes: React.FC = () => {
         gestureDirection: "horizontal", // Set the initial gesture direction
         fullScreenGestureEnabled: true,
         customAnimationOnGesture: true,
-        animation: "fade_from_bottom", // Try a different animation type
-        animationDuration: 1100, // Experiment with animation duration
+        animation: "fade_from_bottom",
+        animationDuration: 1100,
         animationTypeForReplace: "pop",
       }}
     >
-      <Stack.Screen name="Splash" component={SplashScreen} />
+      <Stack.Screen name="Splash" component={SplashRoutes} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUpRoutes} />
       <Stack.Screen name="Forgot" component={ForgotRoutes} />

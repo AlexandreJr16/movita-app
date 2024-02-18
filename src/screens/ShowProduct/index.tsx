@@ -67,6 +67,10 @@ const ShowProduct = ({ route, navigation }) => {
 
     fetchData();
   }, []);
+  const uploadImage = (bin: any) => {
+    const data = { bin, id: projeto.id };
+    addImageProj(data);
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -78,7 +82,7 @@ const ShowProduct = ({ route, navigation }) => {
             navigation={navigation}
             visiblePerfil={true}
           />
-          {projeto.imagem[0] ? (
+          {projeto.imagem ? (
             <ImagemBuffer imgBuffer={projeto.imagem} style={styles.img} />
           ) : (
             <MovelDefault />
@@ -112,7 +116,7 @@ const ShowProduct = ({ route, navigation }) => {
       <ImagePickerModal
         imagePicker={imagePicker}
         visible={visible}
-        uploadFunction={addImageProj}
+        uploadFunction={uploadImage}
       />
       <LoadingIndicator visible={loading} />
     </ScrollView>
