@@ -1,8 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, FlatList, TouchableOpacity, StatusBar } from "react-native";
+import React, { Suspense, lazy, useContext, useEffect, useState } from "react";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  StatusBar,
+  ActivityIndicator,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 import ChatModal from "../../components/Chat/Modal";
-import ChatComponent from "../../components/Chat/ChatComponent/index";
 import styles from "./styles";
 import socket from "../../utils/socket";
 import AuthContext from "../../contexts";
@@ -13,6 +18,10 @@ import LoadingIndicator from "../../components/Default/Loading";
 import TextoInput from "../../components/Default/texto/TextoInput";
 import HeaderMyProduct from "../../components/MeusProjetos/Header";
 import Plus from "../../assents/Chat/plus";
+
+const ChatComponent = lazy(
+  () => import("../../components/Chat/ChatComponent/index")
+);
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
@@ -35,6 +44,7 @@ const Chat = ({ navigation }) => {
 
   useEffect(() => {
     const handleRoomsList = (newRooms) => {
+      console.log(newRooms);
       setRooms(newRooms);
       setSavedRooms(newRooms);
       setLoading(false);
@@ -70,14 +80,14 @@ const Chat = ({ navigation }) => {
       />
 
       <View style={styles.chatlistContainer}>
-        {loading ? (
-          <LoadingIndicator visible={loading} />
-        ) : rooms.length > 0 ? (
-          <FlatList
-            data={rooms}
-            renderItem={renderChatItem}
-            keyExtractor={keyExtractor}
-          />
+        {rooms.length > 0 ? (
+          <Suspense fallback={<ActivityIndicator />}>
+            <FlatList
+              data={rooms}
+              renderItem={renderChatItem}
+              keyExtractor={keyExtractor}
+            />
+          </Suspense>
         ) : (
           <View style={styles.chatemptyContainer}>
             <Texto weight="bold" style={styles.chatemptyText}>

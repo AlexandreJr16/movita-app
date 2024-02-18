@@ -22,7 +22,7 @@ const ImagePickerModal = ({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
-        quality: 1,
+        quality: 0.4,
         base64: true,
       });
       if (!result.canceled) {
@@ -38,7 +38,7 @@ const ImagePickerModal = ({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
-        quality: 1,
+        quality: 0.4,
         base64: true,
       });
       if (!result.canceled) {

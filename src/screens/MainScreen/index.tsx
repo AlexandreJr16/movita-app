@@ -1,15 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, lazy, Suspense } from "react";
 import { View, ScrollView, StatusBar, ActivityIndicator } from "react-native";
 import AuthContext from "../../contexts";
 import styles from "./styles";
 import HeaderMain from "../../components/Main/Header";
 import SelectCategory from "../../components/Main/SelectCategory";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 import LoadingIndicator from "../../components/Default/Loading";
 
+const ShowProductsCarousel = lazy(
+  () => import("../../components/CarrosselShowProducts")
+);
+
 export default function MainScreen({ navigation }) {
-  const { getTopProjects, loading, getTopEmpresas, getRandomProjects, user } =
+  const { getTopProjects, loading, getTopEmpresas, getRandomProjects } =
     useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
@@ -46,14 +49,15 @@ export default function MainScreen({ navigation }) {
           <SelectCategory navigation={navigation} />
           {!loading && (
             <React.Fragment>
-              <ShowProductsCarousel
-                navigation={navigation}
-                title={"Projetos bem avaliados:"}
-                produtos={produtos[0]}
-                tipo="projeto"
-                color={"#36A5BF"}
-              />
-              {/* <ShowProductsCarousel
+              <Suspense fallback={<ActivityIndicator />}>
+                <ShowProductsCarousel
+                  navigation={navigation}
+                  title={"Projetos bem avaliados:"}
+                  produtos={produtos[0]}
+                  tipo="projeto"
+                  color={"#36A5BF"}
+                />
+                {/* <ShowProductsCarousel
                 navigation={navigation}
                 title={"Empresas bem avaliados:"}
                 produtos={produtos[1]}
@@ -61,16 +65,31 @@ export default function MainScreen({ navigation }) {
 
                 Fazer carrossel apenas para empresas
               /> */}
-              <ShowProductsCarousel
-                navigation={navigation}
-                title={"Outros:"}
-                produtos={produtos[2]}
-                tipo="projeto"
-                color={"#36A5BF"}
-              />
+                <ShowProductsCarousel
+                  navigation={navigation}
+                  title={"Outros:"}
+                  produtos={produtos[2]}
+                  tipo="projeto"
+                  color={"#36A5BF"}
+                />
+                <ShowProductsCarousel
+                  navigation={navigation}
+                  title={"Outros:"}
+                  produtos={produtos[2]}
+                  tipo="projeto"
+                  color={"#36A5BF"}
+                />
+                <ShowProductsCarousel
+                  navigation={navigation}
+                  title={"Outros:"}
+                  produtos={produtos[2]}
+                  tipo="projeto"
+                  color={"#36A5BF"}
+                />
+              </Suspense>
             </React.Fragment>
           )}
-          {loading && <ActivityIndicator size="large" color="#0000ff" />}
+          {/* {loading && <ActivityIndicator size="large" color="#0000ff" />} */}
         </View>
       </ScrollView>
     </View>

@@ -12,13 +12,26 @@ import React from "react";
 
 const UpdatePerfil = ({ navigation }) => {
   const { user, updateUser, loading } = useContext(AuthContext);
-  const [nome, setNome] = useState<string>(user.Cliente[0].nome);
-  const [email, setEmail] = useState<string>(user.email);
-  const [telefone, setTelefone] = useState<string>(user.Cliente[0].telefone);
-  const [endereco, setEndereco] = useState<string>(
-    `${user.Cliente[0].Endereco.bairro} - ${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
+  const [nome, setNome] = useState<string>(
+    user.tipoUser == "empresa"
+      ? user.Empresa[0].nomeFantasia
+      : user.Cliente[0].nome
   );
-  const [cpf, setCpf] = useState(user.Cliente[0].cpf);
+  const [email, setEmail] = useState<string>(user.email);
+  const [telefone, setTelefone] = useState<string>(
+    user.tipoUser == "empresa"
+      ? user.Empresa[0].telefone
+      : user.Cliente[0].telefone
+  );
+  const [endereco, setEndereco] = useState<string>(
+    user.tipoUser == "empresa"
+      ? `${user.Empresa[0].Endereco.cidade} - ${user.Empresa[0].Endereco.estado}`
+      : `${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
+  );
+  // `${user.Cliente[0].Endereco.bairro} - ${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
+  const [cpf, setCpf] = useState(
+    user.tipoUser == "empresa" ? user.Empresa[0].cnpj : user.Cliente[0].cpf
+  );
 
   const handleNome = (value: any) => {
     setNome(value);

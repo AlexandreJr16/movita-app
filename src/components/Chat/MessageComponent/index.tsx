@@ -7,7 +7,11 @@ import Texto from "../../Default/texto/Texto";
 
 export default function MessageComponent({ item }: { item: any }) {
   const { user } = useContext(AuthContext);
-  const status = item.userName !== user.nome;
+  const nome =
+    user.tipoUser == "empresa"
+      ? user.Empresa[0].nomeFantasia
+      : user.Cliente[0].nome;
+  const status = item.userName !== nome;
 
   return (
     <View>

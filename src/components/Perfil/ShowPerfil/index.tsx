@@ -1,5 +1,5 @@
 import AuthContext from "../../../contexts";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import styles from "./styles";
 import { View } from "react-native";
 import ImagemBuffer from "../../Default/Imagem";
@@ -19,6 +19,26 @@ type ImageInfo = {
 const ShowPerfil = () => {
   const { user, addImageUser } = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
+  const [name, setName] = useState<string>();
+  const [cpf, setCpf] = useState<string>();
+  const [endereco, setEndereco] = useState<string>();
+
+  useEffect(() => {
+    const name =
+      user.tipoUser == "empresa"
+        ? user.Empresa[0].nomeFantasia
+        : user.Cliente[0].nome;
+    const cpf =
+      user.tipoUser == "empresa" ? user.Empresa[0].cnpj : user.Cliente[0].cpf;
+    const endereco =
+      user.tipoUser == "empresa"
+        ? `${user.Empresa[0].Endereco.cidade} - ${user.Empresa[0].Endereco.estado}`
+        : `${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`;
+
+    setEndereco(endereco);
+    setName(name);
+    setCpf(cpf);
+  }, []);
 
   const pickImage = () => {
     visible ? setVisible(false) : setVisible(true);
@@ -34,17 +54,17 @@ const ShowPerfil = () => {
       </TouchableOpacity>
       <View style={styles.textContainer}>
         <Texto style={styles.title} weight={"bold"}>
-          {user.Cliente[0].nome}
+          {name}
         </Texto>
         <Texto weight="regular" style={styles.subtitle}>
           {user.email}
         </Texto>
         <Texto weight="regular" style={styles.subtitle}>
-          {user.Cliente[0].cpf}
+          {cpf}
         </Texto>
-        {/* <Texto weight="regular" style={styles.subtitle}>
-          {user.endereco.cidade} - {user.endereco.estado}
-        </Texto> */}
+        <Texto weight="regular" style={styles.subtitle}>
+          {endereco}
+        </Texto>
         <ImagePickerModal
           visible={visible}
           imagePicker={pickImage}

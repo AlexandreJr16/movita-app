@@ -6,6 +6,7 @@ export const getUser = async (token, setUser, setLoading) => {
     setLoading(true);
     const response = await auth.getUser(token);
     if (response.id) {
+      await AsyncStorage.setItem("userData", JSON.stringify(response));
       setUser(response);
     }
   } catch (error) {

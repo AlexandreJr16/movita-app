@@ -7,10 +7,18 @@ import AuthContext from "../../../contexts";
 import { Buffer } from "buffer";
 import ImagemBuffer from "../../Default/Imagem";
 import { SafeAreaView } from "react-native-safe-area-context";
+import UserDefault from "../../../assents/defaults/User";
 
 const HeaderMain = ({ navigation }: { navigation: any }) => {
+  const [name, setName] = useState<string>();
   const { user } = useContext(AuthContext);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const name =
+      user.tipoUser == "empresa"
+        ? user.Empresa[0].nomeFantasia
+        : user.Cliente[0].nome;
+    setName(name);
+  }, []);
 
   return (
     <View style={styles.headerCard}>
@@ -23,9 +31,7 @@ const HeaderMain = ({ navigation }: { navigation: any }) => {
       <View style={styles.infoContainer}>
         <View style={styles.welcome}>
           <Texto weight="bold" style={styles.titleMessage}>
-            {user
-              ? `Olá, ${user.Cliente[0] ? user.Cliente[0].nome : "TOM"}`
-              : "Olá, Cliente"}
+            {user ? `Olá, ${name}` : "Olá, Cliente"}
           </Texto>
           <Texto weight="bold" style={styles.subtitleMessage}>
             SEJA BEM-VINDO AO MOVITA

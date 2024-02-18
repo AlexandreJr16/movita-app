@@ -29,9 +29,12 @@ export const AuthProvider = ({ children }) => {
     async function loadStorageData() {
       try {
         const storageToken = await AsyncStorage.getItem("@RNAuth:token");
-        if (storageToken) {
+        const cachedUserData = await AsyncStorage.getItem("userData");
+
+        if (storageToken && cachedUserData) {
           setToken(storageToken);
-          await getUser(storageToken);
+          setUser(JSON.parse(cachedUserData));
+          // await getUser(storageToken);
         }
       } catch (e) {
       } finally {

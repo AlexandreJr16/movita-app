@@ -14,6 +14,11 @@ const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
   const [chatMessages, setChatMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [nome, setNome] = useState(
+    user.tipoUser == "empresa"
+      ? user.Empresa[0].nomeFantasia
+      : user.Cliente[0].nome
+  );
   const flatListRef = useRef(null);
 
   const { name, id } = route.params;
@@ -58,7 +63,7 @@ const Messaging = ({ route, navigation }) => {
       message: message,
       time: `${hour}:${mins}`,
       roomId: id,
-      userName: user.nome,
+      userName: nome,
     };
 
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -66,7 +71,7 @@ const Messaging = ({ route, navigation }) => {
     socket.emit("newMessage", {
       room_id: id,
       message,
-      user: user.nome,
+      user: nome,
       timestamp: { hour, mins },
     });
 

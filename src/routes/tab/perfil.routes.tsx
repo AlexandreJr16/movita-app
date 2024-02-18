@@ -17,6 +17,9 @@ const PerfilRoutes: React.FC = () => {
       initialRouteName="main"
       screenOptions={{
         headerShown: false,
+        animationDuration: 500,
+        animationTypeForReplace: "pop",
+        animation: "fade_from_bottom",
       }}
     >
       <Stack.Screen name="main" component={PerfilScreen} />

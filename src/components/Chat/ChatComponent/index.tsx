@@ -70,10 +70,7 @@ const ChatComponent = ({
 
   return (
     <Pressable style={styles.cchat} onPress={handleNavigation}>
-      <ImagemBuffer
-        imgBuffer={item.img[0]}
-        style={styles.cavatar}
-      ></ImagemBuffer>
+      <ImagemBuffer imgBuffer={item.img} style={styles.cavatar}></ImagemBuffer>
 
       <View style={styles.crightContainer}>
         <View>
