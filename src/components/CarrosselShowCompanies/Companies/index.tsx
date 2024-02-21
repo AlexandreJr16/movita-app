@@ -7,20 +7,20 @@ import styles from "./styles";
 import MovelDefault from "../../../assents/defaults/Projeto";
 import DefaultMiniProjeto from "../../../assents/defaults/MiniProjeto";
 
-const Produto = ({
+const Companies = ({
   produto,
   navigation,
   color,
-  tipo = "projeto",
+  tipo = "empresa",
 }: {
   produto: any;
   navigation: any;
   color: any;
-  tipo?: "projeto";
+  tipo?: "empresa";
 }) => {
   const navigateToProduct = () => {
     try {
-      navigation.navigate("Product", { id: produto.id, color: color });
+      navigation.navigate("PerfilEmpresa", { id: produto.id, color: color });
     } catch (error) {
       throw new Error(error);
     }
@@ -31,11 +31,8 @@ const Produto = ({
       onPress={navigateToProduct}
       style={styles.produtoContainer}
     >
-      {produto.imagem[0] ? (
-        <ImagemBuffer
-          imgBuffer={produto.imagem[0]}
-          style={styles.imagemProduto}
-        />
+      {produto.imagem ? (
+        <ImagemBuffer imgBuffer={produto.imagem} style={styles.imagemProduto} />
       ) : (
         <DefaultMiniProjeto />
       )}
@@ -56,4 +53,4 @@ const Produto = ({
   );
 };
 
-export default Produto;
+export default Companies;

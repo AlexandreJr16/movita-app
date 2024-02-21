@@ -1,6 +1,11 @@
+import { ClienteDTO } from "./cliente.dto";
+import EmpresaDTO from "./empresa.dto";
+import EnderecoDTO from "./endereco.dto";
+
 export type updateUserDTO = {
-  user?: any;
-  cliente?: any;
-  empresa?: any;
-  endereco?: any;
+  email: string;
+  Cliente?: ClienteDTO[];
+  Empresa?: EmpresaDTO[] | EmpresaDTO;
+  Endereco?: EnderecoDTO;
+  tipoUser: "empresa" | "cliente";
 };

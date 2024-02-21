@@ -82,8 +82,8 @@ const ShowProduct = ({ route, navigation }) => {
             navigation={navigation}
             visiblePerfil={true}
           />
-          {projeto.imagem ? (
-            <ImagemBuffer imgBuffer={projeto.imagem} style={styles.img} />
+          {projeto.imagem[0] ? (
+            <ImagemBuffer imgBuffer={projeto.imagem[0]} style={styles.img} />
           ) : (
             <MovelDefault />
           )}

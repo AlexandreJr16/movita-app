@@ -6,22 +6,14 @@ import {
   StatusBar,
   ActivityIndicator,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import ChatModal from "../../components/Chat/Modal";
 import styles from "./styles";
 import socket from "../../utils/socket";
 import AuthContext from "../../contexts";
-import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
 import Texto from "../../components/Default/texto/Texto";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
-import LoadingIndicator from "../../components/Default/Loading";
-import TextoInput from "../../components/Default/texto/TextoInput";
 import HeaderMyProduct from "../../components/MeusProjetos/Header";
 import Plus from "../../assents/Chat/plus";
-
-const ChatComponent = lazy(
-  () => import("../../components/Chat/ChatComponent/index")
-);
+import ChatComponent from "../../components/Chat/ChatComponent";
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
@@ -44,7 +36,6 @@ const Chat = ({ navigation }) => {
 
   useEffect(() => {
     const handleRoomsList = (newRooms) => {
-      console.log(newRooms);
       setRooms(newRooms);
       setSavedRooms(newRooms);
       setLoading(false);
@@ -81,13 +72,11 @@ const Chat = ({ navigation }) => {
 
       <View style={styles.chatlistContainer}>
         {rooms.length > 0 ? (
-          <Suspense fallback={<ActivityIndicator />}>
-            <FlatList
-              data={rooms}
-              renderItem={renderChatItem}
-              keyExtractor={keyExtractor}
-            />
-          </Suspense>
+          <FlatList
+            data={rooms}
+            renderItem={renderChatItem}
+            keyExtractor={keyExtractor}
+          />
         ) : (
           <View style={styles.chatemptyContainer}>
             <Texto weight="bold" style={styles.chatemptyText}>

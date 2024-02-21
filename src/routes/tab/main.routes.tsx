@@ -18,7 +18,7 @@ const MainRoutes: React.FC = () => {
     >
       <Stack.Screen name="Main" component={MainScrenn} />
       <Stack.Screen name="Product" component={ShowProduct} />
-      <Stack.Screen name="Perfil" component={ShowEmpresaPerfil} />
+      <Stack.Screen name="PerfilEmpresa" component={ShowEmpresaPerfil} />
       <Stack.Screen name="ProjetoSearch" component={MeusProjetosScreen} />
       <Stack.Screen name="EmpresaSearch" component={EmpresasSearchScreen} />
     </Stack.Navigator>

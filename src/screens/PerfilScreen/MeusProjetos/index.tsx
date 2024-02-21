@@ -1,6 +1,4 @@
 import { ActivityIndicator, ScrollView, StatusBar, View } from "react-native";
-import Texto from "../../../components/Default/texto/Texto";
-import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
 import styles from "./styles";

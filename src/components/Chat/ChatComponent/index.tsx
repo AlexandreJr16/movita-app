@@ -23,8 +23,6 @@ const ChatComponent = ({
     user: string;
   }>({ id: "oi", messagem: "errou", time: "1:76", user: "Ale" });
 
-  //👇🏻 Retrieves the last message in the array from the item prop
-
   useLayoutEffect(() => {
     const lastMessage = item.Message[item.Message.length - 1];
 

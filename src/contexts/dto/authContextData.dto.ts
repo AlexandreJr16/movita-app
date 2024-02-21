@@ -1,5 +1,6 @@
 import { SignInResponse } from "./signInResponse.dto";
 import { SignUpInfo } from "./signUpInfo.dto";
+import { updateUserDTO } from "./updateUser.dto";
 import { User } from "./user.dto";
 
 export interface AuthContextData {
@@ -11,12 +12,7 @@ export interface AuthContextData {
   token?: string;
   loading?: boolean;
 
-  updateUser?(dto: {
-    user?: any;
-    cliente?: any;
-    empresa?: any;
-    endereco?: any;
-  });
+  updateUser?(dto: updateUserDTO);
   updateSenha?(dto: {
     senhaAtual: string;
     novaSenha: string;

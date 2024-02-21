@@ -22,7 +22,7 @@ const ImagePickerModal = ({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
-        quality: 0.4,
+        quality: 0.2,
         base64: true,
       });
       if (!result.canceled) {
@@ -38,12 +38,11 @@ const ImagePickerModal = ({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
-        quality: 0.4,
+        quality: 0.2,
         base64: true,
       });
       if (!result.canceled) {
         uploadFunction(result.assets[0].base64);
-        // addImageUser(result.assets[0]);
       }
     } catch (e) {
       console.log(e);

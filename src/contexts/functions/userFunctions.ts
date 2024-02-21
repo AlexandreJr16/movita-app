@@ -19,9 +19,9 @@ export const getUser = async (token, setUser, setLoading) => {
 export const updateUser = async (dto, token, getUser, setLoading) => {
   try {
     setLoading(true);
-    const user = await auth.updateUser(dto, token);
+    const response = await auth.updateUser(dto, token);
     await getUser(token);
-    return user;
+    return response;
   } catch (error) {
     setLoading(false);
     throw new Error(error);
@@ -49,9 +49,8 @@ export async function addImageUser(
   getUser
 ): Promise<any> {
   try {
-    const image = await auth.uploadImagemUser(dto, token);
+    await auth.uploadImagemUser(dto, token);
     getUser(token);
-    return image;
   } catch (error) {
     throw new Error(error);
   } finally {

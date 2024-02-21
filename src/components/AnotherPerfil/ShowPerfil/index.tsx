@@ -9,12 +9,22 @@ import { TouchableOpacity } from "react-native";
 import { Buffer } from "buffer";
 import { User } from "../../../contexts/dto/user.dto";
 
-const ShowMainDataPerfil = ({ user }: { user: any }) => {
+const ShowMainDataPerfil = ({
+  user,
+  imgNotArray = false,
+}: {
+  user: any;
+  imgNotArray?: boolean;
+}) => {
   useEffect(() => {}, []);
   return (
     <View style={styles.container}>
       <TouchableOpacity>
-        {user.img ? (
+        {imgNotArray ? (
+          user.img ? (
+            <ImagemBuffer imgBuffer={user.img} style={styles.img} />
+          ) : null
+        ) : user.img ? (
           <ImagemBuffer imgBuffer={user.img[0]} style={styles.img} />
         ) : null}
       </TouchableOpacity>

@@ -1,25 +1,25 @@
 import { View, FlatList } from "react-native";
 import Texto from "../Default/texto/Texto";
-import Produto from "./Product";
+import Produto from "./Companies";
 import styles from "./styles";
 import React from "react";
 
-const ShowProductsCarousel = ({
-  produtos,
+const ShowCompaniesCarrossel = ({
+  companies,
   navigation,
   color = "#fff",
   title = "Outros",
-  tipo = "projeto",
+  tipo = "empresa",
 }: {
-  produtos: any;
+  companies: any;
   navigation: any;
   color?: any;
   title?: any;
-  tipo?: "projeto";
+  tipo?: "empresa";
 }) => {
   return (
     <View style={styles.container}>
-      {produtos == undefined ? null : (
+      {companies == undefined ? null : (
         <React.Fragment>
           <View style={styles.textContainer}>
             <Texto weight="regular" style={styles.title}>
@@ -29,10 +29,10 @@ const ShowProductsCarousel = ({
               Ver mais
             </Texto>
           </View>
-          {produtos[0] != null ? (
+          {companies[0] != null ? (
             <FlatList
               style={{ width: "100%" }}
-              data={produtos}
+              data={companies}
               keyExtractor={(item) => item.id}
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -65,4 +65,4 @@ const ShowProductsCarousel = ({
     </View>
   );
 };
-export default ShowProductsCarousel;
+export default ShowCompaniesCarrossel;

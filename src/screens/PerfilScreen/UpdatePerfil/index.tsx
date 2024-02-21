@@ -9,9 +9,24 @@ import AuthContext from "../../../contexts";
 import ButtonPerfil from "../../../components/Perfil/Button";
 import LoadingIndicator from "../../../components/Default/Loading";
 import React from "react";
+import cep from "cep-promise";
+import { err } from "react-native-svg/lib/typescript/xml";
+import EmpresaDTO from "../../../contexts/dto/empresa.dto";
+import { updateUserDTO } from "../../../contexts/dto/updateUser.dto";
+import ErrorAlert from "../../../components/ErrorAlert/ErrorAlert";
+
+interface Local {
+  cep: string;
+  city: string;
+  neighborhood: string;
+  service: string;
+  state: string;
+  street: string;
+}
 
 const UpdatePerfil = ({ navigation }) => {
   const { user, updateUser, loading } = useContext(AuthContext);
+  const [text, setText] = useState(null);
   const [nome, setNome] = useState<string>(
     user.tipoUser == "empresa"
       ? user.Empresa[0].nomeFantasia
@@ -48,8 +63,16 @@ const UpdatePerfil = ({ navigation }) => {
   const handleCpf = (value: any) => {
     setCpf(value);
   };
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let local: Local;
+    try {
+      local = await cep(`${endereco}`);
+    } catch (error) {
+      setText("Algum campo está errado.");
+      return;
+    }
+    setText(null);
     if (
       email == "" ||
       telefone == "" ||
@@ -57,18 +80,48 @@ const UpdatePerfil = ({ navigation }) => {
       cpf == "" ||
       !emailRegex.test(email)
     ) {
-      throw new Error("Campos inválidos");
-    }
-    if (user.tipoUser == "empresa") {
+      console.log("Campos inválidos");
+    } else if (user.tipoUser == "empresa") {
       const dto = {
-        user: { email },
-        empresa: { nomeFantasia: nome, telefone },
-      };
-      const us = updateUser(dto);
-    } else {
-      const dto = { user: { email }, cliente: { nome, telefone, cpf } };
-      const us = updateUser(dto);
-    }
+        email,
+        tipoUser: user.tipoUser,
+        Empresa: [
+          {
+            cpf: cpf,
+            nomeFantasia: nome,
+            telefone,
+            Endereco: {
+              cidade: local.city,
+              bairro: local.neighborhood,
+              estado: local.state,
+              cep: local.cep,
+            },
+          },
+        ],
+      } as updateUserDTO;
+      const { status } = await updateUser(dto);
+      if (status == "ok") navigation.goBack();
+    } else if (user.tipoUser == "cliente") {
+      const dto = {
+        email,
+        tipoUser: user.tipoUser,
+        Cliente: [
+          {
+            cpf: cpf,
+            nome: nome,
+            telefone,
+            Endereco: {
+              cidade: local.city,
+              bairro: local.neighborhood,
+              estado: local.state,
+              cep: local.cep,
+            },
+          },
+        ],
+      } as updateUserDTO;
+      const { status } = await updateUser(dto);
+      if (status == "ok") navigation.goBack();
+    } else setText("Algum campo está errado.");
   };
 
   return (
@@ -101,7 +154,7 @@ const UpdatePerfil = ({ navigation }) => {
             value={telefone}
           />
           <InputPerfil
-            title="Endereço:"
+            title="CEP:"
             func={(value) => {
               handleEndereco(value);
             }}
@@ -114,6 +167,10 @@ const UpdatePerfil = ({ navigation }) => {
             }}
             value={cpf}
           />
+
+          <ErrorAlert isAlert={text != null} styles={styles.errorText}>
+            {text}
+          </ErrorAlert>
           <ButtonPerfil onPress={handleUpdate} />
         </View>
         <LoadingIndicator visible={loading} />

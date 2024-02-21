@@ -31,6 +31,7 @@ const UpdateSenha = ({ navigation }) => {
       novaSenha: senhaNova,
       confirmSenha: confirmSenha,
     };
+    console.log(dto);
     const updateUser = await updateSenha(dto);
     if (updateUser.status == "ok") {
       navigation.goBack();

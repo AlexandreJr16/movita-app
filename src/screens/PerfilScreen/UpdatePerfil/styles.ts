@@ -12,8 +12,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 20,
+    marginBottom: 60,
     paddingHorizontal: 15,
     gap: 15,
+  },
+  errorText: {
+    color: "#C63818",
   },
 });
 export default styles;

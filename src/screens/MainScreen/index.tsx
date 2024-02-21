@@ -6,6 +6,8 @@ import HeaderMain from "../../components/Main/Header";
 import SelectCategory from "../../components/Main/SelectCategory";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoadingIndicator from "../../components/Default/Loading";
+import ShowProductsCompanies from "../../components/CarrosselShowCompanies";
+import ShowCompaniesCarrossel from "../../components/CarrosselShowCompanies";
 
 const ShowProductsCarousel = lazy(
   () => import("../../components/CarrosselShowProducts")
@@ -57,14 +59,12 @@ export default function MainScreen({ navigation }) {
                   tipo="projeto"
                   color={"#36A5BF"}
                 />
-                {/* <ShowProductsCarousel
-                navigation={navigation}
-                title={"Empresas bem avaliados:"}
-                produtos={produtos[1]}
-                tipo="empresa"
-
-                Fazer carrossel apenas para empresas
-              /> */}
+                <ShowCompaniesCarrossel
+                  navigation={navigation}
+                  title={"Empresas bem avaliados:"}
+                  companies={produtos[1]}
+                  tipo="empresa"
+                />
                 <ShowProductsCarousel
                   navigation={navigation}
                   title={"Outros:"}

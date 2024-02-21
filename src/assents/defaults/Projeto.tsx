@@ -4,8 +4,8 @@ import Svg, { Rect, Path } from "react-native-svg";
 function MovelDefault(props) {
   return (
     <Svg
-      width={373}
-      height={373}
+      width={350}
+      height={350}
       viewBox="0 0 373 373"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

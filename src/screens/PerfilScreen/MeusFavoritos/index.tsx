@@ -1,11 +1,14 @@
-import { ScrollView, StatusBar, View } from "react-native";
+import { ActivityIndicator, ScrollView, StatusBar, View } from "react-native";
 import styles from "./styles";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, Suspense, lazy } from "react";
 import TitleTextPerfil from "../../../components/Perfil/TitleText";
-import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import AuthContext from "../../../contexts";
+
+const ShowProductsCarousel = lazy(
+  () => import("../../../components/CarrosselShowProducts")
+);
 
 const MeusFavoritos = ({ navigation }: { navigation: any }) => {
   const { getFavProjects } = useContext(AuthContext);
@@ -31,11 +34,13 @@ const MeusFavoritos = ({ navigation }: { navigation: any }) => {
         <ShowPerfil />
         <View style={styles.container}>
           <TitleTextPerfil>Meus Favoritos</TitleTextPerfil>
-          <ShowProductsCarousel
-            navigation={navigation}
-            produtos={projetos}
-            title={"Produtos favoritos"}
-          />
+          <Suspense fallback={<ActivityIndicator />}>
+            <ShowProductsCarousel
+              navigation={navigation}
+              produtos={projetos}
+              title={"Produtos favoritos"}
+            />
+          </Suspense>
         </View>
       </ScrollView>
     </View>

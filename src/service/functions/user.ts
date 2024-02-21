@@ -33,10 +33,6 @@ export const updateUser = async (
   token: string
 ): Promise<UpdateUserResponse> => {
   const url = `${API_URL}/user`;
-  // Assuming you need to send data in the request body, populate the 'data' object
-  const data = {
-    /* populate with necessary data */
-  };
 
   const options = {
     headers: {
@@ -51,7 +47,6 @@ export const updateUser = async (
       dto,
       options
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     // Ensure that 'handleApiError' is defined
@@ -78,13 +73,14 @@ export const updateSenha = async (
         Authorization: token,
       },
     };
-
+    console.log(dto);
     const response: AxiosResponse<updateSenhaDTO> = await axios.put(
       url,
       dto,
       options
     );
 
+    console.log(response);
     return response.data;
   } catch (error) {
     // Ensure that 'handleApiError' is defined

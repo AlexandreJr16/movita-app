@@ -18,6 +18,7 @@ const ShowEmpresaPerfil = ({ route, navigation }) => {
   useEffect(() => {
     const getEmpresa = async () => {
       const user = await getEmpresasById(id);
+
       setUser(user);
     };
     getEmpresa();
@@ -29,7 +30,7 @@ const ShowEmpresaPerfil = ({ route, navigation }) => {
         {user != undefined ? (
           <React.Fragment>
             <HeaderPerfil navigation={navigation} />
-            <ShowMainDataPerfil user={user} />
+            <ShowMainDataPerfil imgNotArray={true} user={user} />
             <View style={styles.container}>
               <ShowProductsCarousel
                 produtos={user.projetos}
