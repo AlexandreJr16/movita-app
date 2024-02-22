@@ -8,6 +8,7 @@ import EmpresasSearchScreen from "../../screens/SearchTopics/EmpresasSearch";
 import ShowModel from "../../screens/ShowPages/ShowModel";
 import ShowParseEmpresa from "../../screens/ShowPages/ShowEmpresa/ShowParseEmpresa";
 import ShowEmpresaPerfil from "../../screens/ShowPages/ShowEmpresa";
+import ModelosSearch from "../../screens/SearchTopics/ModeloSearch";
 
 const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -15,7 +16,11 @@ const MainRoutes: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName="Main"
-      screenOptions={{ headerShown: false, animation: "fade_from_bottom" }}
+      screenOptions={{
+        headerShown: false,
+        animation: "fade_from_bottom",
+        gestureEnabled: true,
+      }}
     >
       <Stack.Screen name="Main" component={MainScrenn} />
       <Stack.Screen name="Product" component={ShowProduct} />
@@ -23,6 +28,7 @@ const MainRoutes: React.FC = () => {
       <Stack.Screen name="PerfilEmpresa" component={ShowEmpresaPerfil} />
       <Stack.Screen name="ProjetoSearch" component={MeusProjetosScreen} />
       <Stack.Screen name="EmpresaSearch" component={EmpresasSearchScreen} />
+      <Stack.Screen name="ModelSearch" component={ModelosSearch} />
       <Stack.Screen name="ModelShow" component={ShowModel} />
     </Stack.Navigator>
   );

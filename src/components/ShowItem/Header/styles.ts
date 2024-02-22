@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 13,
     paddingTop: 20,
+    textAlign: "left",
   },
 });
 export default styles;

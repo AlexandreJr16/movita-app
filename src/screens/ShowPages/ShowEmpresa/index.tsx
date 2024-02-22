@@ -1,5 +1,5 @@
 import { FlatList, ScrollView, StatusBar, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import styles from "./styles";
 import AuthContext from "../../../contexts";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
@@ -44,12 +44,15 @@ const ShowEmpresaPerfil = ({ route, navigation }) => {
                   Ver mais
                 </Texto>
               </View>
+
               {user.feedback[0] ? (
-                <ScrollView style={{ flex: 1, width: "100%" }}>
-                  {user.feedback.map((item: any, i: number) => (
-                    <FeedBackShowProduct key={i} feedback={item} />
-                  ))}
-                </ScrollView>
+                <Suspense fallback={null}>
+                  <ScrollView style={{ flex: 1, width: "100%" }}>
+                    {user.feedback.map((item: any, i: number) => (
+                      <FeedBackShowProduct key={i} feedback={item} />
+                    ))}
+                  </ScrollView>
+                </Suspense>
               ) : (
                 <Texto weight="bold" style={{ color: "#fff" }}>
                   Nenhum item

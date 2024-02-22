@@ -62,9 +62,9 @@ const HeaderShowItem = ({
         </View>
       </View>
       <Texto weight="regular" style={styles.textParagrafo}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe odio
-        tempora repellat vel, facilis debitis nisi iusto repellendus hic ea
-        nesciunt rerum sequi numquam error vitae quis soluta quod ratione!
+        {data.descricao
+          ? data.descricao
+          : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe odio tempora repellat vel, facilis debitis nisi iusto repellendus hic ea nesciunt rerum sequi numquam error vitae quis soluta quod ratione!"}
       </Texto>
     </View>
   );

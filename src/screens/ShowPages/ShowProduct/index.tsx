@@ -101,9 +101,7 @@ const ShowProduct = ({ route, navigation }) => {
                 nota: projeto.nota ? `${projeto.nota}` : "0",
               }}
             />
-            <Texto weight="regular" style={styles.description}>
-              {projeto.descricao}:
-            </Texto>
+
             {projeto.Feedback[0] ? (
               <FeedBackShowProduct feedback={projeto.Feedback[0]} />
             ) : (

@@ -45,7 +45,12 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
         </Texto>
       </Pressable>
 
-      <Pressable onPress={() => {}} style={{ gap: 10 }}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("ModelSearch");
+        }}
+        style={{ gap: 10 }}
+      >
         <View style={{ ...styles.btn, backgroundColor: color }}>
           <ModelosIcon style={styles.img} />
         </View>
