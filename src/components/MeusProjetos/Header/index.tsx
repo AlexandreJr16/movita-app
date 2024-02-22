@@ -20,11 +20,13 @@ const HeaderMyProduct = ({
   color = "blue",
   title,
   handleSearch,
+  textoSearch,
 }: {
   navigation: any;
   color?: "blue" | "red";
   title: any;
   handleSearch?: any;
+  textoSearch: string;
 }) => {
   const { user } = useContext(AuthContext);
 
@@ -39,9 +41,7 @@ const HeaderMyProduct = ({
           <TextoInput
             onChangeText={handleSearch}
             weight="regular"
-            placeholder={
-              color == "blue" ? "Pesquise Projetos..." : "Pesquise Empresas..."
-            }
+            placeholder={textoSearch}
             placeholderColor={color == "blue" ? "#36A5BF" : "#A64029"}
             style={
               color == "blue"

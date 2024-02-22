@@ -98,7 +98,7 @@ const ShowProduct = ({ route, navigation }) => {
                 liked,
                 deleteLikeObj: deleteLike,
                 likeObj: addLike,
-                nota: null,
+                nota: projeto.nota ? `${projeto.nota}` : "0",
               }}
             />
             <Texto weight="regular" style={styles.description}>

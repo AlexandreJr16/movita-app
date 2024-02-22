@@ -27,6 +27,7 @@ const MeusProjetosScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.background}>
       <HeaderMyProduct
+        textoSearch="Procurar Projetos"
         navigation={navigation}
         color={"blue"}
         title="Projetos Anteriores"

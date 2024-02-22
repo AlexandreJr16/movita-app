@@ -62,8 +62,9 @@ const Chat = ({ navigation }) => {
 
   return (
     <View style={styles.chatscreen}>
-      <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
+      <StatusBar backgroundColor={"#2f2f2f"} barStyle="light-content" />
       <HeaderMyProduct
+        textoSearch="Procurar conversas"
         navigation={navigation}
         color={"blue"}
         title={"Mensagens"}

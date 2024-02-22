@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 10,
-    marginBottom: 20,
+    paddingBottom: 0,
+    marginBottom: 0,
   },
   titleMessage: {
     marginTop: 20,
