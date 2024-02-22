@@ -17,17 +17,17 @@ export const getTopProjects = async (num: number): Promise<any> => {
     throw error;
   }
 };
-export const getAllProjetosByCliente = async (num: number): Promise<any> => {
-  const url = `${API_URL}/projeto/allcontratante/${num}`;
-
+export const getAllProjetosByCliente = async (token: string): Promise<any> => {
+  const url = `${API_URL}/projeto/allcontratante`;
   const options = {
     headers: {
       "Content-Type": "application/json",
+      Authorization: token,
     },
   };
-
+  const dto = {};
   try {
-    const response = await axios.get(url, options);
+    const response = await axios.post(url, dto, options);
     return response.data;
   } catch (error) {
     throw error;

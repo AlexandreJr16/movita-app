@@ -22,6 +22,8 @@ interface TextInputProps {
   placeholderColor?: any;
   secureTextEntry?: boolean;
   inputMode?: any;
+  onFocus?: any;
+  onBlur?: any;
 }
 
 export default function TextoInput({
@@ -33,6 +35,8 @@ export default function TextoInput({
   placeholderColor = "#7A7979",
   secureTextEntry = false,
   inputMode = null,
+  onFocus,
+  onBlur,
   ...restProps
 }: TextInputProps) {
   const [fontsLoaded] = useFonts({
@@ -51,6 +55,8 @@ export default function TextoInput({
 
   return (
     <TextInput
+      onFocus={onFocus}
+      onBlur={onBlur}
       inputMode={inputMode}
       placeholder={placeholder}
       value={value}

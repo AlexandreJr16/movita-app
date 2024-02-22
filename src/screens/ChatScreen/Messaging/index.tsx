@@ -14,14 +14,25 @@ const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
   const [chatMessages, setChatMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [variableColor, setVariableColor] = useState("#5A5A5A");
   const [nome, setNome] = useState(
     user.tipoUser == "empresa"
       ? user.Empresa[0].nomeFantasia
       : user.Cliente[0].nome
   );
+
   const flatListRef = useRef(null);
 
   const { name, id } = route.params;
+
+  const focusText = async () => {
+    setVariableColor(null);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    scrollToBottom();
+  };
+  const blurText = async () => {
+    setVariableColor("#5A5A5A");
+  };
 
   useEffect(() => {
     const handleFoundRoom = (roomChats) => {
@@ -57,6 +68,7 @@ const Messaging = ({ route, navigation }) => {
     const timestamp = new Date();
     const hour = timestamp.getHours().toString().padStart(2, "0");
     const mins = timestamp.getMinutes().toString().padStart(2, "0");
+    // timestamp.getHours().toLocaleString();  Eu tenho que fazer alguma coisa assim
 
     const newMessage = {
       id: `${Date.now()}`,
@@ -116,13 +128,20 @@ const Messaging = ({ route, navigation }) => {
             scrollToBottom();
           }}
         />
-        <View style={styles.messaginginputContainer}>
+        <View
+          style={{
+            ...styles.messaginginputContainer,
+            backgroundColor: variableColor,
+          }}
+        >
           <View style={styles.messaginginput}>
             <TextoInput
+              onFocus={focusText}
+              onBlur={blurText}
               weight="regular"
               style={styles.inputMessage}
               value={message}
-              placeholderColor={"#7A7979"}
+              placeholderColor={"#fff"}
               onChangeText={(value) => setMessage(value)}
               placeholder="Digite aqui"
             />

@@ -7,12 +7,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    paddingVertical: 10,
-    backgroundColor: "#D06A52",
+    paddingVertical: 5,
+    backgroundColor: "#A64029",
   },
   txt: {
     color: "white",
-    fontSize: 20,
+    fontSize: 18,
   },
 });
 export default styles;

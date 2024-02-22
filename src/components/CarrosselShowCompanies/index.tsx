@@ -1,6 +1,6 @@
 import { View, FlatList } from "react-native";
 import Texto from "../Default/texto/Texto";
-import Produto from "./Companies";
+import Companies from "./Companies";
 import styles from "./styles";
 import React from "react";
 
@@ -37,7 +37,7 @@ const ShowCompaniesCarrossel = ({
               horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
-                <Produto
+                <Companies
                   color={color}
                   navigation={navigation}
                   produto={item}

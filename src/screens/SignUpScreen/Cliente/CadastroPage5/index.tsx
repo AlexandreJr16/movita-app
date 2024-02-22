@@ -44,7 +44,7 @@ const SignUpScreen5 = ({ navigation }) => {
             street: string;
           }) => data
         )
-        .catch(console.log);
+        .catch();
       if (local) {
         setBairro(local.neighborhood);
         setEstado(local.state);
@@ -62,11 +62,30 @@ const SignUpScreen5 = ({ navigation }) => {
     handleCidade(value);
   };
 
-  const handleSubmit = () => {
-    const isError = ceps == "" || estado == "" || cidade == "" || bairro == "";
+  const handleSubmit = async () => {
+    const local: Local | void = await cep(`${ceps}`)
+      .then(
+        (data: {
+          cep: string;
+          city: string;
+          neighborhood: string;
+          service: string;
+          state: string;
+          street: string;
+        }) => data
+      )
+      .catch(() => {
+        setError("O CEP está errado");
+      });
+
+    const isError =
+      ceps == "" ||
+      estado == "" ||
+      cidade == "" ||
+      bairro == "" ||
+      local == undefined;
     if (isError) {
       setError("Endereço inválido.");
-      console.log("errado");
     } else {
       setSignupUser({
         ...signupUser,

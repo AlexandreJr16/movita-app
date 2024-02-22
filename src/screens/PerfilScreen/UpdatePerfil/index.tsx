@@ -4,7 +4,7 @@ import ShowPerfil from "../../../components/Perfil/ShowPerfil";
 import styles from "./styles";
 import TitleTextPerfil from "../../../components/Perfil/TitleText";
 import InputPerfil from "../../../components/Perfil/Input";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../contexts";
 import ButtonPerfil from "../../../components/Perfil/Button";
 import LoadingIndicator from "../../../components/Default/Loading";
@@ -40,10 +40,9 @@ const UpdatePerfil = ({ navigation }) => {
   );
   const [endereco, setEndereco] = useState<string>(
     user.tipoUser == "empresa"
-      ? `${user.Empresa[0].Endereco.cidade} - ${user.Empresa[0].Endereco.estado}`
-      : `${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
+      ? `${user.Empresa[0].Endereco.cep}`
+      : `${user.Cliente[0].Endereco.cep}`
   );
-  // `${user.Cliente[0].Endereco.bairro} - ${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
   const [cpf, setCpf] = useState(
     user.tipoUser == "empresa" ? user.Empresa[0].cnpj : user.Cliente[0].cpf
   );

@@ -7,7 +7,16 @@ import AuthContext from "../../../contexts";
 const HeaderShowItem = ({
   data,
 }: {
-  data: { title: string; madeBy: string; id: number; liked: boolean };
+  data: {
+    title?: string;
+    subtitle?: string;
+    nota?: string;
+    id: number;
+    liked: boolean;
+    likeObj: any;
+    deleteLikeObj: any;
+    descricao?: string;
+  };
 }) => {
   const [liked, setLiked] = useState<boolean>(false);
   const { likeProject, deleteLikeProject } = useContext(AuthContext);
@@ -23,28 +32,40 @@ const HeaderShowItem = ({
   }, []);
   return (
     <View style={styles.boxCardTop}>
-      <Texto weight="bold" style={styles.titulo}>
-        {data.title}
-      </Texto>
-      <View style={styles.boxTopRightCard}>
-        <View style={styles.fabTitleBox}>
-          <Texto weight="bold" style={styles.fabTitleBox}>
-            {data.madeBy}
+      <View style={styles.containerCard}>
+        <View style={styles.topRightView}>
+          <Texto weight="bold" style={styles.titulo}>
+            {data.title}
+          </Texto>
+          <Texto style={styles.subtitle} weight="bold">
+            {data.subtitle}
           </Texto>
         </View>
-        <Pressable onPress={handleLiked}>
-          <Texto
-            weight="bold"
-            style={
-              liked
-                ? styles.heartBox
-                : { ...styles.heartBox, backgroundColor: "#666" }
-            }
-          >
-            S2
-          </Texto>
-        </Pressable>
+        <View style={styles.boxTopRightCard}>
+          {data.nota ? (
+            <Texto weight="bold" style={styles.fabTitleBox}>
+              {data.nota}
+            </Texto>
+          ) : null}
+          <Pressable onPress={handleLiked}>
+            <Texto
+              weight="bold"
+              style={
+                liked
+                  ? styles.heartBox
+                  : { ...styles.heartBox, backgroundColor: "#666" }
+              }
+            >
+              S2
+            </Texto>
+          </Pressable>
+        </View>
       </View>
+      <Texto weight="regular" style={styles.textParagrafo}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe odio
+        tempora repellat vel, facilis debitis nisi iusto repellendus hic ea
+        nesciunt rerum sequi numquam error vitae quis soluta quod ratione!
+      </Texto>
     </View>
   );
 };

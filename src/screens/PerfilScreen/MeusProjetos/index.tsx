@@ -6,7 +6,6 @@ import TitleTextPerfil from "../../../components/Perfil/TitleText";
 import { lazy, useContext, useEffect, useState, Suspense } from "react";
 import AuthContext from "../../../contexts";
 import React from "react";
-import LoadingIndicator from "../../../components/Default/Loading";
 const ShowProductsCarousel = lazy(
   () => import("../../../components/CarrosselShowProducts")
 );
@@ -17,18 +16,20 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
   const [produtos, setProdutos] = useState([]);
 
   const fetchTopProjects = async () => {
-    const topProjects = await getAllProjetosByCliente(user.id);
-    const esperandoProj = topProjects.filter(
-      (proj) => proj.status == "Esperando confirmação"
-    );
-    const andamentoProj = topProjects.filter(
-      (proj) => proj.status == "Andamento"
-    );
-    const concluidoProj = topProjects.filter(
-      (proj) => proj.status == "Concluído"
-    );
+    const topProjects = await getAllProjetosByCliente();
+    if (topProjects[0]) {
+      const esperandoProj = topProjects.filter(
+        (proj) => proj.status == "Esperando confirmação"
+      );
+      const andamentoProj = topProjects.filter(
+        (proj) => proj.status == "Andamento"
+      );
+      const concluidoProj = topProjects.filter(
+        (proj) => proj.status == "Concluído"
+      );
 
-    setProdutos([esperandoProj, andamentoProj, concluidoProj]);
+      setProdutos([esperandoProj, andamentoProj, concluidoProj]);
+    } else setProdutos([{}, {}, {}]);
   };
   useEffect(() => {
     fetchTopProjects();

@@ -38,12 +38,12 @@ export async function getTopProjects(num: number, setLoading): Promise<any> {
   }
 }
 export async function getAllProjetosByCliente(
-  num: number,
+  token: string,
   setLoading
 ): Promise<any> {
   try {
     setLoading(true);
-    const prods = await auth.getAllProjetosByCliente(1);
+    const prods = await auth.getAllProjetosByCliente(token);
     return prods;
   } catch (error) {
     setLoading(false);

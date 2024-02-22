@@ -72,6 +72,8 @@ const ShowProduct = ({ route, navigation }) => {
     addImageProj(data);
   };
 
+  const addLike = () => {};
+  const deleteLike = () => {};
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={"#2f2f2f"} barStyle="light-content" />
@@ -90,10 +92,13 @@ const ShowProduct = ({ route, navigation }) => {
           <View style={styles.card}>
             <HeaderShowItem
               data={{
-                madeBy: projeto.empresa.nomeFantasia,
+                subtitle: projeto.empresa.nomeFantasia,
                 title: projeto.titulo,
                 id,
                 liked,
+                deleteLikeObj: deleteLike,
+                likeObj: addLike,
+                nota: null,
               }}
             />
             <Texto weight="regular" style={styles.description}>

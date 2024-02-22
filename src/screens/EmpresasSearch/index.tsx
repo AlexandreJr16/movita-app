@@ -8,6 +8,7 @@ import HeaderMyProduct from "../../components/MeusProjetos/Header";
 import AuthContext from "../../contexts";
 import ShowProductsCarousel from "../../components/CarrosselShowProducts";
 import TextoInput from "../../components/Default/texto/TextoInput";
+import ShowCompaniesCarrossel from "../../components/CarrosselShowCompanies";
 
 const EmpresasSearchScreen = ({ navigation }) => {
   const { getTopEmpresas } = useContext(AuthContext);
@@ -33,10 +34,10 @@ const EmpresasSearchScreen = ({ navigation }) => {
           color={"red"}
           title="Projetos Anteriores"
         />
-        <ShowProductsCarousel
+        <ShowCompaniesCarrossel
           navigation={navigation}
           title={"Projetos bem avaliados:"}
-          produtos={produtos[0]}
+          companies={produtos[0]}
         />
       </ScrollView>
     </View>

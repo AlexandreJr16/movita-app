@@ -7,13 +7,10 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#1F1F1F",
-    borderBottomRightRadius: 50,
     paddingVertical: 10,
     marginBottom: 20,
   },
   titleMessage: {
-    maxWidth: "70%",
     marginTop: 20,
     alignSelf: "flex-start",
     paddingHorizontal: 20,

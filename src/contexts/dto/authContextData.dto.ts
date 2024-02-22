@@ -19,7 +19,7 @@ export interface AuthContextData {
     confirmSenha: string;
   });
   getTopProjects?(num: number);
-  getAllProjetosByCliente?(num: number);
+  getAllProjetosByCliente?();
   getRandomProjects?(num: number);
   getTopEmpresas?(num: number);
   getProject?(num: number);

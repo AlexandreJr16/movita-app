@@ -91,8 +91,8 @@ export const AuthProvider = ({ children }) => {
     return await projectsFunctions.getProject(num, setLoading);
   };
 
-  const getAllProjetosByCliente = async (num: number) => {
-    return await projectsFunctions.getAllProjetosByCliente(num, setLoading);
+  const getAllProjetosByCliente = async () => {
+    return await projectsFunctions.getAllProjetosByCliente(token, setLoading);
   };
   const getRandomProjects = async (num: number) => {
     return await projectsFunctions.getRandomProjects(num, setLoading);

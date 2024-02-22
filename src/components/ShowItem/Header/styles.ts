@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
     letterSpacing: 0.16,
   },
   fabTitleBox: {
-    paddingVertical: 2,
-    paddingHorizontal: 5,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 5,
-    backgroundColor: "#8f8f8f",
-    borderRadius: 15,
+    paddingTop: 5,
+    paddingHorizontal: 15,
+    borderRadius: 6,
+    fontSize: 16,
+    borderWidth: 2,
+    borderColor: "#fff",
+    textAlign: "center",
+    color: "#fff",
   },
   heartBox: {
     padding: 5,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    flexDirection: "row",
+    flexDirection: "column",
     marginBottom: 5,
     paddingVertical: 5,
   },
@@ -47,6 +47,26 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     gap: 10,
     flexDirection: "row",
+  },
+  topRightView: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  subtitle: {
+    color: "#959595",
+  },
+  containerCard: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+  textParagrafo: {
+    color: "#fff",
+    fontSize: 13,
+    paddingTop: 20,
   },
 });
 export default styles;

@@ -3,11 +3,17 @@ import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import { Pressable, View } from "react-native";
 
-const ButtonPerfil = ({ onPress }: { onPress?: any }) => {
+const ButtonPerfil = ({
+  onPress,
+  text = "Alterar",
+}: {
+  onPress?: any;
+  text?: string;
+}) => {
   return (
     <Pressable onPress={onPress} style={styles.btn}>
-      <Texto weight="bold" style={styles.txt}>
-        Alterar
+      <Texto weight="regular" style={styles.txt}>
+        {text}
       </Texto>
     </Pressable>
   );
