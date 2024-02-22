@@ -14,6 +14,7 @@ const SplashRoutes: React.FC = () => {
       screenOptions={{
         headerShown: false,
         animation: "fade",
+        gestureEnabled: true,
       }}
     >
       <Stack.Screen name="Main" component={SplashScreen} />

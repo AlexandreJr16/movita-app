@@ -46,6 +46,7 @@ export default function MainScreen({ navigation }) {
           barStyle="light-content"
           translucent={true}
         />
+
         <View style={styles.background}>
           <HeaderMain navigation={navigation} />
           <SelectCategory navigation={navigation} />
