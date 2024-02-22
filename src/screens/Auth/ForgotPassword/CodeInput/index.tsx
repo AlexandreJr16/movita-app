@@ -1,37 +1,34 @@
 import { Pressable, View, StatusBar } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./styles";
-import HeaderCodeInputForgot from "../../../components/Forgot/Header";
-import InputCadastro from "../../../components/Cadastro/Input/InputCadastro";
-import LoginButton from "../../../components/Login/LoginButton/LoginButton";
-import Texto from "../../../components/Default/texto/Texto";
-import AuthContext from "../../../contexts";
+import HeaderCodeInputForgot from "../../../../components/Forgot/Header";
+import Texto from "../../../../components/Default/texto/Texto";
+import InputCadastro from "../../../../components/Cadastro/Input/InputCadastro";
+import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
+import AuthContext from "../../../../contexts";
 
-const ChangePasswordForgot = ({ route, navigation }) => {
-  const { email } = route.params;
-  const { updateSenhaForgot } = useContext(AuthContext);
+const CodeInputForgot = ({ route, navigation }) => {
+  const { sendEmailForgot, verifyCodeForgot } = useContext(AuthContext);
   const [error, setError] = useState();
-  const [senha, setSenha] = useState();
-  const [confirmSenha, setConfirmSenha] = useState();
+  const [code, setCode] = useState();
+  const { email } = route.params;
 
-  const handleSenha = (value) => {
-    setSenha(value);
-  };
-  const handleConfirmSenha = (value) => {
-    setConfirmSenha(value);
+  const handleCode = (value) => {
+    setCode(value);
   };
 
   const handleReenviar = async () => {
-    const dto = { senha, confirmSenha, email };
-    const user = await dto;
+    const dto = { to: email };
+    const user = await sendEmailForgot(dto);
   };
 
   const handleConfirmCode = async () => {
-    const dto = { email, senha, confirmSenha };
-    const user = await updateSenhaForgot(dto);
-    if (user.status == "ok") navigation.navigate("Login");
+    const dto = { email, code };
+    const user = await verifyCodeForgot(dto);
+    if (user.status == "ok") navigation.navigate("ChangePassword", { email });
     else setError(user.error);
   };
+
   return (
     <View
       style={{
@@ -59,15 +56,8 @@ const ChangePasswordForgot = ({ route, navigation }) => {
         )}
       </View>
       <InputCadastro
-        children={"Nova senha:"}
-        func={handleSenha}
-        text={senha}
-        styleContainer={styles.input}
-      />
-      <InputCadastro
-        children={"Confirme senha:"}
-        func={handleConfirmSenha}
-        text={confirmSenha}
+        func={handleCode}
+        text={code}
         styleContainer={styles.input}
       />
       <View style={styles.btnContainer}>
@@ -89,4 +79,4 @@ const ChangePasswordForgot = ({ route, navigation }) => {
     </View>
   );
 };
-export default ChangePasswordForgot;
+export default CodeInputForgot;

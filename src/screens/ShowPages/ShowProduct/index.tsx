@@ -1,17 +1,17 @@
 import { View, StatusBar, Pressable, TouchableOpacity } from "react-native";
-import Texto from "../../components/Default/texto/Texto";
+import Texto from "../../../components/Default/texto/Texto";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
-import ImagemBuffer from "../../components/Default/Imagem";
-import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
-import AuthContext from "../../contexts";
-import HeaderShowItem from "../../components/ShowItem/Header";
-import LoadingIndicator from "../../components/Default/Loading";
-import FeedBackShowProduct from "../../components/ShowItem/Feedback";
-import AddModel from "../../components/Modelo3D/AddModel";
-import MovelDefault from "../../assents/defaults/Projeto";
-import ImagePickerModal from "../../components/ImageModal";
+import ImagemBuffer from "../../../components/Default/Imagem";
+import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
+import AuthContext from "../../../contexts";
+import HeaderShowItem from "../../../components/ShowItem/Header";
+import LoadingIndicator from "../../../components/Default/Loading";
+import FeedBackShowProduct from "../../../components/ShowItem/Feedback";
+import AddModel from "../../../components/Modelo3D/AddModel";
+import MovelDefault from "../../../assents/defaults/Projeto";
+import ImagePickerModal from "../../../components/ImageModal";
 
 type Projeto = {
   id: number;

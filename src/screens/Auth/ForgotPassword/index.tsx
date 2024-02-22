@@ -1,11 +1,11 @@
 import { View, StatusBar } from "react-native";
-import Texto from "../../components/Default/texto/Texto";
+import Texto from "../../../components/Default/texto/Texto";
 import React, { useState, useContext } from "react";
 import styles from "./styles";
-import HeaderForgotScreen from "../../components/Forgot/Header";
-import InputCadastro from "../../components/Cadastro/Input/InputCadastro";
-import LoginButton from "../../components/Login/LoginButton/LoginButton";
-import AuthContext from "../../contexts";
+import HeaderForgotScreen from "../../../components/Forgot/Header";
+import InputCadastro from "../../../components/Cadastro/Input/InputCadastro";
+import LoginButton from "../../../components/Login/LoginButton/LoginButton";
+import AuthContext from "../../../contexts";
 
 const ForgotScreen = ({ navigation }) => {
   const { sendEmailForgot } = useContext(AuthContext);

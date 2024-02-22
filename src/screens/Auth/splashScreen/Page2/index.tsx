@@ -1,8 +1,8 @@
 import { View, StatusBar } from "react-native";
-import Texto from "../../../components/Default/texto/Texto";
-import Button from "../../../components/splashScreen/button/Button";
-import ImageProgress2 from "../../../assents/Splash/ImageProgress2";
-import SplashImage2 from "../../../assents/Splash/SplashImage2";
+import Texto from "../../../../components/Default/texto/Texto";
+import Button from "../../../../components/splashScreen/button/Button";
+import ImageProgress2 from "../../../../assents/Splash/ImageProgress2";
+import SplashImage2 from "../../../../assents/Splash/SplashImage2";
 
 import styles from "../style";
 import React from "react";

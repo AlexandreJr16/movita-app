@@ -2,15 +2,12 @@ import { View, StatusBar, Pressable, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../../contexts";
-import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
-import ImagemBuffer from "../../../components/Default/Imagem";
-import ImagePickerModal from "../../../components/ImageModal";
-import MovelDefault from "../../../assents/defaults/Projeto";
-import LoadingIndicator from "../../../components/Default/Loading";
-import ButtonPerfil from "../../../components/Perfil/Button";
-import HeaderShowItem from "../../../components/ShowItem/Header";
-import Texto from "../../../components/Default/texto/Texto";
+import AuthContext from "../../../../contexts";
+import HeaderPerfil from "../../../../components/Perfil/HeaderPerfil";
+import ImagemBuffer from "../../../../components/Default/Imagem";
+import MovelDefault from "../../../../assents/defaults/Projeto";
+import HeaderShowItem from "../../../../components/ShowItem/Header";
+import ButtonPerfil from "../../../../components/Perfil/Button";
 
 type Empresa = {
   img: any;

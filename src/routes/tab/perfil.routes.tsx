@@ -6,8 +6,8 @@ import UpdatePerfil from "../../screens/PerfilScreen/UpdatePerfil";
 import UpdateSenha from "../../screens/PerfilScreen/UpdateSenha";
 import MeusProjetos from "../../screens/PerfilScreen/MeusProjetos";
 import MeusFavoritos from "../../screens/PerfilScreen/MeusFavoritos";
-import ShowProduct from "../../screens/ShowProduct";
-import ShowEmpresaPerfil from "../../screens/ShowEmpresa";
+import ShowProduct from "../../screens/ShowPages/ShowProduct";
+import ShowEmpresaPerfil from "../../screens/ShowPages/ShowEmpresa";
 
 const PerfilRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();

@@ -1,19 +1,19 @@
 import { View, ScrollView, Pressable, StatusBar } from "react-native";
-import Texto from "../../components/Default/texto/Texto";
+import Texto from "../../../components/Default/texto/Texto";
 import styles from "./styles";
 import { useState, useContext, useEffect } from "react";
-import Carrossel from "../../components/Login/Carrossel/Carrossel";
-import Logo from "../../components/Default/Logo/Logo";
-import InputLogin from "../../components/Login/Input/InputLogin";
-import UserIcon from "../../assents/Login/UserIcon";
-import SecurityIcon from "../../assents/Login/SecurityIcon";
-import LoginButton from "../../components/Login/LoginButton/LoginButton";
+import Carrossel from "../../../components/Login/Carrossel/Carrossel";
+import Logo from "../../../components/Default/Logo/Logo";
+import InputLogin from "../../../components/Login/Input/InputLogin";
+import UserIcon from "../../../assents/Login/UserIcon";
+import SecurityIcon from "../../../assents/Login/SecurityIcon";
+import LoginButton from "../../../components/Login/LoginButton/LoginButton";
 import React from "react";
-import AuthContext from "../../contexts";
-import ErrorAlert from "../../components/ErrorAlert/ErrorAlert";
-import LoadingIndicator from "../../components/Default/Loading";
+import AuthContext from "../../../contexts";
+import ErrorAlert from "../../../components/ErrorAlert/ErrorAlert";
+import LoadingIndicator from "../../../components/Default/Loading";
 import * as DocumentPicker from "expo-document-picker";
-import AddModel from "../../components/Modelo3D/AddModel";
+import AddModel from "../../../components/Modelo3D/AddModel";
 
 const Login = ({ navigation }) => {
   const { signIn, loading, signed } = useContext(AuthContext);

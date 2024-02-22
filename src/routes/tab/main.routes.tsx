@@ -1,13 +1,13 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "../../screens/Login";
 import MainScrenn from "../../screens/MainScreen";
-import ShowProduct from "../../screens/ShowProduct";
-import MeusProjetosScreen from "../../screens/ProjetosSearch";
-import EmpresasSearchScreen from "../../screens/EmpresasSearch";
-import ShowAnotherPerfil from "../../screens/ShowEmpresa";
-import ShowEmpresaPerfil from "../../screens/ShowEmpresa";
-import ShowParseEmpresa from "../../screens/ShowEmpresa/ShowParseEmpresa";
+import ShowProduct from "../../screens/ShowPages/ShowProduct";
+import MeusProjetosScreen from "../../screens/SearchTopics/ProjetosSearch";
+import EmpresasSearchScreen from "../../screens/SearchTopics/EmpresasSearch";
+
+import ShowModel from "../../screens/ShowPages/ShowModel";
+import ShowParseEmpresa from "../../screens/ShowPages/ShowEmpresa/ShowParseEmpresa";
+import ShowEmpresaPerfil from "../../screens/ShowPages/ShowEmpresa";
 
 const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -15,7 +15,7 @@ const MainRoutes: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName="Main"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false, animation: "fade_from_bottom" }}
     >
       <Stack.Screen name="Main" component={MainScrenn} />
       <Stack.Screen name="Product" component={ShowProduct} />
@@ -23,6 +23,7 @@ const MainRoutes: React.FC = () => {
       <Stack.Screen name="PerfilEmpresa" component={ShowEmpresaPerfil} />
       <Stack.Screen name="ProjetoSearch" component={MeusProjetosScreen} />
       <Stack.Screen name="EmpresaSearch" component={EmpresasSearchScreen} />
+      <Stack.Screen name="ModelShow" component={ShowModel} />
     </Stack.Navigator>
   );
 };

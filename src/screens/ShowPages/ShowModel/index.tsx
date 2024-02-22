@@ -1,16 +1,16 @@
 import { FlatList, ScrollView, StatusBar, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles";
-import Texto from "../../components/Default/texto/Texto";
-import LoadingIndicator from "../../components/Default/Loading";
-import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
-import ShowPerfil from "../../components/Perfil/ShowPerfil";
-import AuthContext from "../../contexts";
-import ShowMainDataPerfil from "../../components/AnotherPerfil/ShowPerfil";
-import ShowProductsCarousel from "../../components/CarrosselShowProducts";
-import FeedBackShowProduct from "../../components/ShowItem/Feedback";
+import Texto from "../../../components/Default/texto/Texto";
+import LoadingIndicator from "../../../components/Default/Loading";
+import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
+import ShowPerfil from "../../../components/Perfil/ShowPerfil";
+import AuthContext from "../../../contexts";
+import ShowMainDataPerfil from "../../../components/AnotherPerfil/ShowPerfil";
+import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
+import FeedBackShowProduct from "../../../components/ShowItem/Feedback";
 
-const ShowEmpresaPerfil = ({ route, navigation }) => {
+const ShowModel = ({ route, navigation }) => {
   const id = route.params.id;
   const { getEmpresasById, loading } = useContext(AuthContext);
   const [user, setUser] = useState<any>(undefined);
@@ -64,4 +64,4 @@ const ShowEmpresaPerfil = ({ route, navigation }) => {
     </View>
   );
 };
-export default ShowEmpresaPerfil;
+export default ShowModel;

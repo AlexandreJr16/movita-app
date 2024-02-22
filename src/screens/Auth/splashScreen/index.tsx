@@ -1,11 +1,11 @@
 import { View, StatusBar } from "react-native";
-import Texto from "../.././components/Default/texto/Texto";
-import Button from "../.././components/splashScreen/button/Button";
-import ImageProgress from "../.././assents/Splash/ImageProgress";
-import SplashImage from "../.././assents/Splash/SplashImage";
 
 import styles from "./style";
 import React from "react";
+import SplashImage from "../../../assents/Splash/SplashImage";
+import Texto from "../../../components/Default/texto/Texto";
+import ImageProgress from "../../../assents/Splash/ImageProgress";
+import Button from "../../../components/splashScreen/button/Button";
 
 const SplashScreen = ({ navigation }) => {
   const handlePages = () => {
