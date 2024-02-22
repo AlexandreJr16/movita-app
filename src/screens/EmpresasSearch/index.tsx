@@ -29,11 +29,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
   return (
     <View style={styles.background}>
       <ScrollView style={styles.background}>
-        <HeaderMyProduct
-          navigation={navigation}
-          color={"red"}
-          title="Projetos Anteriores"
-        />
+        <HeaderMyProduct navigation={navigation} title="Projetos Anteriores" />
         <ShowCompaniesCarrossel
           navigation={navigation}
           title={"Projetos bem avaliados:"}

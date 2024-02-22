@@ -31,7 +31,6 @@ const ShowParseEmpresa = ({ route, navigation }) => {
     const fetchData = async () => {
       try {
         const proj = await getEmpresasById(id);
-        console.log({ proj });
         setEmpresa(proj);
       } catch (error) {
         console.error("Erro ao obter o projeto:", error);

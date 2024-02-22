@@ -39,17 +39,23 @@ const ShowEmpresaPerfil = ({ route, navigation }) => {
               />
               <View style={styles.textContainer}>
                 <Texto weight="regular" style={styles.title}>
-                  Ola
+                  Comentários
                 </Texto>
                 <Texto weight="regular" style={styles.blueText}>
                   Ver mais
                 </Texto>
               </View>
-              <ScrollView style={{ flex: 1, width: "100%" }}>
-                {user.feedback.map((item: any, i: number) => (
-                  <FeedBackShowProduct key={i} feedback={item} />
-                ))}
-              </ScrollView>
+              {user.feedback[0] ? (
+                <ScrollView style={{ flex: 1, width: "100%" }}>
+                  {user.feedback.map((item: any, i: number) => (
+                    <FeedBackShowProduct key={i} feedback={item} />
+                  ))}
+                </ScrollView>
+              ) : (
+                <Texto weight="bold" style={{ color: "#fff" }}>
+                  Nenhum item
+                </Texto>
+              )}
             </View>
           </React.Fragment>
         ) : null}

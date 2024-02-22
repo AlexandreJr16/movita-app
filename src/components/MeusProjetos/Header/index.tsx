@@ -17,12 +17,12 @@ import TextoInput from "../../Default/texto/TextoInput";
 
 const HeaderMyProduct = ({
   navigation,
-  color,
+  color = "blue",
   title,
   handleSearch,
 }: {
   navigation: any;
-  color: "blue" | "red";
+  color?: "blue" | "red";
   title: any;
   handleSearch?: any;
 }) => {

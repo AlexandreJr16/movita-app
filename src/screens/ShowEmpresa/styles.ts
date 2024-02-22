@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.18,
   },
   blueText: {
-    color: "#36A5BF",
+    color: "#FFC501",
     fontSize: 16,
     lineHeight: 18.4,
     letterSpacing: 0.16,
