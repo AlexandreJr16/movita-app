@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   messaContainer: {
     flex: 1,
     backgroundColor: "#f2f2f2",
-    paddingTop: 40,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
   },
@@ -39,6 +38,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   messaginginput: {
+    flex: 1,
     width: "100%",
     backgroundColor: "#8D8D8D",
     display: "flex",
@@ -50,14 +50,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   messagingbuttonContainer: {
-    marginLeft: "auto",
     backgroundColor: "#fff",
     padding: 10,
-    borderRadius: 100,
-    borderColor: "#36A5BF",
-    borderWidth: 3,
+    margin: 5,
+    borderRadius: 20,
   },
   inputMessage: {
+    color: "#fff",
     flex: 1,
     padding: 10,
   },

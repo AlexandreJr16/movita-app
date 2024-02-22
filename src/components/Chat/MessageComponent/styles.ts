@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   mmessageWrapper: {
     width: "100%",
     alignItems: "flex-start",
-    marginBottom: 15,
+    marginBottom: 0,
   },
   mmessage: {
     maxWidth: "50%",

@@ -5,13 +5,41 @@ import { styles } from "./styles";
 import AuthContext from "../../../contexts";
 import Texto from "../../Default/texto/Texto";
 
-export default function MessageComponent({ item }: { item: any }) {
+type Room = {
+  id: number;
+  userId: number;
+  userId2: number;
+};
+type MessageReceived = {
+  createAt: string;
+  id: number;
+  message: string;
+  room: Room;
+  userName: string;
+};
+type CreateNowMessage = {
+  id: string;
+  message: string;
+  roomId: number;
+  time: string;
+  userName: string;
+};
+
+export default function MessageComponent({
+  item,
+  different,
+}: {
+  item: MessageReceived | CreateNowMessage;
+  different: boolean;
+}) {
   const { user } = useContext(AuthContext);
   const nome =
     user.tipoUser == "empresa"
       ? user.Empresa[0].nomeFantasia
       : user.Cliente[0].nome;
   const status = item.userName !== nome;
+
+  useEffect(() => {});
 
   return (
     <View>
@@ -35,9 +63,19 @@ export default function MessageComponent({ item }: { item: any }) {
             </Texto>
           </View>
         </View>
-        <Texto weight="regular" style={{ marginLeft: 40, color: "#000" }}>
-          {item.time}
-        </Texto>
+        {different ? (
+          <Texto
+            weight="regular"
+            style={{ left: 0, color: "#9f9f9f", fontSize: 11 }}
+          >
+            {"createAt" in item
+              ? new Date(item.createAt).toLocaleString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : item.time}
+          </Texto>
+        ) : null}
       </View>
     </View>
   );
