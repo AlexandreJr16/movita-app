@@ -19,7 +19,7 @@ const PerfilScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.bg}>
       <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
-      <HeaderPerfil visibleLogo={true} />
+      <HeaderPerfil visibleLogo={false} navigation={navigation} />
       <ShowPerfil />
       <View style={styles.container}>
         <SelectButton

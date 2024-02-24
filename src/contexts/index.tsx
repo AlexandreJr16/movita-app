@@ -135,6 +135,12 @@ export const AuthProvider = ({ children }) => {
   const deleteLikeProject = async (projetoId: number) => {
     return await likeFunctions.deleteLikeProject(projetoId, token);
   };
+  const likeEmpresa = async (empresaId: number) => {
+    return await likeFunctions.likeEmpresa(empresaId, token);
+  };
+  const deleteLikeEmpresa = async (empresaId: number) => {
+    return await likeFunctions.deleteLikeEmpresa(empresaId, token);
+  };
 
   // Funções Model ------------------------------------------------------------------------------------------------
   const addModel = async (dto: { modeloBin: string; projetoId: number }) => {
@@ -160,25 +166,27 @@ export const AuthProvider = ({ children }) => {
     setSignupUser,
   };
   const didLogin = {
-    signed,
-    user,
-    token,
-    loading,
-    logout,
-    updateUser,
-    updateSenha,
-    getTopProjects,
-    getAllProjetosByCliente,
-    getRandomProjects,
-    getTopEmpresas,
-    getProject,
-    addImageUser,
-    deleteLikeProject,
-    likeProject,
-    getFavProjects,
-    getEmpresasById,
-    addModel,
-    addImageProj,
+    signed: signed,
+    user: user,
+    token: token,
+    loading: loading,
+    logout: logout,
+    updateUser: updateUser,
+    updateSenha: updateSenha,
+    getTopProjects: getTopProjects,
+    getAllProjetosByCliente: getAllProjetosByCliente,
+    getRandomProjects: getRandomProjects,
+    getTopEmpresas: getTopEmpresas,
+    getProject: getProject,
+    addImageUser: addImageUser,
+    deleteLikeProject: deleteLikeProject,
+    likeProject: likeProject,
+    deleteLikeEmpresa: deleteLikeEmpresa,
+    likeEmpresa: likeEmpresa,
+    getFavProjects: getFavProjects,
+    getEmpresasById: getEmpresasById,
+    addModel: addModel,
+    addImageProj: addImageProj,
   };
 
   return (

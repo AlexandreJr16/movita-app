@@ -21,18 +21,21 @@ const HeaderPerfil = ({
   const { user } = useContext(AuthContext);
   return (
     <View style={styles.header}>
-      <Pressable
-        style={visibleLogo ? { opacity: 0 } : { ...styles.logo }}
-        onPress={() => {
-          try {
-            navigation.goBack();
-          } catch (error) {
-            console.log("Apenas tentou voltar mais que podia");
-          }
-        }}
-      >
-        <Arrow color={color} />
-      </Pressable>
+      {navigation ? (
+        <Pressable
+          style={visibleLogo ? { opacity: 0 } : { ...styles.logo }}
+          onPress={() => {
+            try {
+              navigation.goBack();
+            } catch (error) {
+              console.log("Apenas tentou voltar mais que podia");
+            }
+          }}
+        >
+          <Arrow color={color} />
+        </Pressable>
+      ) : null}
+
       <Pressable style={styles.logo}>
         <Logo color={color}></Logo>
       </Pressable>

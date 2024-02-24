@@ -19,11 +19,9 @@ const HeaderShowItem = ({
   };
 }) => {
   const [liked, setLiked] = useState<boolean>(false);
-  const { likeProject, deleteLikeProject } = useContext(AuthContext);
+  const { likeObj, deleteLikeObj } = data;
   const handleLiked = async () => {
-    const func = liked
-      ? await deleteLikeProject(data.id)
-      : await likeProject(data.id);
+    const func = liked ? await deleteLikeObj(data.id) : await likeObj(data.id);
     setLiked(!liked);
   };
 

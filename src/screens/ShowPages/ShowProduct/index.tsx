@@ -47,7 +47,14 @@ const ShowProduct = ({ route, navigation }) => {
   const color = route.params.color;
 
   //Usa o context para pegar as informações e funções que podem ser acessadas globalmente
-  const { getProject, loading, user, addImageProj } = useContext(AuthContext);
+  const {
+    getProject,
+    loading,
+    user,
+    addImageProj,
+    likeProject,
+    deleteLikeProject,
+  } = useContext(AuthContext);
 
   //UseStates
   const [projeto, setProjeto] = useState<Projeto>();
@@ -83,10 +90,14 @@ const ShowProduct = ({ route, navigation }) => {
     addImageProj(data);
   };
 
-  //Função que ainda necessita do processamento do backend
-  const addLike = () => {};
-  //Função que ainda necessita do backend
-  const deleteLike = () => {};
+  //Função para adicionar like
+  const addLike = (value) => {
+    likeProject(value);
+  };
+  //Função para deletar like
+  const deleteLike = (value) => {
+    deleteLikeProject(value);
+  };
 
   return (
     <ScrollView style={styles.container}>

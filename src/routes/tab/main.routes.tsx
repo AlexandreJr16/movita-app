@@ -4,7 +4,6 @@ import MainScrenn from "../../screens/TabPages/MainScreen";
 import ShowProduct from "../../screens/ShowPages/ShowProduct";
 
 import ShowModel from "../../screens/ShowPages/ShowModel";
-import ShowParseEmpresa from "../../screens/ShowPages/ShowEmpresa/ShowParseEmpresa";
 import ShowEmpresaPerfil from "../../screens/ShowPages/ShowEmpresa";
 import MeusProjetosScreen from "../../screens/SearchPages/ProjetosSearch";
 import EmpresasSearchScreen from "../../screens/SearchPages/EmpresasSearch";
@@ -24,7 +23,6 @@ const MainRoutes: React.FC = () => {
     >
       <Stack.Screen name="Main" component={MainScrenn} />
       <Stack.Screen name="Product" component={ShowProduct} />
-      <Stack.Screen name="ParseEmpresa" component={ShowParseEmpresa} />
       <Stack.Screen name="PerfilEmpresa" component={ShowEmpresaPerfil} />
       <Stack.Screen name="ProjetoSearch" component={MeusProjetosScreen} />
       <Stack.Screen name="EmpresaSearch" component={EmpresasSearchScreen} />

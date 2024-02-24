@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Image } from "react-native";
-import Logo from "../../Default/Logo/Logo";
 import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import AuthContext from "../../../contexts";
@@ -8,6 +7,7 @@ import { Buffer } from "buffer";
 import ImagemBuffer from "../../Default/Imagem";
 import { SafeAreaView } from "react-native-safe-area-context";
 import UserDefault from "../../../assents/defaults/User";
+import Logo from "../../../assents/Perfil/Logo";
 
 const HeaderMain = ({ navigation }: { navigation: any }) => {
   const [name, setName] = useState<string>();

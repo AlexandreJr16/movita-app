@@ -32,7 +32,7 @@ const HeaderMyProduct = ({
 
   return (
     <View style={{ ...styles.headerCard }}>
-      <HeaderPerfil visiblePerfil={true} navigation={navigation} />
+      <HeaderPerfil visiblePerfil={true} />
       <Texto style={styles.titleMessage} weight="bold">
         {title}
       </Texto>

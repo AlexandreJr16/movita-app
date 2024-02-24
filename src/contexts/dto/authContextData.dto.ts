@@ -33,6 +33,8 @@ export interface AuthContextData {
   sendEmailForgot?(dto: { to: string });
   deleteLikeProject?(projetoId: number);
   likeProject?(projetoId: number);
+  likeEmpresa?(empresaId: number);
+  deleteLikeEmpresa?(empresaId: number);
   getFavProjects?();
   getEmpresasById?(id: number);
   signupUser?: signupUser;
