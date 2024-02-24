@@ -11,10 +11,13 @@ import AuthContext from "../../../../contexts";
 
 const UpdateSenha = ({ navigation }) => {
   const { updateSenha, loading } = useContext(AuthContext);
+
+  //UseStates
   const [senhaAntiga, setSenhaAntiga] = useState<string>();
   const [senhaNova, setSenhaNova] = useState<string>();
   const [confirmSenha, setConfirmSenha] = useState<string>();
 
+  //Handle dos  useStates
   const handleSenhaAntiga = (value: any) => {
     setSenhaAntiga(value);
   };
@@ -24,6 +27,8 @@ const UpdateSenha = ({ navigation }) => {
   const handleConfirmSenha = (value: any) => {
     setConfirmSenha(value);
   };
+
+  //Faz o submit para alterar a senha
   const handleSubmit = async () => {
     const dto = {
       senhaAtual: senhaAntiga,
@@ -32,6 +37,8 @@ const UpdateSenha = ({ navigation }) => {
     };
     console.log(dto);
     const updateUser = await updateSenha(dto);
+
+    //Se estiver tudo ok -> volta ao menu
     if (updateUser.status == "ok") {
       navigation.goBack();
     }

@@ -12,16 +12,18 @@ const ModelosSearch = ({ navigation }) => {
   const { getTopProjects } = useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const topProjects = await getTopProjects(10);
-        setProdutos([topProjects]);
-      } catch (error) {
-        console.error("Erro ao obter os projetos:", error);
-      }
-    };
+  // Faz o get dos projetos
+  const fetchData = async () => {
+    try {
+      const topProjects = await getTopProjects(10);
+      setProdutos([topProjects]);
+    } catch (error) {
+      console.error("Erro ao obter os projetos:", error);
+    }
+  };
 
+  //Executa ao renderizar página
+  useEffect(() => {
     fetchData();
   }, []);
   return (

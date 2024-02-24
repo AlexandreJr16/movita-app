@@ -14,16 +14,18 @@ const EmpresasSearchScreen = ({ navigation }) => {
   const { getTopEmpresas } = useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const topEmpresas = await getTopEmpresas(10);
-        setProdutos([topEmpresas]);
-      } catch (error) {
-        console.error("Erro ao obter os projetos:", error);
-      }
-    };
+  //Get de dados dos projetos
+  const fetchData = async () => {
+    try {
+      const topEmpresas = await getTopEmpresas(10);
+      setProdutos([topEmpresas]);
+    } catch (error) {
+      console.error("Erro ao obter os projetos:", error);
+    }
+  };
 
+  //Executa ao renderizar página
+  useEffect(() => {
     fetchData();
   }, []);
   return (

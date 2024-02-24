@@ -115,6 +115,7 @@ const Messaging = ({ route, navigation }) => {
     scrollToBottom();
   };
 
+  //Scrolar para o fim do bate papo
   const scrollToBottom = () => {
     if (flatListRef.current) {
       flatListRef.current.scrollToEnd({ animated: true });

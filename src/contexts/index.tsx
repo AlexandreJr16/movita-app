@@ -25,24 +25,29 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [signupUser, setSignupUser] = useState<signupUser>({} as signupUser);
 
-  useEffect(() => {
-    async function loadStorageData() {
-      try {
-        const storageToken = await AsyncStorage.getItem("@RNAuth:token");
-        const cachedUserData = await AsyncStorage.getItem("userData");
+  //Faz o carregamento dos Dados salvos localmente
+  async function loadStorageData() {
+    try {
+      //Get dos dados guardados localmente relacionados ao Token e ao user
+      const storageToken = await AsyncStorage.getItem("@RNAuth:token");
+      const cachedUserData = await AsyncStorage.getItem("userData");
 
-        if (storageToken && cachedUserData) {
-          setToken(storageToken);
-          setUser(JSON.parse(cachedUserData));
-          // await getUser(storageToken);
-        }
-      } catch (e) {
-      } finally {
-        await SplashScreen.hideAsync();
+      if (storageToken && cachedUserData) {
+        //Set do Token e User
+        setToken(storageToken);
+        setUser(JSON.parse(cachedUserData));
       }
+    } catch (e) {
+    } finally {
+      await SplashScreen.hideAsync();
     }
+  }
+
+  //Executa ao APP ser renderizado inicalmente
+  useEffect(() => {
     loadStorageData();
   }, []);
+
   // Funções auth --------------------------------------------------------------------------------------
   const signIn = async (
     email: string,

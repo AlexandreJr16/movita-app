@@ -23,10 +23,26 @@ const Chat = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState();
 
-  const handleSearch = (value) => {
+  //Debounce para melhorar a perfomace da pesquisa
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return function (...args) {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
+  //handleSearch para alterar o valor a ser pesquisado
+  const handleSearch = debounce((value) => {
     filterRooms(value);
     setSearch(value);
-  };
+  }, 300);
+
+  //filterRooms para filtrar as salas de conversa de acordo com o handleSearch
   const filterRooms = (searchString) => {
     const filteredRooms = savedRooms.filter((savedRooms) =>
       savedRooms.name.toLowerCase().includes(searchString.toLowerCase())
@@ -34,6 +50,7 @@ const Chat = ({ navigation }) => {
     setRooms(filteredRooms);
   };
 
+  //Use effect que ao abrir a página de conversa ele procura a lista de salas de papo papo do user
   useEffect(() => {
     const handleRoomsList = (newRooms) => {
       setRooms(newRooms);
@@ -50,12 +67,13 @@ const Chat = ({ navigation }) => {
     };
   }, []);
 
+  //handle para mudar a visibilidade do Modal
   const openChatModal = () => {
     setVisible(true);
   };
-
   const keyExtractor = (item) => item.id.toString();
 
+  //Função que retorna o item que renderiza a pré-visualização dos bate papos
   const renderChatItem = ({ item }) => (
     <ChatComponent navigation={navigation} item={item} />
   );
@@ -87,6 +105,7 @@ const Chat = ({ navigation }) => {
         )}
       </View>
 
+      {/* Altera a visualizaçãpo do modal para criar uma nova sala de bate papo */}
       {visible && <ChatModal setVisible={setVisible} visible={visible} />}
       <TouchableOpacity
         style={styles.createButton}

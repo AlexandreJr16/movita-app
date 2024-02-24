@@ -1,7 +1,4 @@
 import { useState, useEffect, createContext } from "react";
-import * as auth from "../service/index";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as SplashScreen from "expo-splash-screen";
 
 export const AuthContex = createContext({});
 
@@ -12,3 +9,5 @@ export const useAuth = () => {
 
   return { user, setUser, token, setToken, loading, setLoading };
 };
+
+//Se eu te falar que nem eu lembro oq é isso

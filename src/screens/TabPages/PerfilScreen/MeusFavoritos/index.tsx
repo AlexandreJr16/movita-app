@@ -13,6 +13,8 @@ const ShowProductsCarousel = lazy(
 const MeusFavoritos = ({ navigation }: { navigation: any }) => {
   const { getFavProjects } = useContext(AuthContext);
   const [projetos, setProjetos] = useState();
+
+  //get da api dos projetos favoritos
   const getFav = async () => {
     const likes = await getFavProjects();
     const proj = likes ? likes.map((obj) => obj.projeto) : null;

@@ -15,12 +15,16 @@ const ShowModel = ({ route, navigation }) => {
   const { getEmpresasById, loading } = useContext(AuthContext);
   const [user, setUser] = useState<any>(undefined);
 
-  useEffect(() => {
-    const getEmpresa = async () => {
-      const user = await getEmpresasById(id);
+  //Faz o Get dos dados da empresa
+  const getEmpresa = async () => {
+    //O backend precisa retornar o modelo 3d e conseguir renderizar de alguma forma aqui
+    const user = await getEmpresasById(id);
 
-      setUser(user);
-    };
+    setUser(user);
+  };
+
+  //Executa quando a página é renderizada
+  useEffect(() => {
     getEmpresa();
   }, []);
   return (

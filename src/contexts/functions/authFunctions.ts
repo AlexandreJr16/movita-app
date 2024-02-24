@@ -1,39 +1,64 @@
-import * as auth from "../../service/index";
+import * as authService from "../../service/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+//SIM, IHAGO, EU DEIXEI O CHAT GPT COMENTAR PRA MIM
+
+/**
+ * Realiza o login do usuário.
+ * @param {string} email - O endereço de e-mail do usuário.
+ * @param {string} senha - A senha do usuário.
+ * @param {Function} setToken - Função para atualizar o token no estado.
+ * @param {Function} getUser - Função para obter informações do usuário.
+ * @param {Function} setLoading - Função para definir o estado de carregamento.
+ * @returns {Promise<Object>} - Uma Promise que resolve com o objeto de resposta.
+ */
 export const signIn = async (email, senha, setToken, getUser, setLoading) => {
   try {
     setLoading(true);
-    const response = await auth.signIn(email, senha);
+    const response = await authService.signIn(email, senha);
+
     if (response.token) {
       setToken(response.token);
       await AsyncStorage.setItem("@RNAuth:token", response.token);
-
       await getUser(response.token);
-      setLoading(false);
-    } else {
-      setLoading(false);
-      return response;
     }
+
+    return response;
   } catch (error) {
+    console.error("Erro no login:", error);
+  } finally {
     setLoading(false);
   }
 };
 
+/**
+ * Realiza o logout do usuário.
+ * @param {Function} setUser - Função para limpar as informações do usuário no estado.
+ */
 export const logout = async (setUser) => {
-  await AsyncStorage.clear().then(() => {
+  try {
+    await AsyncStorage.clear();
     setUser(null);
-  });
+  } catch (error) {
+    console.error("Erro no logout:", error);
+  }
 };
+
+/**
+ * Realiza o cadastro do usuário.
+ * @param {Object} userInfo - As informações do usuário a serem cadastradas.
+ * @param {Function} setLoading - Função para definir o estado de carregamento.
+ * @param {Function} setToken - Função para atualizar o token no estado.
+ * @returns {Promise<Object>} - Uma Promise que resolve com o objeto de resposta.
+ */
 
 export const signUp = async (userInfo, setLoading, setToken) => {
   try {
     setLoading(true);
-    const response = await auth.signUp(userInfo);
+    const response = await authService.signUp(userInfo);
     return response;
   } catch (error) {
     console.error("Erro no cadastro:", error);
-    setLoading(false);
   } finally {
     setLoading(false);
     setToken("Non-Resp-butCad");

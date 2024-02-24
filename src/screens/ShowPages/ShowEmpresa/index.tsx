@@ -14,12 +14,15 @@ const ShowEmpresaPerfil = ({ route, navigation }) => {
   const { getEmpresasById, loading } = useContext(AuthContext);
   const [user, setUser] = useState<any>(undefined);
 
-  useEffect(() => {
-    const getEmpresa = async () => {
-      const user = await getEmpresasById(id);
+  //Faz o get dos dados da empresa pelo Id
+  const getEmpresa = async () => {
+    const user = await getEmpresasById(id);
 
-      setUser(user);
-    };
+    setUser(user);
+  };
+
+  //Executa quando a página é renderizada
+  useEffect(() => {
     getEmpresa();
   }, []);
   return (

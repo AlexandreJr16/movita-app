@@ -1,4 +1,4 @@
-import { View, StatusBar, Pressable, TouchableOpacity } from "react-native";
+import { View, StatusBar } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
@@ -17,28 +17,35 @@ type Empresa = {
   nota: any;
 };
 
+//Tela de pré-visualização da empresa, provavelmente vai ser deltada
 const ShowParseEmpresa = ({ route, navigation }) => {
   const id = route.params.id;
   const color = route.params.color;
   const { getEmpresasById } = useContext(AuthContext);
   const [empresa, setEmpresa] = useState<Empresa>();
-  const [visible, setVisible] = useState<boolean>(false);
 
+  //Função que busca os dados da empresa pelo ID
+  const fetchData = async () => {
+    try {
+      const proj = await getEmpresasById(id);
+      setEmpresa(proj);
+    } catch (error) {
+      console.error("Erro ao obter o projeto:", error);
+    }
+  };
+
+  //Executa quando a tela é renderizada
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const proj = await getEmpresasById(id);
-        setEmpresa(proj);
-      } catch (error) {
-        console.error("Erro ao obter o projeto:", error);
-      }
-    };
-
     fetchData();
   }, []);
 
+  //Função para adicionar like a empresa (Eu real esqueci de preencher isso e não lembro como faz isso)
   const addLike = () => {};
+
+  //Função para deletar like
   const deleteLike = () => {};
+
+  //Função para ir para a página que mostra as informações completas da empresa
   const handlePage = () => {
     navigation.navigate("PerfilEmpresa", { id: id, color: color });
   };

@@ -15,6 +15,7 @@ export default function MainScreen({ navigation }) {
     useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
 
+  //Faz o get da Api quando a página é renderizada e seta os produtos
   useEffect(() => {
     const fetchData = async () => {
       try {

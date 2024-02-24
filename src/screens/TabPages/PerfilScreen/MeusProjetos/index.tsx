@@ -15,6 +15,8 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
 
   const [produtos, setProdutos] = useState([]);
 
+  //get da api dos projetos do usuarios e filtra em 3 tipos: esperando confirmação, andamento e concluído
+  //Passível de alterações futuras de acordo com a quantidade de estados que um projeto pode estar
   const fetchTopProjects = async () => {
     const topProjects = await getAllProjetosByCliente();
     if (topProjects[0]) {
@@ -31,6 +33,7 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
       setProdutos([esperandoProj, andamentoProj, concluidoProj]);
     } else setProdutos([{}, {}, {}]);
   };
+  //Ao renderizar a página roda a função fetchTopProjects
   useEffect(() => {
     fetchTopProjects();
   }, []);

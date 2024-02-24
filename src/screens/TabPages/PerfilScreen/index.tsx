@@ -14,6 +14,7 @@ import AuthContext from "../../../contexts";
 import Lock from "../../../assents/Perfil/Lock";
 
 const PerfilScreen = ({ navigation }) => {
+  //logout
   const { logout } = useContext(AuthContext);
   return (
     <ScrollView style={styles.bg}>

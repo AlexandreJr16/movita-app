@@ -45,35 +45,49 @@ type Projeto = {
 const ShowProduct = ({ route, navigation }) => {
   const id = route.params.id;
   const color = route.params.color;
-  const [projeto, setProjeto] = useState<Projeto>();
+
+  //Usa o context para pegar as informações e funções que podem ser acessadas globalmente
   const { getProject, loading, user, addImageProj } = useContext(AuthContext);
-  const userId = user.id;
+
+  //UseStates
+  const [projeto, setProjeto] = useState<Projeto>();
   const [liked, setLiked] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
 
-  const imagePicker = () => (visible ? setVisible(false) : setVisible(true));
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const proj = await getProject(id);
-        proj.Like.map((liked) => {
-          if (liked.userId == userId) setLiked(true);
-        });
-        setProjeto(proj);
-      } catch (error) {
-        console.error("Erro ao obter o projeto:", error);
-      }
-    };
+  const userId = user.id;
 
+  //Apenas faz o handle da visibilidade do modal de Get Imagem
+  const imagePicker = () => (visible ? setVisible(false) : setVisible(true));
+
+  //Pega os dados do projeto
+  const fetchData = async () => {
+    try {
+      const proj = await getProject(id);
+      proj.Like.map((liked) => {
+        if (liked.userId == userId) setLiked(true);
+      });
+      setProjeto(proj);
+    } catch (error) {
+      console.error("Erro ao obter o projeto:", error);
+    }
+  };
+
+  //Executado ao renderizar a página
+  useEffect(() => {
     fetchData();
   }, []);
+
+  //Função usada para enviar imagens
   const uploadImage = (bin: any) => {
     const data = { bin, id: projeto.id };
     addImageProj(data);
   };
 
+  //Função que ainda necessita do processamento do backend
   const addLike = () => {};
+  //Função que ainda necessita do backend
   const deleteLike = () => {};
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar backgroundColor={"#2f2f2f"} barStyle="light-content" />
@@ -109,6 +123,7 @@ const ShowProduct = ({ route, navigation }) => {
                 Ainda não há nenhum feedback do cliente
               </Texto>
             )}
+            {/* ADD Model e ImagePicker Modal servem apeans para o desenvolvimento */}
             <AddModel id={projeto.id} />
             <TouchableOpacity onPress={imagePicker}>
               <Texto weight="bold">Adicione a foto ao projeto</Texto>

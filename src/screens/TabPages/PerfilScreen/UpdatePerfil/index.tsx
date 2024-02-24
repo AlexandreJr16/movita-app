@@ -24,6 +24,9 @@ interface Local {
 
 const UpdatePerfil = ({ navigation }) => {
   const { user, updateUser, loading } = useContext(AuthContext);
+
+  //Set de use states para cada input da página
+  //Passível de futuras atualizações com alguma dependencia que diminua a quantidade de use states e deixe o código mais limpo
   const [text, setText] = useState(null);
   const [nome, setNome] = useState<string>(
     user.tipoUser == "empresa"
@@ -45,6 +48,7 @@ const UpdatePerfil = ({ navigation }) => {
     user.tipoUser == "empresa" ? user.Empresa[0].cnpj : user.Cliente[0].cpf
   );
 
+  //handle de cada useState
   const handleNome = (value: any) => {
     setNome(value);
   };
@@ -60,15 +64,20 @@ const UpdatePerfil = ({ navigation }) => {
   const handleCpf = (value: any) => {
     setCpf(value);
   };
+
+  //Função que faz o update
   const handleUpdate = async () => {
+    //Verifica se email é válido
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let local: Local;
     try {
+      //Tenta consultar a existência do endereço de acordo com o CEP
       local = await cep(`${endereco}`);
     } catch (error) {
       setText("Algum campo está errado.");
       return;
     }
+    //Se as válidações acima derem certo, retira a mensagem de erro
     setText(null);
     if (
       email == "" ||
@@ -79,6 +88,7 @@ const UpdatePerfil = ({ navigation }) => {
     ) {
       console.log("Campos inválidos");
     } else if (user.tipoUser == "empresa") {
+      //Se o usuário for empresa cria um objeto que será enviado para a api
       const dto = {
         email,
         tipoUser: user.tipoUser,
@@ -96,9 +106,18 @@ const UpdatePerfil = ({ navigation }) => {
           },
         ],
       } as updateUserDTO;
+      //O "as updateUserDTO" é apenas para evitar um erro do TS (Gambiarrra)
+
+      //Faz o updateUse na api e recebe o atributo status do retorno
       const { status } = await updateUser(dto);
+
+      //verifica se o retorno foi "ok" e retorna para a APIs
       if (status == "ok") navigation.goBack();
+      else {
+        //Tratamento de erro ao update
+      }
     } else if (user.tipoUser == "cliente") {
+      //Objeto de updateno caso de cliente
       const dto = {
         email,
         tipoUser: user.tipoUser,
@@ -116,8 +135,15 @@ const UpdatePerfil = ({ navigation }) => {
           },
         ],
       } as updateUserDTO;
+
+      //Faz o updateUse na api e recebe o atributo status do retorno
       const { status } = await updateUser(dto);
+
+      //verifica se o retorno foi "ok" e retorna para a APIs
       if (status == "ok") navigation.goBack();
+      else {
+        //Objeto de updateno caso de cliente
+      }
     } else setText("Algum campo está errado.");
   };
 
