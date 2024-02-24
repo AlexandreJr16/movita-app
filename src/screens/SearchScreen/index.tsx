@@ -1,12 +1,12 @@
 import { View } from "react-native";
-import Texto from "../../components/Default/texto/Texto";
-import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
+import HeaderPerfil from "../../components/Perfil/HeaderPerfil";
+import styles from "./styles";
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   return (
-    <View>
-      <Texto weight={"bold"}>Search</Texto>
+    <View style={styles.background}>
+      <HeaderPerfil navigation={navigation} visiblePerfil={true} />
     </View>
   );
 };
