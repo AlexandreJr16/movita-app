@@ -128,6 +128,7 @@ export const AuthProvider = ({ children }) => {
     return await forgotFunctions.sendEmailForgot(dto, setLoading);
   };
 
+  // Funções Like ---------------------------------------------------------------------------------------------
   const likeProject = async (projetoId: number) => {
     return await likeFunctions.likeProject(projetoId, token);
   };
@@ -135,7 +136,7 @@ export const AuthProvider = ({ children }) => {
     return await likeFunctions.deleteLikeProject(projetoId, token);
   };
 
-  // Modelo 3d ------------------------------------------------------------------------------------------------
+  // Funções Model ------------------------------------------------------------------------------------------------
   const addModel = async (dto: { modeloBin: string; projetoId: number }) => {
     return await modelo3d.addModelo(
       dto.modeloBin,
