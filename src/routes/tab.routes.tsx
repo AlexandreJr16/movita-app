@@ -3,7 +3,7 @@ import { StyleSheet, View, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MainRoutes from "./tab/main.routes";
 import ChatScreen from "../screens/ChatScreen";
-import SearchScreen from "../screens/SearchScreen";
+import SearchScreen from "../screens/TabPages/SearchScreen";
 import PerfilScreen from "../screens/PerfilScreen";
 import Home from "../assents/NavBar/NoSelected/Home";
 import Message from "../assents/NavBar/NoSelected/Message";

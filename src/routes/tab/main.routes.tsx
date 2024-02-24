@@ -1,14 +1,14 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainScrenn from "../../screens/MainScreen";
+import MainScrenn from "../../screens/TabPages/MainScreen";
 import ShowProduct from "../../screens/ShowPages/ShowProduct";
-import MeusProjetosScreen from "../../screens/SearchTopics/ProjetosSearch";
-import EmpresasSearchScreen from "../../screens/SearchTopics/EmpresasSearch";
 
 import ShowModel from "../../screens/ShowPages/ShowModel";
 import ShowParseEmpresa from "../../screens/ShowPages/ShowEmpresa/ShowParseEmpresa";
 import ShowEmpresaPerfil from "../../screens/ShowPages/ShowEmpresa";
-import ModelosSearch from "../../screens/SearchTopics/ModeloSearch";
+import MeusProjetosScreen from "../../screens/SearchPages/ProjetosSearch";
+import EmpresasSearchScreen from "../../screens/SearchPages/EmpresasSearch";
+import ModelosSearch from "../../screens/SearchPages/ModeloSearch";
 
 const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();

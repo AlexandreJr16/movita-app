@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Chat from "../../screens/ChatScreen";
-import Messaging from "../../screens/ChatScreen/Messaging";
+import Messaging from "../../screens/TabPages/ChatScreen/Messaging";
+import Chat from "../../screens/TabPages/ChatScreen";
 
 const ChatRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();

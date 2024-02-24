@@ -1,9 +1,9 @@
 import "react-native-gesture-handler";
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SplashScreen from "../../screens/Auth/splashScreen";
-import SplashScreen2 from "../../screens/Auth/splashScreen/Page2";
-import SplashScreen3 from "../../screens/Auth/splashScreen/Page3";
+import SplashScreen from "../../screens/AuthPages/splashScreen";
+import SplashScreen2 from "../../screens/AuthPages/splashScreen/Page2";
+import SplashScreen3 from "../../screens/AuthPages/splashScreen/Page3";
 
 const SplashRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();

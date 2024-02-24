@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ForgotScreen from "../../screens/Auth/ForgotPassword/index";
-import CodeInputForgot from "../../screens/Auth/ForgotPassword/CodeInput";
-import ChangePasswordForgot from "../../screens/Auth/ForgotPassword/ChangePassword";
+import ForgotScreen from "../../screens/AuthPages/ForgotPassword/index";
+import CodeInputForgot from "../../screens/AuthPages/ForgotPassword/CodeInput";
+import ChangePasswordForgot from "../../screens/AuthPages/ForgotPassword/ChangePassword";
 
 const ForgotRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();

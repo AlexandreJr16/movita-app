@@ -1,13 +1,13 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import PerfilScreen from "../../screens/PerfilScreen";
-import UpdatePerfil from "../../screens/PerfilScreen/UpdatePerfil";
-import UpdateSenha from "../../screens/PerfilScreen/UpdateSenha";
-import MeusProjetos from "../../screens/PerfilScreen/MeusProjetos";
-import MeusFavoritos from "../../screens/PerfilScreen/MeusFavoritos";
 import ShowProduct from "../../screens/ShowPages/ShowProduct";
 import ShowEmpresaPerfil from "../../screens/ShowPages/ShowEmpresa";
+import PerfilScreen from "../../screens/TabPages/PerfilScreen";
+import MeusFavoritos from "../../screens/TabPages/PerfilScreen/MeusFavoritos";
+import MeusProjetos from "../../screens/TabPages/PerfilScreen/MeusProjetos";
+import UpdatePerfil from "../../screens/TabPages/PerfilScreen/UpdatePerfil";
+import UpdateSenha from "../../screens/TabPages/PerfilScreen/UpdateSenha";
 
 const PerfilRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
