@@ -41,4 +41,7 @@ export interface AuthContextData {
   setSignupUser?(user: signupUser);
   addModel?(doc: any);
   addImageProj?(dto: { bin: any; id: number });
+  findEmpresasByName?(
+    nome: string
+  ): Promise<{ id: number; imagem: any; nome: string }[]>;
 }

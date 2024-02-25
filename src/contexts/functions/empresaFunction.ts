@@ -51,3 +51,20 @@ export async function getEmpresaById(num: number, setLoading): Promise<any> {
     setLoading(false);
   }
 }
+
+export async function findEmpresaByName(
+  nome: string
+): Promise<{ id: number; imagem: any; nome: string }[]> {
+  try {
+    // Define o carregamento como true enquanto busca os dados
+
+    // Chama o serviço de autenticação para obter a empresa pelo ID
+    const empresa = await auth.empresaFindByname({ nome });
+
+    // Retorna as informações da empresa recuperadas
+    return empresa;
+  } catch (error) {
+    // Trata erros definindo o carregamento como false e relança o erro
+    throw new Error(error);
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import { FlatList, StatusBar, View } from "react-native";
 import HeaderMyProduct from "../../../../components/MeusProjetos/Header";
 import styles from "../styles";
@@ -6,9 +6,22 @@ import Texto from "../../../../components/Default/texto/Texto";
 import ChatComponent from "../../../../components/Chat/ChatComponent";
 import socket from "../../../../utils/socket";
 import AddContatoComponent from "../../../../components/Chat/AddContato";
+import AuthContext from "../../../../contexts";
+
+type ResponseEmpresa = {
+  id: number;
+  imagem: ArrayBuffer;
+  nome: string;
+};
+type EmpresaData = {
+  id: number;
+  imagem: ArrayBuffer;
+  nome: string;
+};
 
 const AddRoomMessage = ({ navigation }) => {
-  const [empresa, setEmpresa] = useState([]);
+  const [empresa, setEmpresa] = useState<EmpresaData[]>([] as EmpresaData[]);
+  const { findEmpresasByName } = useContext(AuthContext);
 
   //Debounce pra melhorar o processamento
   const debounce = (func, delay) => {
@@ -22,8 +35,11 @@ const AddRoomMessage = ({ navigation }) => {
   };
 
   //handle de Pesquisa
-  const handleSearch = (value) => {
-    socket.emit("searchEmpresa", { nome: value });
+  const handleSearch = async (value: string) => {
+    if (value == "") return;
+    const empresas: ResponseEmpresa[] = await findEmpresasByName(value);
+
+    setEmpresa(empresas);
   };
 
   //Debounce efetivado no handleSearch
@@ -33,28 +49,16 @@ const AddRoomMessage = ({ navigation }) => {
   const keyExtractor = (item) => item.id.toString();
 
   //Renderização dos componenetes de adicionar
-  const renderChatItem = ({ item }) => (
-    <AddContatoComponent id={item.id} nome={item.nome} imagem={item.img} />
-  );
-
-  const handleNewFilter = (empresa) => {
-    const data = empresa.map((empresa) => {
-      return {
-        id: empresa.user.id,
-        imagem: empresa.user.imagem,
-        nome: empresa.nomeFantasia,
-      };
-    });
+  const renderChatItem = ({ item }: { item: EmpresaData }) => {
+    return (
+      <AddContatoComponent
+        navigation={navigation}
+        id={item.id}
+        nome={item.nome}
+        imagem={item.imagem}
+      />
+    );
   };
-  const listenFilterRoom = () => {
-    socket.on("foundEmpresa", (empresa) => {
-      handleNewFilter(empresa);
-    });
-  };
-
-  useEffect(() => {
-    listenFilterRoom();
-  }, []);
 
   return (
     <View style={styles.chatscreen}>

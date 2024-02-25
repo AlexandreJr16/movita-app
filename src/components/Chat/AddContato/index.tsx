@@ -1,5 +1,11 @@
 import { View, Text, Pressable } from "react-native";
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React, {
+  Suspense,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
@@ -18,39 +24,53 @@ type createRoomDTO = {
 //DTO para o componente
 type ComponentDTO = {
   id: number;
-  imagem: any;
+  imagem: ArrayBuffer;
   nome: string;
+  navigation: any;
 };
 
-const AddContatoComponent = ({ id, imagem, nome }: ComponentDTO) => {
+const AddContatoComponent = ({
+  id,
+  imagem,
+  nome,
+  navigation,
+}: ComponentDTO) => {
   const { user } = useContext(AuthContext);
 
   //Faz a requisição para criar uma nova sala
   const createRoom = (dto: createRoomDTO) => {
+    console.log(dto, "CRiando");
     const { userId1, userId2 } = dto;
     socket.emit("createRoom", { userId1, userId2 });
+    socket.emit("roomList", { id: user.id });
+    navigation.goBack();
   };
 
   return (
-    <View style={styles.cchat}>
-      {imagem ? (
-        <ImagemBuffer imgBuffer={imagem} style={styles.cavatar}></ImagemBuffer>
-      ) : null}
+    <Suspense>
+      <View style={styles.cchat}>
+        {imagem ? (
+          <ImagemBuffer
+            imgBuffer={imagem}
+            style={styles.cavatar}
+          ></ImagemBuffer>
+        ) : null}
 
-      <View style={styles.crightContainer}>
-        <View>
-          <Texto weight="bold" style={styles.cusername}>
-            {nome}
-          </Texto>
+        <View style={styles.crightContainer}>
+          <View>
+            <Texto weight="bold" style={styles.cusername}>
+              {nome}
+            </Texto>
+          </View>
+          <Pressable
+            style={styles.timeStyle}
+            onPress={() => createRoom({ userId1: user.id, userId2: id })}
+          >
+            <Texto weight="bold">+</Texto>
+          </Pressable>
         </View>
-        <Pressable
-          style={styles.timeStyle}
-          onPress={() => createRoom({ userId1: user.id, userId2: id })}
-        >
-          <Texto weight="bold">+</Texto>
-        </Pressable>
       </View>
-    </View>
+    </Suspense>
   );
 };
 

@@ -117,6 +117,10 @@ export const AuthProvider = ({ children }) => {
     return await empresas.getEmpresaById(id, setLoading);
   };
 
+  const findEmpresaByName = async (nome: string) => {
+    return await empresas.findEmpresaByName(nome);
+  };
+
   // Funções Forgot Password  ---------------------------------------------------------------------------------
   const verifyCodeForgot = async (dto: { code: string; email: string }) => {
     return await forgotFunctions.verifyCodeForgot(dto, setLoading);
@@ -187,6 +191,7 @@ export const AuthProvider = ({ children }) => {
     getEmpresasById: getEmpresasById,
     addModel: addModel,
     addImageProj: addImageProj,
+    findEmpresasByName: findEmpresaByName,
   };
 
   return (

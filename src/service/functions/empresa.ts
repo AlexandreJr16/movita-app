@@ -54,6 +54,24 @@ export const deleteLikeEmpresa = async (
     throw error;
   }
 };
+
+export const empresaFindByname = async (dto: {
+  nome: string;
+}): Promise<any> => {
+  const url = `${API_URL}/empresa/searchEmpresa/${dto.nome}`;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const likeEmpresa = async (
   empresaId: number,
   token: string
