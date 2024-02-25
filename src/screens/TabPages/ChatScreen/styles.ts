@@ -12,10 +12,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     backgroundColor: "#1f1f1f",
-    borderBottomRightRadius: 50,
   },
   titleMessage: {
-    marginTop: 20,
     alignSelf: "flex-start",
     paddingHorizontal: 20,
     color: "#fff",
@@ -27,7 +25,6 @@ const styles = StyleSheet.create({
     width: "90%",
     backgroundColor: "#fff",
     borderRadius: 15,
-    marginTop: 10,
   },
   textInput: {
     width: "100%",
@@ -35,13 +32,9 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     letterSpacing: 0.16,
     paddingHorizontal: 20,
-    paddingVertical: 10,
   },
-  chatlistContainer: {
-    flex: 1,
-  },
+  chatlistContainer: {},
   chatemptyContainer: {
-    flex: 1,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

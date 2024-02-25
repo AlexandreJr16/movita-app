@@ -3,13 +3,9 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   headerCard: {
     width: "100%",
-    height: 250,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    paddingBottom: 0,
-    marginBottom: 0,
+    paddingBottom: 12,
   },
   titleMessage: {
     marginTop: 20,
@@ -21,7 +17,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.33,
   },
   boxInput: {
-    flex: 1,
     width: "90%",
     borderRadius: 15,
     marginTop: 10,
@@ -45,7 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     maxWidth: "100%",
     borderRadius: 15,
-    marginBottom: 10,
     gap: 10,
   },
   filterBtn: {

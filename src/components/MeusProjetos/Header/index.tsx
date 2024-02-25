@@ -21,18 +21,20 @@ const HeaderMyProduct = ({
   title,
   handleSearch,
   textoSearch,
+  ShowBack = true,
 }: {
   navigation: any;
   color?: "blue" | "red";
   title: any;
   handleSearch?: any;
   textoSearch: string;
+  ShowBack?: boolean;
 }) => {
   const { user } = useContext(AuthContext);
-
+  const nav = ShowBack ? navigation : null;
   return (
     <View style={{ ...styles.headerCard }}>
-      <HeaderPerfil visiblePerfil={true} />
+      <HeaderPerfil visiblePerfil={true} navigation={nav} />
       <Texto style={styles.titleMessage} weight="bold">
         {title}
       </Texto>

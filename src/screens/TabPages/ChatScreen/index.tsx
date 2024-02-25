@@ -1,14 +1,7 @@
 import React, { Suspense, lazy, useContext, useEffect, useState } from "react";
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  StatusBar,
-  ActivityIndicator,
-} from "react-native";
+import { View, FlatList, TouchableOpacity, StatusBar } from "react-native";
 import Plus from "../../../assents/Chat/plus";
 import ChatComponent from "../../../components/Chat/ChatComponent";
-import ChatModal from "../../../components/Chat/Modal";
 import Texto from "../../../components/Default/texto/Texto";
 import HeaderMyProduct from "../../../components/MeusProjetos/Header";
 import AuthContext from "../../../contexts";
@@ -17,7 +10,6 @@ import styles from "./styles";
 
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
-  const [visible, setVisible] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [savedRooms, setSavedRooms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,7 +61,8 @@ const Chat = ({ navigation }) => {
 
   //handle para mudar a visibilidade do Modal
   const openChatModal = () => {
-    setVisible(true);
+    console.log(navigation.navigate("AddRoom"));
+    // navigation.navigate("AddRoom");
   };
   const keyExtractor = (item) => item.id.toString();
 
@@ -82,6 +75,7 @@ const Chat = ({ navigation }) => {
     <View style={styles.chatscreen}>
       <StatusBar backgroundColor={"#2f2f2f"} barStyle="light-content" />
       <HeaderMyProduct
+        ShowBack={false}
         textoSearch="Procurar conversas"
         navigation={navigation}
         color={"blue"}
@@ -105,14 +99,7 @@ const Chat = ({ navigation }) => {
         )}
       </View>
 
-      {/* Altera a visualizaçãpo do modal para criar uma nova sala de bate papo */}
-      {visible && <ChatModal setVisible={setVisible} visible={visible} />}
-      <TouchableOpacity
-        style={styles.createButton}
-        onPress={() => {
-          openChatModal();
-        }}
-      >
+      <TouchableOpacity style={styles.createButton} onPress={openChatModal}>
         <Plus />
       </TouchableOpacity>
     </View>
