@@ -19,9 +19,9 @@ export default function MainScreen({ navigation }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const topProjects = await getTopProjects(4);
-        const topEmpresas = await getTopEmpresas(4);
-        const aleatorioProdutos = await getRandomProjects(4);
+        const topProjects = await getTopProjects(10);
+        const topEmpresas = await getTopEmpresas(10);
+        const aleatorioProdutos = await getRandomProjects(10);
 
         await setProdutos([
           topProjects,

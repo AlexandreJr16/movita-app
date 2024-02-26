@@ -20,7 +20,7 @@ const Companies = ({
 }) => {
   const navigateToProduct = () => {
     try {
-      navigation.navigate("ParseEmpresa", { id: produto.id, color: color });
+      navigation.navigate("PerfilEmpresa", { id: produto.id, color: color });
     } catch (error) {
       throw new Error(error);
     }

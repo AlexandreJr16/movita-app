@@ -3,6 +3,8 @@ import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../contexts";
+import CoracaoBranco from "../../../assents/ShowItem/Coracao/CoracaoBranco";
+import CoracaoRed from "../../../assents/ShowItem/Coracao/CoracaoRed";
 
 const HeaderShowItem = ({
   data,
@@ -46,16 +48,15 @@ const HeaderShowItem = ({
             </Texto>
           ) : null}
           <Pressable onPress={handleLiked}>
-            <Texto
-              weight="bold"
+            <View
               style={
                 liked
                   ? styles.heartBox
-                  : { ...styles.heartBox, backgroundColor: "#666" }
+                  : { ...styles.heartBox, backgroundColor: "#fff" }
               }
             >
-              S2
-            </Texto>
+              {liked ? <CoracaoRed /> : <CoracaoBranco />}
+            </View>
           </Pressable>
         </View>
       </View>
