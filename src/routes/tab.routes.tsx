@@ -2,9 +2,7 @@ import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MainRoutes from "./tab/main.routes";
-import ChatScreen from "../screens/ChatScreen";
 import SearchScreen from "../screens/TabPages/SearchScreen";
-import PerfilScreen from "../screens/PerfilScreen";
 import Home from "../assents/NavBar/NoSelected/Home";
 import Message from "../assents/NavBar/NoSelected/Message";
 import Perfil from "../assents/NavBar/NoSelected/Perfil";
@@ -33,6 +31,7 @@ export default function TabRoutes() {
         <Tab.Navigator
           initialRouteName="main"
           screenOptions={({ route }) => ({
+            tabBarHideOnKeyboard: true,
             lazy: true,
             headerShown: false,
             tabBarStyle: isIos ? styles.tabBarIOS : styles.tabBarAndroid,
