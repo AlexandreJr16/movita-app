@@ -31,7 +31,7 @@ const HeaderMain = ({ navigation }: { navigation: any }) => {
       <View style={styles.infoContainer}>
         <View style={styles.welcome}>
           <Texto weight="bold" style={styles.titleMessage}>
-            {user ? `Olá, ${name}` : "Olá, Cliente"}
+            {user ? `Olá, ${name}!` : "Olá, Cliente!"}
           </Texto>
           <Texto weight="bold" style={styles.subtitleMessage}>
             SEJA BEM-VINDO AO MOVITA

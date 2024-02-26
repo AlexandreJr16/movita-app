@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
   },
 
   subtitleMessage: {
+    marginTop: 10,
     fontSize: 16,
     color: "#FFC501",
-    letterSpacing: -0.3,
+    letterSpacing: -0.6,
   },
   infoContainer: {
     width: "100%",
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     paddingHorizontal: 10,
+    flex: 1,
   },
   welcome: {
     width: "60%",

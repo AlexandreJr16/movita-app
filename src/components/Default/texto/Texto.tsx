@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, ViewStyle } from "react-native";
 import styles from "./styles";
-import { useFonts } from "expo-font";
 import {
-  Poppins_500Medium,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
+  useFonts,
+  Inter_700Bold,
+  Inter_500Medium,
+} from "@expo-google-fonts/inter";
 
 type StyleOptions = "bold" | "regular";
 
@@ -33,8 +33,8 @@ export default function Texto({
   ...restProps
 }: TextProps) {
   const [textLoaded] = useFonts({
-    Poppins_500Medium,
-    Poppins_600SemiBold,
+    Inter_700Bold,
+    Inter_500Medium,
   });
 
   if (!textLoaded) {

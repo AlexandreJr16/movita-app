@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/poppins": "^0.2.3",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-navigation/bottom-tabs": "^6.5.11",
@@ -25,6 +26,7 @@
     "expo-config": "^1.0.0",
     "expo-document-picker": "~11.5.4",
     "expo-file-system": "~15.4.5",
+    "expo-font": "~11.4.0",
     "expo-image-picker": "~14.3.2",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
@@ -41,8 +43,7 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "13.9.0",
     "react-native-websocket": "^1.0.2",
-    "socket.io-client": "^4.7.2",
-    "undefined": "@expo/google-fonts/inter"
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
