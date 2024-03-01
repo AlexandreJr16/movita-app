@@ -22,6 +22,7 @@ const HeaderMyProduct = ({
   handleSearch,
   textoSearch,
   ShowBack = true,
+  showFilter = true,
 }: {
   navigation: any;
   color?: "blue" | "red";
@@ -29,6 +30,7 @@ const HeaderMyProduct = ({
   handleSearch?: any;
   textoSearch: string;
   ShowBack?: boolean;
+  showFilter?: boolean;
 }) => {
   const { user } = useContext(AuthContext);
   const nav = ShowBack ? navigation : null;
@@ -65,14 +67,17 @@ const HeaderMyProduct = ({
           ></TextoInput>
           <Pressable>{color == "blue" ? <LupaAzul /> : <LupaRed />}</Pressable>
         </View>
-        <Pressable
-          style={styles.filterBtn}
-          onPress={() => {
-            console.log("Ihago bobão");
-          }}
-        >
-          {color == "blue" ? <FiltroBlue /> : <FiltroRed />}
-        </Pressable>
+
+        {showFilter && (
+          <Pressable
+            style={styles.filterBtn}
+            onPress={() => {
+              console.log("Ihago bobão");
+            }}
+          >
+            {color == "blue" ? <FiltroBlue /> : <FiltroRed />}
+          </Pressable>
+        )}
       </View>
     </View>
   );

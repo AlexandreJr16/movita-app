@@ -148,10 +148,6 @@ const Messaging = ({ route, navigation }) => {
               let different;
               if (index == chatMessages.length - 1) {
                 different = true;
-                console.log({
-                  chatMessages1: chatMessages[2],
-                  chatMessages2: chatMessages[3],
-                });
               } else if (
                 chatMessages[index].userName != chatMessages[index + 1].userName
               ) {

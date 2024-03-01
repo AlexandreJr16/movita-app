@@ -66,7 +66,12 @@ const AddContatoComponent = ({
             style={styles.timeStyle}
             onPress={() => createRoom({ userId1: user.id, userId2: id })}
           >
-            <Texto weight="bold">+</Texto>
+            <Texto
+              weight="bold"
+              style={{ fontSize: 16, color: "white", alignItems: "center" }}
+            >
+              +
+            </Texto>
           </Pressable>
         </View>
       </View>

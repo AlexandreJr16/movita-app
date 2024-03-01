@@ -26,6 +26,7 @@ const AddModel = (dto: Params) => {
         });
         // setImageData(base64Data);
         const data = { modeloBin: base64, projetoId: dto.id };
+        console.log(data.projetoId);
         const oi = await addModel(data);
       }
     } catch (error) {

@@ -81,6 +81,7 @@ const Chat = ({ navigation }) => {
         color={"blue"}
         title={"Mensagens"}
         handleSearch={handleSearch}
+        showFilter={false}
       />
 
       <View style={styles.chatlistContainer}>

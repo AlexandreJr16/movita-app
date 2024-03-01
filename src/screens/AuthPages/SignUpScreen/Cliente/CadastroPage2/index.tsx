@@ -61,7 +61,7 @@ const SignUpScreen2 = ({ navigation }) => {
           </View>
           <View style={styles.textContainer}>
             <Texto weight="regular" style={styles.title}>
-              Informe seu Email completo{" "}
+              Informe seu Email e Telefone
             </Texto>
             <ErrorAlert isAlert={!!error} styles={styles.errorText}>
               {error}

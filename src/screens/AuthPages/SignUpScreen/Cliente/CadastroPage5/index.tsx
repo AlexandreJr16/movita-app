@@ -45,7 +45,7 @@ const SignUpScreen5 = ({ navigation }) => {
             street: string;
           }) => data
         )
-        .catch();
+        .catch((error) => {});
       if (local) {
         setBairro(local.neighborhood);
         setEstado(local.state);

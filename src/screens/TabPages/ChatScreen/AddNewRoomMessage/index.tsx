@@ -36,9 +36,9 @@ const AddRoomMessage = ({ navigation }) => {
 
   //handle de Pesquisa
   const handleSearch = async (value: string) => {
-    if (value == "") return;
-    const empresas: ResponseEmpresa[] = await findEmpresasByName(value);
-
+    //Verifica se a string for vazia e se for pesquisa a letra "A"
+    const str = value == "" ? "A" : value;
+    const empresas: ResponseEmpresa[] = await findEmpresasByName(str);
     setEmpresa(empresas);
   };
 
@@ -59,6 +59,15 @@ const AddRoomMessage = ({ navigation }) => {
       />
     );
   };
+
+  //Funçção de ativar ao iniciar
+  const onInit = async () => {
+    await handleSearch("A");
+  };
+
+  useEffect(() => {
+    onInit();
+  }, []);
 
   return (
     <View style={styles.chatscreen}>
