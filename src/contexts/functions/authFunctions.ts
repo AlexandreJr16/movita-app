@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<Object>} - Uma Promise que resolve com o objeto de resposta.
  */
-export const signIn = async (email, senha, setToken, getUser, setLoading) => {
+export const signIn = async (email, senha, setToken, setLoading) => {
   try {
     setLoading(true);
     const response = await authService.signIn(email, senha);
@@ -20,7 +20,7 @@ export const signIn = async (email, senha, setToken, getUser, setLoading) => {
     if (response.token) {
       setToken(response.token);
       await AsyncStorage.setItem("@RNAuth:token", response.token);
-      await getUser(response.token);
+      await authService.getUser(response.token);
     }
 
     return response;
