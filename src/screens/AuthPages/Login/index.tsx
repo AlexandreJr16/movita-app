@@ -12,8 +12,6 @@ import React from "react";
 import AuthContext from "../../../contexts";
 import ErrorAlert from "../../../components/ErrorAlert/ErrorAlert";
 import LoadingIndicator from "../../../components/Default/Loading";
-import * as DocumentPicker from "expo-document-picker";
-import AddModel from "../../../components/Modelo3D/AddModel";
 
 const Login = ({ navigation }) => {
   const { signIn, loading, signed } = useContext(AuthContext);

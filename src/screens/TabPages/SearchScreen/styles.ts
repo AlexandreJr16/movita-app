@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#52B6CE",
     gap: 10,
+    marginBottom: 20,
+    marginTop: 20,
   },
   filterBtn: {
     backgroundColor: "#fff",
@@ -44,6 +46,28 @@ const styles = StyleSheet.create({
     letterSpacing: 0.16,
     fontSize: 16,
     color: "#fff",
+  },
+  boxSearch: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  leftBoxSearch: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 15,
+  },
+  textBoxSearch: {
+    alignSelf: "center",
+    fontSize: 16,
+    color: "#898989",
   },
 });
 

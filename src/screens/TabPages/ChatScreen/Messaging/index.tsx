@@ -138,7 +138,12 @@ const Messaging = ({ route, navigation }) => {
         <ImageBackground
           resizeMode="cover"
           imageStyle={{ borderTopRightRadius: 50, borderTopLeftRadius: 50 }}
-          style={{ flex: 1, paddingTop: 40 }}
+          style={{
+            flex: 1,
+            paddingTop: 15,
+            borderTopRightRadius: 50,
+            borderTopLeftRadius: 50,
+          }}
           source={require("../../../../assents/Chat/bg.png")}
         >
           <FlatList
