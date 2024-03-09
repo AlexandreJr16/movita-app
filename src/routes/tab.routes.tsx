@@ -13,6 +13,7 @@ import PerfilSelected from "../assents/NavBar/Selected/SelectedPerfil";
 import HomeSelected from "../assents/NavBar/Selected/SelectedHome";
 import PerfilRoutes from "./tab/perfil.routes";
 import ChatRoutes from "./tab/chat.routes";
+import SearchRoutes from "./tab/search.routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -58,7 +59,7 @@ export default function TabRoutes() {
         >
           <Tab.Screen name="main" component={MainRoutes}></Tab.Screen>
           <Tab.Screen name="chat" component={ChatRoutes}></Tab.Screen>
-          <Tab.Screen name="search" component={SearchScreen}></Tab.Screen>
+          <Tab.Screen name="search" component={SearchRoutes}></Tab.Screen>
           <Tab.Screen name="perfil" component={PerfilRoutes}></Tab.Screen>
         </Tab.Navigator>
       </View>

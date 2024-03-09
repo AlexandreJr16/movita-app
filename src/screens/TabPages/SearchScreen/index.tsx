@@ -4,14 +4,12 @@ import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import styles from "./styles";
 import TextoInput from "../../../components/Default/texto/TextoInput";
 import LupaAzul from "../../../assents/MeusProjetos/LupaAzul";
-import debounce from "../../../utils/debounce";
 import Texto from "../../../components/Default/texto/Texto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LupaCinza from "../../../assents/SearchScreen/lupaCinza";
 import DeleteCinza from "../../../assents/SearchScreen/deleteCinza";
 
 const SearchScreen = ({ navigation }) => {
-  const set = new Set();
   const [textSearch, setTextSearch] = useState("");
   const [hSearch, setHSearch] = useState([]);
 
@@ -20,11 +18,15 @@ const SearchScreen = ({ navigation }) => {
     setTextSearch(value);
   };
 
-  //Função para o debounce do handle
-  const debouncedHandleSearch = debounce(handleSearch, 500, null);
-
   //Função para a partir de uma string fornecida buscar item com aquilo
-  const findItems = () => {};
+  const findItems = (text: string) => {};
+
+  //Deletar item do histórico
+  const handleDeleteItem = (index) => {
+    const updatedData = hSearch.filter((_, i) => i !== index);
+    setHSearch(updatedData);
+    AsyncStorage.setItem("historySearch", JSON.stringify(updatedData));
+  };
 
   //Função de submit do handle
   const handleSubmit = async () => {
@@ -34,6 +36,7 @@ const SearchScreen = ({ navigation }) => {
 
       AsyncStorage.setItem("historySearch", JSON.stringify(hSearch));
     }
+    findItems(textSearch);
   };
 
   //Função que pega itens do historySearch (Assync Storage de pesquisas passadas)
@@ -50,10 +53,11 @@ const SearchScreen = ({ navigation }) => {
       <HeaderPerfil visiblePerfil={true} visibleLogo={false} />
       <View style={styles.textInput}>
         <TextoInput
-          onChangeText={debouncedHandleSearch}
+          onChangeText={handleSearch}
           weight="regular"
           placeholder="Digite algo"
           placeholderColor={"#7A7979"}
+          value={textSearch}
           style={styles.textInputTyping}
         ></TextoInput>
         <Pressable onPress={handleSubmit}>
@@ -64,13 +68,25 @@ const SearchScreen = ({ navigation }) => {
       <ScrollView>
         {hSearch.map((texto, i) => (
           <View key={i} style={styles.boxSearch}>
-            <View style={styles.leftBoxSearch}>
+            <Pressable
+              style={styles.leftBoxSearch}
+              onPress={() => {
+                setTextSearch(texto);
+                findItems(texto);
+              }}
+            >
               <LupaCinza height={15} width={15} />
               <Texto style={styles.textBoxSearch} weight="bold">
                 {texto}
               </Texto>
-            </View>
-            <DeleteCinza height={25} width={25} />
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                handleDeleteItem(i);
+              }}
+            >
+              <DeleteCinza height={25} width={25} />
+            </Pressable>
           </View>
         ))}
       </ScrollView>
