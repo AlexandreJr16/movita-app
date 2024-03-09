@@ -12,15 +12,8 @@ export interface AuthContextData {
   token?: string;
   loading?: boolean;
 
-  updateUser?(dto: updateUserDTO);
-  updateSenha?(dto: {
-    senhaAtual: string;
-    novaSenha: string;
-    confirmSenha: string;
-  });
-
   getTopEmpresas?(num: number);
-  addImageUser?(dto: any);
+
   updateSenhaForgot?(dto: {
     email: string;
     confirmSenha: string;
@@ -41,4 +34,5 @@ export interface AuthContextData {
   ): Promise<{ id: number; imagem: any; nome: string }[]>;
   findProjetoByName?(nome: string);
   setLoading?();
+  setUser?();
 }

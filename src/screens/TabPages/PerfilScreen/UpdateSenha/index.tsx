@@ -8,9 +8,11 @@ import InputPerfil from "../../../../components/Perfil/Input";
 import ShowPerfil from "../../../../components/Perfil/ShowPerfil";
 import TitleTextPerfil from "../../../../components/Perfil/TitleText";
 import AuthContext from "../../../../contexts/auth.context";
+import UserContext from "../../../../contexts/user.context";
 
 const UpdateSenha = ({ navigation }) => {
-  const { updateSenha, loading } = useContext(AuthContext);
+  const { loading } = useContext(AuthContext);
+  const { updateSenha } = useContext(UserContext);
 
   //UseStates
   const [senhaAntiga, setSenhaAntiga] = useState<string>();

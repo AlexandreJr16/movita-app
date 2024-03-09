@@ -12,6 +12,7 @@ import ShowPerfil from "../../../../components/Perfil/ShowPerfil";
 import TitleTextPerfil from "../../../../components/Perfil/TitleText";
 import AuthContext from "../../../../contexts/auth.context";
 import { updateUserDTO } from "../../../../contexts/dto/updateUser.dto";
+import UserContext from "../../../../contexts/user.context";
 
 interface Local {
   cep: string;
@@ -23,7 +24,8 @@ interface Local {
 }
 
 const UpdatePerfil = ({ navigation }) => {
-  const { user, updateUser, loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
+  const { updateUser } = useContext(UserContext);
 
   //Set de use states para cada input da página
   //Passível de futuras atualizações com alguma dependencia que diminua a quantidade de use states e deixe o código mais limpo

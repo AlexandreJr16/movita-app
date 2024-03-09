@@ -4,17 +4,17 @@ import { useAuth } from "./providersContext";
 import { AuthContextData } from "./dto/authContextData.dto";
 import { SignUpInfo } from "./dto/signUpInfo.dto";
 import * as authFunctions from "./functions/authFunctions";
-import * as userFunctions from "./functions/userFunctions";
 import * as forgotFunctions from "./functions/forgotFunctions";
 import * as modelo3d from "./functions/modelos3dFunctions";
-import * as projectsFunctions from "./functions/projectFunction";
 import * as likeFunctions from "./functions/likeFunction";
 import * as empresas from "./functions/empresaFunction";
 import { SignInResponse } from "./dto/signInResponse.dto";
 import { updateUserDTO } from "./dto/updateUser.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
 import { User } from "./dto/user.dto";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import ProjetoContext from "./project.context";
+import UserContext from "./user.context";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
@@ -53,13 +53,7 @@ export const AuthProvider = ({ children }) => {
     email: string,
     senha: string
   ): Promise<SignInResponse> => {
-    return await authFunctions.signIn(
-      email,
-      senha,
-      setToken,
-      getUser,
-      setLoading
-    );
+    return await authFunctions.signIn(email, senha, setToken, setLoading);
   };
 
   const logout = async () => {
@@ -68,23 +62,6 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (userInfo: SignUpInfo) => {
     return await authFunctions.signUp(userInfo, setLoading, setToken);
-  };
-
-  // Funções user --------------------------------------------------------------------------------------
-  const getUser = async (token: string) => {
-    return await userFunctions.getUser(token, setUser, setLoading);
-  };
-
-  const updateUser = async (dto: updateUserDTO) => {
-    return await userFunctions.updateUser(dto, token, getUser, setLoading);
-  };
-
-  const addImageUser = async (dto: any) => {
-    return await userFunctions.addImageUser(dto, token, setLoading, getUser);
-  };
-
-  const updateSenha = async (dto: any) => {
-    return await userFunctions.updateSenha(dto, token, setLoading);
   };
 
   // Funções Empresas ----------------------------------------------------------------------------------------
@@ -136,6 +113,9 @@ export const AuthProvider = ({ children }) => {
   const definirLoading = (value: boolean) => {
     setLoading(value);
   };
+  const definirUser = (value: any) => {
+    setUser(value);
+  };
 
   const signed = !!user;
   const notSigned = {
@@ -150,6 +130,7 @@ export const AuthProvider = ({ children }) => {
     signupUser,
     setSignupUser,
     setLoading: definirLoading,
+    setUser: definirUser,
   };
   const didLogin = {
     signed: signed,
@@ -157,10 +138,7 @@ export const AuthProvider = ({ children }) => {
     token: token,
     loading: loading,
     logout: logout,
-    updateUser: updateUser,
-    updateSenha: updateSenha,
     getTopEmpresas: getTopEmpresas,
-    addImageUser: addImageUser,
     deleteLikeProject: deleteLikeProject,
     likeProject: likeProject,
     deleteLikeEmpresa: deleteLikeEmpresa,
@@ -169,6 +147,7 @@ export const AuthProvider = ({ children }) => {
     addModel: addModel,
     findEmpresasByName: findEmpresaByName,
     setLoading: definirLoading,
+    setUser: definirUser,
   };
 
   return (
