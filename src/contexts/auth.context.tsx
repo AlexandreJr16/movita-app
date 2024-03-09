@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
-import { useAuth } from "./providersContext";
 import { AuthContextData } from "./dto/authContextData.dto";
 import { SignUpInfo } from "./dto/signUpInfo.dto";
 import * as authFunctions from "./functions/authFunctions";
@@ -13,8 +12,6 @@ import { updateUserDTO } from "./dto/updateUser.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
 import { User } from "./dto/user.dto";
 import React, { createContext, useState, useEffect, useContext } from "react";
-import ProjetoContext from "./project.context";
-import UserContext from "./user.context";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
