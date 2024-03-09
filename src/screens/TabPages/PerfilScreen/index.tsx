@@ -10,7 +10,7 @@ import SignOutPerfil from "../../../assents/Perfil/SignOut";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import SelectButton from "../../../components/Perfil/SelectButton";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import Lock from "../../../assents/Perfil/Lock";
 
 const PerfilScreen = ({ navigation }) => {

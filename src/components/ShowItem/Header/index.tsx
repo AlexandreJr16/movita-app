@@ -2,7 +2,7 @@ import { Pressable, View } from "react-native";
 import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import CoracaoBranco from "../../../assents/ShowItem/Coracao/CoracaoBranco";
 import CoracaoRed from "../../../assents/ShowItem/Coracao/CoracaoRed";
 

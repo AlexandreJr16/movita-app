@@ -1,5 +1,5 @@
 import { Pressable, ScrollView, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import styles from "./styles";
 import TextoInput from "../../../components/Default/texto/TextoInput";
@@ -8,10 +8,14 @@ import Texto from "../../../components/Default/texto/Texto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LupaCinza from "../../../assents/SearchScreen/lupaCinza";
 import DeleteCinza from "../../../assents/SearchScreen/deleteCinza";
+import AuthContext from "../../../contexts/auth.context";
+import ProjetoContext from "../../../contexts/project.context";
 
 const SearchScreen = ({ navigation }) => {
   const [textSearch, setTextSearch] = useState("");
   const [hSearch, setHSearch] = useState([]);
+  const [typing, setTyping] = useState(true);
+  const { findProjetoByName } = useContext(ProjetoContext);
 
   //Função de handle no Search
   const handleSearch = (value) => {
@@ -31,10 +35,10 @@ const SearchScreen = ({ navigation }) => {
   //Função de submit do handle
   const handleSubmit = async () => {
     if (!hSearch.includes(textSearch)) {
-      setHSearch((prevHSearch) => [...prevHSearch, textSearch]);
+      const itens = [...hSearch, textSearch];
+      setHSearch(itens);
       // Atualizar o localStorage sempre que hSearch for alterado
-
-      AsyncStorage.setItem("historySearch", JSON.stringify(hSearch));
+      AsyncStorage.setItem("historySearch", JSON.stringify(itens));
     }
     findItems(textSearch);
   };
@@ -66,29 +70,31 @@ const SearchScreen = ({ navigation }) => {
       </View>
 
       <ScrollView>
-        {hSearch.map((texto, i) => (
-          <View key={i} style={styles.boxSearch}>
-            <Pressable
-              style={styles.leftBoxSearch}
-              onPress={() => {
-                setTextSearch(texto);
-                findItems(texto);
-              }}
-            >
-              <LupaCinza height={15} width={15} />
-              <Texto style={styles.textBoxSearch} weight="bold">
-                {texto}
-              </Texto>
-            </Pressable>
-            <Pressable
-              onPress={() => {
-                handleDeleteItem(i);
-              }}
-            >
-              <DeleteCinza height={25} width={25} />
-            </Pressable>
-          </View>
-        ))}
+        {typing
+          ? hSearch.map((texto, i) => (
+              <View key={i} style={styles.boxSearch}>
+                <Pressable
+                  style={styles.leftBoxSearch}
+                  onPress={() => {
+                    setTextSearch(texto);
+                    findItems(texto);
+                  }}
+                >
+                  <LupaCinza height={15} width={15} />
+                  <Texto style={styles.textBoxSearch} weight="bold">
+                    {texto}
+                  </Texto>
+                </Pressable>
+                <Pressable
+                  onPress={() => {
+                    handleDeleteItem(i);
+                  }}
+                >
+                  <DeleteCinza height={25} width={25} />
+                </Pressable>
+              </View>
+            ))
+          : null}
       </ScrollView>
     </View>
   );

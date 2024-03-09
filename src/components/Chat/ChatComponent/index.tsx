@@ -6,7 +6,7 @@ import styles from "./styles";
 import ChatRoutes from "../../../routes/tab/chat.routes";
 import socket from "../../../utils/socket";
 import ImagemBuffer from "../../Default/Imagem";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import Texto from "../../Default/texto/Texto";
 
 const ChatComponent = ({

@@ -5,13 +5,14 @@ import styles from "./styles";
 import React, { useContext, useEffect, useState } from "react";
 import ImagemBuffer from "../../../components/Default/Imagem";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import HeaderShowItem from "../../../components/ShowItem/Header";
 import LoadingIndicator from "../../../components/Default/Loading";
 import FeedBackShowProduct from "../../../components/ShowItem/Feedback";
 import AddModel from "../../../components/Modelo3D/AddModel";
 import MovelDefault from "../../../assents/defaults/Projeto";
 import ImagePickerModal from "../../../components/ImageModal";
+import ProjetoContext from "../../../contexts/project.context";
 
 type Projeto = {
   id: number;
@@ -47,14 +48,10 @@ const ShowProduct = ({ route, navigation }) => {
   const color = route.params.color;
 
   //Usa o context para pegar as informações e funções que podem ser acessadas globalmente
-  const {
-    getProject,
-    loading,
-    user,
-    addImageProj,
-    likeProject,
-    deleteLikeProject,
-  } = useContext(AuthContext);
+  const { loading, user, likeProject, deleteLikeProject } =
+    useContext(AuthContext);
+
+  const { getProject, addImageProj } = useContext(ProjetoContext);
 
   //UseStates
   const [projeto, setProjeto] = useState<Projeto>();

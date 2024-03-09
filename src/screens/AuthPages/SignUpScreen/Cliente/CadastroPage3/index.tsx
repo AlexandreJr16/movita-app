@@ -10,7 +10,7 @@ import Texto from "../../../../../components/Default/texto/Texto";
 import ErrorAlert from "../../../../../components/ErrorAlert/ErrorAlert";
 import Carrossel from "../../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../../components/Login/LoginButton/LoginButton";
-import AuthContext from "../../../../../contexts";
+import AuthContext from "../../../../../contexts/auth.context";
 
 const SignUpScreen3 = ({ navigation }) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);

@@ -87,28 +87,6 @@ export const AuthProvider = ({ children }) => {
     return await userFunctions.updateSenha(dto, token, setLoading);
   };
 
-  // Funções Projeto  -----------------------------------------------------------------------------------
-  const getTopProjects = async (num: number) => {
-    return await projectsFunctions.getTopProjects(num, setLoading);
-  };
-
-  const getProject = async (num: number) => {
-    return await projectsFunctions.getProject(num, setLoading);
-  };
-
-  const getAllProjetosByCliente = async () => {
-    return await projectsFunctions.getAllProjetosByCliente(token, setLoading);
-  };
-  const getRandomProjects = async (num: number) => {
-    return await projectsFunctions.getRandomProjects(num, setLoading);
-  };
-  const getFavProjects = async () => {
-    return await projectsFunctions.getFavProjects(token, setLoading);
-  };
-  const addImageProj = async (dto: { bin: any; id: number }) => {
-    return await projectsFunctions.addImageProj(dto, token);
-  };
-
   // Funções Empresas ----------------------------------------------------------------------------------------
   const getTopEmpresas = async (num: number) => {
     return await empresas.getTopEmpresas(num, setLoading);
@@ -155,6 +133,9 @@ export const AuthProvider = ({ children }) => {
       setLoading
     );
   };
+  const definirLoading = (value: boolean) => {
+    setLoading(value);
+  };
 
   const signed = !!user;
   const notSigned = {
@@ -168,6 +149,7 @@ export const AuthProvider = ({ children }) => {
     verifyCodeForgot,
     signupUser,
     setSignupUser,
+    setLoading: definirLoading,
   };
   const didLogin = {
     signed: signed,
@@ -177,25 +159,24 @@ export const AuthProvider = ({ children }) => {
     logout: logout,
     updateUser: updateUser,
     updateSenha: updateSenha,
-    getTopProjects: getTopProjects,
-    getAllProjetosByCliente: getAllProjetosByCliente,
-    getRandomProjects: getRandomProjects,
     getTopEmpresas: getTopEmpresas,
-    getProject: getProject,
     addImageUser: addImageUser,
     deleteLikeProject: deleteLikeProject,
     likeProject: likeProject,
     deleteLikeEmpresa: deleteLikeEmpresa,
     likeEmpresa: likeEmpresa,
-    getFavProjects: getFavProjects,
     getEmpresasById: getEmpresasById,
     addModel: addModel,
-    addImageProj: addImageProj,
     findEmpresasByName: findEmpresaByName,
+    setLoading: definirLoading,
   };
 
   return (
-    <AuthContext.Provider value={signed ? didLogin : notSigned}>
+    <AuthContext.Provider
+      value={
+        signed ? (didLogin as AuthContextData) : (notSigned as AuthContextData)
+      }
+    >
       {children}
     </AuthContext.Provider>
   );

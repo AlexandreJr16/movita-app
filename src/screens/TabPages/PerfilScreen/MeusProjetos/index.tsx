@@ -5,13 +5,14 @@ import React from "react";
 import HeaderPerfil from "../../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../../components/Perfil/ShowPerfil";
 import TitleTextPerfil from "../../../../components/Perfil/TitleText";
-import AuthContext from "../../../../contexts";
+import AuthContext from "../../../../contexts/auth.context";
+import ProjetoContext from "../../../../contexts/project.context";
 const ShowProductsCarousel = lazy(
   () => import("../../../../components/CarrosselShowProducts")
 );
 
 const MeusProjetos = ({ navigation }: { navigation: any }) => {
-  const { getAllProjetosByCliente, user, loading } = useContext(AuthContext);
+  const { getAllProjetosByCliente } = useContext(ProjetoContext);
 
   const [produtos, setProdutos] = useState([]);
 

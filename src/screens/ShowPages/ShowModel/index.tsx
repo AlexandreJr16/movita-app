@@ -5,7 +5,7 @@ import Texto from "../../../components/Default/texto/Texto";
 import LoadingIndicator from "../../../components/Default/Loading";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import ShowMainDataPerfil from "../../../components/AnotherPerfil/ShowPerfil";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import FeedBackShowProduct from "../../../components/ShowItem/Feedback";

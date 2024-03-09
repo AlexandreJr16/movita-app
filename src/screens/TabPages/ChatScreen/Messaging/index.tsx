@@ -13,7 +13,7 @@ import Logo from "../../../../assents/Perfil/Logo";
 import MessageComponent from "../../../../components/Chat/MessageComponent";
 import Texto from "../../../../components/Default/texto/Texto";
 import TextoInput from "../../../../components/Default/texto/TextoInput";
-import AuthContext from "../../../../contexts";
+import AuthContext from "../../../../contexts/auth.context";
 import socket from "../../../../utils/socket";
 import styles from "./styles";
 

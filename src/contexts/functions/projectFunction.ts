@@ -159,3 +159,14 @@ export async function addImageProj(
     // Pode ser usado para código que precisa ser executado independentemente de ocorrer uma exceção ou não
   }
 }
+
+export async function findProjetoByName(dto: { nome: string }) {
+  try {
+    const { nome } = dto;
+    const prods = await auth.projetoFindByname({ nome });
+    console.log(prods);
+    return prods;
+  } catch (error) {
+    throw new Error(error);
+  }
+}

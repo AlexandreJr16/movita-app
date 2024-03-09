@@ -7,7 +7,7 @@ import HeaderPerfil from "../../../../components/Perfil/HeaderPerfil";
 import InputPerfil from "../../../../components/Perfil/Input";
 import ShowPerfil from "../../../../components/Perfil/ShowPerfil";
 import TitleTextPerfil from "../../../../components/Perfil/TitleText";
-import AuthContext from "../../../../contexts";
+import AuthContext from "../../../../contexts/auth.context";
 
 const UpdateSenha = ({ navigation }) => {
   const { updateSenha, loading } = useContext(AuthContext);

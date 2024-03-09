@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { View, Image } from "react-native";
 import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import { Buffer } from "buffer";
 import ImagemBuffer from "../../Default/Imagem";
 import { SafeAreaView } from "react-native-safe-area-context";

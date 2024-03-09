@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 import HeaderMyProduct from "../../../components/MeusProjetos/Header";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import TextoInput from "../../../components/Default/texto/TextoInput";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";

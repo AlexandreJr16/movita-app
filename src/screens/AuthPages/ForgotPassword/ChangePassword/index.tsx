@@ -5,7 +5,7 @@ import HeaderCodeInputForgot from "../../../../components/Forgot/Header";
 import InputCadastro from "../../../../components/Cadastro/Input/InputCadastro";
 import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
 import Texto from "../../../../components/Default/texto/Texto";
-import AuthContext from "../../../../contexts";
+import AuthContext from "../../../../contexts/auth.context";
 
 const ChangePasswordForgot = ({ route, navigation }) => {
   const { email } = route.params;

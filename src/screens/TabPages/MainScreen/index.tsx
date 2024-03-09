@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState, lazy, Suspense } from "react";
 import { View, ScrollView, StatusBar, ActivityIndicator } from "react-native";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import styles from "./styles";
 import HeaderMain from "../../../components/Main/Header";
 import SelectCategory from "../../../components/Main/SelectCategory";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
+import ProjetoContext from "../../../contexts/project.context";
 
 const ShowProductsCarousel = lazy(
   () => import("../../../components/CarrosselShowProducts")
 );
 
 export default function MainScreen({ navigation }) {
-  const { getTopProjects, loading, getTopEmpresas, getRandomProjects } =
-    useContext(AuthContext);
+  const { loading, getTopEmpresas } = useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
+  const { getTopProjects, getRandomProjects } = useContext(ProjetoContext);
 
   //Faz o get da Api quando a página é renderizada e seta os produtos
   useEffect(() => {

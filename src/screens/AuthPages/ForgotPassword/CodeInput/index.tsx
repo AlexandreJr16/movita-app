@@ -5,7 +5,7 @@ import HeaderCodeInputForgot from "../../../../components/Forgot/Header";
 import Texto from "../../../../components/Default/texto/Texto";
 import InputCadastro from "../../../../components/Cadastro/Input/InputCadastro";
 import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
-import AuthContext from "../../../../contexts";
+import AuthContext from "../../../../contexts/auth.context";
 
 const CodeInputForgot = ({ route, navigation }) => {
   const { sendEmailForgot, verifyCodeForgot } = useContext(AuthContext);

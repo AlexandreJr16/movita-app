@@ -1,4 +1,4 @@
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import { useContext, useState, useEffect } from "react";
 import styles from "./styles";
 import { View } from "react-native";

@@ -9,7 +9,7 @@ import UserIcon from "../../../assents/Login/UserIcon";
 import SecurityIcon from "../../../assents/Login/SecurityIcon";
 import LoginButton from "../../../components/Login/LoginButton/LoginButton";
 import React from "react";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import ErrorAlert from "../../../components/ErrorAlert/ErrorAlert";
 import LoadingIndicator from "../../../components/Default/Loading";
 

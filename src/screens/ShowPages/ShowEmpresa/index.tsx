@@ -1,7 +1,7 @@
 import { FlatList, ScrollView, StatusBar, View } from "react-native";
 import React, { Suspense, useContext, useEffect, useState } from "react";
 import styles from "./styles";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ShowMainDataPerfil from "../../../components/AnotherPerfil/ShowPerfil";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";

@@ -5,7 +5,7 @@ import styles from "./styles";
 import Logo from "../../Default/Logo/Logo";
 import React, { useContext } from "react";
 import ImagemBuffer from "../../Default/Imagem";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 
 const HeaderPerfil = ({
   navigation,

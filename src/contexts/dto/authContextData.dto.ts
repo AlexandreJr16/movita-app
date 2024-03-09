@@ -18,11 +18,8 @@ export interface AuthContextData {
     novaSenha: string;
     confirmSenha: string;
   });
-  getTopProjects?(num: number);
-  getAllProjetosByCliente?();
-  getRandomProjects?(num: number);
+
   getTopEmpresas?(num: number);
-  getProject?(num: number);
   addImageUser?(dto: any);
   updateSenhaForgot?(dto: {
     email: string;
@@ -35,13 +32,13 @@ export interface AuthContextData {
   likeProject?(projetoId: number);
   likeEmpresa?(empresaId: number);
   deleteLikeEmpresa?(empresaId: number);
-  getFavProjects?();
   getEmpresasById?(id: number);
   signupUser?: signupUser;
   setSignupUser?(user: signupUser);
   addModel?(doc: any);
-  addImageProj?(dto: { bin: any; id: number });
   findEmpresasByName?(
     nome: string
   ): Promise<{ id: number; imagem: any; nome: string }[]>;
+  findProjetoByName?(nome: string);
+  setLoading?();
 }

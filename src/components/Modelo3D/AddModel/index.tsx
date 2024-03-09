@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { Pressable } from "react-native";
 import styles from "./styles";
 import Texto from "../../Default/texto/Texto";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import * as FileSystem from "expo-file-system";
 
 interface Params {

@@ -4,7 +4,7 @@ import Plus from "../../../assents/Chat/plus";
 import ChatComponent from "../../../components/Chat/ChatComponent";
 import Texto from "../../../components/Default/texto/Texto";
 import HeaderMyProduct from "../../../components/MeusProjetos/Header";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import socket from "../../../utils/socket";
 import styles from "./styles";
 

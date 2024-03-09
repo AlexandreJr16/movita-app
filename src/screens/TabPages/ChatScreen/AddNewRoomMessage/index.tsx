@@ -6,7 +6,7 @@ import Texto from "../../../../components/Default/texto/Texto";
 import ChatComponent from "../../../../components/Chat/ChatComponent";
 import socket from "../../../../utils/socket";
 import AddContatoComponent from "../../../../components/Chat/AddContato";
-import AuthContext from "../../../../contexts";
+import AuthContext from "../../../../contexts/auth.context";
 
 type ResponseEmpresa = {
   id: number;

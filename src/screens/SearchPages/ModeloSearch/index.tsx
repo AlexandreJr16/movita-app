@@ -5,11 +5,12 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 import HeaderMyProduct from "../../../components/MeusProjetos/Header";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
+import ProjetoContext from "../../../contexts/project.context";
 
 const ModelosSearch = ({ navigation }) => {
-  const { getTopProjects } = useContext(AuthContext);
+  const { getTopProjects } = useContext(ProjetoContext);
   const [produtos, setProdutos] = useState([]);
 
   // Faz o get dos projetos

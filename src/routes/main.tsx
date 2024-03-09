@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthContext from "../contexts";
+import AuthContext from "../contexts/auth.context";
 import AuthRoutes from "./auth/auth.routes";
 import TabRoutes from "./tab.routes";
 

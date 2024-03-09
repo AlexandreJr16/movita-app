@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./styles";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 import Texto from "../../Default/texto/Texto";
 
 type Room = {

@@ -4,7 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import styles from "./styles";
 import ButtonPerfil from "../Perfil/Button";
 import ButtonImageModalPicker from "./ModalImagemButton";
-import AuthContext from "../../contexts";
+import AuthContext from "../../contexts/auth.context";
 
 const ImagePickerModal = ({
   visible,

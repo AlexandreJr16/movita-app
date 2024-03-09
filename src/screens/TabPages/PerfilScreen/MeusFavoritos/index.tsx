@@ -4,14 +4,15 @@ import React, { useEffect, useState, useContext, Suspense, lazy } from "react";
 import HeaderPerfil from "../../../../components/Perfil/HeaderPerfil";
 import ShowPerfil from "../../../../components/Perfil/ShowPerfil";
 import TitleTextPerfil from "../../../../components/Perfil/TitleText";
-import AuthContext from "../../../../contexts";
+import AuthContext from "../../../../contexts/auth.context";
+import ProjetoContext from "../../../../contexts/project.context";
 
 const ShowProductsCarousel = lazy(
   () => import("../../../../components/CarrosselShowProducts")
 );
 
 const MeusFavoritos = ({ navigation }: { navigation: any }) => {
-  const { getFavProjects } = useContext(AuthContext);
+  const { getFavProjects } = useContext(ProjetoContext);
   const [projetos, setProjetos] = useState();
 
   //get da api dos projetos favoritos

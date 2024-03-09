@@ -5,7 +5,7 @@ import styles from "./styles";
 import HeaderForgotScreen from "../../../components/Forgot/Header";
 import InputCadastro from "../../../components/Cadastro/Input/InputCadastro";
 import LoginButton from "../../../components/Login/LoginButton/LoginButton";
-import AuthContext from "../../../contexts";
+import AuthContext from "../../../contexts/auth.context";
 
 const ForgotScreen = ({ navigation }) => {
   const { sendEmailForgot } = useContext(AuthContext);
