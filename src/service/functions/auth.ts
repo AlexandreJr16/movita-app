@@ -31,12 +31,14 @@ export const signIn = async (
     },
   };
 
-  return await axios
+  const response = await axios
     .post(url, data, options)
     .then((resp) => resp.data)
     .catch((error: AxiosError<ErrorResponse>) => {
       return { message: error };
     });
+
+  return response;
 };
 
 export async function signUp({

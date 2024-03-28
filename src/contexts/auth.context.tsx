@@ -12,6 +12,7 @@ import { updateUserDTO } from "./dto/updateUser.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
 import { User } from "./dto/user.dto";
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { getUser } from "../service";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
@@ -27,12 +28,12 @@ export const AuthProvider = ({ children }) => {
     try {
       //Get dos dados guardados localmente relacionados ao Token e ao user
       const storageToken = await AsyncStorage.getItem("@RNAuth:token");
-      const cachedUserData = await AsyncStorage.getItem("userData");
 
-      if (storageToken && cachedUserData) {
+      if (storageToken) {
         //Set do Token e User
         setToken(storageToken);
-        setUser(JSON.parse(cachedUserData));
+        const user = await getUser(storageToken);
+        setUser(user);
       }
     } catch (e) {
     } finally {
@@ -50,7 +51,15 @@ export const AuthProvider = ({ children }) => {
     email: string,
     senha: string
   ): Promise<SignInResponse> => {
-    return await authFunctions.signIn(email, senha, setToken, setLoading);
+    const response = await authFunctions.signIn(
+      email,
+      senha,
+      setToken,
+      setLoading,
+      setUser
+    );
+    console.log(response, "WE ARE HERE");
+    return response;
   };
 
   const logout = async () => {

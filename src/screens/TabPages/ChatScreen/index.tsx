@@ -1,5 +1,11 @@
 import React, { Suspense, lazy, useContext, useEffect, useState } from "react";
-import { View, FlatList, TouchableOpacity, StatusBar } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  StatusBar,
+  ScrollView,
+} from "react-native";
 import Plus from "../../../assents/Chat/plus";
 import ChatComponent from "../../../components/Chat/ChatComponent";
 import Texto from "../../../components/Default/texto/Texto";
@@ -67,10 +73,10 @@ const Chat = ({ navigation }) => {
   const keyExtractor = (item) => item.id.toString();
 
   //Função que retorna o item que renderiza a pré-visualização dos bate papos
-  const renderChatItem = ({ item }) => (
-    <ChatComponent navigation={navigation} item={item} />
-  );
-
+  const renderChatItem = ({ item }) => {
+    console.log(item);
+    return <ChatComponent navigation={navigation} item={item} />;
+  };
   return (
     <View style={styles.chatscreen}>
       <StatusBar backgroundColor={"#2f2f2f"} barStyle="light-content" />
@@ -88,6 +94,7 @@ const Chat = ({ navigation }) => {
         {rooms.length > 0 ? (
           <FlatList
             data={rooms}
+            scrollEnabled={true}
             renderItem={renderChatItem}
             keyExtractor={keyExtractor}
           />

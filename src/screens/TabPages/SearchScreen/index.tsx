@@ -34,7 +34,12 @@ const SearchScreen = ({ navigation }) => {
 
   //Função de submit do handle
   const handleSubmit = async () => {
-    if (!hSearch.includes(textSearch)) {
+    if (!hSearch) {
+      const itens = [textSearch];
+      setHSearch(itens);
+      // Atualizar o localStorage sempre que hSearch for alterado
+      AsyncStorage.setItem("historySearch", JSON.stringify(itens));
+    } else if (!hSearch.includes(textSearch)) {
       const itens = [...hSearch, textSearch];
       setHSearch(itens);
       // Atualizar o localStorage sempre que hSearch for alterado
@@ -70,7 +75,7 @@ const SearchScreen = ({ navigation }) => {
       </View>
 
       <ScrollView>
-        {typing
+        {typing && hSearch
           ? hSearch.map((texto, i) => (
               <View key={i} style={styles.boxSearch}>
                 <Pressable
