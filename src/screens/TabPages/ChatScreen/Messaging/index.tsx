@@ -51,6 +51,7 @@ const Messaging = ({ route, navigation }) => {
   //Procurar bate-papos
   useEffect(() => {
     const handleFoundRoom = (roomChats) => {
+      console.log("Mensagens recebidas da api: ", roomChats);
       setChatMessages(roomChats);
       scrollToBottom();
     };
@@ -95,21 +96,17 @@ const Messaging = ({ route, navigation }) => {
       .padStart(2, "0");
 
     const newMessage = {
-      id: `${Date.now()}`,
-      message,
-      time: `${hour}:${mins}`,
-      roomId: id,
-      userName: nome,
+      room_id: `${id}`,
+      tipoMessage: "TEXTO",
+      texto: message,
+      user: nome,
+      modelo3D: null,
+      imagem: null,
     };
 
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
 
-    socket.emit("newMessage", {
-      room_id: id,
-      message,
-      user: nome,
-      timestamp: { hour, mins },
-    });
+    socket.emit("newMessage", newMessage);
 
     setMessage("");
     scrollToBottom();
@@ -146,7 +143,7 @@ const Messaging = ({ route, navigation }) => {
           }}
           source={require("../../../../assents/Chat/bg.png")}
         >
-          <FlatList
+          {/* <FlatList
             ref={flatListRef}
             data={chatMessages}
             renderItem={({ item, index }) => {
@@ -163,7 +160,7 @@ const Messaging = ({ route, navigation }) => {
             keyExtractor={(item) => item.id}
             style={{ paddingHorizontal: 15 }}
             onContentSizeChange={scrollToBottom}
-          />
+          /> */}
           <View
             style={{
               ...styles.messaginginputContainer,
