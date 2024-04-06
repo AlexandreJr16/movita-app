@@ -1,11 +1,5 @@
-import React, { Suspense, lazy, useContext, useEffect, useState } from "react";
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  StatusBar,
-  ScrollView,
-} from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, FlatList, TouchableOpacity, StatusBar } from "react-native";
 import Plus from "../../../assents/Chat/plus";
 import ChatComponent from "../../../components/Chat/ChatComponent";
 import Texto from "../../../components/Default/texto/Texto";
@@ -14,11 +8,29 @@ import AuthContext from "../../../contexts/auth.context";
 import socket from "../../../utils/socket";
 import styles from "./styles";
 
+export type RoomResponse = {
+  id: number;
+  userId1: number;
+  userId2: number;
+  Message: MessageResponse[];
+  name: string;
+  img: any;
+};
+
+export type MessageResponse = {
+  id: number;
+  texto: string | null;
+  imagem: any;
+  modelo3d: Buffer | null;
+  userName: string;
+  createAt: Date;
+  roomId: number;
+  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D";
+};
+
 const Chat = ({ navigation }) => {
   const { user } = useContext(AuthContext);
-  const [rooms, setRooms] = useState([]);
-  const [savedRooms, setSavedRooms] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [rooms, setRooms] = useState<RoomResponse[]>([]);
   const [search, setSearch] = useState();
 
   //Debounce para melhorar a perfomace da pesquisa
@@ -42,7 +54,7 @@ const Chat = ({ navigation }) => {
 
   //filterRooms para filtrar as salas de conversa de acordo com o handleSearch
   const filterRooms = (searchString) => {
-    const filteredRooms = savedRooms.filter((savedRooms) =>
+    const filteredRooms = rooms.filter((savedRooms) =>
       savedRooms.name.toLowerCase().includes(searchString.toLowerCase())
     );
     setRooms(filteredRooms);
@@ -52,8 +64,6 @@ const Chat = ({ navigation }) => {
   useEffect(() => {
     const handleRoomsList = (newRooms) => {
       setRooms(newRooms);
-      setSavedRooms(newRooms);
-      setLoading(false);
     };
 
     socket.emit("roomList", { id: user.id });
@@ -67,9 +77,9 @@ const Chat = ({ navigation }) => {
 
   //handle para mudar a visibilidade do Modal
   const openChatModal = () => {
-    console.log(navigation.navigate("AddRoom"));
-    // navigation.navigate("AddRoom");
+    navigation.navigate("AddRoom");
   };
+
   const keyExtractor = (item) => item.id.toString();
 
   //Função que retorna o item que renderiza a pré-visualização dos bate papos

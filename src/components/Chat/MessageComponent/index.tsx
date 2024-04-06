@@ -1,35 +1,16 @@
 import { View, Text } from "react-native";
-import React, { useContext, useEffect, useLayoutEffect } from "react";
-import { Ionicons } from "@expo/vector-icons";
+import React, { useContext } from "react";
 import { styles } from "./styles";
 import AuthContext from "../../../contexts/auth.context";
 import Texto from "../../Default/texto/Texto";
-
-type Room = {
-  id: number;
-  userId: number;
-  userId2: number;
-};
-type MessageReceived = {
-  createAt: string;
-  id: number;
-  message: string;
-  room: Room;
-  userName: string;
-};
-type CreateNowMessage = {
-  id: string;
-  message: string;
-  roomId: number;
-  time: string;
-  userName: string;
-};
+import { MessageResponse } from "../../../screens/TabPages/ChatScreen";
+import { formattedDate } from "../../../utils/tranformDataToString";
 
 export default function MessageComponent({
   item,
   different,
 }: {
-  item: MessageReceived | CreateNowMessage;
+  item: MessageResponse;
   different: boolean;
 }) {
   const { user } = useContext(AuthContext);
@@ -38,8 +19,6 @@ export default function MessageComponent({
       ? user.Empresa[0].nomeFantasia
       : user.Cliente[0].nome;
   const status = item.userName !== nome;
-
-  useEffect(() => {});
 
   return (
     <View>
@@ -59,7 +38,7 @@ export default function MessageComponent({
             }
           >
             <Texto weight="regular" style={{ color: "white" }}>
-              {item.message}
+              {item.texto}
             </Texto>
           </View>
         </View>
@@ -69,11 +48,11 @@ export default function MessageComponent({
             style={{ left: 0, color: "#9f9f9f", fontSize: 11 }}
           >
             {"createAt" in item
-              ? new Date(item.createAt).toLocaleString([], {
+              ? formattedDate(item.createAt)
+              : new Date().toLocaleString([], {
                   hour: "2-digit",
                   minute: "2-digit",
-                })
-              : item.time}
+                })}
           </Texto>
         ) : null}
       </View>

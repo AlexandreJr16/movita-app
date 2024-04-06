@@ -1,27 +1,23 @@
-import { View, Text, Pressable } from "react-native";
-import React, { useContext, useLayoutEffect, useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { View, Pressable } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
 import styles from "./styles";
-import ChatRoutes from "../../../routes/tab/chat.routes";
 import socket from "../../../utils/socket";
 import ImagemBuffer from "../../Default/Imagem";
-import AuthContext from "../../../contexts/auth.context";
 import Texto from "../../Default/texto/Texto";
+import {
+  MessageResponse,
+  RoomResponse,
+} from "../../../screens/TabPages/ChatScreen";
+import { formattedDate } from "../../../utils/tranformDataToString";
 
 const ChatComponent = ({
   item,
   navigation,
 }: {
-  item: any;
+  item: RoomResponse;
   navigation: any;
 }) => {
-  const [messages, setMessages] = useState<{
-    id: string;
-    messagem: string;
-    time: string;
-    user: string;
-  }>({ id: "oi", messagem: "errou", time: "1:76", user: "Ale" });
+  const [messages, setMessages] = useState<MessageResponse>();
 
   useLayoutEffect(() => {
     const lastMessage = item.Message[item.Message.length - 1];
@@ -42,27 +38,13 @@ const ChatComponent = ({
         formattedTime = `há ${daysAgo} dias`;
       }
 
-      setMessages({
-        user: lastMessage.userName,
-        messagem: lastMessage.message,
-        time: formattedTime,
-        id: lastMessage.roomId,
-      });
-    } else {
-      setMessages({
-        id: "1",
-        messagem: `Diga olá para ${item.name}`,
-        time: "",
-        user: "Ale",
-      });
+      setMessages(lastMessage);
     }
   }, []);
 
+  // Navegar para a tela de chat
   const handleNavigation = () => {
-    navigation.navigate("Message", {
-      id: item.id,
-      name: item.name,
-    });
+    navigation.navigate("Message", item);
     socket.emit("joinRoom", item.id);
   };
 
@@ -81,12 +63,12 @@ const ChatComponent = ({
           </Texto>
 
           <Texto weight="regular" style={styles.cmessage}>
-            {messages?.messagem ? messages.messagem : "Tap to start chatting"}
+            {messages?.texto ? messages.texto : "Tap to start chatting"}
           </Texto>
         </View>
         <View style={styles.timeStyle}>
           <Texto weight="regular" style={styles.ctime}>
-            {messages?.time ? messages.time : ""}
+            {messages?.createAt ? formattedDate(messages.createAt) : ""}
           </Texto>
         </View>
       </View>

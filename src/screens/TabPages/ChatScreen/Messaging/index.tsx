@@ -1,36 +1,51 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   View,
-  FlatList,
   Pressable,
   StatusBar,
   ImageBackground,
+  FlatList,
 } from "react-native";
 import SendMessage from "../../../../assents/Chat/SendMessage";
 import AddSource from "../../../../assents/Chat/addSoruce";
 import Arrow from "../../../../assents/Perfil/Arrow";
 import Logo from "../../../../assents/Perfil/Logo";
-import MessageComponent from "../../../../components/Chat/MessageComponent";
 import Texto from "../../../../components/Default/texto/Texto";
 import TextoInput from "../../../../components/Default/texto/TextoInput";
 import AuthContext from "../../../../contexts/auth.context";
 import socket from "../../../../utils/socket";
 import styles from "./styles";
+import { MessageResponse, RoomResponse } from "..";
+import MessageComponent from "../../../../components/Chat/MessageComponent";
+
+export type SendMessage = {
+  texto: string | null;
+  imagem: any;
+  modelo3d: Buffer | null;
+  userName: string;
+  roomId: number;
+  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D";
+};
 
 const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
-  const [chatMessages, setChatMessages] = useState([]);
+  const [chatMessages, setChatMessages] = useState<MessageResponse[]>();
+
+  //Texto sendo digitado
   const [message, setMessage] = useState("");
+
+  //Cor da  barra de digitação
   const [variableColor, setVariableColor] = useState("#5A5A5A");
+
   const [lastMessage, setLastMessage] = useState<string | null>(null);
-  const [nome, setNome] = useState(
+  const nome =
     user.tipoUser === "empresa"
       ? user.Empresa[0].nomeFantasia
-      : user.Cliente[0].nome
-  );
+      : user.Cliente[0].nome;
+
   const flatListRef = useRef(null);
 
-  const { name, id } = route.params;
+  const item: RoomResponse = route.params;
 
   const handleLastMessage = (text: string) => {
     setLastMessage(text);
@@ -51,24 +66,25 @@ const Messaging = ({ route, navigation }) => {
   //Procurar bate-papos
   useEffect(() => {
     const handleFoundRoom = (roomChats) => {
-      console.log("Mensagens recebidas da api: ", roomChats);
       setChatMessages(roomChats);
       scrollToBottom();
     };
 
-    socket.emit("findRoom", id);
+    socket.emit("findRoom", item.id);
     socket.on("foundRoom", handleFoundRoom);
 
     return () => {
       socket.off("foundRoom", handleFoundRoom);
-      socket.emit("disconnectFromSpecificRoom", id);
+      socket.emit("disconnectFromSpecificRoom", item.id);
     };
-  }, [id, navigation]);
+  }, [item]);
 
   //Receber mensagens
   useEffect(() => {
     const handleNewMessageReceived = (newMessage) => {
+      if (nome == newMessage.userName) return;
       setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+      console.log(newMessage, "\n");
       scrollToBottom();
     };
 
@@ -83,25 +99,13 @@ const Messaging = ({ route, navigation }) => {
   const handleNewMessage = () => {
     if (message === "") return;
 
-    const timestamp = new Date();
-    const hour = timestamp
-      .getHours()
-      .toLocaleString()
-      .toString()
-      .padStart(2, "0");
-    const mins = timestamp
-      .getMinutes()
-      .toLocaleString()
-      .toString()
-      .padStart(2, "0");
-
-    const newMessage = {
-      room_id: `${id}`,
+    const newMessage: any = {
       tipoMessage: "TEXTO",
       texto: message,
-      user: nome,
-      modelo3D: null,
       imagem: null,
+      modelo3d: undefined,
+      userName: nome,
+      roomId: item.id,
     };
 
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -127,7 +131,7 @@ const Messaging = ({ route, navigation }) => {
           <Arrow color="#fff" />
         </Pressable>
         <Texto weight="bold" style={styles.textTitle}>
-          {name}
+          {item.name}
         </Texto>
         <Logo color="#fff" />
       </View>
@@ -143,7 +147,7 @@ const Messaging = ({ route, navigation }) => {
           }}
           source={require("../../../../assents/Chat/bg.png")}
         >
-          {/* <FlatList
+          <FlatList
             ref={flatListRef}
             data={chatMessages}
             renderItem={({ item, index }) => {
@@ -155,12 +159,15 @@ const Messaging = ({ route, navigation }) => {
               ) {
                 different = true;
               }
+
               return <MessageComponent item={item} different={different} />;
             }}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) =>
+              "id" in item ? `${item.id}` : `${Math.random() * 3}`
+            }
             style={{ paddingHorizontal: 15 }}
             onContentSizeChange={scrollToBottom}
-          /> */}
+          />
           <View
             style={{
               ...styles.messaginginputContainer,
