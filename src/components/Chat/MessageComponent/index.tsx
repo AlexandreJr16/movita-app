@@ -1,10 +1,11 @@
 import { View, Text } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { styles } from "./styles";
 import AuthContext from "../../../contexts/auth.context";
 import Texto from "../../Default/texto/Texto";
 import { MessageResponse } from "../../../screens/TabPages/ChatScreen";
 import { formattedDate } from "../../../utils/tranformDataToString";
+import ImagemBuffer from "../../Default/Imagem";
 
 export default function MessageComponent({
   item,
@@ -19,6 +20,10 @@ export default function MessageComponent({
       ? user.Empresa[0].nomeFantasia
       : user.Cliente[0].nome;
   const status = item.userName !== nome;
+
+  useEffect(() => {
+    if (item.imagem) console.log(item.imagem);
+  }, []);
 
   return (
     <View>
@@ -37,6 +42,16 @@ export default function MessageComponent({
                 : [styles.mmessage, { backgroundColor: "#7b7b7b" }]
             }
           >
+            {item.imagem ? (
+              <View>
+                <Texto weight="bold">Ola</Texto>
+                <ImagemBuffer
+                  imgBuffer={item.imagem}
+                  key={1}
+                  style={{ width: 100, height: 100 }}
+                />
+              </View>
+            ) : null}
             <Texto weight="regular" style={{ color: "white" }}>
               {item.texto}
             </Texto>

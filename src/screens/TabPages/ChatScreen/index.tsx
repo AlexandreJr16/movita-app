@@ -20,7 +20,7 @@ export type RoomResponse = {
 export type MessageResponse = {
   id: number;
   texto: string | null;
-  imagem: any;
+  imagem: Buffer;
   modelo3d: Buffer | null;
   userName: string;
   createAt: Date;
@@ -84,7 +84,6 @@ const Chat = ({ navigation }) => {
 
   //Função que retorna o item que renderiza a pré-visualização dos bate papos
   const renderChatItem = ({ item }) => {
-    console.log(item);
     return <ChatComponent navigation={navigation} item={item} />;
   };
   return (

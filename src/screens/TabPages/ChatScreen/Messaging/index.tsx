@@ -17,6 +17,7 @@ import socket from "../../../../utils/socket";
 import styles from "./styles";
 import { MessageResponse, RoomResponse } from "..";
 import MessageComponent from "../../../../components/Chat/MessageComponent";
+import ImagePickerModal from "../../../../components/ImageModal";
 
 export type SendMessage = {
   texto: string | null;
@@ -30,6 +31,7 @@ export type SendMessage = {
 const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
   const [chatMessages, setChatMessages] = useState<MessageResponse[]>();
+  const [visibleImagePicker, setVisibleImagePicker] = useState(false);
 
   //Texto sendo digitado
   const [message, setMessage] = useState("");
@@ -65,8 +67,11 @@ const Messaging = ({ route, navigation }) => {
 
   //Procurar bate-papos
   useEffect(() => {
-    const handleFoundRoom = (roomChats) => {
+    const handleFoundRoom = (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
+      roomChats.map((room) => {
+        if (room.imagem) console.log(room.imagem.toString("base64"), "O");
+      });
       scrollToBottom();
     };
 
@@ -117,12 +122,32 @@ const Messaging = ({ route, navigation }) => {
     setMessage("");
     scrollToBottom();
   };
+  const handleNewImage = (imagem: Buffer) => {
+    if (!imagem) return;
+
+    const newMessage: MessageResponse = {
+      tipoMessage: "IMAGEM",
+      texto: null,
+      imagem: imagem,
+      modelo3d: undefined,
+      userName: nome,
+      roomId: item.id,
+      id: Math.random() * 3142142,
+      createAt: new Date(),
+    };
+
+    socket.emit("newMessage", newMessage);
+  };
 
   //Scrolar para o fim do bate papo
   const scrollToBottom = () => {
     if (flatListRef.current) {
       flatListRef.current.scrollToEnd({ animated: true });
     }
+  };
+
+  const loadImage = (base64Image: any) => {
+    handleNewImage(base64Image);
   };
 
   return (
@@ -184,6 +209,9 @@ const Messaging = ({ route, navigation }) => {
             }}
           >
             <Pressable
+              onPress={() => {
+                setVisibleImagePicker(true);
+              }}
               style={{
                 backgroundColor: "#36A5BF",
                 paddingHorizontal: 10,
@@ -255,6 +283,16 @@ const Messaging = ({ route, navigation }) => {
           </View>
         </ImageBackground>
       </View>
+      <ImagePickerModal
+        visible={visibleImagePicker}
+        setFalse={() => {
+          setVisibleImagePicker(false);
+        }}
+        imagePicker={() => {
+          setVisibleImagePicker(false);
+        }}
+        uploadFunction={loadImage}
+      />
     </View>
   );
 };

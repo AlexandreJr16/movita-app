@@ -5,17 +5,19 @@ import styles from "./styles";
 import ButtonPerfil from "../Perfil/Button";
 import ButtonImageModalPicker from "./ModalImagemButton";
 import AuthContext from "../../contexts/auth.context";
+import UserContext from "../../contexts/user.context";
 
 const ImagePickerModal = ({
   visible,
   imagePicker,
   uploadFunction,
+  setFalse,
 }: {
   visible: any;
   imagePicker: any;
   uploadFunction: any;
+  setFalse?: any;
 }) => {
-  const { addImageUser } = useContext(AuthContext);
   const pickImageFromGalery = async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -54,7 +56,7 @@ const ImagePickerModal = ({
       animationType="slide"
       visible={visible}
       onRequestClose={() => {
-        console.log("OI");
+        setFalse();
       }}
       statusBarTranslucent={true}
     >

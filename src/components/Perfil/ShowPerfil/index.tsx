@@ -10,6 +10,7 @@ import { Buffer } from "buffer";
 import React from "react";
 import UserDefault from "../../../assents/defaults/User";
 import ImagePickerModal from "../../ImageModal";
+import UserContext from "../../../contexts/user.context";
 
 type ImageInfo = {
   buffer: ArrayBuffer;
@@ -17,7 +18,8 @@ type ImageInfo = {
 };
 
 const ShowPerfil = () => {
-  const { user, addImageUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { addImageUser } = useContext(UserContext);
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState<string>();
   const [cpf, setCpf] = useState<string>();
