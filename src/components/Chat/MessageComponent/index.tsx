@@ -21,10 +21,6 @@ export default function MessageComponent({
       : user.Cliente[0].nome;
   const status = item.userName !== nome;
 
-  useEffect(() => {
-    if (item.imagem) console.log(item.imagem);
-  }, []);
-
   return (
     <View>
       <View

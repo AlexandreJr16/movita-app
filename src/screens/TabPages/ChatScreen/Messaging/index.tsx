@@ -69,9 +69,7 @@ const Messaging = ({ route, navigation }) => {
   useEffect(() => {
     const handleFoundRoom = (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
-      roomChats.map((room) => {
-        if (room.imagem) console.log(room.imagem.toString("base64"), "O");
-      });
+
       scrollToBottom();
     };
 
@@ -89,7 +87,6 @@ const Messaging = ({ route, navigation }) => {
     const handleNewMessageReceived = (newMessage) => {
       if (nome == newMessage.userName) return;
       setChatMessages((prevMessages) => [...prevMessages, newMessage]);
-      console.log(newMessage, "\n");
       scrollToBottom();
     };
 
