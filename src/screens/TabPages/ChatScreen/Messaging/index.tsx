@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  Suspense,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   View,
   Pressable,
@@ -18,6 +24,7 @@ import styles from "./styles";
 import { MessageResponse, RoomResponse } from "..";
 import MessageComponent from "../../../../components/Chat/MessageComponent";
 import ImagePickerModal from "../../../../components/ImageModal";
+import { ScrollView } from "react-native-gesture-handler";
 
 export type SendMessage = {
   texto: string | null;
@@ -30,6 +37,8 @@ export type SendMessage = {
 
 const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
+  const scrollViewRef = useRef(null);
+
   const [chatMessages, setChatMessages] = useState<MessageResponse[]>();
   const [visibleImagePicker, setVisibleImagePicker] = useState(false);
 
@@ -44,8 +53,6 @@ const Messaging = ({ route, navigation }) => {
     user.tipoUser === "empresa"
       ? user.Empresa[0].nomeFantasia
       : user.Cliente[0].nome;
-
-  const flatListRef = useRef(null);
 
   const item: RoomResponse = route.params;
 
@@ -69,7 +76,6 @@ const Messaging = ({ route, navigation }) => {
   useEffect(() => {
     const handleFoundRoom = (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
-
       scrollToBottom();
     };
 
@@ -138,10 +144,14 @@ const Messaging = ({ route, navigation }) => {
 
   //Scrolar para o fim do bate papo
   const scrollToBottom = () => {
-    if (flatListRef.current) {
-      flatListRef.current.scrollToEnd({ animated: true });
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
     }
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
 
   const loadImage = (base64Image: any) => {
     handleNewImage(base64Image);
@@ -171,27 +181,30 @@ const Messaging = ({ route, navigation }) => {
           }}
           source={require("../../../../assents/Chat/bg.png")}
         >
-          <FlatList
-            ref={flatListRef}
-            data={chatMessages}
-            renderItem={({ item, index }) => {
-              let different;
-              if (index == chatMessages.length - 1) {
-                different = true;
-              } else if (
-                chatMessages[index].userName != chatMessages[index + 1].userName
-              ) {
-                different = true;
-              }
+          <Suspense>
+            <ScrollView ref={scrollViewRef}>
+              {chatMessages &&
+                chatMessages.map((msg, index) => {
+                  let different;
+                  if (index == chatMessages.length - 1) {
+                    different = true;
+                  } else if (
+                    chatMessages[index].userName !=
+                    chatMessages[index + 1].userName
+                  ) {
+                    different = true;
+                  }
 
-              return <MessageComponent item={item} different={different} />;
-            }}
-            keyExtractor={(item) =>
-              "id" in item ? `${item.id}` : `${Math.random() * 3}`
-            }
-            style={{ paddingHorizontal: 15 }}
-            onContentSizeChange={scrollToBottom}
-          />
+                  return (
+                    <MessageComponent
+                      key={index}
+                      item={msg}
+                      different={different}
+                    ></MessageComponent>
+                  );
+                })}
+            </ScrollView>
+          </Suspense>
           <View
             style={{
               width: "100%",

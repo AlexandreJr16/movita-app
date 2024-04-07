@@ -38,19 +38,18 @@ export default function MessageComponent({
                 : [styles.mmessage, { backgroundColor: "#7b7b7b" }]
             }
           >
-            {item.imagem ? (
-              <View>
-                <Texto weight="bold">Ola</Texto>
-                <ImagemBuffer
-                  imgBuffer={item.imagem}
-                  key={1}
-                  style={{ width: 100, height: 100 }}
-                />
-              </View>
-            ) : null}
-            <Texto weight="regular" style={{ color: "white" }}>
-              {item.texto}
-            </Texto>
+            {item.tipoMessage == "IMAGEM" && (
+              <ImagemBuffer
+                imgBuffer={item.imagem}
+                key={1}
+                style={{ width: 250, height: 250 }}
+              />
+            )}
+            {item.tipoMessage == "TEXTO" && (
+              <Texto weight="regular" style={{ color: "white" }}>
+                {item.texto}
+              </Texto>
+            )}
           </View>
         </View>
         {different ? (
