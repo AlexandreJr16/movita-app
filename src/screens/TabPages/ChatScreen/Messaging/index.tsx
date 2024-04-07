@@ -99,13 +99,15 @@ const Messaging = ({ route, navigation }) => {
   const handleNewMessage = () => {
     if (message === "") return;
 
-    const newMessage: any = {
+    const newMessage: MessageResponse = {
       tipoMessage: "TEXTO",
       texto: message,
       imagem: null,
       modelo3d: undefined,
       userName: nome,
       roomId: item.id,
+      id: Math.random() * 3142142,
+      createAt: new Date(),
     };
 
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -170,33 +172,85 @@ const Messaging = ({ route, navigation }) => {
           />
           <View
             style={{
+              width: "100%",
+              backgroundColor: "#626262",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-around",
+              paddingVertical: 10,
+              borderTopLeftRadius: 16,
+              borderTopRightRadius: 16,
+            }}
+          >
+            <Pressable
+              style={{
+                backgroundColor: "#36A5BF",
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                borderRadius: 16,
+              }}
+            >
+              <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
+                Anexar imagem
+              </Texto>
+            </Pressable>
+            <Pressable
+              style={{
+                backgroundColor: "#D06A52",
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+                borderRadius: 16,
+              }}
+            >
+              <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
+                Anexar arquivo
+              </Texto>
+            </Pressable>
+          </View>
+          <View
+            style={{
               ...styles.messaginginputContainer,
               backgroundColor: variableColor,
             }}
           >
-            <View style={styles.messaginginput}>
-              <Pressable
-                style={styles.messagingbuttonContainer}
-                onPress={handleNewMessage}
-              >
-                <AddSource />
-              </Pressable>
-              <TextoInput
-                onFocus={focusText}
-                onBlur={blurText}
-                weight="regular"
-                style={styles.inputMessage}
-                value={message}
-                placeholderColor="#fff"
-                onChangeText={(value) => setMessage(value)}
-                placeholder="Digite aqui"
-              />
-              <Pressable
-                style={styles.messagingbuttonContainer}
-                onPress={handleNewMessage}
-              >
-                <SendMessage />
-              </Pressable>
+            <View
+              style={{
+                flex: 1,
+                width: "100%",
+                backgroundColor: "#8D8D8D",
+                display: "flex",
+
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
+                borderRadius: 30,
+              }}
+            >
+              <View style={styles.messaginginput}>
+                <Pressable
+                  style={styles.messagingbuttonContainer}
+                  onPress={handleNewMessage}
+                >
+                  <AddSource />
+                </Pressable>
+                <TextoInput
+                  onFocus={focusText}
+                  onBlur={blurText}
+                  weight="regular"
+                  style={styles.inputMessage}
+                  value={message}
+                  placeholderColor="#fff"
+                  onChangeText={(value) => setMessage(value)}
+                  placeholder="Digite aqui"
+                />
+                <Pressable
+                  style={styles.messagingbuttonContainer}
+                  onPress={handleNewMessage}
+                >
+                  <SendMessage />
+                </Pressable>
+              </View>
             </View>
           </View>
         </ImageBackground>

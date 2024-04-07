@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   messaginginput: {
-    flex: 1,
     width: "100%",
     backgroundColor: "#8D8D8D",
     display: "flex",
