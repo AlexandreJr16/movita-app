@@ -43,6 +43,7 @@ const Messaging = ({ route, navigation }) => {
 
   const [chatMessages, setChatMessages] = useState<MessageResponse[]>();
   const [visibleImagePicker, setVisibleImagePicker] = useState(false);
+  const [visibleAnex, setVisibleAnex] = useState(false);
 
   //Texto sendo digitado
   const [message, setMessage] = useState("");
@@ -181,7 +182,7 @@ const Messaging = ({ route, navigation }) => {
         });
         // setImageData(base64Data);
         const data = { modeloBin: base64 };
-        console.log(data);
+        console.log(doc.assets[0].mimeType);
       }
     } catch (error) {
       console.log(error);
@@ -194,9 +195,6 @@ const Messaging = ({ route, navigation }) => {
 
   const loadImage = (base64Image: any) => {
     handleNewImage(base64Image);
-  };
-  const loadModel = (base64model: any) => {
-    handleNewModel(base64model);
   };
 
   return (
@@ -247,48 +245,50 @@ const Messaging = ({ route, navigation }) => {
                 })}
             </ScrollView>
           </Suspense>
-          <View
-            style={{
-              width: "100%",
-              backgroundColor: "#626262",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
-              paddingVertical: 10,
-              borderTopLeftRadius: 16,
-              borderTopRightRadius: 16,
-            }}
-          >
-            <Pressable
-              onPress={() => {
-                setVisibleImagePicker(true);
-              }}
+          {visibleAnex && (
+            <View
               style={{
-                backgroundColor: "#36A5BF",
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                borderRadius: 16,
+                width: "100%",
+                backgroundColor: "#626262",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-around",
+                paddingVertical: 10,
+                borderTopLeftRadius: 16,
+                borderTopRightRadius: 16,
               }}
             >
-              <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
-                Anexar imagem
-              </Texto>
-            </Pressable>
-            <Pressable
-              style={{
-                backgroundColor: "#D06A52",
-                paddingHorizontal: 10,
-                paddingVertical: 5,
-                borderRadius: 16,
-              }}
-              onPress={picker}
-            >
-              <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
-                Anexar arquivo
-              </Texto>
-            </Pressable>
-          </View>
+              <Pressable
+                onPress={() => {
+                  setVisibleImagePicker(true);
+                }}
+                style={{
+                  backgroundColor: "#36A5BF",
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                  borderRadius: 16,
+                }}
+              >
+                <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
+                  Anexar imagem
+                </Texto>
+              </Pressable>
+              <Pressable
+                style={{
+                  backgroundColor: "#D06A52",
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                  borderRadius: 16,
+                }}
+                onPress={picker}
+              >
+                <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
+                  Anexar arquivo
+                </Texto>
+              </Pressable>
+            </View>
+          )}
           <View
             style={{
               ...styles.messaginginputContainer,
@@ -312,7 +312,12 @@ const Messaging = ({ route, navigation }) => {
                 <Pressable
                   style={styles.messagingbuttonContainer}
                   // onPress={handleNewMessage}
-                  onPress={() => {}}
+                  onPress={() => {
+                    setVisibleAnex(!visibleAnex);
+                    setTimeout(() => {
+                      scrollToBottom();
+                    }, 1000);
+                  }}
                 >
                   <AddSource />
                 </Pressable>
