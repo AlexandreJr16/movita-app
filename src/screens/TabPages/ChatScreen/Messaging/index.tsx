@@ -143,6 +143,8 @@ const Messaging = ({ route, navigation }) => {
     };
 
     socket.emit("newMessage", newMessage);
+    setTimeout(() => {}, 2000);
+    socket.emit("findRoom", item.id);
   };
 
   // Enviar novo modelo 3D
