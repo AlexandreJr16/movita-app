@@ -12,6 +12,9 @@ import {
   ImageBackground,
   FlatList,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import * as FileSystem from "expo-file-system";
+import * as DocumentPicker from "expo-document-picker";
 import SendMessage from "../../../../assents/Chat/SendMessage";
 import AddSource from "../../../../assents/Chat/addSoruce";
 import Arrow from "../../../../assents/Perfil/Arrow";
@@ -24,7 +27,6 @@ import styles from "./styles";
 import { MessageResponse, RoomResponse } from "..";
 import MessageComponent from "../../../../components/Chat/MessageComponent";
 import ImagePickerModal from "../../../../components/ImageModal";
-import { ScrollView } from "react-native-gesture-handler";
 
 export type SendMessage = {
   texto: string | null;
@@ -142,10 +144,47 @@ const Messaging = ({ route, navigation }) => {
     socket.emit("newMessage", newMessage);
   };
 
+  // Enviar novo modelo 3D
+  const handleNewModel = (modelo: Buffer) => {
+    if (!modelo) return;
+
+    const newMessage: MessageResponse = {
+      tipoMessage: "MODELO_3D",
+      texto: null,
+      imagem: null,
+      modelo3d: modelo,
+      userName: nome,
+      roomId: item.id,
+      id: Math.random() * 3142142,
+      createAt: new Date(),
+    };
+
+    socket.emit("newMessage", newMessage);
+  };
+
   //Scrolar para o fim do bate papo
   const scrollToBottom = () => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  };
+  const picker = async () => {
+    try {
+      const doc = await DocumentPicker.getDocumentAsync({
+        multiple: false,
+        copyToCacheDirectory: true,
+      });
+      if (!doc.canceled) {
+        // const base64Data = await convertUriToBase64(doc.assets[0].uri);
+        const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        // setImageData(base64Data);
+        const data = { modeloBin: base64 };
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -155,6 +194,9 @@ const Messaging = ({ route, navigation }) => {
 
   const loadImage = (base64Image: any) => {
     handleNewImage(base64Image);
+  };
+  const loadModel = (base64model: any) => {
+    handleNewModel(base64model);
   };
 
   return (
@@ -240,6 +282,7 @@ const Messaging = ({ route, navigation }) => {
                 paddingVertical: 5,
                 borderRadius: 16,
               }}
+              onPress={picker}
             >
               <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
                 Anexar arquivo
@@ -268,7 +311,8 @@ const Messaging = ({ route, navigation }) => {
               <View style={styles.messaginginput}>
                 <Pressable
                   style={styles.messagingbuttonContainer}
-                  onPress={handleNewMessage}
+                  // onPress={handleNewMessage}
+                  onPress={() => {}}
                 >
                   <AddSource />
                 </Pressable>
