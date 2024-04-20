@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, ScrollView } from "react-native";
 import Texto from "../Default/texto/Texto";
 import Produto from "./Product";
 import styles from "./styles";
@@ -29,22 +29,22 @@ const ShowProductsCarousel = ({
               Ver mais
             </Texto>
           </View>
-          {produtos[0] != null ? (
-            <FlatList
-              style={{ width: "100%" }}
-              data={produtos}
-              keyExtractor={(item) => item.id}
+          {produtos ? (
+            <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
+              style={{ width: "100%" }}
+            >
+              {produtos.map((item, i) => (
                 <Produto
+                  key={`${item.id}-${i}`}
                   color={color}
                   navigation={navigation}
                   produto={item}
                   tipo={tipo}
                 />
-              )}
-            />
+              ))}
+            </ScrollView>
           ) : (
             <View
               style={{

@@ -35,15 +35,11 @@ const MeusProjetosScreen = ({ navigation }) => {
         title="Projetos Anteriores"
         handleSearch={undefined}
       />
-      {/* <ShowProductsCarousel
-        navigation={navigation}
-        title={"Projetos bem avaliados:"}
-        produtos={produtos[0]}
-      /> */}
 
       {produtos ? (
-        produtos.map((product) => (
+        produtos.map((product, i) => (
           <ShowProductsCarousel
+            key={i}
             navigation={navigation}
             title={"Projetos bem avaliados:"}
             produtos={product}

@@ -38,8 +38,9 @@ const EmpresasSearchScreen = ({ navigation }) => {
           title="Projetos Anteriores"
         />
         {produtos ? (
-          produtos.map((product) => (
+          produtos.map((product, i) => (
             <ShowCompaniesCarrossel
+              key={i}
               navigation={navigation}
               title={"Projetos bem avaliados:"}
               companies={product}
