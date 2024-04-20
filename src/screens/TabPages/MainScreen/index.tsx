@@ -5,6 +5,7 @@ import styles from "./styles";
 import HeaderMain from "../../../components/Main/Header";
 import SelectCategory from "../../../components/Main/SelectCategory";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
+
 import ProjetoContext from "../../../contexts/project.context";
 
 const ShowProductsCarousel = lazy(
@@ -59,6 +60,7 @@ export default function MainScreen({ navigation }) {
                   tipo="projeto"
                   color={"#36A5BF"}
                 />
+
                 <ShowCompaniesCarrossel
                   navigation={navigation}
                   title={"Empresas bem avaliados:"}

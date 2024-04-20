@@ -7,6 +7,7 @@ import HeaderMyProduct from "../../../components/MeusProjetos/Header";
 import AuthContext from "../../../contexts/auth.context";
 import socket from "../../../utils/socket";
 import styles from "./styles";
+import VitaNotFound from "../../../assents/Vita/VitaNotFound";
 
 export type RoomResponse = {
   id: number;
@@ -110,8 +111,9 @@ const Chat = ({ navigation }) => {
         ) : (
           <View style={styles.chatemptyContainer}>
             <Texto weight="bold" style={styles.chatemptyText}>
-              Nenhum contato encontrada.
+              Você não possui conversas
             </Texto>
+            <VitaNotFound />
           </View>
         )}
       </View>

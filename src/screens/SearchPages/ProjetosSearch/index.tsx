@@ -8,6 +8,7 @@ import HeaderMyProduct from "../../../components/MeusProjetos/Header";
 import AuthContext from "../../../contexts/auth.context";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import ProjetoContext from "../../../contexts/project.context";
+import VitaNotFound from "../../../assents/Vita/VitaNotFound";
 
 const MeusProjetosScreen = ({ navigation }) => {
   const { getTopProjects } = useContext(ProjetoContext);
@@ -34,11 +35,33 @@ const MeusProjetosScreen = ({ navigation }) => {
         title="Projetos Anteriores"
         handleSearch={undefined}
       />
-      <ShowProductsCarousel
+      {/* <ShowProductsCarousel
         navigation={navigation}
         title={"Projetos bem avaliados:"}
         produtos={produtos[0]}
-      />
+      /> */}
+
+      {produtos ? (
+        produtos.map((product) => (
+          <ShowProductsCarousel
+            navigation={navigation}
+            title={"Projetos bem avaliados:"}
+            produtos={product}
+          />
+        ))
+      ) : (
+        <View style={styles.emptyContainer}>
+          <Texto
+            weight="bold"
+            style={{
+              ...styles.emptyText,
+            }}
+          >
+            Não conseguimos encontrar esta produto.
+          </Texto>
+          <VitaNotFound />
+        </View>
+      )}
     </ScrollView>
   );
 };

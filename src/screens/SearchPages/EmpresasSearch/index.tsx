@@ -9,6 +9,7 @@ import AuthContext from "../../../contexts/auth.context";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import TextoInput from "../../../components/Default/texto/TextoInput";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
+import VitaNotFound from "../../../assents/Vita/VitaNotFound";
 
 const EmpresasSearchScreen = ({ navigation }) => {
   const { getTopEmpresas } = useContext(AuthContext);
@@ -36,11 +37,27 @@ const EmpresasSearchScreen = ({ navigation }) => {
           navigation={navigation}
           title="Projetos Anteriores"
         />
-        <ShowCompaniesCarrossel
-          navigation={navigation}
-          title={"Projetos bem avaliados:"}
-          companies={produtos[0]}
-        />
+        {produtos ? (
+          produtos.map((product) => (
+            <ShowCompaniesCarrossel
+              navigation={navigation}
+              title={"Projetos bem avaliados:"}
+              companies={product}
+            />
+          ))
+        ) : (
+          <View style={styles.emptyContainer}>
+            <Texto
+              weight="bold"
+              style={{
+                ...styles.emptyText,
+              }}
+            >
+              Não conseguimos encontrar esta empresa.
+            </Texto>
+            <VitaNotFound />
+          </View>
+        )}
       </ScrollView>
     </View>
   );

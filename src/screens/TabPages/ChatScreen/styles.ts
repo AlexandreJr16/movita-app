@@ -38,10 +38,13 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    padding: 50,
+    gap: 10,
   },
   chatemptyText: {
     fontSize: 16,
     color: "#fff",
+    textAlign: "center",
   },
   createButton: {
     display: "flex",

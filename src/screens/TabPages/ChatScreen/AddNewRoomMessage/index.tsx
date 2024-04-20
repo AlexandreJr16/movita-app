@@ -7,6 +7,7 @@ import ChatComponent from "../../../../components/Chat/ChatComponent";
 import socket from "../../../../utils/socket";
 import AddContatoComponent from "../../../../components/Chat/AddContato";
 import AuthContext from "../../../../contexts/auth.context";
+import VitaNotFound from "../../../../assents/Vita/VitaNotFound";
 
 type ResponseEmpresa = {
   id: number;
@@ -89,9 +90,15 @@ const AddRoomMessage = ({ navigation }) => {
           />
         ) : (
           <View style={styles.chatemptyContainer}>
-            <Texto weight="bold" style={styles.chatemptyText}>
-              Nenhum contato encontrada.
+            <Texto
+              weight="bold"
+              style={{
+                ...styles.chatemptyText,
+              }}
+            >
+              Não conseguimos encontrar esta empresa.
             </Texto>
+            <VitaNotFound />
           </View>
         )}
       </View>
