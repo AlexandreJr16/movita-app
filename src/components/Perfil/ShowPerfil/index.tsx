@@ -34,9 +34,12 @@ const ShowPerfil = () => {
       user.tipoUser == "empresa" ? user.Empresa[0].cnpj : user.Cliente[0].cpf;
     const endereco =
       user.tipoUser == "empresa"
-        ? `${user.Empresa[0].Endereco.cidade} - ${user.Empresa[0].Endereco.estado}`
-        : `${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`;
-
+        ? user.Empresa[0].Endereco.cidade && user.Empresa[0].Endereco.estado
+          ? `${user.Empresa[0].Endereco.cidade} - ${user.Empresa[0].Endereco.estado}`
+          : null
+        : user.Cliente[0].Endereco.cidade && user.Cliente[0].Endereco.estado
+        ? `${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
+        : null;
     setEndereco(endereco);
     setName(name);
     setCpf(cpf);

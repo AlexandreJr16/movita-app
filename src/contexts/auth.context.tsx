@@ -58,7 +58,8 @@ export const AuthProvider = ({ children }) => {
       setLoading,
       setUser
     );
-    console.log(response, "WE ARE HERE");
+    const user = await getUser(response.token);
+    setUser(user);
     return response;
   };
 
