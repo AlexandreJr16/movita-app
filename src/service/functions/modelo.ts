@@ -3,8 +3,10 @@ import { API_URL } from "../../../configs";
 
 export const addModelo = async (
   modeloBin: string,
-  projetoId: number
+  projetoId: number,
+  nome: string
 ): Promise<any> => {
+  console.log(nome);
   const url = `${API_URL}/modelo3d`;
   // console.log(projetoId, token);
   const options = {
@@ -12,7 +14,7 @@ export const addModelo = async (
       "Content-Type": "application/json",
     },
   };
-  const data = { projetoId, modeloBin };
+  const data = { projetoId, modeloBin, nome };
 
   try {
     const response = await axios.post(url, data, options);
@@ -22,4 +24,3 @@ export const addModelo = async (
     throw error;
   }
 };
-export const oi = () => {};

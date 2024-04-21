@@ -19,7 +19,6 @@
     "@react-navigation/stack": "^6.3.21",
     "@types/react-native-snap-carousel": "^3.8.8",
     "axios": "^1.6.2",
-    "base-64": "^1.0.0",
     "cep-promise": "^4.4.0",
     "cpf-cnpj-validator": "^1.0.3",
     "deprecated-react-native-prop-types": "^5.0.0",
@@ -28,6 +27,7 @@
     "expo-document-picker": "~11.5.4",
     "expo-file-system": "~15.4.5",
     "expo-font": "~11.4.0",
+    "expo-gl": "^13.6.0",
     "expo-image-picker": "~14.3.2",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
@@ -43,7 +43,8 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "13.9.0",
     "react-native-websocket": "^1.0.2",
-    "socket.io-client": "^4.7.2"
+    "socket.io-client": "^4.7.2",
+    "three": "^0.163.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

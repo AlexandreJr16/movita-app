@@ -109,10 +109,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Funções Model ------------------------------------------------------------------------------------------------
-  const addModel = async (dto: { modeloBin: string; projetoId: number }) => {
+  const addModel = async (dto: {
+    modeloBin: string;
+    projetoId: number;
+    nome: string;
+  }) => {
     return await modelo3d.addModelo(
       dto.modeloBin,
       dto.projetoId,
+      dto.nome,
       token,
       setLoading
     );

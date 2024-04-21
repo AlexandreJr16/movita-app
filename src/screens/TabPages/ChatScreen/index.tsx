@@ -22,7 +22,7 @@ export type MessageResponse = {
   id: number;
   texto: string | null;
   imagem: Buffer;
-  modelo3d: Buffer | null;
+  modelo3D: Buffer | null;
   userName: string;
   createAt: Date;
   roomId: number;

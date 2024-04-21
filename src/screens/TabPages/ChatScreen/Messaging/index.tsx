@@ -12,6 +12,7 @@ import {
   ImageBackground,
   FlatList,
 } from "react-native";
+import { Buffer } from "buffer";
 import { ScrollView } from "react-native-gesture-handler";
 import * as FileSystem from "expo-file-system";
 import * as DocumentPicker from "expo-document-picker";
@@ -79,6 +80,9 @@ const Messaging = ({ route, navigation }) => {
   useEffect(() => {
     const handleFoundRoom = (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
+      roomChats.map((sala) => {
+        if (sala.modelo3D) console.log(sala.modelo3D);
+      });
       scrollToBottom();
     };
 
@@ -114,7 +118,7 @@ const Messaging = ({ route, navigation }) => {
       tipoMessage: "TEXTO",
       texto: message,
       imagem: null,
-      modelo3d: undefined,
+      modelo3D: undefined,
       userName: nome,
       roomId: item.id,
       id: Math.random() * 3142142,
@@ -135,7 +139,7 @@ const Messaging = ({ route, navigation }) => {
       tipoMessage: "IMAGEM",
       texto: null,
       imagem: imagem,
-      modelo3d: undefined,
+      modelo3D: undefined,
       userName: nome,
       roomId: item.id,
       id: Math.random() * 3142142,
@@ -148,29 +152,22 @@ const Messaging = ({ route, navigation }) => {
   };
 
   // Enviar novo modelo 3D
-  const handleNewModel = (modelo: Buffer) => {
+  const handleNewModel = (modelo: Buffer, nome: string) => {
     if (!modelo) return;
-
     const newMessage: MessageResponse = {
       tipoMessage: "MODELO_3D",
       texto: null,
       imagem: null,
-      modelo3d: modelo,
+      modelo3D: modelo,
       userName: nome,
       roomId: item.id,
       id: Math.random() * 3142142,
       createAt: new Date(),
     };
-
+    console.log(newMessage);
     socket.emit("newMessage", newMessage);
   };
 
-  //Scrolar para o fim do bate papo
-  const scrollToBottom = () => {
-    if (scrollViewRef.current) {
-      scrollViewRef.current.scrollToEnd({ animated: true });
-    }
-  };
   const picker = async () => {
     try {
       const doc = await DocumentPicker.getDocumentAsync({
@@ -178,16 +175,25 @@ const Messaging = ({ route, navigation }) => {
         copyToCacheDirectory: true,
       });
       if (!doc.canceled) {
-        // const base64Data = await convertUriToBase64(doc.assets[0].uri);
         const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
           encoding: FileSystem.EncodingType.Base64,
         });
-        // setImageData(base64Data);
-        const data = { modeloBin: base64 };
-        console.log(doc.assets[0].mimeType);
+        const nome = doc.assets[0].name;
+
+        // Converter o base64 em buffer
+        const buffer = Buffer.from(base64, "base64");
+
+        handleNewModel(buffer, nome);
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  //Scrolar para o fim do bate papo
+  const scrollToBottom = () => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
     }
   };
 

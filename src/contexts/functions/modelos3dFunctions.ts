@@ -8,13 +8,19 @@ import * as auth from "../../service/index";
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para a resposta da adição do modelo.
  */
-export const addModelo = async (modeloBin, projetoId, token, setLoading) => {
+export const addModelo = async (
+  modeloBin,
+  projetoId,
+  nome,
+  token,
+  setLoading
+) => {
   try {
     // Define o carregamento como true enquanto adiciona o modelo
     setLoading(true);
 
     // Chama o serviço de autenticação para adicionar o modelo ao projeto
-    const response = await auth.addModelo(modeloBin, projetoId);
+    const response = await auth.addModelo(modeloBin, projetoId, nome);
 
     // Define o carregamento como false após a operação ser concluída
     setLoading(false);
