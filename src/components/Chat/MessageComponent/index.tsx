@@ -8,9 +8,6 @@ import { formattedDate } from "../../../utils/tranformDataToString";
 import ImagemBuffer from "../../Default/Imagem";
 import { Buffer } from "buffer";
 
-import { GLView } from "expo-gl";
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import ModelViewer from "./ModelViewer";
 
 export default function MessageComponent({
@@ -56,7 +53,7 @@ export default function MessageComponent({
             {item.tipoMessage === "MODELO_3D" && item.modelo3D ? (
               <React.Fragment>
                 {/* Converter modelo 3D para base64 antes de passá-lo para o ModelViewer */}
-                <ModelViewer />
+                <ModelViewer base64={arrayBufferToBase64(item.modelo3D)} />
                 <Texto weight="bold"> OLA</Texto>
               </React.Fragment>
             ) : null}
