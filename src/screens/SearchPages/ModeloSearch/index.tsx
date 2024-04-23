@@ -60,10 +60,10 @@ const ModelosSearch = ({ navigation }) => {
   return (
     <ScrollView style={styles.background}>
       <HeaderMyProduct
-        textoSearch="Procurar Projetos"
+        textoSearch="Procurar Modelos"
         navigation={navigation}
         color={"blue"}
-        title="Projetos Anteriores"
+        title="Modelo Anteriores"
         handleSearch={handleSearchDebounce}
       />
       {!saoTodosVaziosOuNulos(produtos) ? (

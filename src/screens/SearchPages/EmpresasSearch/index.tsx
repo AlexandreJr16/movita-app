@@ -42,6 +42,19 @@ const EmpresasSearchScreen = ({ navigation }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  function saoTodosVaziosOuNulos(produtos) {
+    if (!Array.isArray(produtos)) {
+      return false;
+    }
+    for (let i = 0; i < produtos.length; i++) {
+      const arrayInterno = produtos[i];
+      if (!Array.isArray(arrayInterno) || arrayInterno.length !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
   return (
     <View style={styles.background}>
       <ScrollView style={styles.background}>
@@ -51,7 +64,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
           navigation={navigation}
           title="Projetos Anteriores"
         />
-        {produtos ? (
+        {!saoTodosVaziosOuNulos(produtos) ? (
           produtos.map((product, i) => (
             <ShowCompaniesCarrossel
               key={i}

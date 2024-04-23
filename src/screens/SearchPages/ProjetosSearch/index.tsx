@@ -39,6 +39,19 @@ const MeusProjetosScreen = ({ navigation }) => {
   };
   const handleSearchDebounce = debounce(handleSearch, 1000);
 
+  function saoTodosVaziosOuNulos(produtos) {
+    if (!Array.isArray(produtos)) {
+      return false;
+    }
+    for (let i = 0; i < produtos.length; i++) {
+      const arrayInterno = produtos[i];
+      if (!Array.isArray(arrayInterno) || arrayInterno.length !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return (
     <ScrollView style={styles.background}>
       <HeaderMyProduct
@@ -49,7 +62,7 @@ const MeusProjetosScreen = ({ navigation }) => {
         handleSearch={handleSearchDebounce}
       />
 
-      {produtos ? (
+      {!saoTodosVaziosOuNulos(produtos) ? (
         produtos.map((product, i) => (
           <ShowProductsCarousel
             key={i}
