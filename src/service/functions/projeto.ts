@@ -160,3 +160,19 @@ export const projetoFindByname = async (dto: {
     throw error;
   }
 };
+
+export const findByProjeto = async (dto: { value: string }) => {
+  const url = `${API_URL}/projeto/findByName`;
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.post(url, dto, options);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

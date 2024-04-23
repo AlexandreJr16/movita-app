@@ -9,10 +9,12 @@ import AuthContext from "../../../contexts/auth.context";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import ProjetoContext from "../../../contexts/project.context";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
+import debounce from "../../../utils/debounce";
 
 const MeusProjetosScreen = ({ navigation }) => {
-  const { getTopProjects } = useContext(ProjetoContext);
+  const { getTopProjects, findProjetoByName } = useContext(ProjetoContext);
   const [produtos, setProdutos] = useState([]);
+  const [search, setValue] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,14 @@ const MeusProjetosScreen = ({ navigation }) => {
 
     fetchData();
   }, []);
+
+  const handleSearch = async (value) => {
+    setValue(value);
+    const prod = await findProjetoByName(value);
+    console.log(prod);
+  };
+  const handleSearchDebounce = debounce(handleSearch, 1000);
+
   return (
     <ScrollView style={styles.background}>
       <HeaderMyProduct
@@ -33,7 +43,7 @@ const MeusProjetosScreen = ({ navigation }) => {
         navigation={navigation}
         color={"blue"}
         title="Projetos Anteriores"
-        handleSearch={undefined}
+        handleSearch={handleSearchDebounce}
       />
 
       {produtos ? (

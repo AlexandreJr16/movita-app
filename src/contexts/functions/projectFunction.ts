@@ -164,7 +164,16 @@ export async function findProjetoByName(dto: { nome: string }) {
   try {
     const { nome } = dto;
     const prods = await auth.projetoFindByname({ nome });
-    console.log(prods);
+    return prods;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function findByNameProjeto(dto: { value: string }) {
+  try {
+    const { value } = dto;
+    const prods = await auth.projetoFindByname({ nome: value });
     return prods;
   } catch (error) {
     throw new Error(error);

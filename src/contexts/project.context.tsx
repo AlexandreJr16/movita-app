@@ -41,6 +41,10 @@ export const ProjetoProvider = ({ children }) => {
   const findProjetoByName = async (nome: string) => {
     return await projectsFunctions.findProjetoByName({ nome });
   };
+  const findByNameProject = async (dto: { value: string }) => {
+    return await projectsFunctions.findByNameProjeto(dto);
+  };
+
   return (
     <ProjetoContext.Provider
       value={{
