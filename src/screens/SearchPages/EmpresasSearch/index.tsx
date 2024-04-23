@@ -11,6 +11,7 @@ import TextoInput from "../../../components/Default/texto/TextoInput";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
 import debounce from "../../../utils/debounce";
+import ProjetoContext from "../../../contexts/project.context";
 
 const EmpresasSearchScreen = ({ navigation }) => {
   const { getTopEmpresas, findEmpresasByName } = useContext(AuthContext);

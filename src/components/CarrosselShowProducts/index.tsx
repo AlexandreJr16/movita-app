@@ -2,7 +2,7 @@ import { View, FlatList, ScrollView } from "react-native";
 import Texto from "../Default/texto/Texto";
 import Produto from "./Product";
 import styles from "./styles";
-import React from "react";
+import React, { useState } from "react";
 
 const ShowProductsCarousel = ({
   produtos,
@@ -11,15 +11,16 @@ const ShowProductsCarousel = ({
   title = "Outros",
   tipo = "projeto",
 }: {
-  produtos: any;
+  produtos: any[] | null;
   navigation: any;
   color?: any;
   title?: any;
   tipo?: "projeto";
 }) => {
+  if (produtos == null) produtos = [];
   return (
     <View style={styles.container}>
-      {produtos == undefined ? null : (
+      {produtos.length == 0 ? null : (
         <React.Fragment>
           <View style={styles.textContainer}>
             <Texto weight="regular" style={styles.title}>

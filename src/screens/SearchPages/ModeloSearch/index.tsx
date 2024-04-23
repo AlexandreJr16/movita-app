@@ -9,10 +9,13 @@ import AuthContext from "../../../contexts/auth.context";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import ProjetoContext from "../../../contexts/project.context";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
+import debounce from "../../../utils/debounce";
 
 const ModelosSearch = ({ navigation }) => {
-  const { getTopProjects } = useContext(ProjetoContext);
+  const { getTopProjects, findProjetoByName } = useContext(ProjetoContext);
   const [produtos, setProdutos] = useState([]);
+  const [value, setValue] = useState();
+  const [visible, setVisible] = useState(true);
 
   // Faz o get dos projetos
   const fetchData = async () => {
@@ -28,6 +31,32 @@ const ModelosSearch = ({ navigation }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleSearch = async (value) => {
+    setValue(value);
+    if (value == "") {
+      fetchData();
+    } else {
+      const prod = await findProjetoByName(value);
+      console.log([prod, prod]);
+      setProdutos([prod, prod]);
+    }
+  };
+  const handleSearchDebounce = debounce(handleSearch, 1000);
+
+  function saoTodosVaziosOuNulos(produtos) {
+    if (!Array.isArray(produtos)) {
+      return false;
+    }
+    for (let i = 0; i < produtos.length; i++) {
+      const arrayInterno = produtos[i];
+      if (!Array.isArray(arrayInterno) || arrayInterno.length !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return (
     <ScrollView style={styles.background}>
       <HeaderMyProduct
@@ -35,9 +64,9 @@ const ModelosSearch = ({ navigation }) => {
         navigation={navigation}
         color={"blue"}
         title="Projetos Anteriores"
-        handleSearch={undefined}
+        handleSearch={handleSearchDebounce}
       />
-      {produtos ? (
+      {!saoTodosVaziosOuNulos(produtos) ? (
         produtos.map((product, i) => (
           <ShowProductsCarousel
             key={i}
