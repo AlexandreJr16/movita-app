@@ -10,10 +10,12 @@ import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 import TextoInput from "../../../components/Default/texto/TextoInput";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
+import debounce from "../../../utils/debounce";
 
 const EmpresasSearchScreen = ({ navigation }) => {
-  const { getTopEmpresas } = useContext(AuthContext);
+  const { getTopEmpresas, findEmpresasByName } = useContext(AuthContext);
   const [produtos, setProdutos] = useState([]);
+  const [value, setValue] = useState();
 
   //Get de dados dos projetos
   const fetchData = async () => {
@@ -24,6 +26,16 @@ const EmpresasSearchScreen = ({ navigation }) => {
       console.error("Erro ao obter os projetos:", error);
     }
   };
+  const handleSearch = async (value) => {
+    setValue(value);
+    if (value == "") {
+      fetchData();
+    } else {
+      const prod = await findEmpresasByName(value);
+      setProdutos([prod]);
+    }
+  };
+  const handleSearchDebounce = debounce(handleSearch, 1000);
 
   //Executa ao renderizar página
   useEffect(() => {
@@ -33,6 +45,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
     <View style={styles.background}>
       <ScrollView style={styles.background}>
         <HeaderMyProduct
+          handleSearch={handleSearchDebounce}
           textoSearch="Procurar empresas"
           navigation={navigation}
           title="Projetos Anteriores"

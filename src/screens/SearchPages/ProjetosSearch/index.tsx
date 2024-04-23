@@ -16,23 +16,26 @@ const MeusProjetosScreen = ({ navigation }) => {
   const [produtos, setProdutos] = useState([]);
   const [search, setValue] = useState("");
 
+  const fetchData = async () => {
+    try {
+      const topProjects = await getTopProjects(10);
+      setProdutos([topProjects]);
+    } catch (error) {
+      console.error("Erro ao obter os projetos:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const topProjects = await getTopProjects(10);
-        setProdutos([topProjects]);
-      } catch (error) {
-        console.error("Erro ao obter os projetos:", error);
-      }
-    };
-
     fetchData();
   }, []);
 
   const handleSearch = async (value) => {
     setValue(value);
-    const prod = await findProjetoByName(value);
-    console.log(prod);
+    if (value == "") {
+      fetchData();
+    } else {
+      const prod = await findProjetoByName(value);
+      setProdutos([prod]);
+    }
   };
   const handleSearchDebounce = debounce(handleSearch, 1000);
 
