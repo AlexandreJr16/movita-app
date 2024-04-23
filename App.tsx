@@ -6,7 +6,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Contexts from "./src/contexts/contexts";
-import { LogBox } from "react-native";
+import { Keyboard, LogBox, Pressable } from "react-native";
 
 export default function App() {
   //Só estou ignorando um warning
@@ -16,11 +16,13 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <Contexts>
-            <Routes />
-          </Contexts>
-        </NavigationContainer>
+        <Pressable style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+          <NavigationContainer>
+            <Contexts>
+              <Routes />
+            </Contexts>
+          </NavigationContainer>
+        </Pressable>
       </GestureHandlerRootView>
     </SafeAreaView>
   );

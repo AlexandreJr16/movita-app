@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, FlatList, TouchableOpacity, StatusBar } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  StatusBar,
+  Keyboard,
+  Pressable,
+} from "react-native";
 import Plus from "../../../assents/Chat/plus";
 import ChatComponent from "../../../components/Chat/ChatComponent";
 import Texto from "../../../components/Default/texto/Texto";
@@ -8,6 +15,7 @@ import AuthContext from "../../../contexts/auth.context";
 import socket from "../../../utils/socket";
 import styles from "./styles";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export type RoomResponse = {
   id: number;
@@ -88,6 +96,7 @@ const Chat = ({ navigation }) => {
     return <ChatComponent navigation={navigation} item={item} />;
   };
   return (
+    // <Pressable style={styles.chatscreen}>
     <View style={styles.chatscreen}>
       <StatusBar backgroundColor={"#2f2f2f"} barStyle="light-content" />
       <HeaderMyProduct

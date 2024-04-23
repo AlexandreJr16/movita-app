@@ -45,7 +45,10 @@ const SignUpScreen5 = ({ navigation }) => {
             street: string;
           }) => data
         )
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error);
+        });
+      console.log(local);
       if (local) {
         setBairro(local.neighborhood);
         setEstado(local.state);
@@ -60,7 +63,7 @@ const SignUpScreen5 = ({ navigation }) => {
     setBairro(value);
   };
   const handleCidade = (value) => {
-    handleCidade(value);
+    setCidade(value);
   };
 
   const handleSubmit = async () => {
