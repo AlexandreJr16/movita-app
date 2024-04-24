@@ -179,3 +179,9 @@ export async function findByNameProjeto(dto: { value: string }) {
     throw new Error(error);
   }
 }
+export async function findProjetoByUserCompany(dto: {
+  clienteId: number;
+  empresaId: number;
+}) {
+  return await auth.findProjetoByUserCompany(dto);
+}

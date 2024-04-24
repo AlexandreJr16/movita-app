@@ -11,6 +11,8 @@ type ProjetoContextData = {
   getProject(num: number);
   getFavProjects();
   addImageProj?(dto: { bin: any; id: number });
+  findByNameProject?(dto: { value: string });
+  findProjetoByUserCompany(dto: { clienteId: number; empresaId: number });
 };
 
 const ProjetoContext = createContext({} as ProjetoContextData);
@@ -44,6 +46,12 @@ export const ProjetoProvider = ({ children }) => {
   const findByNameProject = async (dto: { value: string }) => {
     return await projectsFunctions.findByNameProjeto(dto);
   };
+  const findProjetoByUserCompany = async (dto: {
+    clienteId: number;
+    empresaId: number;
+  }) => {
+    return await projectsFunctions.findProjetoByUserCompany(dto);
+  };
 
   return (
     <ProjetoContext.Provider
@@ -55,6 +63,8 @@ export const ProjetoProvider = ({ children }) => {
         getTopProjects,
         getFavProjects,
         addImageProj,
+        findByNameProject,
+        findProjetoByUserCompany,
       }}
     >
       {children}

@@ -176,3 +176,22 @@ export const findByProjeto = async (dto: { value: string }) => {
     throw error;
   }
 };
+
+export const findProjetoByUserCompany = async (dto: {
+  clienteId: number;
+  empresaId: number;
+}) => {
+  const url = `${API_URL}/projeto/getProjetoByUserCompany`;
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.post(url, dto, options);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

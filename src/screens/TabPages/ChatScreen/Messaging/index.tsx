@@ -28,6 +28,7 @@ import styles from "./styles";
 import { MessageResponse, RoomResponse } from "..";
 import MessageComponent from "../../../../components/Chat/MessageComponent";
 import ImagePickerModal from "../../../../components/ImageModal";
+import ProjetoContext from "../../../../contexts/project.context";
 
 export type SendMessage = {
   texto: string | null;
@@ -40,6 +41,7 @@ export type SendMessage = {
 
 const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
+  const { findProjetoByUserCompany } = useContext(ProjetoContext);
   const scrollViewRef = useRef(null);
 
   const [chatMessages, setChatMessages] = useState<MessageResponse[]>();
@@ -78,11 +80,16 @@ const Messaging = ({ route, navigation }) => {
 
   //Procurar bate-papos
   useEffect(() => {
-    const handleFoundRoom = (roomChats: MessageResponse[]) => {
+    const handleFoundRoom = async (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
       roomChats.map((sala) => {
         if (sala.modelo3D) console.log(sala.modelo3D);
       });
+      const projetos = await findProjetoByUserCompany({
+        clienteId: item.userId1,
+        empresaId: item.userId2,
+      });
+      console.log(projetos, "OAOAOOA");
       scrollToBottom();
     };
 
