@@ -36,7 +36,12 @@ export type SendMessage = {
   modelo3d: Buffer | null;
   userName: string;
   roomId: number;
-  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D";
+  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING";
+  briefing?: {
+    title: string;
+    answered: boolean;
+    question: [{ text: string; response: string }];
+  };
 };
 
 const Messaging = ({ route, navigation }) => {
@@ -199,7 +204,7 @@ const Messaging = ({ route, navigation }) => {
 
   const picker = () => {
     const dto = {
-      tipoMessage: "IMAGEM",
+      tipoMessage: "BRIEFING",
       texto: null,
       imagem: null,
       modelo3D: undefined,
@@ -209,6 +214,7 @@ const Messaging = ({ route, navigation }) => {
       createAt: new Date(),
       briefing: {
         answered: false,
+        title: "MOVEL NOVO",
         question: [
           { text: "QUAL È O NOME DO SEU IMRAO MAIS NOVO", response: null },
         ],

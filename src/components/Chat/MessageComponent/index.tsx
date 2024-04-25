@@ -9,6 +9,7 @@ import ImagemBuffer from "../../Default/Imagem";
 import { Buffer } from "buffer";
 
 import ModelViewer from "./ModelViewer";
+import BriefingComponent from "../BriefingComponent";
 
 export default function MessageComponent({
   item,
@@ -32,7 +33,6 @@ export default function MessageComponent({
 
     return url;
   };
-
   return (
     <View>
       <View
@@ -47,7 +47,7 @@ export default function MessageComponent({
             style={
               status
                 ? styles.mmessage
-                : [styles.mmessage, { backgroundColor: "#7b7b7b" }]
+                : [styles.mmessage, { backgroundColor: "#464646" }]
             }
           >
             {item.tipoMessage === "MODELO_3D" && item.modelo3D ? (
@@ -68,6 +68,9 @@ export default function MessageComponent({
               <Texto weight="regular" style={{ color: "white" }}>
                 {item.texto}
               </Texto>
+            )}
+            {item.tipoMessage == "BRIEFING" && (
+              <BriefingComponent briefing={item.briefing} />
             )}
           </View>
         </View>

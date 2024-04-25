@@ -34,7 +34,12 @@ export type MessageResponse = {
   userName: string;
   createAt: Date;
   roomId: number;
-  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D";
+  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING";
+  briefing?: {
+    title: string;
+    answered: boolean;
+    question: [{ text: string; response: string }];
+  };
 };
 
 const Chat = ({ navigation }) => {
