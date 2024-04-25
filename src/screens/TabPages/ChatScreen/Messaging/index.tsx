@@ -175,26 +175,47 @@ const Messaging = ({ route, navigation }) => {
     socket.emit("newMessage", newMessage);
   };
 
-  const picker = async () => {
-    try {
-      const doc = await DocumentPicker.getDocumentAsync({
-        multiple: false,
-        copyToCacheDirectory: true,
-      });
-      if (!doc.canceled) {
-        const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-        const nome = doc.assets[0].name;
+  // const picker = async () => {
+  //   try {
+  //     const doc = await DocumentPicker.getDocumentAsync({
+  //       multiple: false,
+  //       copyToCacheDirectory: true,
+  //     });
+  //     if (!doc.canceled) {
+  //       const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
+  //         encoding: FileSystem.EncodingType.Base64,
+  //       });
+  //       const nome = doc.assets[0].name;
 
-        // Converter o base64 em buffer
-        const buffer = Buffer.from(base64, "base64");
+  //       // Converter o base64 em buffer
+  //       const buffer = Buffer.from(base64, "base64");
 
-        handleNewModel(buffer, nome);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  //       handleNewModel(buffer, nome);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const picker = () => {
+    const dto = {
+      tipoMessage: "IMAGEM",
+      texto: null,
+      imagem: null,
+      modelo3D: undefined,
+      userName: nome,
+      roomId: item.id,
+      id: Math.random() * 3142142,
+      createAt: new Date(),
+      briefing: {
+        answered: false,
+        question: [
+          { text: "QUAL È O NOME DO SEU IMRAO MAIS NOVO", response: null },
+        ],
+      },
+    };
+    console.log(dto);
+    socket.emit("newMessage", dto);
   };
 
   //Scrolar para o fim do bate papo
