@@ -8,8 +8,10 @@ const BriefingComponent = ({
   navigation,
 }: {
   briefing: {
+    id: number;
     answered: boolean;
     title: string;
+
     question: [{ text: string; response: string }];
   };
   navigation: any;
@@ -42,7 +44,7 @@ const BriefingComponent = ({
       </View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("BriefingRespond");
+          navigation.navigate("BriefingRespond", { briefingId: briefing.id });
         }}
         style={{
           backgroundColor: "#238298",

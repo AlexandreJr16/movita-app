@@ -36,6 +36,7 @@ export type MessageResponse = {
   roomId: number;
   tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING";
   briefing?: {
+    id: number;
     title: string;
     answered: boolean;
     question: [{ text: string; response: string }];
