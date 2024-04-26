@@ -42,7 +42,7 @@ const BriefingComponent = ({
       </View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("Main");
+          navigation.navigate("BriefingRespond");
         }}
         style={{
           backgroundColor: "#238298",

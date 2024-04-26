@@ -17,9 +17,13 @@ const PerfilRoutes: React.FC = () => {
       initialRouteName="main"
       screenOptions={{
         headerShown: false,
-        animationDuration: 500,
-        animationTypeForReplace: "pop",
+        gestureEnabled: true,
+        gestureDirection: "horizontal", // Set the initial gesture direction
+        fullScreenGestureEnabled: true,
+        customAnimationOnGesture: true,
         animation: "fade_from_bottom",
+        animationDuration: 1100,
+        animationTypeForReplace: "pop",
       }}
     >
       <Stack.Screen name="main" component={PerfilScreen} />
