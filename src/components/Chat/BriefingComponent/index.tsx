@@ -5,12 +5,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const BriefingComponent = ({
   briefing,
+  navigation,
 }: {
   briefing: {
     answered: boolean;
     title: string;
     question: [{ text: string; response: string }];
   };
+  navigation: any;
 }) => {
   const { answered, question, title } = briefing;
   return (
@@ -39,6 +41,9 @@ const BriefingComponent = ({
         </Texto>
       </View>
       <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Main");
+        }}
         style={{
           backgroundColor: "#238298",
           borderRadius: 10,

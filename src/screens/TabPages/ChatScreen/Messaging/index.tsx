@@ -282,6 +282,7 @@ const Messaging = ({ route, navigation }) => {
                       key={index}
                       item={msg}
                       different={different}
+                      navigation={navigation}
                     ></MessageComponent>
                   );
                 })}

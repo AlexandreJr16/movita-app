@@ -14,9 +14,11 @@ import BriefingComponent from "../BriefingComponent";
 export default function MessageComponent({
   item,
   different,
+  navigation,
 }: {
   item: MessageResponse;
   different: boolean;
+  navigation: any;
 }) {
   const { user } = useContext(AuthContext);
   const nome =
@@ -70,7 +72,10 @@ export default function MessageComponent({
               </Texto>
             )}
             {item.tipoMessage == "BRIEFING" && (
-              <BriefingComponent briefing={item.briefing} />
+              <BriefingComponent
+                navigation={navigation}
+                briefing={item.briefing}
+              />
             )}
           </View>
         </View>
