@@ -3,7 +3,6 @@ import { View, ScrollView, Button, Alert } from "react-native";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import styles from "./styles";
 import BriefingContext, {
-  UpdateBriefingDTO,
   UpdateQuestionDTO,
 } from "../../../../contexts/briefing.context";
 import Texto from "../../../../components/Default/texto/Texto";
@@ -25,9 +24,11 @@ type BriefingType = {
 };
 
 const RespondBriefing = ({
+  navigation,
   route,
 }: {
   route: { params: { briefingId: number } };
+  navigation: any;
 }) => {
   const [briefing, setBriefing] = useState<BriefingType | undefined>();
   const { findBriefing, updateBriefing } = useContext(BriefingContext);
@@ -60,11 +61,12 @@ const RespondBriefing = ({
         : ([] as UpdateQuestionDTO[]);
       const dto = {
         title: briefing.title,
-        answered: briefing.answered,
+        answered: true,
         id: briefing.id,
         question: quest,
       };
       const response = await updateBriefing(briefing.id, dto);
+      if (response) navigation.goBack();
       // console.log(response);
     } else {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");

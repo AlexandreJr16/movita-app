@@ -87,14 +87,11 @@ const Messaging = ({ route, navigation }) => {
   useEffect(() => {
     const handleFoundRoom = async (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
-      roomChats.map((sala) => {
-        if (sala.modelo3D) console.log(sala.modelo3D);
-      });
+
       const projetos = await findProjetoByUserCompany({
         clienteId: item.userId1,
         empresaId: item.userId2,
       });
-      console.log(projetos, "OAOAOOA");
       scrollToBottom();
     };
 
@@ -176,7 +173,6 @@ const Messaging = ({ route, navigation }) => {
       id: Math.random() * 3142142,
       createAt: new Date(),
     };
-    console.log(newMessage);
     socket.emit("newMessage", newMessage);
   };
 
@@ -222,7 +218,6 @@ const Messaging = ({ route, navigation }) => {
         ],
       },
     };
-    console.log(dto);
     socket.emit("newMessage", dto);
   };
 
