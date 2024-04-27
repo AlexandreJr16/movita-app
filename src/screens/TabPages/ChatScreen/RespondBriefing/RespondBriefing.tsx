@@ -8,7 +8,7 @@ import TextoInput from "../../../../components/Default/texto/TextoInput";
 
 type QuestionType = {
   id: number;
-  questionId: number;
+  briefingId: number;
   response: string;
   text: string;
 };
@@ -45,15 +45,15 @@ const RespondBriefing = ({
 
   const onSubmit: SubmitHandler<BriefingType> = (data) => {
     const isValid = Object.keys(errors).length === 0;
+
     if (isValid) {
-      const formattedData = {
-        answered: false,
-        question: data.question.map((item) => ({
-          id: item.id,
-          response: item.response || null,
-        })),
-      };
-      console.log(formattedData);
+      const test = briefing.question.map((question, index) => ({
+        id: question.id,
+        briefingId: question.briefingId,
+        text: briefing.question[index].text,
+        response: data.question[index].response,
+      }));
+      console.log(test);
     } else {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
     }
@@ -72,11 +72,14 @@ const RespondBriefing = ({
                 {question.text}
               </Texto>
               <Controller
+                key={question.id}
                 control={control}
                 render={({ field }) => (
                   <TextoInput
                     value={field.value}
-                    onChangeText={(value) => field.onChange(value)}
+                    onChangeText={(value) => {
+                      field.onChange(value);
+                    }}
                     style={{
                       color: "white",
                       fontSize: 16,

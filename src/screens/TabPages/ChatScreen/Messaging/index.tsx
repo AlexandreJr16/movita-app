@@ -217,6 +217,8 @@ const Messaging = ({ route, navigation }) => {
         title: "MOVEL NOVO",
         question: [
           { text: "QUAL È O NOME DO SEU IMRAO MAIS NOVO", response: null },
+          { text: "QUAL È O NOME DO SEU IMRAO MAIS Velho", response: null },
+          { text: "QUAL È O NOME DO SEU Irmão do meio", response: null },
         ],
       },
     };

@@ -16,7 +16,8 @@ const BriefingComponent = ({
   };
   navigation: any;
 }) => {
-  const { answered, question, title } = briefing;
+  console.log(briefing);
+  const { title, id } = briefing;
   return (
     <View
       style={{
@@ -44,7 +45,7 @@ const BriefingComponent = ({
       </View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("BriefingRespond", { briefingId: briefing.id });
+          navigation.navigate("BriefingRespond", { briefingId: id });
         }}
         style={{
           backgroundColor: "#238298",
