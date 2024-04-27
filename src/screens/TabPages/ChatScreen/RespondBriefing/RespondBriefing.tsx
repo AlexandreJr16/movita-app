@@ -2,7 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { View, ScrollView, Button, Alert } from "react-native";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import styles from "./styles";
-import BriefingContext from "../../../../contexts/briefing.context";
+import BriefingContext, {
+  UpdateBriefingDTO,
+  UpdateQuestionDTO,
+} from "../../../../contexts/briefing.context";
 import Texto from "../../../../components/Default/texto/Texto";
 import TextoInput from "../../../../components/Default/texto/TextoInput";
 
@@ -27,7 +30,7 @@ const RespondBriefing = ({
   route: { params: { briefingId: number } };
 }) => {
   const [briefing, setBriefing] = useState<BriefingType | undefined>();
-  const { findBriefing } = useContext(BriefingContext);
+  const { findBriefing, updateBriefing } = useContext(BriefingContext);
   const {
     control,
     handleSubmit,
@@ -43,17 +46,26 @@ const RespondBriefing = ({
     init();
   }, [route.params, findBriefing]);
 
-  const onSubmit: SubmitHandler<BriefingType> = (data) => {
+  const onSubmit: SubmitHandler<BriefingType> = async (data) => {
     const isValid = Object.keys(errors).length === 0;
 
     if (isValid) {
-      const test = briefing.question.map((question, index) => ({
-        id: question.id,
-        briefingId: question.briefingId,
-        text: briefing.question[index].text,
-        response: data.question[index].response,
-      }));
-      console.log(test);
+      const quest: UpdateQuestionDTO[] = briefing.question
+        ? briefing.question.map((question, index) => ({
+            id: question.id,
+            briefingId: question.briefingId,
+            text: briefing.question[index].text,
+            response: data.question[index].response,
+          }))
+        : ([] as UpdateQuestionDTO[]);
+      const dto = {
+        title: briefing.title,
+        answered: briefing.answered,
+        id: briefing.id,
+        question: quest,
+      };
+      const response = await updateBriefing(briefing.id, dto);
+      // console.log(response);
     } else {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
     }
