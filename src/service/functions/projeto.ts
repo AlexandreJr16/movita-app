@@ -1,6 +1,26 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { API_URL } from "../../../configs";
 
+export const createProjeto = async (dto: {
+  users: { user1: number; user2: number };
+  titulo: string;
+  descricao: string;
+}) => {
+  const url = `${API_URL}/projeto`;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.post(url, dto, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getTopProjects = async (num: number): Promise<any> => {
   const url = `${API_URL}/projeto/topProjetos/${num}`;
 

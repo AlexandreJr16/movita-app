@@ -7,6 +7,12 @@ import ProjetoContext from "../../../contexts/project.context";
 import { AuthContex } from "../../../contexts/providersContext";
 import AuthContext from "../../../contexts/auth.context";
 
+type EnviarResposta = {
+  users: { user1: number; user2: number };
+  titulo: string;
+  descricao: string;
+};
+
 const ProjetoMessage = ({
   projeto,
   users,
@@ -21,19 +27,20 @@ const ProjetoMessage = ({
   };
   users: { user1: number; user2: number };
 }) => {
-  const {} = useContext(ProjetoContext);
+  const { createProjeto } = useContext(ProjetoContext);
   const { user } = useContext(AuthContext);
 
   const [visible, setVisible] = useState(false);
 
-  const handleResponderProjeto = (value: boolean) => {
-    const dto = {
-      userId: user.id,
-      title: projeto.title,
-      description: projeto.detalhes,
+  const handleResponderProjeto = async (value: boolean) => {
+    const dto: EnviarResposta = {
+      descricao: projeto.detalhes,
+      titulo: projeto.title,
       users: users,
     };
-    console.log(dto);
+    const response = await createProjeto(dto);
+    if (response) {
+    }
   };
 
   return (
