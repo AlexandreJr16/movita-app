@@ -34,12 +34,20 @@ export type MessageResponse = {
   userName: string;
   createAt: Date;
   roomId: number;
-  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING";
+  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING" | "PROJETO";
   briefing?: {
     id: number;
     title: string;
     answered: boolean;
     question: [{ text: string; response: string }];
+  };
+  project: {
+    id: number;
+    title: string;
+    detalhes: string;
+    messageId: number;
+    respondido: boolean;
+    resposta: boolean;
   };
 };
 

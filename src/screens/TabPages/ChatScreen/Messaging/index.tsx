@@ -33,14 +33,18 @@ import ProjetoContext from "../../../../contexts/project.context";
 export type SendMessage = {
   texto: string | null;
   imagem: any;
-  modelo3d: Buffer | null;
+  modelo3D: Buffer | null;
   userName: string;
   roomId: number;
-  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING";
+  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING" | "PROJETO";
   briefing?: {
     title: string;
     answered: boolean;
     question: [{ text: string; response: string }];
+  };
+  project: {
+    title: string;
+    detalhes: string;
   };
 };
 
@@ -132,6 +136,7 @@ const Messaging = ({ route, navigation }) => {
       roomId: item.id,
       id: Math.random() * 3142142,
       createAt: new Date(),
+      project: null,
     };
 
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -153,6 +158,7 @@ const Messaging = ({ route, navigation }) => {
       roomId: item.id,
       id: Math.random() * 3142142,
       createAt: new Date(),
+      project: null,
     };
 
     socket.emit("newMessage", newMessage);
@@ -172,55 +178,46 @@ const Messaging = ({ route, navigation }) => {
       roomId: item.id,
       id: Math.random() * 3142142,
       createAt: new Date(),
+      project: null,
     };
     socket.emit("newMessage", newMessage);
   };
 
-  const picker = async () => {
-    try {
-      const doc = await DocumentPicker.getDocumentAsync({
-        multiple: false,
-        copyToCacheDirectory: true,
-      });
-      if (!doc.canceled) {
-        const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-        const nome = doc.assets[0].name;
+  // const picker = async () => {
+  //   try {
+  //     const doc = await DocumentPicker.getDocumentAsync({
+  //       multiple: false,
+  //       copyToCacheDirectory: true,
+  //     });
+  //     if (!doc.canceled) {
+  //       const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
+  //         encoding: FileSystem.EncodingType.Base64,
+  //       });
+  //       const nome = doc.assets[0].name;
 
-        // Converter o base64 em buffer
-        const buffer = Buffer.from(base64, "base64");
+  //       // Converter o base64 em buffer
+  //       const buffer = Buffer.from(base64, "base64");
 
-        handleNewModel(buffer, nome);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // Função de criar um novo briefing (Apenas para desenvolvimento e teste)
-  // const picker = () => {
-  //   const dto = {
-  //     tipoMessage: "BRIEFING",
-  //     texto: null,
-  //     imagem: null,
-  //     modelo3D: undefined,
-  //     userName: nome,
-  //     roomId: item.id,
-  //     id: Math.random() * 3142142,
-  //     createAt: new Date(),
-  //     briefing: {
-  //       answered: false,
-  //       title: "MOVEL NOVO",
-  //       question: [
-  //         { text: "QUAL È O NOME DO SEU IMRAO MAIS NOVO", response: null },
-  //         { text: "QUAL È O NOME DO SEU IMRAO MAIS Velho", response: null },
-  //         { text: "QUAL È O NOME DO SEU Irmão do meio", response: null },
-  //       ],
-  //     },
-  //   };
-  //   socket.emit("newMessage", dto);
+  //       handleNewModel(buffer, nome);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
   // };
+
+  const picker = () => {
+    const dto: SendMessage = {
+      tipoMessage: "PROJETO",
+      texto: null,
+      imagem: null,
+      modelo3D: null,
+      userName: nome,
+      roomId: item.id,
+      briefing: null,
+      project: { title: "OLA", detalhes: "ELE é bonito" },
+    };
+    socket.emit("newMessage", dto);
+  };
 
   //Scrolar para o fim do bate papo
   const scrollToBottom = () => {

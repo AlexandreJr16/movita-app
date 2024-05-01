@@ -10,6 +10,7 @@ import { Buffer } from "buffer";
 
 import ModelViewer from "./ModelViewer";
 import BriefingComponent from "../BriefingComponent";
+import ProjetoMessage from "../ProjetoMessage/ProjetoMessage";
 
 export default function MessageComponent({
   item,
@@ -76,6 +77,9 @@ export default function MessageComponent({
                 navigation={navigation}
                 briefing={item.briefing}
               />
+            )}
+            {item.tipoMessage == "PROJETO" && (
+              <ProjetoMessage projeto={item.project} />
             )}
           </View>
         </View>
