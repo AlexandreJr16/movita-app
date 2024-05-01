@@ -16,10 +16,12 @@ export default function MessageComponent({
   item,
   different,
   navigation,
+  users,
 }: {
   item: MessageResponse;
   different: boolean;
   navigation: any;
+  users: { user1: number; user2: number };
 }) {
   const { user } = useContext(AuthContext);
   const nome =
@@ -79,7 +81,7 @@ export default function MessageComponent({
               />
             )}
             {item.tipoMessage == "PROJETO" && (
-              <ProjetoMessage projeto={item.project} />
+              <ProjetoMessage users={users} projeto={item.project} />
             )}
           </View>
         </View>

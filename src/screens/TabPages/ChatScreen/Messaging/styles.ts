@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 20,
     paddingTop: 30,
-    paddingBottom: 60,
+    paddingBottom: 30,
   },
   textTitle: {
     color: "#fff",
@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
   messaContainer: {
     flex: 1,
     backgroundColor: "#f2f2f2",
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
   },
   messaginginputContainer: {
     display: "flex",

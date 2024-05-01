@@ -249,12 +249,9 @@ const Messaging = ({ route, navigation }) => {
       <View style={styles.messaContainer}>
         <ImageBackground
           resizeMode="cover"
-          imageStyle={{ borderTopRightRadius: 50, borderTopLeftRadius: 50 }}
           style={{
             flex: 1,
             paddingTop: 15,
-            borderTopRightRadius: 50,
-            borderTopLeftRadius: 50,
           }}
           source={require("../../../../assents/Chat/bg.png")}
         >
@@ -276,6 +273,7 @@ const Messaging = ({ route, navigation }) => {
                     <MessageComponent
                       key={index}
                       item={msg}
+                      users={{ user1: item.userId1, user2: item.userId2 }}
                       different={different}
                       navigation={navigation}
                     ></MessageComponent>
