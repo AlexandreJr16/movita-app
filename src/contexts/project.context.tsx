@@ -3,6 +3,7 @@ import { createContext } from "react";
 import * as projectsFunctions from "./functions/projectFunction";
 import AuthContext from "./auth.context";
 import * as projService from "../service/index";
+import * as api from "../service/index";
 
 type ProjetoContextData = {
   findProjetoByName(nome: string);
@@ -19,6 +20,7 @@ type ProjetoContextData = {
     titulo: string;
     descricao: string;
   });
+  findProjectById(dto: { id: number });
 };
 
 const ProjetoContext = createContext({} as ProjetoContextData);
@@ -32,6 +34,9 @@ export const ProjetoProvider = ({ children }) => {
     descricao: string;
   }) => {
     return await projService.createProjeto(dto);
+  };
+  const findProjectById = async (dto: { id: number }) => {
+    return await api.findProjectById(dto);
   };
 
   const getTopProjects = async (num: number) => {
@@ -81,6 +86,7 @@ export const ProjetoProvider = ({ children }) => {
         findByNameProject,
         findProjetoByUserCompany,
         createProjeto,
+        findProjectById,
       }}
     >
       {children}

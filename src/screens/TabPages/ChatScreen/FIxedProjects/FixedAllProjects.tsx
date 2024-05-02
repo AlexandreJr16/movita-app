@@ -30,7 +30,13 @@ const FixedAllProjects = ({
       <ScrollView style={styles.projetosContainer}>
         {projects.projetos &&
           projects.projetos.map((item, index) => (
-            <ShowProjects index={index + 1} key={index} title={item.titulo} />
+            <ShowProjects
+              index={index + 1}
+              key={index}
+              title={item.titulo}
+              id={item.id}
+              navigation={navigation}
+            />
           ))}
       </ScrollView>
     </View>
@@ -38,9 +44,22 @@ const FixedAllProjects = ({
 };
 
 export default FixedAllProjects;
-const ShowProjects = ({ title, index }: { title: string; index: number }) => {
+const ShowProjects = ({
+  title,
+  index,
+  id,
+  navigation,
+}: {
+  title: string;
+  index: number;
+  id: number;
+  navigation: any;
+}) => {
+  const handleNavigate = () => {
+    navigation.navigate("Details", { id });
+  };
   return (
-    <TouchableOpacity style={styles.projectsItems}>
+    <TouchableOpacity style={styles.projectsItems} onPress={handleNavigate}>
       <Texto weight="bold" style={styles.textItems}>
         {index}
       </Texto>

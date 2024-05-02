@@ -20,6 +20,21 @@ export const createProjeto = async (dto: {
     throw error;
   }
 };
+export const findProjectById = async (dto: { id: number }) => {
+  const url = `${API_URL}/projeto/${dto.id}`;
+
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getTopProjects = async (num: number): Promise<any> => {
   const url = `${API_URL}/projeto/topProjetos/${num}`;
