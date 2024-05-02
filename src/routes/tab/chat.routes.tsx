@@ -4,6 +4,8 @@ import Messaging from "../../screens/TabPages/ChatScreen/Messaging";
 import Chat from "../../screens/TabPages/ChatScreen";
 import AddRoomMessage from "../../screens/TabPages/ChatScreen/AddNewRoomMessage";
 import RespondBriefing from "../../screens/TabPages/ChatScreen/RespondBriefing/RespondBriefing";
+import FixedAllProjects from "../../screens/TabPages/ChatScreen/FIxedProjects/FixedAllProjects";
+import DetailsProject from "../../screens/TabPages/ChatScreen/FIxedProjects/DetailsProject/DetailsProject";
 
 const ChatRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -26,6 +28,8 @@ const ChatRoutes: React.FC = () => {
       <Stack.Screen name="Message" component={Messaging} />
       <Stack.Screen name="AddRoom" component={AddRoomMessage} />
       <Stack.Screen name="BriefingRespond" component={RespondBriefing} />
+      <Stack.Screen name="AllProjects" component={FixedAllProjects} />
+      <Stack.Screen name="Details" component={DetailsProject} />
     </Stack.Navigator>
   );
 };

@@ -11,11 +11,10 @@ import {
   StatusBar,
   ImageBackground,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import { Buffer } from "buffer";
 import { ScrollView } from "react-native-gesture-handler";
-import * as FileSystem from "expo-file-system";
-import * as DocumentPicker from "expo-document-picker";
 import SendMessage from "../../../../assents/Chat/SendMessage";
 import AddSource from "../../../../assents/Chat/addSoruce";
 import Arrow from "../../../../assents/Perfil/Arrow";
@@ -29,6 +28,7 @@ import { MessageResponse, RoomResponse } from "..";
 import MessageComponent from "../../../../components/Chat/MessageComponent";
 import ImagePickerModal from "../../../../components/ImageModal";
 import ProjetoContext from "../../../../contexts/project.context";
+import FixedProjects from "../../../../components/Chat/ShowFixedProjects/FixedProjects";
 
 export type SendMessage = {
   texto: string | null;
@@ -48,6 +48,32 @@ export type SendMessage = {
   };
 };
 
+// "contratanteId": 1,
+// "createdAt": "2024-05-01T13:48:00.069Z",
+// "descricao": "Descrição do novo projeto",
+//  "fabricanteId": 2,
+//  "id": 1,
+//   "imagem": [],
+//    "nota": 0,
+//    "status": "Esperando confirmação",
+//     "titulo": "Novo Projeto",
+//      "updatedAt": "2024-05-01T13:48:00.069Z"
+
+export type ProjetosResponseType = {
+  id: number;
+  titulo: string;
+  descricao: string;
+  status: string;
+  nota: number;
+  imagem: Buffer[];
+
+  contratanteId: number;
+  fabricanteId: number;
+
+  createdAt: string;
+  updatedAt: string;
+};
+
 const Messaging = ({ route, navigation }) => {
   const { user } = useContext(AuthContext);
   const { findProjetoByUserCompany } = useContext(ProjetoContext);
@@ -56,6 +82,7 @@ const Messaging = ({ route, navigation }) => {
   const [chatMessages, setChatMessages] = useState<MessageResponse[]>();
   const [visibleImagePicker, setVisibleImagePicker] = useState(false);
   const [visibleAnex, setVisibleAnex] = useState(false);
+  const [projects, setProjects] = useState<ProjetosResponseType[]>();
 
   //Texto sendo digitado
   const [message, setMessage] = useState("");
@@ -92,10 +119,6 @@ const Messaging = ({ route, navigation }) => {
     const handleFoundRoom = async (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
 
-      const projetos = await findProjetoByUserCompany({
-        clienteId: item.userId1,
-        empresaId: item.userId2,
-      });
       scrollToBottom();
     };
 
@@ -146,6 +169,20 @@ const Messaging = ({ route, navigation }) => {
     setMessage("");
     scrollToBottom();
   };
+
+  // Pegar todos os itens associados
+  const handleGetProjectsByChat = async () => {
+    const response: ProjetosResponseType[] = await findProjetoByUserCompany({
+      clienteId: item.userId1,
+      empresaId: item.userId2,
+    });
+    setProjects(response);
+  };
+
+  useEffect(() => {
+    handleGetProjectsByChat();
+  }, []);
+
   const handleNewImage = (imagem: Buffer) => {
     if (!imagem) return;
 
@@ -166,23 +203,7 @@ const Messaging = ({ route, navigation }) => {
     socket.emit("findRoom", item.id);
   };
 
-  // Enviar novo modelo 3D
-  const handleNewModel = (modelo: Buffer, nome: string) => {
-    if (!modelo) return;
-    const newMessage: MessageResponse = {
-      tipoMessage: "MODELO_3D",
-      texto: null,
-      imagem: null,
-      modelo3D: modelo,
-      userName: nome,
-      roomId: item.id,
-      id: Math.random() * 3142142,
-      createAt: new Date(),
-      project: null,
-    };
-    socket.emit("newMessage", newMessage);
-  };
-
+  // Mandar Modelo
   // const picker = async () => {
   //   try {
   //     const doc = await DocumentPicker.getDocumentAsync({
@@ -205,6 +226,24 @@ const Messaging = ({ route, navigation }) => {
   //   }
   // };
 
+  // Enviar novo modelo 3D
+  const handleNewModel = (modelo: Buffer, nome: string) => {
+    if (!modelo) return;
+    const newMessage: MessageResponse = {
+      tipoMessage: "MODELO_3D",
+      texto: null,
+      imagem: null,
+      modelo3D: modelo,
+      userName: nome,
+      roomId: item.id,
+      id: Math.random() * 3142142,
+      createAt: new Date(),
+      project: null,
+    };
+    socket.emit("newMessage", newMessage);
+  };
+
+  //Enviar Projeto ---  --- --- --- --- --- --- Apenas teste
   const picker = () => {
     const dto: SendMessage = {
       tipoMessage: "PROJETO",
@@ -218,6 +257,7 @@ const Messaging = ({ route, navigation }) => {
     };
     socket.emit("newMessage", dto);
   };
+  //--------------------------- --- --- --- --- ---
 
   //Scrolar para o fim do bate papo
   const scrollToBottom = () => {
@@ -246,6 +286,7 @@ const Messaging = ({ route, navigation }) => {
         </Texto>
         <Logo color="#fff" />
       </View>
+      <FixedProjects projetos={projects} navigation={navigation} />
       <View style={styles.messaContainer}>
         <ImageBackground
           resizeMode="cover"
@@ -295,7 +336,7 @@ const Messaging = ({ route, navigation }) => {
                 borderTopRightRadius: 16,
               }}
             >
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setVisibleImagePicker(true);
                 }}
@@ -309,8 +350,8 @@ const Messaging = ({ route, navigation }) => {
                 <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
                   Anexar imagem
                 </Texto>
-              </Pressable>
-              <Pressable
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={{
                   backgroundColor: "#D06A52",
                   paddingHorizontal: 10,
@@ -322,7 +363,7 @@ const Messaging = ({ route, navigation }) => {
                 <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
                   Anexar arquivo
                 </Texto>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           )}
           <View
@@ -345,7 +386,7 @@ const Messaging = ({ route, navigation }) => {
               }}
             >
               <View style={styles.messaginginput}>
-                <Pressable
+                <TouchableOpacity
                   style={styles.messagingbuttonContainer}
                   // onPress={handleNewMessage}
                   onPress={() => {
@@ -356,7 +397,7 @@ const Messaging = ({ route, navigation }) => {
                   }}
                 >
                   <AddSource />
-                </Pressable>
+                </TouchableOpacity>
                 <TextoInput
                   onFocus={focusText}
                   onBlur={blurText}
@@ -367,12 +408,12 @@ const Messaging = ({ route, navigation }) => {
                   onChangeText={(value) => setMessage(value)}
                   placeholder="Digite aqui"
                 />
-                <Pressable
+                <TouchableOpacity
                   style={styles.messagingbuttonContainer}
                   onPress={handleNewMessage}
                 >
                   <SendMessage />
-                </Pressable>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

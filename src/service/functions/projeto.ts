@@ -209,7 +209,6 @@ export const findProjetoByUserCompany = async (dto: {
   };
   try {
     const response = await axios.post(url, dto, options);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;
