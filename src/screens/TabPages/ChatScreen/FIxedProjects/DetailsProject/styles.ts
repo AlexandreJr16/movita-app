@@ -41,12 +41,25 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    flexDirection: "row",
+    flexDirection: "column",
     gap: 15,
   },
   textItems: {
     color: "#fff",
     fontSize: 19,
+  },
+  topItemContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+  inContainerTextItem: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    width: "100%",
   },
 });
 export default styles;

@@ -6,6 +6,9 @@ import Arrow from "../../../../../assents/Perfil/Arrow";
 import Logo from "../../../../../assents/Perfil/Logo";
 import Texto from "../../../../../components/Default/texto/Texto";
 import ProjetoContext from "../../../../../contexts/project.context";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import SetaBottom from "../../../../../assents/Chat/setaBottom";
+import SetaUp from "../../../../../assents/Chat/setaUp";
 
 type EmpresaType = {
   id: number;
@@ -70,9 +73,40 @@ const FixedAllProjects = ({
         </Texto>
         <Logo color="#fff" />
       </View>
-      <ScrollView style={styles.projetosContainer}></ScrollView>
+      <ScrollView style={styles.projetosContainer}>
+        <Fields mainText={"Descrição"} />
+      </ScrollView>
     </View>
   );
 };
 
 export default FixedAllProjects;
+
+const Fields = ({ mainText }: { mainText: string }) => {
+  const [visible, setVisible] = useState(false);
+
+  const handleVisible = () => {
+    setVisible(!visible);
+  };
+
+  return (
+    <TouchableOpacity style={styles.projectsItems} onPress={handleVisible}>
+      <View style={styles.topItemContainer}>
+        <Texto weight="bold" style={styles.textItems}>
+          {mainText}
+        </Texto>
+        {visible ? <SetaUp /> : <SetaBottom />}
+      </View>
+      {visible && (
+        <View style={styles.inContainerTextItem}>
+          <Texto weight="regular">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam
+            inventore perspiciatis vitae repudiandae quisquam natus eius
+            pariatur error delectus dolorum aspernatur nemo incidunt animi
+            temporibus, eum esse facilis. Incidunt, minus.
+          </Texto>
+        </View>
+      )}
+    </TouchableOpacity>
+  );
+};
