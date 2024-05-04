@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
-import { Pressable, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { TouchableOpacity, View } from "react-native";
 import ImagemBuffer from "../../Default/Imagem";
 import Texto from "../../Default/texto/Texto";
-import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
-import MovelDefault from "../../../assents/defaults/Projeto";
 import DefaultMiniProjeto from "../../../assents/defaults/MiniProjeto";
 
 const Companies = ({
   produto,
   navigation,
-  color,
-  tipo = "empresa",
+  color = "#fff",
 }: {
   produto: any;
   navigation: any;
-  color: any;
-  tipo?: "empresa";
+  color?: any;
 }) => {
   const navigateToProduct = () => {
     try {

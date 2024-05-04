@@ -50,47 +50,47 @@ export default function MainScreen({ navigation }) {
         <View style={styles.background}>
           <HeaderMain navigation={navigation} />
           <SelectCategory navigation={navigation} />
-          {!loading && (
-            <React.Fragment>
-              <Suspense fallback={<ActivityIndicator />}>
-                <ShowProductsCarousel
-                  navigation={navigation}
-                  title={"Projetos bem avaliados:"}
-                  produtos={produtos[0]}
-                  tipo="projeto"
-                  color={"#36A5BF"}
-                />
 
-                <ShowCompaniesCarrossel
-                  navigation={navigation}
-                  title={"Empresas bem avaliados:"}
-                  companies={produtos[1]}
-                  tipo="empresa"
-                />
-                <ShowProductsCarousel
-                  navigation={navigation}
-                  title={"Outros:"}
-                  produtos={produtos[2]}
-                  tipo="projeto"
-                  color={"#36A5BF"}
-                />
-                <ShowProductsCarousel
-                  navigation={navigation}
-                  title={"Outros:"}
-                  produtos={produtos[2]}
-                  tipo="projeto"
-                  color={"#36A5BF"}
-                />
-                <ShowProductsCarousel
-                  navigation={navigation}
-                  title={"Outros:"}
-                  produtos={produtos[2]}
-                  tipo="projeto"
-                  color={"#36A5BF"}
-                />
-              </Suspense>
-            </React.Fragment>
-          )}
+          <React.Fragment>
+            <Suspense fallback={<ActivityIndicator />}>
+              <ShowProductsCarousel
+                navigation={navigation}
+                title={"Projetos bem avaliados:"}
+                produtos={produtos[0]}
+                color={"#36A5BF"}
+                loading={loading}
+              />
+
+              <ShowCompaniesCarrossel
+                navigation={navigation}
+                title={"Empresas bem avaliados:"}
+                companies={produtos[1]}
+                loading={loading}
+              />
+              <ShowProductsCarousel
+                loading={loading}
+                navigation={navigation}
+                title={"Outros:"}
+                produtos={produtos[2]}
+                color={"#36A5BF"}
+              />
+
+              <ShowCompaniesCarrossel
+                navigation={navigation}
+                title={"Empresas bem avaliados:"}
+                companies={produtos[1]}
+                loading={loading}
+              />
+              <ShowProductsCarousel
+                loading={loading}
+                navigation={navigation}
+                title={"Outros:"}
+                produtos={produtos[2]}
+                color={"#36A5BF"}
+              />
+            </Suspense>
+          </React.Fragment>
+
           {/* {loading && <ActivityIndicator size="large" color="#0000ff" />} */}
         </View>
       </ScrollView>

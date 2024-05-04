@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    flexDirection: "row",
+    flexDirection: "column",
     paddingHorizontal: 15,
   },
   title: {

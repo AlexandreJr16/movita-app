@@ -1,28 +1,36 @@
-import { View, FlatList, ScrollView } from "react-native";
+import React from "react";
+import { View, ScrollView } from "react-native";
 import Texto from "../Default/texto/Texto";
 import Produto from "./Product";
+import SkeletonProduto from "./Product/Skeleton/SkeletonProduto";
 import styles from "./styles";
-import React, { useState } from "react";
 
 const ShowProductsCarousel = ({
-  produtos,
+  produtos = [],
   navigation,
   color = "#fff",
   title = "Outros",
-  tipo = "projeto",
-}: {
-  produtos: any[] | null;
-  navigation: any;
-  color?: any;
-  title?: any;
-  tipo?: "projeto";
+  loading = false,
 }) => {
-  if (produtos == null) produtos = [];
   return (
     <View style={styles.container}>
-      {produtos.length == 0 ? null : (
-        <React.Fragment>
-          <View style={styles.textContainer}>
+      {loading ? (
+        <ScrollView style={{ width: "100%" }} horizontal={true}>
+          {[0, 1, 2, 3, 4].map((index) => (
+            <SkeletonProduto key={index} />
+          ))}
+        </ScrollView>
+      ) : (
+        <View style={styles.textContainer}>
+          <View
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <Texto weight="regular" style={styles.title}>
               {title}
             </Texto>
@@ -30,11 +38,12 @@ const ShowProductsCarousel = ({
               Ver mais
             </Texto>
           </View>
-          {produtos ? (
+          {produtos.length > 0 ? (
             <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={{ width: "100%" }}
+              horizontal={true}
+              style={{
+                width: "100%",
+              }}
             >
               {produtos.map((item, i) => (
                 <Produto
@@ -42,7 +51,7 @@ const ShowProductsCarousel = ({
                   color={color}
                   navigation={navigation}
                   produto={item}
-                  tipo={tipo}
+                  tipo="projeto"
                 />
               ))}
             </ScrollView>
@@ -50,7 +59,6 @@ const ShowProductsCarousel = ({
             <View
               style={{
                 flex: 1,
-                display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 padding: 25,
@@ -61,9 +69,10 @@ const ShowProductsCarousel = ({
               </Texto>
             </View>
           )}
-        </React.Fragment>
+        </View>
       )}
     </View>
   );
 };
+
 export default ShowProductsCarousel;
