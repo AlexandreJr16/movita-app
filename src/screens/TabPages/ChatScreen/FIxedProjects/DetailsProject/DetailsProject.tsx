@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { Linking, Pressable, ScrollView, View } from "react-native";
 import styles from "./styles";
 
 import Arrow from "../../../../../assents/Perfil/Arrow";
@@ -53,6 +53,13 @@ const FixedAllProjects = ({
   const projectId = route.params;
   const [projeto, setProjeto] = useState<ResponseProjeto>();
 
+  const handleLink = () => {
+    const url = "https://movita-ar.vercel.app";
+    Linking.openURL(url).catch((err) =>
+      console.error("Erro ao abrir URL:", err)
+    );
+  };
+
   const getProject = async (id) => {
     const response: ResponseProjeto = await findProjectById({ id });
     setProjeto(response);
@@ -74,7 +81,11 @@ const FixedAllProjects = ({
         <Logo color="#fff" />
       </View>
       <ScrollView style={styles.projetosContainer}>
-        <Fields mainText={"Descrição"} />
+        <Fields mainText={"Descrição"}>
+          <TouchableOpacity onPress={handleLink}>
+            <Texto weight="bold">Ola pessoal Meu nome é alexandre</Texto>
+          </TouchableOpacity>
+        </Fields>
       </ScrollView>
     </View>
   );
@@ -82,7 +93,13 @@ const FixedAllProjects = ({
 
 export default FixedAllProjects;
 
-const Fields = ({ mainText }: { mainText: string }) => {
+const Fields = ({
+  mainText,
+  children,
+}: {
+  mainText: string;
+  children?: any;
+}) => {
   const [visible, setVisible] = useState(false);
 
   const handleVisible = () => {
@@ -97,16 +114,7 @@ const Fields = ({ mainText }: { mainText: string }) => {
         </Texto>
         {visible ? <SetaUp /> : <SetaBottom />}
       </View>
-      {visible && (
-        <View style={styles.inContainerTextItem}>
-          <Texto weight="regular">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam
-            inventore perspiciatis vitae repudiandae quisquam natus eius
-            pariatur error delectus dolorum aspernatur nemo incidunt animi
-            temporibus, eum esse facilis. Incidunt, minus.
-          </Texto>
-        </View>
-      )}
+      {visible && <View style={styles.inContainerTextItem}>{children}</View>}
     </TouchableOpacity>
   );
 };

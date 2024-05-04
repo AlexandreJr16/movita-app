@@ -22,7 +22,11 @@ const ShowCompaniesCarrossel = ({
   return (
     <React.Fragment>
       {loading ? (
-        <ScrollView style={{ width: "100%" }} horizontal={true}>
+        <ScrollView
+          style={{ width: "100%" }}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
           {[0, 1, 2, 3, 4].map((index) => (
             <SkeletonProduto key={index} />
           ))}
@@ -41,6 +45,7 @@ const ShowCompaniesCarrossel = ({
               </View>
               {companies[0] != null ? (
                 <ScrollView
+                  showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   style={{
                     width: "100%",
