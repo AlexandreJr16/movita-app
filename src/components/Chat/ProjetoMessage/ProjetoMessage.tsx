@@ -131,6 +131,7 @@ const ProjetoMessage = ({
                     width: "100%",
                     paddingHorizontal: 25,
                     paddingVertical: 8,
+                    borderRadius: 8,
                   }}
                 >
                   <Texto weight="bold" style={{ color: "#fff" }}>
@@ -146,6 +147,7 @@ const ProjetoMessage = ({
                     width: "100%",
                     paddingHorizontal: 25,
                     paddingVertical: 8,
+                    borderRadius: 8,
                   }}
                 >
                   <Texto weight="bold" style={{ color: "#fff" }}>

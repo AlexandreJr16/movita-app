@@ -162,6 +162,7 @@ const Messaging = ({ route, navigation }) => {
       project: null,
     };
 
+    console.log(newMessage);
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
 
     socket.emit("newMessage", newMessage);
@@ -200,6 +201,8 @@ const Messaging = ({ route, navigation }) => {
 
     socket.emit("newMessage", newMessage);
     setTimeout(() => {}, 2000);
+    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+
     socket.emit("findRoom", item.id);
   };
 

@@ -22,7 +22,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
   const fetchData = async () => {
     try {
       const topEmpresas = await getTopEmpresas(10);
-      setProdutos([topEmpresas]);
+      setProdutos([topEmpresas, topEmpresas]);
     } catch (error) {
       console.error("Erro ao obter os projetos:", error);
     }
@@ -62,14 +62,14 @@ const EmpresasSearchScreen = ({ navigation }) => {
           handleSearch={handleSearchDebounce}
           textoSearch="Procurar empresas"
           navigation={navigation}
-          title="Projetos Anteriores"
+          title="Empresas Anteriores"
         />
         {!saoTodosVaziosOuNulos(produtos) ? (
           produtos.map((product, i) => (
             <ShowCompaniesCarrossel
               key={i}
               navigation={navigation}
-              title={"Projetos bem avaliados:"}
+              title={"Empresas bem avaliados:"}
               companies={product}
             />
           ))

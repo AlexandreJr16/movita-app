@@ -132,10 +132,10 @@ const ShowProduct = ({ route, navigation }) => {
               </Texto>
             )}
             {/* ADD Model e ImagePicker Modal servem apeans para o desenvolvimento */}
-            <AddModel id={projeto.id} />
+            {/* <AddModel id={projeto.id} />
             <TouchableOpacity onPress={imagePicker}>
               <Texto weight="bold">Adicione a foto ao projeto</Texto>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       )}
