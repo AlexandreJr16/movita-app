@@ -15,6 +15,7 @@ interface CustomViewStyle extends ViewStyle {
   color?: string;
   fontSize?: number;
   marginRight?: number;
+  textDecorationLine?: any;
 }
 
 interface TextProps {

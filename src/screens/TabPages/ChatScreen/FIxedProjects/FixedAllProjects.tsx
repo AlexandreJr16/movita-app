@@ -59,13 +59,13 @@ const ShowProjects = ({
     navigation.navigate("Details", { id });
   };
   return (
-    <TouchableOpacity style={styles.projectsItems} onPress={handleNavigate}>
+    <Pressable style={styles.projectsItems} onPress={handleNavigate}>
       <Texto weight="bold" style={styles.textItems}>
         {index}
       </Texto>
       <Texto weight="bold" style={styles.textItems}>
         {title}
       </Texto>
-    </TouchableOpacity>
+    </Pressable>
   );
 };

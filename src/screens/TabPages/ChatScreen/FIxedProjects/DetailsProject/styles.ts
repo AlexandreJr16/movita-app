@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "column",
-    gap: 15,
+    gap: 20,
   },
   textItems: {
     color: "#fff",

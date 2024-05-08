@@ -9,6 +9,7 @@ import ProjetoContext from "../../../../../contexts/project.context";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SetaBottom from "../../../../../assents/Chat/setaBottom";
 import SetaUp from "../../../../../assents/Chat/setaUp";
+import AnaliseAcompanhamento from "../../../../../assents/Projeto/AnaliseAcompanhamento";
 
 type EmpresaType = {
   id: number;
@@ -80,13 +81,67 @@ const FixedAllProjects = ({
         </Texto>
         <Logo color="#fff" />
       </View>
-      <ScrollView style={styles.projetosContainer}>
-        <Fields mainText={"Descrição"}>
-          <TouchableOpacity onPress={handleLink}>
-            <Texto weight="bold">Ola pessoal Meu nome é alexandre</Texto>
-          </TouchableOpacity>
-        </Fields>
-      </ScrollView>
+      {projeto ? (
+        <ScrollView style={styles.projetosContainer}>
+          <Fields mainText={"Descrição do móvel"}>
+            <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
+              {projeto.descricao}
+            </Texto>
+          </Fields>
+          <Fields mainText={"Briefing"}>
+            <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
+              Tipo do móvel: Cadeira
+            </Texto>
+            <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
+              Categoria: Quarto
+            </Texto>
+            <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
+              Tamanho: 1x1x1
+            </Texto>
+            <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
+              Cor: Amarelo
+            </Texto>
+          </Fields>
+          <Fields mainText={"Modelos 3D"}>
+            <Pressable onPress={handleLink}>
+              <Texto
+                style={{
+                  color: "#fff",
+                  fontSize: 16,
+                  textDecorationLine: "underline",
+                }}
+                weight="bold"
+              >
+                Modelo 3D 1
+              </Texto>
+              <Texto
+                style={{
+                  color: "#fff",
+                  fontSize: 16,
+                  textDecorationLine: "underline",
+                }}
+                weight="bold"
+              >
+                Modelo 3D 1
+              </Texto>
+            </Pressable>
+          </Fields>
+          <Fields mainText={"Progresso do móvel"}>
+            <Texto
+              style={{
+                color: "#fff",
+                fontSize: 16,
+                alignSelf: "center",
+                paddingBottom: 15,
+              }}
+              weight="bold"
+            >
+              Fase Atual: Em análise
+            </Texto>
+            <AnaliseAcompanhamento />
+          </Fields>
+        </ScrollView>
+      ) : null}
     </View>
   );
 };
@@ -107,7 +162,7 @@ const Fields = ({
   };
 
   return (
-    <TouchableOpacity style={styles.projectsItems} onPress={handleVisible}>
+    <Pressable style={styles.projectsItems} onPress={handleVisible}>
       <View style={styles.topItemContainer}>
         <Texto weight="bold" style={styles.textItems}>
           {mainText}
@@ -115,6 +170,6 @@ const Fields = ({
         {visible ? <SetaUp /> : <SetaBottom />}
       </View>
       {visible && <View style={styles.inContainerTextItem}>{children}</View>}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
