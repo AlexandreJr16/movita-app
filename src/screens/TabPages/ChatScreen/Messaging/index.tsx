@@ -121,7 +121,6 @@ const Messaging = ({ route, navigation }) => {
 
       scrollToBottom();
     };
-
     socket.emit("findRoom", item.id);
     socket.on("foundRoom", handleFoundRoom);
 
