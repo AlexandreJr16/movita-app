@@ -12,6 +12,7 @@ import React from "react";
 import AuthContext from "../../../contexts/auth.context";
 import ErrorAlert from "../../../components/ErrorAlert/ErrorAlert";
 import LoadingIndicator from "../../../components/Default/Loading";
+import { Form } from "react-hook-form";
 
 const Login = ({ navigation }) => {
   const { signIn, loading, signed } = useContext(AuthContext);
@@ -52,70 +53,77 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
-        <View style={styles.container}>
-          <Logo style={styles.logo} />
-          <View style={styles.carrossel}>
-            <Carrossel />
-          </View>
-          <View style={styles.textContainer}>
-            <Texto weight="regular" style={styles.title}>
-              Bem-vindo!
+    // <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <StatusBar backgroundColor={"#1f1f1f"} barStyle="light-content" />
+      <View style={styles.container}>
+        <Logo style={styles.logo} />
+        <View style={styles.carrossel}>
+          <Carrossel />
+        </View>
+        <View style={styles.textContainer}>
+          <Texto weight="regular" style={styles.title}>
+            Bem-vindo!
+          </Texto>
+          <Texto weight="regular" style={styles.smallTitle}>
+            Acesse a sua conta:
+          </Texto>
+          <ErrorAlert isAlert={text != null} styles={styles.errorText}>
+            {text}
+          </ErrorAlert>
+        </View>
+        <View style={styles.inputContainer}>
+          <InputLogin
+            Icon={<UserIcon />}
+            placeholder="E-mail:"
+            func={handleEmail}
+          ></InputLogin>
+          <InputLogin
+            Icon={<SecurityIcon />}
+            placeholder="Senha:"
+            secureText={true}
+            func={handlePassword}
+          ></InputLogin>
+          <View style={styles.forgetPContainer}>
+            <Texto weight="regular" style={styles.forgetPassword}>
+              Esqueceu a senha?
             </Texto>
-            <Texto weight="regular" style={styles.smallTitle}>
-              Acesse a sua conta:
-            </Texto>
-            <ErrorAlert isAlert={text != null} styles={styles.errorText}>
-              {text}
-            </ErrorAlert>
-          </View>
-          <View style={styles.inputContainer}>
-            <InputLogin
-              Icon={<UserIcon />}
-              placeholder="E-mail:"
-              func={handleEmail}
-            ></InputLogin>
-            <InputLogin
-              Icon={<SecurityIcon />}
-              placeholder="Senha:"
-              secureText={true}
-              func={handlePassword}
-            ></InputLogin>
-            <View style={styles.forgetPContainer}>
-              <Texto weight="regular" style={styles.forgetPassword}>
-                Esqueceu a senha?
-              </Texto>
-              <Pressable onPress={redirectToForgetPassword}>
-                <Texto
-                  weight="regular"
-                  style={text == "" ? styles.blueSignUp : styles.errorText}
-                >
-                  Clique Aqui.
-                </Texto>
-              </Pressable>
-            </View>
-          </View>
-
-          <LoginButton text="Entrar" func={handleLogin} />
-          <View style={styles.signUpContainer}>
-            <Texto weight="regular" style={styles.signIn}>
-              Não possui conta?
-            </Texto>
-            <Pressable onPress={redirectToSignUp}>
+            <Pressable onPress={redirectToForgetPassword}>
               <Texto
                 weight="regular"
                 style={text == "" ? styles.blueSignUp : styles.errorText}
               >
-                Cadastre-se.
+                Clique Aqui.
               </Texto>
             </Pressable>
-            <LoadingIndicator visible={loading} />
           </View>
         </View>
-      </ScrollView>
-    </View>
+
+        <LoginButton text="Entrar" func={handleLogin} />
+        <View style={styles.signUpContainer}>
+          <Texto weight="regular" style={styles.signIn}>
+            Não possui conta?
+          </Texto>
+          <Pressable
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onPress={redirectToSignUp}
+          >
+            <Texto
+              weight="regular"
+              style={text == "" ? styles.blueSignUp : styles.errorText}
+            >
+              Cadastre-se.
+            </Texto>
+          </Pressable>
+          <LoadingIndicator visible={loading} />
+        </View>
+      </View>
+    </ScrollView>
+    // </View>
   );
 };
 export default Login;

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 16,
-    color: "#878787",
+    color: "#fff",
     fontFamily: "Poppins_500Medium",
     width: "80%",
   },

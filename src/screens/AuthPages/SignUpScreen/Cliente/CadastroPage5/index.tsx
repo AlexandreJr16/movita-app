@@ -12,6 +12,7 @@ import ErrorAlert from "../../../../../components/ErrorAlert/ErrorAlert";
 import Carrossel from "../../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../../contexts/auth.context";
+import debounce from "../../../../../utils/debounce";
 
 interface Local {
   cep: string;
@@ -33,6 +34,9 @@ const SignUpScreen5 = ({ navigation }) => {
 
   const handleceps = async (value) => {
     setceps(value);
+    debounce(searchCep, 2000);
+  };
+  const searchCep = async (value: any) => {
     if (value) {
       const local: Local | void = await cep(`${value}`)
         .then(

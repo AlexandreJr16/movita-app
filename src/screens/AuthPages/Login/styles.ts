@@ -4,13 +4,15 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     display: "flex",
-    alignItems: "center",
+    // alignItems: "center",
     height: "100%",
     backgroundColor: "#1F1F1F",
+    gap: 10,
   },
   logo: {
     marginBottom: 60,
     marginTop: 20,
+    alignSelf: "center",
   },
   carrossel: {
     maxHeight: 300,
