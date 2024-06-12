@@ -47,7 +47,7 @@ export const updateUser = async (dto, token, getUser, setLoading) => {
 
     // Obtém as informações atualizadas do usuário após a atualização
     await getUser(token);
-
+    console.log(response);
     // Retorna a resposta da atualização do usuário
     return response;
   } catch (error) {

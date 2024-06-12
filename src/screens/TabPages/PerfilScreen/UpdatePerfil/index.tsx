@@ -75,8 +75,10 @@ const UpdatePerfil = ({ navigation }) => {
     try {
       //Tenta consultar a existência do endereço de acordo com o CEP
       local = await cep(`${endereco}`);
+      console.log(local);
     } catch (error) {
       setText("Algum campo está errado.");
+
       return;
     }
     //Se as válidações acima derem certo, retira a mensagem de erro
@@ -109,9 +111,10 @@ const UpdatePerfil = ({ navigation }) => {
         ],
       } as updateUserDTO;
       //O "as updateUserDTO" é apenas para evitar um erro do TS (Gambiarrra)
-
+      console.log(dto);
       //Faz o updateUse na api e recebe o atributo status do retorno
       const { status } = await updateUser(dto);
+      console.log(status);
 
       //verifica se o retorno foi "ok" e retorna para a APIs
       if (status == "ok") navigation.goBack();
@@ -137,14 +140,17 @@ const UpdatePerfil = ({ navigation }) => {
           },
         ],
       } as updateUserDTO;
-
       //Faz o updateUse na api e recebe o atributo status do retorno
-      const { status } = await updateUser(dto);
+      try {
+        const response = await updateUser(dto);
 
-      //verifica se o retorno foi "ok" e retorna para a APIs
-      if (status == "ok") navigation.goBack();
-      else {
-        //Objeto de updateno caso de cliente
+        //verifica se o retorno foi "ok" e retorna para a APIs
+        if (response) navigation.goBack();
+        else {
+          //Objeto de updateno caso de cliente
+        }
+      } catch (error) {
+        console.log(error);
       }
     } else setText("Algum campo está errado.");
   };

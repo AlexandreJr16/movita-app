@@ -134,7 +134,7 @@ const Messaging = ({ route, navigation }) => {
   useEffect(() => {
     const handleNewMessageReceived = (newMessage) => {
       if (nome == newMessage.userName) return;
-      setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+      setChatMessages((prevMessages) => prevMessages.concat(newMessage));
       scrollToBottom();
     };
 
@@ -162,8 +162,7 @@ const Messaging = ({ route, navigation }) => {
     };
 
     console.log(newMessage);
-    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
-
+    setChatMessages((prevMessages) => prevMessages.concat(newMessage));
     socket.emit("newMessage", newMessage);
 
     setMessage("");
@@ -200,8 +199,7 @@ const Messaging = ({ route, navigation }) => {
 
     socket.emit("newMessage", newMessage);
     setTimeout(() => {}, 2000);
-    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
-
+    setChatMessages((prevMessages) => prevMessages.concat(newMessage));
     socket.emit("findRoom", item.id);
   };
 
@@ -294,12 +292,11 @@ const Messaging = ({ route, navigation }) => {
           resizeMode="cover"
           style={{
             flex: 1,
-            paddingTop: 15,
           }}
           source={require("../../../../assents/Chat/bg.png")}
         >
           <Suspense>
-            <ScrollView ref={scrollViewRef}>
+            <ScrollView style={{ width: "100%", flex: 1 }} ref={scrollViewRef}>
               {chatMessages &&
                 chatMessages.map((msg, index) => {
                   let different;
@@ -338,7 +335,7 @@ const Messaging = ({ route, navigation }) => {
                 borderTopRightRadius: 16,
               }}
             >
-              <TouchableOpacity
+              <Pressable
                 onPress={() => {
                   setVisibleImagePicker(true);
                 }}
@@ -352,8 +349,8 @@ const Messaging = ({ route, navigation }) => {
                 <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
                   Anexar imagem
                 </Texto>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 style={{
                   backgroundColor: "#D06A52",
                   paddingHorizontal: 10,
@@ -365,7 +362,7 @@ const Messaging = ({ route, navigation }) => {
                 <Texto style={{ color: "#fff", fontSize: 18 }} weight="regular">
                   Anexar arquivo
                 </Texto>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           )}
           <View
