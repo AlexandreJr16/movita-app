@@ -55,7 +55,21 @@ const ChatComponent = ({
           imgBuffer={item.img}
           style={styles.cavatar}
         ></ImagemBuffer>
-      ) : null}
+      ) : (
+        <View
+          style={{
+            ...styles.cavatar,
+            backgroundColor: "#f2f2f2",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Texto weight="bold" style={{ fontSize: 25 }}>
+            {item.name[0].toUpperCase()}
+          </Texto>
+        </View>
+      )}
       <View style={styles.crightContainer}>
         <View>
           <Texto weight="bold" style={styles.cusername}>

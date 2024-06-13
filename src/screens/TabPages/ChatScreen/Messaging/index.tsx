@@ -292,6 +292,7 @@ const Messaging = ({ route, navigation }) => {
           resizeMode="cover"
           style={{
             flex: 1,
+            padding: 5,
           }}
           source={require("../../../../assents/Chat/bg.png")}
         >
