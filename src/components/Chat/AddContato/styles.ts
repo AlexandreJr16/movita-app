@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 60,
+
+    borderRadius: 2000,
     backgroundColor: "#1966C0",
+    padding: 5,
   },
 });
 

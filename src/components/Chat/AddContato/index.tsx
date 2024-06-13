@@ -54,7 +54,21 @@ const AddContatoComponent = ({
             imgBuffer={imagem}
             style={styles.cavatar}
           ></ImagemBuffer>
-        ) : null}
+        ) : (
+          <View
+            style={{
+              ...styles.cavatar,
+              backgroundColor: "#f2f2f2",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Texto weight="bold" style={{ fontSize: 25 }}>
+              {nome[0].toUpperCase()}
+            </Texto>
+          </View>
+        )}
 
         <View style={styles.crightContainer}>
           <View>
@@ -66,12 +80,7 @@ const AddContatoComponent = ({
             style={styles.timeStyle}
             onPress={() => createRoom({ userId1: user.id, userId2: id })}
           >
-            <Texto
-              weight="bold"
-              style={{ fontSize: 16, color: "white", alignItems: "center" }}
-            >
-              +
-            </Texto>
+            <Ionicons name="add" color={"#fff"} style={{ fontSize: 25 }} />
           </Pressable>
         </View>
       </View>

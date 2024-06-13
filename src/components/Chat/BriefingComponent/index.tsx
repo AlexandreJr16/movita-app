@@ -32,6 +32,7 @@ const BriefingComponent = ({
         <View style={{ flex: 1, gap: 15 }}>
           <View
             style={{
+              width: "100%",
               display: "flex",
               alignItems: "flex-start",
               justifyContent: "center",
@@ -41,7 +42,10 @@ const BriefingComponent = ({
             <Texto style={{ color: "white", fontSize: 18 }} weight="bold">
               {briefing.title}
             </Texto>
-            <Texto weight="regular" style={{ color: "#989898", fontSize: 14 }}>
+            <Texto
+              weight="regular"
+              style={{ color: "#989898", fontSize: 16, width: "100%" }}
+            >
               Resposta ao Briefing
             </Texto>
           </View>

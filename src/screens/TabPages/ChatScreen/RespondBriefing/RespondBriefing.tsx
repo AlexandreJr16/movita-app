@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, ScrollView, Button, Alert } from "react-native";
+import { View, ScrollView, Button, Alert, Pressable } from "react-native";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import styles from "./styles";
 import BriefingContext, {
@@ -75,13 +75,28 @@ const RespondBriefing = ({
 
   return (
     <ScrollView style={styles.screenDefault}>
+      <Texto
+        weight="bold"
+        style={{ fontSize: 35, color: "#fff", marginBottom: 16 }}
+      >
+        Briefing
+      </Texto>
       {briefing && (
-        <View>
+        <View
+          style={{
+            backgroundColor: "#8f8f8f",
+            borderRadius: 16,
+            paddingVertical: 20,
+            paddingHorizontal: 19,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            gap: 15,
+          }}
+        >
           {briefing.question.map((question, index) => (
-            <View
-              key={index}
-              style={{ backgroundColor: "#8f8f8f", padding: 20 }}
-            >
+            <View key={index} style={{ width: "100%" }}>
               <Texto weight="bold" style={{ color: "white", fontSize: 16 }}>
                 {question.text}
               </Texto>
@@ -96,9 +111,11 @@ const RespondBriefing = ({
                     }}
                     style={{
                       color: "white",
-                      fontSize: 16,
+                      fontSize: 18,
+                      paddingHorizontal: 10,
+                      paddingVertical: 5,
                       backgroundColor: "#9f9f9f",
-                      padding: 10,
+                      borderRadius: 6,
                     }}
                   />
                 )}
@@ -115,7 +132,19 @@ const RespondBriefing = ({
                 )}
             </View>
           ))}
-          <Button onPress={handleSubmit(onSubmit)} title="Enviar" />
+          <Pressable
+            style={{
+              backgroundColor: "#87CEEB",
+              paddingHorizontal: 20,
+              paddingVertical: 5,
+              borderRadius: 6,
+            }}
+            onPress={handleSubmit(onSubmit)}
+          >
+            <Texto weight="bold" style={{ color: "white", fontSize: 20 }}>
+              Responder
+            </Texto>
+          </Pressable>
         </View>
       )}
     </ScrollView>
