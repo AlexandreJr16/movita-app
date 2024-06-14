@@ -1,0 +1,56 @@
+import { StyleSheet } from "react-native";
+const styles = StyleSheet.create({
+  feedbackContainer: {
+    width: "95%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    backgroundColor: "#fff",
+    padding: 10,
+    gap: 10,
+    borderRadius: 15,
+    marginBottom: 10,
+  },
+  topFeedback: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 15,
+  },
+  notaContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 10,
+    backgroundColor: "#36A5BF",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  notaFont: {
+    color: "#fff",
+    fontSize: 16,
+    lineHeight: 18.4,
+    letterSpacing: 0.16,
+  },
+  title: {
+    fontSize: 16,
+    color: "#000",
+    lineHeight: 18.4,
+    letterSpacing: 0.16,
+  },
+  description: {
+    width: "100%",
+    alignSelf: "flex-start",
+    color: "#000",
+    fontSize: 12,
+    lineHeight: 13.8,
+    letterSpacing: 0.12,
+  },
+});
+export default styles;
