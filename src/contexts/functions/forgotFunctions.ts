@@ -1,3 +1,5 @@
+import { SetStateAction } from "react";
+
 import { updateSenhaDTO } from "../../service/functions/dto/requestDTO";
 import * as auth from "../../service/index";
 import { UpdateSenhaForgotDTO } from "../dto/updateSenhaForgot.dto";
@@ -15,7 +17,7 @@ export async function verifyCodeForgot(
     code: string;
     email: string;
   },
-  setLoading
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
 ): Promise<any> {
   try {
     // Define o carregamento como true enquanto verifica o código
@@ -29,7 +31,7 @@ export async function verifyCodeForgot(
   } catch (error) {
     // Trata erros definindo o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -44,7 +46,7 @@ export async function verifyCodeForgot(
  */
 export async function updateSenhaForgot(
   dto: UpdateSenhaForgotDTO,
-  setLoading
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
 ): Promise<any> {
   try {
     // Define o carregamento como true enquanto atualiza a senha esquecida
@@ -58,7 +60,7 @@ export async function updateSenhaForgot(
   } catch (error) {
     // Trata erros definindo o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -74,7 +76,7 @@ export async function updateSenhaForgot(
  */
 export async function sendEmailForgot(
   dto: { to: string },
-  setLoading
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
 ): Promise<any> {
   try {
     // Define o carregamento como true enquanto envia o email de recuperação
@@ -88,7 +90,7 @@ export async function sendEmailForgot(
   } catch (error) {
     // Trata erros definindo o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);

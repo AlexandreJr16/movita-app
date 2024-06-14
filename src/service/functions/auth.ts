@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { API_URL } from "../../../configs";
 import { ErrorResponse, UserResponse } from "./dto/requestDTO";
+import { API_URL } from "../../../configs";
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
   if (error.response) {

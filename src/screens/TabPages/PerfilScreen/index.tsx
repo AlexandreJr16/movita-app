@@ -13,7 +13,7 @@ import ShowPerfil from "../../../components/Perfil/ShowPerfil";
 import AuthContext from "../../../contexts/auth.context";
 import Lock from "../../../assents/Perfil/Lock";
 
-const PerfilScreen = ({ navigation }) => {
+const PerfilScreen = ({ navigation }: any) => {
   //logout
   const { logout } = useContext(AuthContext);
   return (

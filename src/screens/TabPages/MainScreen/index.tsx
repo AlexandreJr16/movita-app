@@ -7,14 +7,11 @@ import SelectCategory from "../../../components/Main/SelectCategory";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
 
 import ProjetoContext from "../../../contexts/project.context";
+import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 
-const ShowProductsCarousel = lazy(
-  () => import("../../../components/CarrosselShowProducts")
-);
-
-export default function MainScreen({ navigation }) {
+export default function MainScreen({ navigation }: { navigation: any }) {
   const { loading, getTopEmpresas } = useContext(AuthContext);
-  const [produtos, setProdutos] = useState([]);
+  const [produtos, setProdutos] = useState<any>([]);
   const { getTopProjects, getRandomProjects } = useContext(ProjetoContext);
 
   //Faz o get da Api quando a página é renderizada e seta os produtos
@@ -25,11 +22,7 @@ export default function MainScreen({ navigation }) {
         const topEmpresas = await getTopEmpresas(10);
         const aleatorioProdutos = await getRandomProjects(10);
 
-        await setProdutos([
-          topProjects,
-          topEmpresas,
-          aleatorioProdutos[0].produtos,
-        ]);
+        setProdutos([topProjects, topEmpresas, aleatorioProdutos[0].produtos]);
       } catch (error) {
         console.error("Erro ao obter os projetos:", error);
       }

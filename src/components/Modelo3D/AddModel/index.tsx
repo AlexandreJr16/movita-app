@@ -33,7 +33,7 @@ const AddModel = (dto: Params) => {
     }
   };
 
-  const convertUriToBase64 = async (uri) => {
+  const convertUriToBase64 = async (uri: any) => {
     const response = await fetch(uri);
     const blob = await response.blob();
 

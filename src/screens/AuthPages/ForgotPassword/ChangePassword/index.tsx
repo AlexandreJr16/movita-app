@@ -7,23 +7,29 @@ import LoginButton from "../../../../components/Login/LoginButton/LoginButton";
 import Texto from "../../../../components/Default/texto/Texto";
 import AuthContext from "../../../../contexts/auth.context";
 
-const ChangePasswordForgot = ({ route, navigation }) => {
+const ChangePasswordForgot = ({
+  route,
+  navigation,
+}: {
+  route: any;
+  navigation: any;
+}) => {
   const { email } = route.params;
   const { updateSenhaForgot } = useContext(AuthContext);
-  const [error, setError] = useState();
-  const [senha, setSenha] = useState();
-  const [confirmSenha, setConfirmSenha] = useState();
+  const [error, setError] = useState<any>();
+  const [senha, setSenha] = useState<any>();
+  const [confirmSenha, setConfirmSenha] = useState<any>();
 
-  const handleSenha = (value) => {
+  const handleSenha = (value: any) => {
     setSenha(value);
   };
-  const handleConfirmSenha = (value) => {
+  const handleConfirmSenha = (value: any) => {
     setConfirmSenha(value);
   };
 
   const handleReenviar = async () => {
     const dto = { senha, confirmSenha, email };
-    const user = await dto;
+    const user = await updateSenhaForgot(dto);
   };
 
   const handleConfirmCode = async () => {

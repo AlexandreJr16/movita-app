@@ -7,11 +7,11 @@ import InputCadastro from "../../../components/Cadastro/Input/InputCadastro";
 import LoginButton from "../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../contexts/auth.context";
 
-const ForgotScreen = ({ navigation }) => {
+const ForgotScreen = ({ navigation }: any) => {
   const { sendEmailForgot } = useContext(AuthContext);
-  const [email, setEmail] = useState();
-  const [error, setError] = useState();
-  const handleEmail = (value) => {
+  const [email, setEmail] = useState<any>();
+  const [error, setError] = useState<any>();
+  const handleEmail = (value: any) => {
     setEmail(value);
   };
   const handleEnviarEmail = async () => {

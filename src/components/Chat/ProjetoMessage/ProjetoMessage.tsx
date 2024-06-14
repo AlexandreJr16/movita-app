@@ -110,7 +110,7 @@ const ProjetoMessage = ({
                 </Texto>
               </View>
             )}
-            {user.tipoUser == "cliente" ? (
+            {user?.tipoUser == "cliente" ? (
               <View
                 style={{
                   display: "flex",

@@ -12,12 +12,13 @@ import Carrossel from "../../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../../contexts/auth.context";
 
-const SignUpScreen3 = ({ navigation }) => {
+const SignUpScreen3 = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null);
   const { loading } = useContext(AuthContext);
 
-  const handleCpf = (value) => setSignupUser({ ...signupUser, cpf: value });
+  const handleCpf = (value: any) =>
+    setSignupUser({ ...signupUser, cpf: value });
   const handleSubmit = async () => {
     const cpfLimpo = signupUser.cpf.replace(/[^\d]/g, "");
     const isError = cpf.isValid(cpfLimpo) || cnpj.isValid(cpfLimpo);
@@ -75,7 +76,7 @@ const SignUpScreen3 = ({ navigation }) => {
               inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
               text={signupUser.cpf}
-              func={(value) => {
+              func={(value: any) => {
                 handleCpf(value);
                 if (!!error) setError(null);
               }}

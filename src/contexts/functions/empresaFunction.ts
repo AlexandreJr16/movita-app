@@ -1,3 +1,4 @@
+import { SetStateAction } from "react";
 import * as auth from "../../service/index";
 
 /**
@@ -6,7 +7,10 @@ import * as auth from "../../service/index";
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para as principais empresas.
  */
-export async function getTopEmpresas(num: number, setLoading): Promise<any> {
+export async function getTopEmpresas(
+  num: number,
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
+): Promise<any> {
   try {
     // Define o carregamento como true enquanto busca os dados
     setLoading(true);
@@ -19,7 +23,7 @@ export async function getTopEmpresas(num: number, setLoading): Promise<any> {
   } catch (error) {
     // Trata erros definindo o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -32,7 +36,10 @@ export async function getTopEmpresas(num: number, setLoading): Promise<any> {
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para as informações da empresa.
  */
-export async function getEmpresaById(num: number, setLoading): Promise<any> {
+export async function getEmpresaById(
+  num: number,
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
+): Promise<any> {
   try {
     // Define o carregamento como true enquanto busca os dados
     setLoading(true);
@@ -45,16 +52,14 @@ export async function getEmpresaById(num: number, setLoading): Promise<any> {
   } catch (error) {
     // Trata erros definindo o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
   }
 }
 
-export async function findEmpresaByName(
-  nome: string
-): Promise<{ id: number; imagem: any; nome: string }[]> {
+export async function findEmpresaByName(nome: string): Promise<any> {
   try {
     // Define o carregamento como true enquanto busca os dados
 
@@ -65,6 +70,6 @@ export async function findEmpresaByName(
     return empresa;
   } catch (error) {
     // Trata erros definindo o carregamento como false e relança o erro
-    throw new Error(error);
+    console.log(error);
   }
 }

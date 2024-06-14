@@ -8,14 +8,16 @@ import * as auth from "../../service/index";
  */
 export async function likeProject(
   projetoId: number,
-  token: string
+  token: string | undefined | null
 ): Promise<any> {
   try {
     // Chama o serviço de autenticação para adicionar um "like" ao projeto
+    if (!token || !projetoId) return;
+
     await auth.likeProject(projetoId, token);
   } catch (error) {
     // Em caso de erro, lança uma exceção
-    throw new Error(error);
+    console.log(error);
   }
 }
 
@@ -27,14 +29,16 @@ export async function likeProject(
  */
 export async function deleteLikeProject(
   projetoId: number,
-  token: string
+  token: string | undefined | null
 ): Promise<any> {
   try {
     // Chama o serviço de autenticação para remover o "like" do projeto
+    if (!token || !projetoId) return;
+
     await auth.deleteLikeProject(projetoId, token);
   } catch (error) {
     // Em caso de erro, lança uma exceção
-    throw new Error(error);
+    console.log(error);
   }
 }
 
@@ -46,14 +50,16 @@ export async function deleteLikeProject(
  */
 export async function likeEmpresa(
   empresaId: number,
-  token: string
+  token: string | undefined | null
 ): Promise<any> {
   try {
     // Chama o serviço de autenticação para adicionar um "like" a empresa
+    if (!token || !empresaId) return;
+
     await auth.likeProject(empresaId, token);
   } catch (error) {
     // Em caso de erro, lança uma exceção
-    throw new Error(error);
+    console.log(error);
   }
 }
 
@@ -65,13 +71,15 @@ export async function likeEmpresa(
  */
 export async function deleteLikeEmpresa(
   empresaId: number,
-  token: string
+  token: string | undefined | null
 ): Promise<any> {
   try {
     // Chama o serviço de autenticação para remover o "like" do empresa
+    if (!token || !empresaId) return;
+
     await auth.deleteLikeProject(empresaId, token);
   } catch (error) {
     // Em caso de erro, lança uma exceção
-    throw new Error(error);
+    console.log(error);
   }
 }

@@ -11,15 +11,16 @@ import LoginButton from "../../../../../components/Login/LoginButton/LoginButton
 import AuthContext from "../../../../../contexts/auth.context";
 import styles from "../../styles";
 
-const SignUpScreen6 = ({ navigation }) => {
+const SignUpScreen6 = ({ navigation }: any) => {
   const { signupUser, setSignupUser, signUp } = useContext(AuthContext);
   const { loading } = useContext(AuthContext);
-  const [senha, setSenha] = useState("");
-  const [confirmSenha, setConfirmSenha] = useState("");
-  const [error, setError] = useState(null);
+  const [senha, setSenha] = useState<any>("");
+  const [confirmSenha, setConfirmSenha] = useState<any>("");
+  const [error, setError] = useState<any>(null);
 
-  const handleSenha = (value) => setSenha(value);
-  const handleConfirmSenha = (value) => setConfirmSenha(value);
+  const handleSenha = (value: React.SetStateAction<string>) => setSenha(value);
+  const handleConfirmSenha = (value: React.SetStateAction<string>) =>
+    setConfirmSenha(value);
   const handleSubmit = async () => {
     const isError = senha == "" || confirmSenha == "";
     if (isError) {
@@ -103,7 +104,7 @@ const SignUpScreen6 = ({ navigation }) => {
               secureText={true}
               styleContainer={{ width: "100%" }}
               text={senha}
-              func={(value) => {
+              func={(value: any) => {
                 handleSenha(value);
                 if (!!error) setError(null);
               }}
@@ -115,7 +116,7 @@ const SignUpScreen6 = ({ navigation }) => {
               secureText={true}
               styleContainer={{ width: "100%" }}
               text={confirmSenha}
-              func={(value) => {
+              func={(value: any) => {
                 handleConfirmSenha(value);
                 if (!!error) setError(null);
               }}

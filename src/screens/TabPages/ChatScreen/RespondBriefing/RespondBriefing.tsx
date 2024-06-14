@@ -51,22 +51,24 @@ const RespondBriefing = ({
     const isValid = Object.keys(errors).length === 0;
 
     if (isValid) {
-      const quest: UpdateQuestionDTO[] = briefing.question
+      const quest: UpdateQuestionDTO[] = briefing?.question
         ? briefing.question.map((question, index) => ({
             id: question.id,
             briefingId: question.briefingId,
-            text: briefing.question[index].text,
+            text: briefing?.question[index].text,
             response: data.question[index].response,
           }))
         : ([] as UpdateQuestionDTO[]);
       const dto = {
-        title: briefing.title,
+        title: briefing?.title,
         answered: true,
-        id: briefing.id,
+        id: briefing?.id,
         question: quest,
       };
-      const response = await updateBriefing(briefing.id, dto);
-      if (response) navigation.goBack();
+      if (briefing && briefing.id !== undefined) {
+        const response = await updateBriefing(briefing.id, dto ?? null);
+        if (response) navigation.goBack();
+      }
       // console.log(response);
     } else {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
@@ -125,7 +127,7 @@ const RespondBriefing = ({
               />
               {errors &&
                 errors.question &&
-                errors.question[index]?.response && (
+                errors.question[index]?.response && ( // Note o uso do operador de optional chaining (?.)
                   <Texto weight="bold" style={{ color: "red" }}>
                     Campo obrigatório
                   </Texto>

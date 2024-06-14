@@ -22,7 +22,7 @@ const Produto = ({
     try {
       navigation.navigate("Product", { id: produto.id, color: color });
     } catch (error) {
-      throw new Error(error);
+      console.log(error);
     }
   };
 

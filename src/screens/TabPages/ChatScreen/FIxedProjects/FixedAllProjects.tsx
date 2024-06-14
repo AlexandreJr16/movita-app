@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { ProjetosResponseType } from "../Messaging";
 import styles from "./styles";
 import Texto from "../../../../components/Default/texto/Texto";
 import Arrow from "../../../../assents/Perfil/Arrow";
 import Logo from "../../../../assents/Perfil/Logo";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const FixedAllProjects = ({
   route,

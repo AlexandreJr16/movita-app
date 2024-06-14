@@ -6,17 +6,15 @@ import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 import HeaderMyProduct from "../../../components/MeusProjetos/Header";
 import AuthContext from "../../../contexts/auth.context";
-import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
-import TextoInput from "../../../components/Default/texto/TextoInput";
+
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
 import debounce from "../../../utils/debounce";
-import ProjetoContext from "../../../contexts/project.context";
 
-const EmpresasSearchScreen = ({ navigation }) => {
+const EmpresasSearchScreen = ({ navigation }: { navigation: any }) => {
   const { getTopEmpresas, findEmpresasByName } = useContext(AuthContext);
-  const [produtos, setProdutos] = useState([]);
-  const [value, setValue] = useState();
+  const [produtos, setProdutos] = useState<any>([]);
+  const [value, setValue] = useState<any>();
 
   //Get de dados dos projetos
   const fetchData = async () => {
@@ -27,7 +25,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
       console.error("Erro ao obter os projetos:", error);
     }
   };
-  const handleSearch = async (value) => {
+  const handleSearch = async (value: any) => {
     setValue(value);
     if (value == "") {
       fetchData();
@@ -43,7 +41,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
     fetchData();
   }, []);
 
-  function saoTodosVaziosOuNulos(produtos) {
+  function saoTodosVaziosOuNulos(produtos: any) {
     if (!Array.isArray(produtos)) {
       return false;
     }
@@ -65,7 +63,7 @@ const EmpresasSearchScreen = ({ navigation }) => {
           title="Empresas Anteriores"
         />
         {!saoTodosVaziosOuNulos(produtos) ? (
-          produtos.map((product, i) => (
+          produtos.map((product: any[], i: React.Key | null | undefined) => (
             <ShowCompaniesCarrossel
               key={i}
               navigation={navigation}

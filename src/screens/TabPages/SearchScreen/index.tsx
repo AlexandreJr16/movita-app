@@ -13,11 +13,11 @@ import ProjetoContext from "../../../contexts/project.context";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
 
-const SearchScreen = ({ navigation }) => {
-  const [textSearch, setTextSearch] = useState("");
-  const [hSearch, setHSearch] = useState([]);
-  const [visibleSearch, setVisibleSearch] = useState(false);
-  const [arrProjetos, setArrProjetos] = useState([]);
+const SearchScreen = ({ navigation }: any) => {
+  const [textSearch, setTextSearch] = useState<any>("");
+  const [hSearch, setHSearch] = useState<any>([]);
+  const [visibleSearch, setVisibleSearch] = useState<any>(false);
+  const [arrProjetos, setArrProjetos] = useState<any>([]);
   const { findProjetoByName } = useContext(ProjetoContext);
   const { findEmpresasByName, loading } = useContext(AuthContext);
 
@@ -34,8 +34,7 @@ const SearchScreen = ({ navigation }) => {
       const empresa = await findProjetoByName(text);
       const modelo = await findProjetoByName(text);
 
-      const empresaImg = empresa.map((item) => {
-        // console.log(item, "ONDASNOIDSBUDBA");
+      const empresaImg = empresa.map((item: { imagem: any[] }) => {
         return item.imagem[0]
           ? { ...item, imagem: item.imagem[0] }
           : { ...item, imagem: null };
@@ -47,8 +46,8 @@ const SearchScreen = ({ navigation }) => {
   };
 
   //Deletar item do histórico
-  const handleDeleteItem = (index) => {
-    const updatedData = hSearch.filter((_, i) => i !== index);
+  const handleDeleteItem = (index: any) => {
+    const updatedData = hSearch.filter((_: any, i: any) => i !== index);
     setHSearch(updatedData);
     AsyncStorage.setItem("historySearch", JSON.stringify(updatedData));
   };
@@ -76,7 +75,9 @@ const SearchScreen = ({ navigation }) => {
 
   //Função que pega itens do historySearch (Assync Storage de pesquisas passadas)
   const getItens = async () => {
-    const data = JSON.parse(await AsyncStorage.getItem("historySearch"));
+    const data = JSON.parse(
+      (await AsyncStorage.getItem("historySearch")) ?? ""
+    );
     setHSearch(data);
   };
   // useEffect(() => {
@@ -102,7 +103,7 @@ const SearchScreen = ({ navigation }) => {
 
       <ScrollView>
         {!visibleSearch ? (
-          hSearch.map((texto, i) => (
+          hSearch.map((texto: any, i: React.Key | null | undefined) => (
             <View key={i} style={styles.boxSearch}>
               <Pressable
                 style={styles.leftBoxSearch}

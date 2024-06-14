@@ -7,14 +7,12 @@ import ShowPerfil from "../../../../components/Perfil/ShowPerfil";
 import TitleTextPerfil from "../../../../components/Perfil/TitleText";
 import AuthContext from "../../../../contexts/auth.context";
 import ProjetoContext from "../../../../contexts/project.context";
-const ShowProductsCarousel = lazy(
-  () => import("../../../../components/CarrosselShowProducts")
-);
+import ShowProductsCarousel from "../../../../components/CarrosselShowProducts";
 
 const MeusProjetos = ({ navigation }: { navigation: any }) => {
   const { getAllProjetosByCliente } = useContext(ProjetoContext);
 
-  const [produtos, setProdutos] = useState([]);
+  const [produtos, setProdutos] = useState<any>([]);
 
   //get da api dos projetos do usuarios e filtra em 3 tipos: esperando confirmação, andamento e concluído
   //Passível de alterações futuras de acordo com a quantidade de estados que um projeto pode estar
@@ -22,13 +20,13 @@ const MeusProjetos = ({ navigation }: { navigation: any }) => {
     const topProjects = await getAllProjetosByCliente();
     if (topProjects[0]) {
       const esperandoProj = topProjects.filter(
-        (proj) => proj.status == "Esperando confirmação"
+        (proj: { status: string }) => proj.status == "Esperando confirmação"
       );
       const andamentoProj = topProjects.filter(
-        (proj) => proj.status == "Andamento"
+        (proj: { status: string }) => proj.status == "Andamento"
       );
       const concluidoProj = topProjects.filter(
-        (proj) => proj.status == "Concluído"
+        (proj: { status: string }) => proj.status == "Concluído"
       );
 
       setProdutos([esperandoProj, andamentoProj, concluidoProj]);

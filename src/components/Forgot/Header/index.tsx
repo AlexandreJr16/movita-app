@@ -1,12 +1,10 @@
 import { TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
-import Texto from "../../Default/texto/Texto";
 import BlueBack from "../../../assents/Cadastro/BlueBack";
 import Logo from "../../Default/Logo/Logo";
 import styles from "./styles";
 
-const HeaderForgotScreen = ({ navigation }) => {
+const HeaderForgotScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity

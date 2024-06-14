@@ -4,18 +4,18 @@ import * as userFunctions from "./functions/userFunctions";
 import { updateUserDTO } from "./dto/updateUser.dto";
 
 type UserContextData = {
-  getUser?(token: string);
-  addImageUser?(dto: any);
-  updateUser?(dto: updateUserDTO);
-  updateSenha?(dto: {
+  getUser: (token: string) => any;
+  addImageUser: (dto: any) => any;
+  updateUser: (dto: updateUserDTO) => any;
+  updateSenha: (dto: {
     senhaAtual: string;
     novaSenha: string;
     confirmSenha: string;
-  });
+  }) => any;
 };
 const UserContext = createContext({} as UserContextData);
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }: any) => {
   const { setLoading, setUser, token } = useContext(AuthContext);
 
   // Funções user --------------------------------------------------------------------------------------

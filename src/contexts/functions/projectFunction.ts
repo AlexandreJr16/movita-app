@@ -6,7 +6,10 @@ import * as auth from "../../service/index";
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para os projetos favoritos.
  */
-export async function getFavProjects(token, setLoading): Promise<any> {
+export async function getFavProjects(
+  token: any,
+  setLoading: any
+): Promise<any> {
   try {
     // Define o carregamento como true enquanto obtém os projetos favoritos
     setLoading(true);
@@ -19,7 +22,7 @@ export async function getFavProjects(token, setLoading): Promise<any> {
   } catch (error) {
     // Em caso de erro, define o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -32,7 +35,7 @@ export async function getFavProjects(token, setLoading): Promise<any> {
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para as informações do projeto.
  */
-export async function getProject(num: number, setLoading): Promise<any> {
+export async function getProject(num: number, setLoading: any): Promise<any> {
   try {
     // Define o carregamento como true enquanto obtém informações do projeto
     setLoading(true);
@@ -45,7 +48,7 @@ export async function getProject(num: number, setLoading): Promise<any> {
   } catch (error) {
     // Em caso de erro, define o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -58,7 +61,10 @@ export async function getProject(num: number, setLoading): Promise<any> {
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para os principais projetos.
  */
-export async function getTopProjects(num: number, setLoading): Promise<any> {
+export async function getTopProjects(
+  num: number,
+  setLoading: any
+): Promise<any> {
   try {
     // Define o carregamento como true enquanto obtém os principais projetos
     setLoading(true);
@@ -71,7 +77,7 @@ export async function getTopProjects(num: number, setLoading): Promise<any> {
   } catch (error) {
     // Em caso de erro, define o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -86,7 +92,7 @@ export async function getTopProjects(num: number, setLoading): Promise<any> {
  */
 export async function getAllProjetosByCliente(
   token: string,
-  setLoading
+  setLoading: any
 ): Promise<any> {
   try {
     // Define o carregamento como true enquanto obtém todos os projetos do cliente
@@ -100,7 +106,7 @@ export async function getAllProjetosByCliente(
   } catch (error) {
     // Em caso de erro, define o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -113,7 +119,10 @@ export async function getAllProjetosByCliente(
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para projetos aleatórios.
  */
-export async function getRandomProjects(num: number, setLoading): Promise<any> {
+export async function getRandomProjects(
+  num: number,
+  setLoading: any
+): Promise<any> {
   try {
     // Define o carregamento como true enquanto obtém projetos aleatórios
     setLoading(true);
@@ -126,7 +135,7 @@ export async function getRandomProjects(num: number, setLoading): Promise<any> {
   } catch (error) {
     // Em caso de erro, define o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -142,8 +151,8 @@ export async function getRandomProjects(num: number, setLoading): Promise<any> {
  * @returns {Promise<any>} - Promessa que resolve para o resultado da adição da imagem.
  */
 export async function addImageProj(
-  dto: { bin: any; id: number },
-  token: string
+  dto?: { bin?: any; id?: number },
+  token?: string
 ): Promise<any> {
   try {
     // Chama o serviço de autenticação para adicionar a imagem ao projeto
@@ -153,7 +162,7 @@ export async function addImageProj(
     return prods;
   } catch (error) {
     // Em caso de erro, lança uma exceção
-    throw new Error(error);
+    console.log(error);
   } finally {
     // O bloco `finally` é opcional e pode ser omitido se não houver código a ser executado após o bloco `try` ou `catch`
     // Pode ser usado para código que precisa ser executado independentemente de ocorrer uma exceção ou não
@@ -166,7 +175,7 @@ export async function findProjetoByName(dto: { nome: string }) {
     const prods = await auth.projetoFindByname({ nome });
     return prods;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 }
 
@@ -176,7 +185,7 @@ export async function findByNameProjeto(dto: { value: string }) {
     const prods = await auth.projetoFindByname({ nome: value });
     return prods;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 }
 export async function findProjetoByUserCompany(dto: {

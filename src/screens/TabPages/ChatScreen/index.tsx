@@ -1,12 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  StatusBar,
-  Keyboard,
-  Pressable,
-} from "react-native";
+import { View, FlatList, TouchableOpacity, StatusBar } from "react-native";
 import Plus from "../../../assents/Chat/plus";
 import ChatComponent from "../../../components/Chat/ChatComponent";
 import Texto from "../../../components/Default/texto/Texto";
@@ -15,7 +8,6 @@ import AuthContext from "../../../contexts/auth.context";
 import socket from "../../../utils/socket";
 import styles from "./styles";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export type RoomResponse = {
   id: number;
@@ -28,10 +20,10 @@ export type RoomResponse = {
 
 export type MessageResponse = {
   id: number;
-  texto: string | null;
-  imagem: Buffer;
-  modelo3D: Buffer | null;
-  userName: string;
+  texto?: string;
+  imagem?: Buffer;
+  modelo3D?: Buffer;
+  userName?: string;
   createAt: Date;
   roomId: number;
   tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING" | "PROJETO";
@@ -41,7 +33,7 @@ export type MessageResponse = {
     answered: boolean;
     question: [{ text: string; response: string }];
   };
-  project: {
+  project?: {
     id: number;
     title: string;
     detalhes: string;
@@ -51,19 +43,22 @@ export type MessageResponse = {
   };
 };
 
-const Chat = ({ navigation }) => {
+const Chat = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
   const [rooms, setRooms] = useState<RoomResponse[]>([]);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState<any>();
 
   //Debounce para melhorar a perfomace da pesquisa
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return function (...args) {
+  const debounce = <T extends (...args: any[]) => void>(
+    func: T,
+    delay: number
+  ): ((...args: Parameters<T>) => void) => {
+    let timeoutId: number | undefined;
+    return function (...args: Parameters<T>) {
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
-      timeoutId = setTimeout(() => {
+      timeoutId = window.setTimeout(() => {
         func(...args);
       }, delay);
     };
@@ -76,7 +71,7 @@ const Chat = ({ navigation }) => {
   }, 300);
 
   //filterRooms para filtrar as salas de conversa de acordo com o handleSearch
-  const filterRooms = (searchString) => {
+  const filterRooms = (searchString: string) => {
     const filteredRooms = rooms.filter((savedRooms) =>
       savedRooms.name.toLowerCase().includes(searchString.toLowerCase())
     );
@@ -85,11 +80,13 @@ const Chat = ({ navigation }) => {
 
   //Use effect que ao abrir a página de conversa ele procura a lista de salas de papo papo do user
   useEffect(() => {
-    const handleRoomsList = (newRooms) => {
+    const handleRoomsList = (
+      newRooms: React.SetStateAction<RoomResponse[]>
+    ) => {
       setRooms(newRooms);
     };
 
-    socket.emit("roomList", { id: user.id });
+    socket.emit("roomList", { id: user?.id });
 
     socket.on("roomsList", handleRoomsList);
 
@@ -103,10 +100,11 @@ const Chat = ({ navigation }) => {
     navigation.navigate("AddRoom");
   };
 
-  const keyExtractor = (item) => item.id.toString();
+  const keyExtractor = (item: { id: { toString: () => any } }) =>
+    item.id.toString();
 
   //Função que retorna o item que renderiza a pré-visualização dos bate papos
-  const renderChatItem = ({ item }) => {
+  const renderChatItem = ({ item }: { item: any }) => {
     return <ChatComponent navigation={navigation} item={item} />;
   };
   return (

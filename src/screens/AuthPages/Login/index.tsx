@@ -1,20 +1,20 @@
+import React from "react";
 import { View, ScrollView, Pressable, StatusBar } from "react-native";
-import Texto from "../../../components/Default/texto/Texto";
+import { useState, useContext } from "react";
+
 import styles from "./styles";
-import { useState, useContext, useEffect } from "react";
 import Carrossel from "../../../components/Login/Carrossel/Carrossel";
 import Logo from "../../../components/Default/Logo/Logo";
 import InputLogin from "../../../components/Login/Input/InputLogin";
 import UserIcon from "../../../assents/Login/UserIcon";
 import SecurityIcon from "../../../assents/Login/SecurityIcon";
 import LoginButton from "../../../components/Login/LoginButton/LoginButton";
-import React from "react";
 import AuthContext from "../../../contexts/auth.context";
 import ErrorAlert from "../../../components/ErrorAlert/ErrorAlert";
 import LoadingIndicator from "../../../components/Default/Loading";
-import { Form } from "react-hook-form";
+import Texto from "../../../components/Default/texto/Texto";
 
-const Login = ({ navigation }) => {
+const Login = ({ navigation }: { navigation: any }) => {
   const { signIn, loading, signed } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

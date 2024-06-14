@@ -11,13 +11,14 @@ import LoginButton from "../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../contexts/auth.context";
 import styles from "./styles";
 
-const SignUpScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
   const { loading } = useContext(AuthContext);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null);
 
-  const handleNome = (value) => setSignupUser({ ...signupUser, nome: value });
-  const handleSobrenome = (value) =>
+  const handleNome = (value: any) =>
+    setSignupUser({ ...signupUser, nome: value });
+  const handleSobrenome = (value: any) =>
     setSignupUser({ ...signupUser, sobrenome: value });
   const handleSubmit = () => {
     const isError =
@@ -64,7 +65,7 @@ const SignUpScreen = ({ navigation }) => {
             <InputCadastro
               styleContainer={{ width: "100%" }}
               text={signupUser.nome}
-              func={(value) => {
+              func={(value: any) => {
                 handleNome(value);
                 if (!!error) setError(null);
               }}
@@ -75,7 +76,7 @@ const SignUpScreen = ({ navigation }) => {
             <InputCadastro
               styleContainer={{ width: "100%" }}
               text={signupUser.sobrenome}
-              func={(value) => {
+              func={(value: any) => {
                 handleSobrenome(value);
                 if (!!error) setError(null);
               }}

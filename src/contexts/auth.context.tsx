@@ -1,24 +1,26 @@
+import React, { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
+
 import { AuthContextData } from "./dto/authContextData.dto";
 import { SignUpInfo } from "./dto/signUpInfo.dto";
+import { User } from "./dto/user.dto";
+
 import * as authFunctions from "./functions/authFunctions";
 import * as forgotFunctions from "./functions/forgotFunctions";
 import * as modelo3d from "./functions/modelos3dFunctions";
 import * as likeFunctions from "./functions/likeFunction";
 import * as empresas from "./functions/empresaFunction";
+
 import { SignInResponse } from "./dto/signInResponse.dto";
-import { updateUserDTO } from "./dto/updateUser.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
-import { User } from "./dto/user.dto";
-import React, { createContext, useState, useEffect, useContext } from "react";
 import { getUser } from "../service";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState<User | null>();
+export const AuthProvider = ({ children }: { children: any }) => {
+  const [user, setUser] = useState<any>();
   const [token, setToken] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [signupUser, setSignupUser] = useState<signupUser>({} as signupUser);
@@ -58,9 +60,10 @@ export const AuthProvider = ({ children }) => {
       setLoading,
       setUser
     );
-    const user = await getUser(response.token);
+    const user = response ? await getUser(response.token ?? "") : null;
+
     setUser(user);
-    return response;
+    return response ?? null;
   };
 
   const logout = async () => {

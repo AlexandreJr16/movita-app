@@ -10,7 +10,6 @@ import {
   Pressable,
   StatusBar,
   ImageBackground,
-  FlatList,
   TouchableOpacity,
 } from "react-native";
 import { Buffer } from "buffer";
@@ -31,33 +30,22 @@ import ProjetoContext from "../../../../contexts/project.context";
 import FixedProjects from "../../../../components/Chat/ShowFixedProjects/FixedProjects";
 
 export type SendMessage = {
-  texto: string | null;
-  imagem: any;
-  modelo3D: Buffer | null;
-  userName: string;
-  roomId: number;
-  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING" | "PROJETO";
+  texto?: string | null;
+  imagem?: any;
+  modelo3D?: Buffer | null;
+  userName?: string;
+  roomId?: number;
+  tipoMessage?: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING" | "PROJETO";
   briefing?: {
     title: string;
     answered: boolean;
     question: [{ text: string; response: string }];
   };
-  project: {
+  project?: {
     title: string;
     detalhes: string;
   };
 };
-
-// "contratanteId": 1,
-// "createdAt": "2024-05-01T13:48:00.069Z",
-// "descricao": "Descrição do novo projeto",
-//  "fabricanteId": 2,
-//  "id": 1,
-//   "imagem": [],
-//    "nota": 0,
-//    "status": "Esperando confirmação",
-//     "titulo": "Novo Projeto",
-//      "updatedAt": "2024-05-01T13:48:00.069Z"
 
 export type ProjetosResponseType = {
   id: number;
@@ -74,27 +62,27 @@ export type ProjetosResponseType = {
   updatedAt: string;
 };
 
-const Messaging = ({ route, navigation }) => {
+const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
   const { user } = useContext(AuthContext);
   const { findProjetoByUserCompany } = useContext(ProjetoContext);
-  const scrollViewRef = useRef(null);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const [chatMessages, setChatMessages] = useState<MessageResponse[]>();
-  const [visibleImagePicker, setVisibleImagePicker] = useState(false);
-  const [visibleAnex, setVisibleAnex] = useState(false);
+  const [visibleImagePicker, setVisibleImagePicker] = useState<any>(false);
+  const [visibleAnex, setVisibleAnex] = useState<any>(false);
   const [projects, setProjects] = useState<ProjetosResponseType[]>();
 
   //Texto sendo digitado
   const [message, setMessage] = useState("");
 
   //Cor da  barra de digitação
-  const [variableColor, setVariableColor] = useState("#5A5A5A");
+  const [variableColor, setVariableColor] = useState<string | null>("#5A5A5A");
 
   const [lastMessage, setLastMessage] = useState<string | null>(null);
   const nome =
-    user.tipoUser === "empresa"
-      ? user.Empresa[0].nomeFantasia
-      : user.Cliente[0].nome;
+    user?.tipoUser === "empresa"
+      ? user?.Empresa && user.Empresa[0]?.nomeFantasia
+      : user?.Cliente && user.Cliente[0]?.nome;
 
   const item: RoomResponse = route.params;
 
@@ -132,9 +120,12 @@ const Messaging = ({ route, navigation }) => {
 
   //Receber mensagens
   useEffect(() => {
-    const handleNewMessageReceived = (newMessage) => {
+    const handleNewMessageReceived = (newMessage: MessageResponse) => {
       if (nome == newMessage.userName) return;
-      setChatMessages((prevMessages) => prevMessages.concat(newMessage));
+      setChatMessages((prevMessages) => {
+        if (prevMessages) return [...prevMessages, newMessage];
+        else return [newMessage];
+      });
       scrollToBottom();
     };
 
@@ -152,17 +143,20 @@ const Messaging = ({ route, navigation }) => {
     const newMessage: MessageResponse = {
       tipoMessage: "TEXTO",
       texto: message,
-      imagem: null,
+      imagem: undefined,
       modelo3D: undefined,
       userName: nome,
       roomId: item.id,
       id: Math.random() * 3142142,
       createAt: new Date(),
-      project: null,
+      project: undefined,
     };
 
     console.log(newMessage);
-    setChatMessages((prevMessages) => prevMessages.concat(newMessage));
+    setChatMessages((prevMessages) => {
+      if (prevMessages) return [...prevMessages, newMessage];
+      else return [newMessage];
+    });
     socket.emit("newMessage", newMessage);
 
     setMessage("");
@@ -187,58 +181,39 @@ const Messaging = ({ route, navigation }) => {
 
     const newMessage: MessageResponse = {
       tipoMessage: "IMAGEM",
-      texto: null,
+      texto: undefined,
       imagem: imagem,
       modelo3D: undefined,
       userName: nome,
       roomId: item.id,
       id: Math.random() * 3142142,
       createAt: new Date(),
-      project: null,
+      project: undefined,
     };
 
     socket.emit("newMessage", newMessage);
     setTimeout(() => {}, 2000);
-    setChatMessages((prevMessages) => prevMessages.concat(newMessage));
+
+    setChatMessages((prevMessages) => {
+      if (prevMessages) return [...prevMessages, newMessage];
+      else return [newMessage];
+    });
     socket.emit("findRoom", item.id);
   };
-
-  // Mandar Modelo
-  // const picker = async () => {
-  //   try {
-  //     const doc = await DocumentPicker.getDocumentAsync({
-  //       multiple: false,
-  //       copyToCacheDirectory: true,
-  //     });
-  //     if (!doc.canceled) {
-  //       const base64 = await FileSystem.readAsStringAsync(doc.assets[0].uri, {
-  //         encoding: FileSystem.EncodingType.Base64,
-  //       });
-  //       const nome = doc.assets[0].name;
-
-  //       // Converter o base64 em buffer
-  //       const buffer = Buffer.from(base64, "base64");
-
-  //       handleNewModel(buffer, nome);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   // Enviar novo modelo 3D
   const handleNewModel = (modelo: Buffer, nome: string) => {
     if (!modelo) return;
     const newMessage: MessageResponse = {
       tipoMessage: "MODELO_3D",
-      texto: null,
-      imagem: null,
+      texto: undefined,
+      imagem: undefined,
       modelo3D: modelo,
       userName: nome,
       roomId: item.id,
       id: Math.random() * 3142142,
       createAt: new Date(),
-      project: null,
+      project: undefined,
     };
     socket.emit("newMessage", newMessage);
   };
@@ -247,12 +222,12 @@ const Messaging = ({ route, navigation }) => {
   const picker = () => {
     const dto: SendMessage = {
       tipoMessage: "PROJETO",
-      texto: null,
-      imagem: null,
-      modelo3D: null,
+      texto: undefined,
+      imagem: undefined,
+      modelo3D: undefined,
       userName: nome,
       roomId: item.id,
-      briefing: null,
+      briefing: undefined,
       project: { title: "OLA", detalhes: "ELE é bonito" },
     };
     socket.emit("newMessage", dto);
@@ -315,7 +290,7 @@ const Messaging = ({ route, navigation }) => {
                       key={index}
                       item={msg}
                       users={{ user1: item.userId1, user2: item.userId2 }}
-                      different={different}
+                      different={different ?? false}
                       navigation={navigation}
                     ></MessageComponent>
                   );
@@ -369,7 +344,7 @@ const Messaging = ({ route, navigation }) => {
           <View
             style={{
               ...styles.messaginginputContainer,
-              backgroundColor: variableColor,
+              backgroundColor: variableColor || undefined,
             }}
           >
             <View

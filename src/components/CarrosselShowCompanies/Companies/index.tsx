@@ -18,7 +18,7 @@ const Companies = ({
     try {
       navigation.navigate("PerfilEmpresa", { id: produto.id, color: color });
     } catch (error) {
-      throw new Error(error);
+      console.log(error);
     }
   };
 

@@ -1,5 +1,8 @@
+import { SetStateAction } from "react";
+
 import * as authService from "../../service/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { User } from "../dto/user.dto";
 
 //SIM, IHAGO, EU DEIXEI O CHAT GPT COMENTAR PRA MIM
 
@@ -12,7 +15,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<Object>} - Uma Promise que resolve com o objeto de resposta.
  */
-export const signIn = async (email, senha, setToken, setLoading, setUser) => {
+export const signIn = async (
+  email: string,
+  senha: string,
+  setToken: {
+    (value: SetStateAction<string | undefined>): void;
+    (arg0: string): void;
+  },
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void },
+  setUser: {
+    (value: SetStateAction<User | null | undefined>): void;
+    (arg0: object | undefined): void;
+  }
+) => {
   try {
     setLoading(true);
     const response = await authService.signIn(email, senha);
@@ -35,7 +50,10 @@ export const signIn = async (email, senha, setToken, setLoading, setUser) => {
  * Realiza o logout do usuário.
  * @param {Function} setUser - Função para limpar as informações do usuário no estado.
  */
-export const logout = async (setUser) => {
+export const logout = async (setUser: {
+  (value: SetStateAction<User | null | undefined>): void;
+  (arg0: null): void;
+}) => {
   try {
     await AsyncStorage.clear();
     setUser(null);
@@ -52,7 +70,27 @@ export const logout = async (setUser) => {
  * @returns {Promise<Object>} - Uma Promise que resolve com o objeto de resposta.
  */
 
-export const signUp = async (userInfo, setLoading, setToken) => {
+export const signUp = async (
+  userInfo: {
+    email: string;
+    senha: string;
+    nome: string;
+    telefone: string;
+    cpf: string;
+    sexo: string;
+    nascimento: string;
+    cep: string;
+    estado: string;
+    bairro: string;
+    cidade: string;
+    tipo_usuario: string;
+  },
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void },
+  setToken: {
+    (value: SetStateAction<string | undefined>): void;
+    (arg0: string): void;
+  }
+) => {
   try {
     setLoading(true);
     const response = await authService.signUp(userInfo);

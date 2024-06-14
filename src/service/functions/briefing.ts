@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
-import { API_URL } from "../../../configs";
 import { ErrorResponse } from "./dto/requestDTO";
 import { UpdateBriefingDTO } from "../../contexts/briefing.context";
+import { API_URL } from "../../../configs";
 
 export const findBriefing = async (id: number) => {
   const url = `${API_URL}/briefing/${id}`;
@@ -21,7 +21,7 @@ export const findBriefing = async (id: number) => {
 
   return response;
 };
-export const updateBriefing = async (id: number, dto: UpdateBriefingDTO) => {
+export const updateBriefing = async (id?: number, dto?: UpdateBriefingDTO) => {
   const url = `${API_URL}/briefing/${id}`;
 
   const options = {

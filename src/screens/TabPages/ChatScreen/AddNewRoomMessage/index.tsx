@@ -1,10 +1,9 @@
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FlatList, StatusBar, View } from "react-native";
 import HeaderMyProduct from "../../../../components/MeusProjetos/Header";
 import styles from "../styles";
 import Texto from "../../../../components/Default/texto/Texto";
-import ChatComponent from "../../../../components/Chat/ChatComponent";
-import socket from "../../../../utils/socket";
+
 import AddContatoComponent from "../../../../components/Chat/AddContato";
 import AuthContext from "../../../../contexts/auth.context";
 import VitaNotFound from "../../../../assents/Vita/VitaNotFound";
@@ -20,17 +19,20 @@ type EmpresaData = {
   nome: string;
 };
 
-const AddRoomMessage = ({ navigation }) => {
+const AddRoomMessage = ({ navigation }: { navigation: any }) => {
   const [empresa, setEmpresa] = useState<EmpresaData[]>([] as EmpresaData[]);
   const { findEmpresasByName } = useContext(AuthContext);
 
   //Debounce pra melhorar o processamento
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return function (...args) {
+  const debounce = (
+    func: { (value: string): Promise<void>; apply?: any },
+    delay: number | undefined
+  ) => {
+    let timeoutId: string | number | NodeJS.Timeout | undefined;
+    return function (...args: any) {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
-        func.apply(this, args);
+        func.apply(debounce, args);
       }, delay);
     };
   };
@@ -47,7 +49,8 @@ const AddRoomMessage = ({ navigation }) => {
   const debouncedHandleSearch = debounce(handleSearch, 500); // 0.5 segundos de debounce
 
   //Transforma number para string
-  const keyExtractor = (item) => item.id.toString();
+  const keyExtractor = (item: { id: { toString: () => any } }) =>
+    item.id.toString();
 
   //Renderização dos componenetes de adicionar
   const renderChatItem = ({ item }: { item: EmpresaData }) => {

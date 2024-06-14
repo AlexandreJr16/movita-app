@@ -11,11 +11,11 @@ import ProjetoContext from "../../../contexts/project.context";
 import VitaNotFound from "../../../assents/Vita/VitaNotFound";
 import debounce from "../../../utils/debounce";
 
-const ModelosSearch = ({ navigation }) => {
+const ModelosSearch = ({ navigation }: any) => {
   const { getTopProjects, findProjetoByName } = useContext(ProjetoContext);
-  const [produtos, setProdutos] = useState([]);
-  const [value, setValue] = useState();
-  const [visible, setVisible] = useState(true);
+  const [produtos, setProdutos] = useState<any>([]);
+  const [value, setValue] = useState<any>();
+  const [visible, setVisible] = useState<any>(true);
 
   // Faz o get dos projetos
   const fetchData = async () => {
@@ -32,7 +32,7 @@ const ModelosSearch = ({ navigation }) => {
     fetchData();
   }, []);
 
-  const handleSearch = async (value) => {
+  const handleSearch = async (value: any) => {
     setValue(value);
     if (value == "") {
       fetchData();
@@ -44,7 +44,7 @@ const ModelosSearch = ({ navigation }) => {
   };
   const handleSearchDebounce = debounce(handleSearch, 1000);
 
-  function saoTodosVaziosOuNulos(produtos) {
+  function saoTodosVaziosOuNulos(produtos: any) {
     if (!Array.isArray(produtos)) {
       return false;
     }
@@ -67,14 +67,16 @@ const ModelosSearch = ({ navigation }) => {
         handleSearch={handleSearchDebounce}
       />
       {!saoTodosVaziosOuNulos(produtos) ? (
-        produtos.map((product, i) => (
-          <ShowProductsCarousel
-            key={i}
-            navigation={navigation}
-            title={"Projetos bem avaliados:"}
-            produtos={product}
-          />
-        ))
+        produtos.map(
+          (product: never[] | undefined, i: React.Key | null | undefined) => (
+            <ShowProductsCarousel
+              key={i}
+              navigation={navigation}
+              title={"Projetos bem avaliados:"}
+              produtos={product}
+            />
+          )
+        )
       ) : (
         <View style={styles.emptyContainer}>
           <Texto

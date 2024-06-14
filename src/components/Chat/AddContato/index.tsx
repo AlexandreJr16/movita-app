@@ -17,8 +17,8 @@ import Texto from "../../Default/texto/Texto";
 
 //DTO para a criação de sala de bate papo
 type createRoomDTO = {
-  userId1: number;
-  userId2: number;
+  userId1?: number;
+  userId2?: number;
 };
 
 //DTO para o componente
@@ -42,7 +42,7 @@ const AddContatoComponent = ({
     console.log(dto, "CRiando");
     const { userId1, userId2 } = dto;
     socket.emit("createRoom", { userId1, userId2 });
-    socket.emit("roomList", { id: user.id });
+    socket.emit("roomList", { id: user?.id });
     navigation.goBack();
   };
 
@@ -78,7 +78,7 @@ const AddContatoComponent = ({
           </View>
           <Pressable
             style={styles.timeStyle}
-            onPress={() => createRoom({ userId1: user.id, userId2: id })}
+            onPress={() => createRoom({ userId1: user?.id, userId2: id })}
           >
             <Ionicons name="add" color={"#fff"} style={{ fontSize: 25 }} />
           </Pressable>

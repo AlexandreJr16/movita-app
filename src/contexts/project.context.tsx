@@ -6,26 +6,29 @@ import * as projService from "../service/index";
 import * as api from "../service/index";
 
 type ProjetoContextData = {
-  findProjetoByName(nome: string);
-  getTopProjects(num: number);
-  getAllProjetosByCliente();
-  getRandomProjects(num: number);
-  getProject(num: number);
-  getFavProjects();
-  addImageProj?(dto: { bin: any; id: number });
-  findByNameProject?(dto: { value: string });
-  findProjetoByUserCompany(dto: { clienteId: number; empresaId: number });
-  createProjeto(dto: {
+  findProjetoByName: (nome: string) => any;
+  getTopProjects: (num: number) => any;
+  getAllProjetosByCliente: () => any;
+  getRandomProjects: (num: number) => any;
+  getProject: (num: number) => any;
+  getFavProjects: () => any;
+  addImageProj: (dto?: { bin?: any; id?: number }) => any;
+  findByNameProject: (dto: { value: string }) => any;
+  findProjetoByUserCompany: (dto: {
+    clienteId: number;
+    empresaId: number;
+  }) => any;
+  createProjeto: (dto: {
     users: { user1: number; user2: number };
     titulo: string;
     descricao: string;
-  });
-  findProjectById(dto: { id: number });
+  }) => any;
+  findProjectById: (dto: { id: number }) => any;
 };
 
 const ProjetoContext = createContext({} as ProjetoContextData);
 
-export const ProjetoProvider = ({ children }) => {
+export const ProjetoProvider = ({ children }: any) => {
   const { token, setLoading } = useContext(AuthContext);
 
   const createProjeto = async (dto: {
@@ -57,7 +60,7 @@ export const ProjetoProvider = ({ children }) => {
   const getFavProjects = async () => {
     return await projectsFunctions.getFavProjects(token, setLoading);
   };
-  const addImageProj = async (dto: { bin: any; id: number }) => {
+  const addImageProj = async (dto?: { bin?: any; id?: number }) => {
     return await projectsFunctions.addImageProj(dto, token);
   };
   const findProjetoByName = async (nome: string) => {
