@@ -10,11 +10,15 @@ const InputPerfil = ({
   func,
   secureText,
   value,
+  onBlur,
+  error,
 }: {
   title?: string;
   func?: any;
   secureText?: boolean;
   value?: any;
+  onBlur?: any;
+  error: any;
 }) => {
   return (
     <View style={styles.container}>
@@ -22,6 +26,7 @@ const InputPerfil = ({
         {title}
       </Texto>
       <TextoInput
+        onBlur={onBlur}
         weight="regular"
         onChangeText={func}
         style={styles.input}
@@ -30,6 +35,11 @@ const InputPerfil = ({
         placeholderColor={"#9f9f9f"}
         value={value}
       ></TextoInput>
+      {error && (
+        <Texto weight="bold" style={{ color: "red" }}>
+          {error}
+        </Texto>
+      )}
     </View>
   );
 };

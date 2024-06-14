@@ -1,7 +1,8 @@
 import { ScrollView, StatusBar, View } from "react-native";
-import styles from "./styles";
-import { useContext, useEffect, useState } from "react";
-import React from "react";
+import { useContext } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import cep from "cep-promise";
 import LoadingIndicator from "../../../../components/Default/Loading";
 import ErrorAlert from "../../../../components/ErrorAlert/ErrorAlert";
@@ -13,174 +14,106 @@ import TitleTextPerfil from "../../../../components/Perfil/TitleText";
 import AuthContext from "../../../../contexts/auth.context";
 import { updateUserDTO } from "../../../../contexts/dto/updateUser.dto";
 import UserContext from "../../../../contexts/user.context";
+import styles from "./styles";
 
-interface Local {
-  cep: string;
-  city: string;
-  neighborhood: string;
-  service: string;
-  state: string;
-  street: string;
-}
+// Schema de validação com zod
+const schema = z.object({
+  nome: z.string().nonempty("Nome é obrigatório"),
+  email: z.string().email("Email inválido"),
+  telefone: z.string().nonempty("Telefone é obrigatório"),
+  endereco: z.string().nonempty("CEP é obrigatório"),
+  cpf: z.string().nonempty("CPF/CNPJ é obrigatório"),
+});
 
 const UpdatePerfil = ({ navigation }: any) => {
   const { user, loading } = useContext(AuthContext);
   const { updateUser } = useContext(UserContext);
 
-  //Set de use states para cada input da página
-  //Passível de futuras atualizações com alguma dependencia que diminua a quantidade de use states e deixe o código mais limpo
-  const [text, setText] = useState<any>(null);
-  const [nome, setNome] = useState<any>(() => {
-    if (user) {
-      if (
-        user.tipoUser === "empresa" &&
-        user.Empresa &&
-        user.Empresa.length > 0
-      ) {
-        return user.Empresa[0]?.nomeFantasia || "";
-      } else if (user.Cliente && user.Cliente.length > 0) {
-        return user.Cliente[0]?.nome || "";
-      }
-    }
-    return ""; // Default value if user or required properties are not defined
+  const defaultValues = {
+    nome:
+      user?.tipoUser === "empresa"
+        ? user?.Empresa?.[0]?.nomeFantasia || ""
+        : user?.Cliente?.[0]?.nome || "",
+    email: user?.email ?? "",
+    telefone:
+      user?.tipoUser === "empresa"
+        ? user?.Empresa?.[0]?.telefone || ""
+        : user?.Cliente?.[0]?.telefone || "",
+    endereco:
+      user?.tipoUser === "empresa"
+        ? user?.Empresa?.[0]?.Endereco?.cep || ""
+        : user?.Cliente?.[0]?.Endereco?.cep || "",
+    cpf:
+      user?.tipoUser === "empresa"
+        ? user?.Empresa?.[0]?.cnpj || ""
+        : user?.Cliente?.[0]?.cpf || "",
+  };
+  // UseForm hook with zod resolver
+  const {
+    control,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({
+    defaultValues,
+    resolver: zodResolver(schema),
   });
-  const [email, setEmail] = useState<any>(user?.email ?? "");
-  const [telefone, setTelefone] = useState<any>(
-    user && user.tipoUser === "empresa"
-      ? user.Empresa && user.Empresa.length > 0
-        ? user.Empresa[0]?.telefone || ""
-        : ""
-      : user && user.Cliente && user.Cliente.length > 0
-      ? user.Cliente[0]?.telefone || ""
-      : ""
-  );
 
-  const [endereco, setEndereco] = useState<any>(
-    user && user.tipoUser === "empresa"
-      ? user.Empresa && user.Empresa.length > 0 && user.Empresa[0]?.Endereco
-        ? `${user.Empresa[0].Endereco.cep}` || ""
-        : ""
-      : user &&
-        user.Cliente &&
-        user.Cliente.length > 0 &&
-        user.Cliente[0]?.Endereco
-      ? `${user.Cliente[0].Endereco.cep}` || ""
-      : ""
-  );
-
-  const [cpf, setCpf] = useState<any>(
-    user?.tipoUser === "empresa"
-      ? user?.Empresa
-        ? user.Empresa[0]?.cnpj
-        : undefined
-      : user?.Cliente && user.Cliente.length > 0
-      ? user.Cliente[0]?.cpf
-      : undefined
-  );
-
-  //handle de cada useState
-  const handleNome = (value: any) => {
-    setNome(value);
-  };
-  const handleEmail = (value: any) => {
-    setEmail(value);
-  };
-  const handleTelefone = (value: any) => {
-    setTelefone(value);
-  };
-  const handleEndereco = (value: any) => {
-    setEndereco(value);
-  };
-  const handleCpf = (value: any) => {
-    setCpf(value);
-  };
-
-  //Função que faz o update
-  const handleUpdate = async () => {
-    //Verifica se email é válido
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let local: Local;
+  const onSubmit = async (data: typeof defaultValues) => {
+    let local;
     try {
-      //Tenta consultar a existência do endereço de acordo com o CEP
-      local = await cep(`${endereco}`);
-      console.log(local);
+      local = await cep(`${data.endereco}`);
     } catch (error) {
-      setText("Algum campo está errado.");
-
+      setError("endereco", { type: "manual", message: "CEP inválido" });
       return;
     }
-    //Se as válidações acima derem certo, retira a mensagem de erro
-    setText(null);
-    if (
-      email == "" ||
-      telefone == "" ||
-      endereco == "" ||
-      cpf == "" ||
-      !emailRegex.test(email)
-    ) {
-      console.log("Campos inválidos");
-    } else if (user?.tipoUser == "empresa") {
-      //Se o usuário for empresa cria um objeto que será enviado para a api
-      const dto = {
-        email,
-        tipoUser: user.tipoUser,
-        Empresa: [
-          {
-            cpf: cpf,
-            nomeFantasia: nome,
-            telefone,
-            Endereco: {
-              cidade: local.city,
-              bairro: local.neighborhood,
-              estado: local.state,
-              cep: local.cep,
-            },
-          },
-        ],
-      } as updateUserDTO;
-      //O "as updateUserDTO" é apenas para evitar um erro do TS (Gambiarrra)
-      console.log(dto);
-      //Faz o updateUse na api e recebe o atributo status do retorno
-      const { status } = await updateUser(dto);
-      console.log(status);
 
-      //verifica se o retorno foi "ok" e retorna para a APIs
-      if (status == "ok") navigation.goBack();
-      else {
-        //Tratamento de erro ao update
-      }
-    } else if (user?.tipoUser == "cliente") {
-      //Objeto de updateno caso de cliente
-      const dto = {
-        email,
-        tipoUser: user.tipoUser,
-        Cliente: [
-          {
-            cpf: cpf,
-            nome: nome,
-            telefone,
-            Endereco: {
-              cidade: local.city,
-              bairro: local.neighborhood,
-              estado: local.state,
-              cep: local.cep,
-            },
-          },
-        ],
-      } as updateUserDTO;
-      //Faz o updateUse na api e recebe o atributo status do retorno
-      try {
-        const response = await updateUser(dto);
+    const dto: any = {
+      email: data.email,
+      tipoUser: user?.tipoUser == "empresa" ? "empresa" : "cliente",
+      ...(user?.tipoUser === "empresa"
+        ? {
+            Empresa: [
+              {
+                cnpj: data.cpf,
+                nomeFantasia: data.nome,
+                telefone: data.telefone,
+                Endereco: {
+                  cidade: local.city,
+                  bairro: local.neighborhood,
+                  estado: local.state,
+                  cep: local.cep,
+                },
+              },
+            ],
+          }
+        : {
+            Cliente: [
+              {
+                cpf: data.cpf,
+                nome: data.nome,
+                telefone: data.telefone,
+                Endereco: {
+                  cidade: local.city,
+                  bairro: local.neighborhood,
+                  estado: local.state,
+                  cep: local.cep,
+                },
+              },
+            ],
+          }),
+    };
 
-        //verifica se o retorno foi "ok" e retorna para a APIs
-        if (response) navigation.goBack();
-        else {
-          //Objeto de updateno caso de cliente
-        }
-      } catch (error) {
-        console.log(error);
+    try {
+      const response = await updateUser(dto);
+      if (response.status === "ok") {
+        navigation.goBack();
+      } else {
+        // setText("Falha ao atualizar os dados");
       }
-    } else setText("Algum campo está errado.");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -191,46 +124,76 @@ const UpdatePerfil = ({ navigation }: any) => {
         <ShowPerfil />
         <View style={styles.container}>
           <TitleTextPerfil>Detalhes da conta</TitleTextPerfil>
-          <InputPerfil
-            title="Nome:"
-            func={(value: any) => {
-              handleNome(value);
-            }}
-            value={nome}
+          <Controller
+            control={control}
+            name="nome"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <InputPerfil
+                title="Nome:"
+                onBlur={onBlur}
+                func={onChange}
+                value={value}
+                error={errors.nome?.message}
+              />
+            )}
           />
-          <InputPerfil
-            title="E-mail:"
-            func={(value: any) => {
-              handleEmail(value);
-            }}
-            value={email}
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <InputPerfil
+                title="E-mail:"
+                onBlur={onBlur}
+                func={onChange}
+                value={value}
+                error={errors.email?.message}
+              />
+            )}
           />
-          <InputPerfil
-            title="Telefone:"
-            func={(value: any) => {
-              handleTelefone(value);
-            }}
-            value={telefone}
+          <Controller
+            control={control}
+            name="telefone"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <InputPerfil
+                title="Telefone:"
+                onBlur={onBlur}
+                func={onChange}
+                value={value}
+                error={errors.telefone?.message}
+              />
+            )}
           />
-          <InputPerfil
-            title="CEP:"
-            func={(value: any) => {
-              handleEndereco(value);
-            }}
-            value={endereco}
+          <Controller
+            control={control}
+            name="endereco"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <InputPerfil
+                title="CEP:"
+                onBlur={onBlur}
+                func={onChange}
+                value={value}
+                error={errors.endereco?.message}
+              />
+            )}
           />
-          <InputPerfil
-            title="CPF/CNPJ:"
-            func={(value: any) => {
-              handleCpf(value);
-            }}
-            value={cpf}
+          <Controller
+            control={control}
+            name="cpf"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <InputPerfil
+                title="CPF/CNPJ:"
+                onBlur={onBlur}
+                func={onChange}
+                value={value}
+                error={errors.cpf?.message}
+              />
+            )}
           />
-
+          {/* 
           <ErrorAlert isAlert={text != null} styles={styles.errorText}>
             {text}
-          </ErrorAlert>
-          <ButtonPerfil onPress={handleUpdate} />
+          </ErrorAlert> */}
+          <ButtonPerfil onPress={handleSubmit(onSubmit)} />
         </View>
         <LoadingIndicator visible={loading} />
       </ScrollView>
