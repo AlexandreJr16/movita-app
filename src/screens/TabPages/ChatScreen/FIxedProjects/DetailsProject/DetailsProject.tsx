@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Linking, Pressable, ScrollView, View } from "react-native";
+import { Linking, Pressable, ScrollView, View, Image } from "react-native";
 import styles from "./styles";
 
 import Arrow from "../../../../../assents/Perfil/Arrow";
@@ -9,7 +9,10 @@ import ProjetoContext from "../../../../../contexts/project.context";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SetaBottom from "../../../../../assents/Chat/setaBottom";
 import SetaUp from "../../../../../assents/Chat/setaUp";
-import AnaliseAcompanhamento from "../../../../../assents/Projeto/AnaliseAcompanhamento";
+import Fase1 from "../../../../../assents/Projeto/fase1";
+import Fase2 from "../../../../../assents/Projeto/fase2";
+import Fase4 from "../../../../../assents/Projeto/fase4";
+import Fase3 from "../../../../../assents/Projeto/fase3";
 
 type EmpresaType = {
   id: number;
@@ -61,7 +64,7 @@ const FixedAllProjects = ({
     );
   };
 
-  const getProject = async (id) => {
+  const getProject = async (id: number) => {
     const response: ResponseProjeto = await findProjectById({ id });
     setProjeto(response);
   };
@@ -112,17 +115,7 @@ const FixedAllProjects = ({
                 }}
                 weight="bold"
               >
-                Modelo 3D 1
-              </Texto>
-              <Texto
-                style={{
-                  color: "#fff",
-                  fontSize: 16,
-                  textDecorationLine: "underline",
-                }}
-                weight="bold"
-              >
-                Modelo 3D 1
+                OASSS
               </Texto>
             </Pressable>
           </Fields>
@@ -136,9 +129,12 @@ const FixedAllProjects = ({
               }}
               weight="bold"
             >
-              Fase Atual: Em análise
+              Fase Atual:{projeto.status}
             </Texto>
-            <AnaliseAcompanhamento />
+            {projeto.status == "Esperando confirmação" && <Fase1 />}
+            {projeto.status == "2" && <Fase2 />}
+            {projeto.status == "3" && <Fase3 />}
+            {projeto.status == "4" && <Fase4 />}
           </Fields>
         </ScrollView>
       ) : null}
