@@ -93,7 +93,7 @@ const SignUpScreen6 = ({ navigation }: any) => {
           </View>
           <View style={styles.textContainer}>
             <Texto weight="regular" style={styles.title}>
-              Informe seu Email completo{" "}
+              Informe seu sua senha
             </Texto>
             <ErrorAlert isAlert={!!error} styles={styles.errorText}>
               {error}
