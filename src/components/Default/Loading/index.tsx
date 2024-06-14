@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, ActivityIndicator, StyleSheet, View, Text } from "react-native";
 import styles from "./style";
 
-const LoadingIndicator = ({ visible }) => (
+const LoadingIndicator = ({ visible }: any) => (
   <Modal
     transparent
     animationType="slide"

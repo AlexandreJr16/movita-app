@@ -23,16 +23,16 @@ interface Local {
   street: string;
 }
 
-const SignUpScreen5 = ({ navigation }) => {
+const SignUpScreen5 = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
   const { loading } = useContext(AuthContext);
-  const [error, setError] = useState(null);
-  const [ceps, setceps] = useState("");
-  const [estado, setEstado] = useState("");
-  const [bairro, setBairro] = useState<string>("");
-  const [cidade, setCidade] = useState("");
+  const [error, setError] = useState<any>(null);
+  const [ceps, setceps] = useState<any>("");
+  const [estado, setEstado] = useState<any>("");
+  const [bairro, setBairro] = useState<any>("");
+  const [cidade, setCidade] = useState<any>("");
 
-  const handleceps = async (value) => {
+  const handleceps = async (value: React.SetStateAction<string>) => {
     setceps(value);
     debounce(searchCep, 2000);
   };
@@ -60,13 +60,13 @@ const SignUpScreen5 = ({ navigation }) => {
       }
     }
   };
-  const handleEstado = (value) => {
+  const handleEstado = (value: React.SetStateAction<string>) => {
     setEstado(value);
   };
-  const handleBairro = (value) => {
+  const handleBairro = (value: React.SetStateAction<string>) => {
     setBairro(value);
   };
-  const handleCidade = (value) => {
+  const handleCidade = (value: React.SetStateAction<string>) => {
     setCidade(value);
   };
 
@@ -164,7 +164,7 @@ const SignUpScreen5 = ({ navigation }) => {
                 inputMode={"numeric"}
                 styleContainer={{ width: "52%" }}
                 text={ceps}
-                func={(value) => {
+                func={(value: React.SetStateAction<string>) => {
                   handleceps(value);
                   if (!!error) setError(null);
                 }}
@@ -174,7 +174,7 @@ const SignUpScreen5 = ({ navigation }) => {
               <InputCadastro
                 styleContainer={{ width: "46%" }}
                 text={estado}
-                func={(value) => {
+                func={(value: any) => {
                   handleEstado(value);
                   if (!!error) setError(null);
                 }}
@@ -195,7 +195,7 @@ const SignUpScreen5 = ({ navigation }) => {
               <InputCadastro
                 styleContainer={{ width: "53%" }}
                 text={bairro}
-                func={(value) => {
+                func={(value: any) => {
                   handleBairro(value);
                   if (!!error) setError(null);
                 }}
@@ -205,7 +205,7 @@ const SignUpScreen5 = ({ navigation }) => {
               <InputCadastro
                 styleContainer={{ width: "45%" }}
                 text={cidade}
-                func={(value) => {
+                func={(value: any) => {
                   handleCidade(value);
                   if (!!error) setError(null);
                 }}

@@ -3,7 +3,7 @@ import { Image } from "react-native";
 
 import { Buffer } from "buffer";
 
-const ImagemBuffer = ({ imgBuffer, style }) => {
+const ImagemBuffer = ({ imgBuffer, style }: any) => {
   const base64 = imgBuffer
     ? Buffer.from(imgBuffer, "binary").toString("base64")
     : null;

@@ -1,14 +1,11 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { API_URL } from "../../../configs";
 import {
   ErrorResponse,
   UpdateUserResponse,
   UserResponse,
   updateSenhaDTO,
 } from "./dto/requestDTO";
-import { Buffer } from "buffer";
-
-import { useContext } from "react";
+import { API_URL } from "../../../configs";
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
   if (error.response) {
@@ -109,7 +106,7 @@ export const getUser = async (token: string): Promise<any> => {
   return user;
 };
 
-export const uploadImagemUser = async (dto, token) => {
+export const uploadImagemUser = async (dto: any, token: any) => {
   const url = `${API_URL}/user/image`;
   try {
     const data = { dto };
@@ -123,7 +120,7 @@ export const uploadImagemUser = async (dto, token) => {
     const response = await axios.post(url, data, options);
     // return response;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 export const enviarEmailForgot = async (dto: {

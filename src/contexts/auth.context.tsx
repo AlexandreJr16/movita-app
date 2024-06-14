@@ -20,7 +20,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
 
 export const AuthProvider = ({ children }: { children: any }) => {
-  const [user, setUser] = useState<User | null>();
+  const [user, setUser] = useState<any>();
   const [token, setToken] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [signupUser, setSignupUser] = useState<signupUser>({} as signupUser);

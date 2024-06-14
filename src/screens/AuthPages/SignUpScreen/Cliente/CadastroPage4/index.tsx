@@ -13,16 +13,20 @@ import AuthContext from "../../../../../contexts/auth.context";
 import { sexoArr, meses } from "../../data";
 import styles from "../../styles";
 
-const SignUpScreen4 = ({ navigation }) => {
+const SignUpScreen4 = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
 
   const { loading } = useContext(AuthContext);
 
-  const [error, setError] = useState(null);
-  const handleDia = (value) => setSignupUser({ ...signupUser, dia: value });
-  const handleMes = (value) => setSignupUser({ ...signupUser, mes: value });
-  const handleAno = (value) => setSignupUser({ ...signupUser, ano: value });
-  const handleSexo = (value) => setSignupUser({ ...signupUser, sexo: value });
+  const [error, setError] = useState<any>(null);
+  const handleDia = (value: any) =>
+    setSignupUser({ ...signupUser, dia: value });
+  const handleMes = (value: any) =>
+    setSignupUser({ ...signupUser, mes: value });
+  const handleAno = (value: any) =>
+    setSignupUser({ ...signupUser, ano: value });
+  const handleSexo = (value: any) =>
+    setSignupUser({ ...signupUser, sexo: value });
   const handleSubmit = () => {
     const isError =
       signupUser.sexo == undefined ||
@@ -75,7 +79,7 @@ const SignUpScreen4 = ({ navigation }) => {
           <View style={styles.inputContainer}>
             <DropDCadastro
               data={sexoArr}
-              func={(value) => {
+              func={(value: any) => {
                 handleSexo(value);
                 if (!!error) setError(null);
               }}
@@ -112,7 +116,7 @@ const SignUpScreen4 = ({ navigation }) => {
               }}
             >
               <InputCadastro
-                func={(value) => {
+                func={(value: any) => {
                   handleDia(value);
                   if (!!error) setError(null);
                 }}
@@ -122,7 +126,7 @@ const SignUpScreen4 = ({ navigation }) => {
               ></InputCadastro>
               <DropDCadastro
                 text={signupUser.mes}
-                func={(value) => {
+                func={(value: any) => {
                   handleMes(value);
                   if (!!error) setError(null);
                 }}
@@ -131,7 +135,7 @@ const SignUpScreen4 = ({ navigation }) => {
                 styleContainer={{ width: "30%" }}
               />
               <InputCadastro
-                func={(value) => {
+                func={(value: any) => {
                   handleAno(value);
                   if (!!error) setError(null);
                 }}

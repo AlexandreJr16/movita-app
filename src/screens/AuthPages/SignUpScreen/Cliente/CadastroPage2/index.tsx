@@ -11,14 +11,15 @@ import LoginButton from "../../../../../components/Login/LoginButton/LoginButton
 import AuthContext from "../../../../../contexts/auth.context";
 import styles from "../../styles";
 
-const SignUpScreen2 = ({ navigation }) => {
+const SignUpScreen2 = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
 
   const { loading } = useContext(AuthContext);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null);
 
-  const handleEmail = (value) => setSignupUser({ ...signupUser, email: value });
-  const handleTelefone = (value) =>
+  const handleEmail = (value: any) =>
+    setSignupUser({ ...signupUser, email: value });
+  const handleTelefone = (value: any) =>
     setSignupUser({ ...signupUser, telefone: value });
   const handleSubmit = () => {
     const isError =
@@ -72,7 +73,7 @@ const SignUpScreen2 = ({ navigation }) => {
               inputMode={"email"}
               styleContainer={{ width: "100%" }}
               text={signupUser.email}
-              func={(value) => {
+              func={(value: any) => {
                 handleEmail(value);
                 if (!!error) setError(null);
               }}
@@ -84,7 +85,7 @@ const SignUpScreen2 = ({ navigation }) => {
               inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
               text={signupUser.telefone}
-              func={(value) => {
+              func={(value: any) => {
                 handleTelefone(value);
                 if (!!error) setError(null);
               }}

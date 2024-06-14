@@ -23,31 +23,59 @@ interface Local {
   street: string;
 }
 
-const UpdatePerfil = ({ navigation }) => {
+const UpdatePerfil = ({ navigation }: any) => {
   const { user, loading } = useContext(AuthContext);
   const { updateUser } = useContext(UserContext);
 
   //Set de use states para cada input da página
   //Passível de futuras atualizações com alguma dependencia que diminua a quantidade de use states e deixe o código mais limpo
-  const [text, setText] = useState(null);
-  const [nome, setNome] = useState<string>(
-    user.tipoUser == "empresa"
-      ? user.Empresa[0].nomeFantasia
-      : user.Cliente[0].nome
+  const [text, setText] = useState<any>(null);
+  const [nome, setNome] = useState<any>(() => {
+    if (user) {
+      if (
+        user.tipoUser === "empresa" &&
+        user.Empresa &&
+        user.Empresa.length > 0
+      ) {
+        return user.Empresa[0]?.nomeFantasia || "";
+      } else if (user.Cliente && user.Cliente.length > 0) {
+        return user.Cliente[0]?.nome || "";
+      }
+    }
+    return ""; // Default value if user or required properties are not defined
+  });
+  const [email, setEmail] = useState<any>(user?.email ?? "");
+  const [telefone, setTelefone] = useState<any>(
+    user && user.tipoUser === "empresa"
+      ? user.Empresa && user.Empresa.length > 0
+        ? user.Empresa[0]?.telefone || ""
+        : ""
+      : user && user.Cliente && user.Cliente.length > 0
+      ? user.Cliente[0]?.telefone || ""
+      : ""
   );
-  const [email, setEmail] = useState<string>(user.email);
-  const [telefone, setTelefone] = useState<string>(
-    user.tipoUser == "empresa"
-      ? user.Empresa[0].telefone
-      : user.Cliente[0].telefone
+
+  const [endereco, setEndereco] = useState<any>(
+    user && user.tipoUser === "empresa"
+      ? user.Empresa && user.Empresa.length > 0 && user.Empresa[0]?.Endereco
+        ? `${user.Empresa[0].Endereco.cep}` || ""
+        : ""
+      : user &&
+        user.Cliente &&
+        user.Cliente.length > 0 &&
+        user.Cliente[0]?.Endereco
+      ? `${user.Cliente[0].Endereco.cep}` || ""
+      : ""
   );
-  const [endereco, setEndereco] = useState<string>(
-    user.tipoUser == "empresa"
-      ? `${user.Empresa[0].Endereco.cep}`
-      : `${user.Cliente[0].Endereco.cep}`
-  );
-  const [cpf, setCpf] = useState(
-    user.tipoUser == "empresa" ? user.Empresa[0].cnpj : user.Cliente[0].cpf
+
+  const [cpf, setCpf] = useState<any>(
+    user?.tipoUser === "empresa"
+      ? user?.Empresa
+        ? user.Empresa[0]?.cnpj
+        : undefined
+      : user?.Cliente && user.Cliente.length > 0
+      ? user.Cliente[0]?.cpf
+      : undefined
   );
 
   //handle de cada useState
@@ -91,7 +119,7 @@ const UpdatePerfil = ({ navigation }) => {
       !emailRegex.test(email)
     ) {
       console.log("Campos inválidos");
-    } else if (user.tipoUser == "empresa") {
+    } else if (user?.tipoUser == "empresa") {
       //Se o usuário for empresa cria um objeto que será enviado para a api
       const dto = {
         email,
@@ -121,7 +149,7 @@ const UpdatePerfil = ({ navigation }) => {
       else {
         //Tratamento de erro ao update
       }
-    } else if (user.tipoUser == "cliente") {
+    } else if (user?.tipoUser == "cliente") {
       //Objeto de updateno caso de cliente
       const dto = {
         email,
@@ -165,35 +193,35 @@ const UpdatePerfil = ({ navigation }) => {
           <TitleTextPerfil>Detalhes da conta</TitleTextPerfil>
           <InputPerfil
             title="Nome:"
-            func={(value) => {
+            func={(value: any) => {
               handleNome(value);
             }}
             value={nome}
           />
           <InputPerfil
             title="E-mail:"
-            func={(value) => {
+            func={(value: any) => {
               handleEmail(value);
             }}
             value={email}
           />
           <InputPerfil
             title="Telefone:"
-            func={(value) => {
+            func={(value: any) => {
               handleTelefone(value);
             }}
             value={telefone}
           />
           <InputPerfil
             title="CEP:"
-            func={(value) => {
+            func={(value: any) => {
               handleEndereco(value);
             }}
             value={endereco}
           />
           <InputPerfil
             title="CPF/CNPJ:"
-            func={(value) => {
+            func={(value: any) => {
               handleCpf(value);
             }}
             value={cpf}

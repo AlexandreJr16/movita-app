@@ -25,12 +25,12 @@ export default function MessageComponent({
 }) {
   const { user } = useContext(AuthContext);
   const nome =
-    user.tipoUser == "empresa"
+    user?.tipoUser == "empresa"
       ? user.Empresa[0].nomeFantasia
       : user.Cliente[0].nome;
   const status = item.userName !== nome;
 
-  const arrayBufferToBase64 = (arrayBuffer) => {
+  const arrayBufferToBase64 = (arrayBuffer: any) => {
     const base64 = arrayBuffer
       ? Buffer.from(arrayBuffer, "binary").toString("base64")
       : null;

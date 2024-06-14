@@ -40,7 +40,7 @@ const HeaderPerfil = ({
         <Logo color={color}></Logo>
       </Pressable>
       {visiblePerfil ? (
-        <ImagemBuffer imgBuffer={user.imagem} style={styles.img} />
+        <ImagemBuffer imgBuffer={user?.imagem} style={styles.img} />
       ) : (
         ""
       )}

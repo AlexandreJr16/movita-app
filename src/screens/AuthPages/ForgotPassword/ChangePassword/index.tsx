@@ -16,9 +16,9 @@ const ChangePasswordForgot = ({
 }) => {
   const { email } = route.params;
   const { updateSenhaForgot } = useContext(AuthContext);
-  const [error, setError] = useState();
-  const [senha, setSenha] = useState();
-  const [confirmSenha, setConfirmSenha] = useState();
+  const [error, setError] = useState<any>();
+  const [senha, setSenha] = useState<any>();
+  const [confirmSenha, setConfirmSenha] = useState<any>();
 
   const handleSenha = (value: any) => {
     setSenha(value);

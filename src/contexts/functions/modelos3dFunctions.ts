@@ -1,3 +1,4 @@
+import { SetStateAction } from "react";
 import * as auth from "../../service/index";
 
 /**
@@ -9,11 +10,11 @@ import * as auth from "../../service/index";
  * @returns {Promise<any>} - Promessa que resolve para a resposta da adição do modelo.
  */
 export const addModelo = async (
-  modeloBin,
-  projetoId,
-  nome,
-  token,
-  setLoading
+  modeloBin: string,
+  projetoId: number,
+  nome: string,
+  token: string | undefined,
+  setLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void }
 ) => {
   try {
     // Define o carregamento como true enquanto adiciona o modelo
@@ -30,7 +31,7 @@ export const addModelo = async (
   } catch (error) {
     // Em caso de erro, define o carregamento como false e relança o erro
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);

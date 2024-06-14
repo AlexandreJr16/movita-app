@@ -20,25 +20,37 @@ type ImageInfo = {
 const ShowPerfil = () => {
   const { user } = useContext(AuthContext);
   const { addImageUser } = useContext(UserContext);
-  const [visible, setVisible] = useState(false);
-  const [name, setName] = useState<string>();
-  const [cpf, setCpf] = useState<string>();
-  const [endereco, setEndereco] = useState<string>();
+  const [visible, setVisible] = useState<any>(false);
+  const [name, setName] = useState<any>();
+  const [cpf, setCpf] = useState<any>();
+  const [endereco, setEndereco] = useState<any>();
 
   useEffect(() => {
     const name =
-      user.tipoUser == "empresa"
-        ? user.Empresa[0].nomeFantasia
-        : user.Cliente[0].nome;
+      user?.tipoUser === "empresa"
+        ? user?.Empresa && user?.Empresa[0]
+          ? user?.Empresa[0].nomeFantasia
+          : ""
+        : user?.Cliente && user?.Cliente[0]
+        ? user?.Cliente[0].nome
+        : "";
+
     const cpf =
-      user.tipoUser == "empresa" ? user.Empresa[0].cnpj : user.Cliente[0].cpf;
+      user?.tipoUser === "empresa"
+        ? user?.Empresa && user?.Empresa[0]
+          ? user?.Empresa[0].cnpj
+          : ""
+        : user?.Cliente && user?.Cliente[0]
+        ? user?.Cliente[0].cpf
+        : "";
+
     const endereco =
-      user.tipoUser == "empresa"
-        ? null
-          ? `${user.Empresa[0].Endereco.cidade} - ${user.Empresa[0].Endereco.estado}`
+      user?.tipoUser === "empresa"
+        ? user?.Empresa && user?.Empresa[0] && user?.Empresa[0].Endereco
+          ? `${user?.Empresa[0].Endereco.cidade} - ${user?.Empresa[0].Endereco.estado}`
           : null
-        : user.Cliente[0].Endereco.cidade && user.Cliente[0].Endereco.estado
-        ? `${user.Cliente[0].Endereco.cidade} - ${user.Cliente[0].Endereco.estado}`
+        : user?.Cliente && user?.Cliente[0] && user?.Cliente[0].Endereco
+        ? `${user?.Cliente[0].Endereco.cidade} - ${user?.Cliente[0].Endereco.estado}`
         : null;
     setEndereco(endereco);
     setName(name);
@@ -51,7 +63,7 @@ const ShowPerfil = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
-        {user.imagem ? (
+        {user?.imagem ? (
           <ImagemBuffer imgBuffer={user.imagem} style={styles.img} />
         ) : (
           <UserDefault />
@@ -62,7 +74,7 @@ const ShowPerfil = () => {
           {name}
         </Texto>
         <Texto weight="regular" style={styles.subtitle}>
-          {user.email}
+          {user?.email}
         </Texto>
         <Texto weight="regular" style={styles.subtitle}>
           {cpf}

@@ -11,7 +11,7 @@ const ShowProductsCarousel = ({
   color = "#fff",
   title = "Outros",
   loading = false,
-}) => {
+}: any) => {
   return (
     <View style={styles.container}>
       {loading ? (
@@ -50,7 +50,7 @@ const ShowProductsCarousel = ({
                 width: "100%",
               }}
             >
-              {produtos.map((item, i) => (
+              {produtos.map((item: { id: any }, i: any) => (
                 <Produto
                   key={`${item.id}-${i}`}
                   color={color}

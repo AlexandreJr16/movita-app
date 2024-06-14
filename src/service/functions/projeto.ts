@@ -120,8 +120,8 @@ export const getFavProject = async (token: string): Promise<any> => {
 };
 
 export const addImageProj = async (
-  token: string,
-  dto: { bin: any; id: number }
+  token?: string,
+  dto?: { bin?: any; id?: number }
 ): Promise<any> => {
   const url = `${API_URL}/projeto/imagem`;
   const options = {

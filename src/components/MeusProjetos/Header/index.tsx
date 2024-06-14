@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, Image, TextInput, TouchableOpacity } from "react-native";
-import Logo from "../../Default/Logo/Logo";
+import React, { useContext } from "react";
+import { View } from "react-native";
 import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import AuthContext from "../../../contexts/auth.context";
-import { Buffer } from "buffer";
-import ImagemBuffer from "../../Default/Imagem";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 import HeaderPerfil from "../../Perfil/HeaderPerfil";
 import FiltroBlue from "../../../assents/MeusProjetos/FiltroBlue";
 import FiltroRed from "../../../assents/MeusProjetos/FiltroRed";

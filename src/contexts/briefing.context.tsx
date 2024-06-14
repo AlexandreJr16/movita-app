@@ -23,17 +23,17 @@ export type UpdateBriefingDTO = {
 };
 
 type BriefingContextData = {
-  findBriefing(id: number);
-  updateBriefing(id: number, dto: UpdateBriefingDTO);
+  findBriefing: (id: number) => any;
+  updateBriefing: (id?: number, dto?: UpdateBriefingDTO | any) => any;
 };
 const BriefingContext = createContext({} as BriefingContextData);
 
-export const BriefingProvider = ({ children }) => {
+export const BriefingProvider = ({ children }: any) => {
   const { token, setLoading } = useContext(AuthContext);
   const findBriefing = async (id: number) => {
     return await briefingFuncs.findBriefing(id);
   };
-  const updateBriefing = async (id: number, dto: UpdateBriefingDTO) => {
+  const updateBriefing = async (id?: number, dto?: UpdateBriefingDTO) => {
     return await briefingFuncs.updateBriefing(id, dto);
   };
 

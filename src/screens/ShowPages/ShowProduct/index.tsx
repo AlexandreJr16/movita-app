@@ -43,7 +43,7 @@ type Projeto = {
   ];
 };
 
-const ShowProduct = ({ route, navigation }) => {
+const ShowProduct = ({ route, navigation }: any) => {
   const id = route.params.id;
   const color = route.params.color;
 
@@ -58,7 +58,7 @@ const ShowProduct = ({ route, navigation }) => {
   const [liked, setLiked] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
 
-  const userId = user.id;
+  const userId = user?.id;
 
   //Apenas faz o handle da visibilidade do modal de Get Imagem
   const imagePicker = () => (visible ? setVisible(false) : setVisible(true));
@@ -67,7 +67,7 @@ const ShowProduct = ({ route, navigation }) => {
   const fetchData = async () => {
     try {
       const proj = await getProject(id);
-      proj.Like.map((liked) => {
+      proj.Like.map((liked: { userId: number | undefined }) => {
         if (liked.userId == userId) setLiked(true);
       });
       setProjeto(proj);
@@ -83,16 +83,16 @@ const ShowProduct = ({ route, navigation }) => {
 
   //Função usada para enviar imagens
   const uploadImage = (bin: any) => {
-    const data = { bin, id: projeto.id };
+    const data = { bin, id: projeto?.id };
     addImageProj(data);
   };
 
   //Função para adicionar like
-  const addLike = (value) => {
+  const addLike = (value: number) => {
     likeProject(value);
   };
   //Função para deletar like
-  const deleteLike = (value) => {
+  const deleteLike = (value: number) => {
     deleteLikeProject(value);
   };
 

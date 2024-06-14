@@ -1,10 +1,9 @@
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FlatList, StatusBar, View } from "react-native";
 import HeaderMyProduct from "../../../../components/MeusProjetos/Header";
 import styles from "../styles";
 import Texto from "../../../../components/Default/texto/Texto";
-import ChatComponent from "../../../../components/Chat/ChatComponent";
-import socket from "../../../../utils/socket";
+
 import AddContatoComponent from "../../../../components/Chat/AddContato";
 import AuthContext from "../../../../contexts/auth.context";
 import VitaNotFound from "../../../../assents/Vita/VitaNotFound";

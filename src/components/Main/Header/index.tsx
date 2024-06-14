@@ -37,7 +37,7 @@ const HeaderMain = ({ navigation }: { navigation: any }) => {
             SEJA BEM-VINDO AO MOVITA
           </Texto>
         </View>
-        {user.imagem ? (
+        {user?.imagem ? (
           <ImagemBuffer imgBuffer={user.imagem} style={styles.img} />
         ) : null}
       </View>

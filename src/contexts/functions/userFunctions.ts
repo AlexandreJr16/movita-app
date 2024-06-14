@@ -1,5 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as auth from "../../service/index";
+import { ClienteDTO } from "../dto/cliente.dto";
+import EmpresaDTO from "../dto/empresa.dto";
+import EnderecoDTO from "../dto/endereco.dto";
 
 /**
  * Obtém informações do usuário usando o token de autenticação.
@@ -7,7 +10,11 @@ import * as auth from "../../service/index";
  * @param {Function} setUser - Função para definir as informações do usuário no estado.
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  */
-export const getUser = async (token, setUser, setLoading) => {
+export const getUser = async (
+  token: string,
+  setUser: { (): any; (arg0: any): void },
+  setLoading: { (): any; (arg0: boolean): void }
+) => {
   try {
     // Define o carregamento como true enquanto obtém as informações do usuário
     setLoading(true);
@@ -37,7 +44,22 @@ export const getUser = async (token, setUser, setLoading) => {
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para a resposta da atualização do usuário.
  */
-export const updateUser = async (dto, token, getUser, setLoading) => {
+export const updateUser = async (
+  dto: {
+    email?: string;
+    Cliente?: ClienteDTO[] | undefined;
+    Empresa?: EmpresaDTO | EmpresaDTO[] | undefined;
+    Endereco?: EnderecoDTO | undefined;
+    tipoUser?: "empresa" | "cliente";
+    user?: any;
+    cliente?: any;
+    empresa?: any;
+    endereco?: any;
+  },
+  token: string,
+  getUser: { (token: string): Promise<void>; (arg0: any): any },
+  setLoading: { (): any; (arg0: boolean): void }
+) => {
   try {
     // Define o carregamento como true enquanto atualiza as informações do usuário
     setLoading(true);
@@ -53,7 +75,7 @@ export const updateUser = async (dto, token, getUser, setLoading) => {
   } catch (error) {
     // Em caso de erro, define o carregamento como false e lança uma exceção
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -67,7 +89,11 @@ export const updateUser = async (dto, token, getUser, setLoading) => {
  * @param {Function} setLoading - Função para definir o estado de carregamento.
  * @returns {Promise<any>} - Promessa que resolve para a resposta da atualização da senha do usuário.
  */
-export const updateSenha = async (dto, token, setLoading) => {
+export const updateSenha = async (
+  dto: { senhaAtual: string; novaSenha: string; confirmSenha: string },
+  token: string,
+  setLoading: { (): any; (arg0: boolean): void }
+) => {
   try {
     // Define o carregamento como true enquanto atualiza a senha do usuário
     setLoading(true);
@@ -80,7 +106,7 @@ export const updateSenha = async (dto, token, setLoading) => {
   } catch (error) {
     // Em caso de erro, define o carregamento como false e lança uma exceção
     setLoading(false);
-    throw new Error(error);
+    console.log(error);
   } finally {
     // Garante que o carregamento seja definido como false independentemente do sucesso ou falha
     setLoading(false);
@@ -99,9 +125,9 @@ export const updateSenha = async (dto, token, setLoading) => {
  */
 export async function addImageUser(
   dto: any,
-  token,
-  setLoading,
-  getUser
+  token: string,
+  setLoading: () => any,
+  getUser: { (token: string): Promise<void>; (arg0: any): any }
 ): Promise<any> {
   try {
     // Chama o serviço de autenticação para adicionar a imagem ao perfil do usuário
@@ -111,7 +137,7 @@ export async function addImageUser(
     await getUser(token);
   } catch (error) {
     // Em caso de erro, lança uma exceção
-    throw new Error(error);
+    console.log(error);
   } finally {
     // O bloco `finally` é opcional e pode ser omitido se não houver código a ser executado após o bloco `try` ou `catch`
     // Pode ser usado para código que precisa ser executado independentemente de ocorrer uma exceção ou não
