@@ -8,9 +8,9 @@ const BriefingComponent = ({
   navigation,
 }: {
   briefing: {
-    id: number;
-    answered: boolean;
-    title: string;
+    id?: number;
+    answered?: boolean;
+    title?: string;
 
     question: [{ text: string; response: string }];
   };
@@ -122,7 +122,7 @@ const BriefingComponent = ({
               Briefing Novo
             </Texto>
           </View>
-          <TouchableOpacity
+          <Pressable
             onPress={() => {
               navigation.navigate("BriefingRespond", { briefingId: id });
             }}
@@ -142,7 +142,7 @@ const BriefingComponent = ({
             >
               Responder Briefing
             </Texto>
-          </TouchableOpacity>
+          </Pressable>
         </React.Fragment>
       )}
     </View>
