@@ -41,11 +41,11 @@ export const signIn = async (
         value: response.token,
         expirationInMinutes: 1000 * 60 * 60 * 1,
       });
-      const user = await authService.getUser(response.token);
-      if (user)
+      const userGetted = await authService.getUser(response.token);
+      if (userGetted)
         await setItemWithExpiration({
           key: "@RNAuth:user",
-          value: JSON.stringify(user),
+          value: userGetted,
           expirationInMinutes: 1000 * 60 * 60 * 1,
         });
     }

@@ -108,7 +108,7 @@ export const getUser = async (token: string): Promise<any> => {
 
   setItemWithExpiration({
     key: "@RNAuth:user",
-    value: JSON.stringify(user),
+    value: user,
     expirationInMinutes: 1000 * 60 * 60 * 1,
   });
 

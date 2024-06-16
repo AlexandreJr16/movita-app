@@ -35,7 +35,6 @@ const getItemWithExpiration = async (key: string) => {
     if (!itemString) {
       return null;
     }
-
     const item = JSON.parse(itemString);
     const currentTime = new Date().getTime();
 

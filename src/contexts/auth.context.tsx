@@ -33,17 +33,15 @@ export const AuthProvider = ({ children }: { children: any }) => {
       const storageToken = await getItemWithExpiration("@RNAuth:token");
       const storageUser = await getItemWithExpiration("@RNAuth:user");
 
-      const user = storageUser ? JSON.parse(storageUser).value : null;
-
-      console.log({ storageToken, user });
+      // console.log({ storageToken, storageUser });
       if (storageToken) {
         //Set do Token e User
         setToken(storageToken);
-        if (!user) {
+        if (!storageUser) {
           const userResponse = await getUser(storageToken);
           setUser(userResponse);
           console.log("USER PEGO DA API");
-        } else setUser(user);
+        } else setUser(storageUser);
       }
     } catch (e) {
     } finally {
