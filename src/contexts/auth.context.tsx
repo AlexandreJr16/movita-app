@@ -30,12 +30,18 @@ export const AuthProvider = ({ children }: { children: any }) => {
     try {
       //Get dos dados guardados localmente relacionados ao Token e ao user
       const storageToken = await AsyncStorage.getItem("@RNAuth:token");
+      const storageUser = await AsyncStorage.getItem("@RNAuth:user");
+      const user = storageUser ? JSON.parse(storageUser) : null;
 
+      // console.log({ storageToken, user });
       if (storageToken) {
         //Set do Token e User
         setToken(storageToken);
-        const user = await getUser(storageToken);
-        setUser(user);
+        if (!user) {
+          const userResponse = await getUser(storageToken);
+          setUser(userResponse);
+          console.log("USER PEGO DA API");
+        } else setUser(user);
       }
     } catch (e) {
     } finally {

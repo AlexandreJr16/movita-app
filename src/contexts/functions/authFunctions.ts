@@ -36,7 +36,9 @@ export const signIn = async (
       setToken(response.token);
       setUser(response.user);
       await AsyncStorage.setItem("@RNAuth:token", response.token);
-      await authService.getUser(response.token);
+      const user = await authService.getUser(response.token);
+      if (user)
+        await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(user));
     }
     return response;
   } catch (error) {

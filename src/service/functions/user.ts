@@ -6,6 +6,7 @@ import {
   updateSenhaDTO,
 } from "./dto/requestDTO";
 import { API_URL } from "../../../configs";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
   if (error.response) {
@@ -103,6 +104,9 @@ export const getUser = async (token: string): Promise<any> => {
     .catch((error: AxiosError<ErrorResponse>) => {
       handleApiError(error);
     });
+
+  await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(user));
+
   return user;
 };
 

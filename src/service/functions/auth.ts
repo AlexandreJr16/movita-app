@@ -31,14 +31,19 @@ export const signIn = async (
     },
   };
 
-  const response = await axios
-    .post(url, data, options)
-    .then((resp) => resp.data)
-    .catch((error: AxiosError<ErrorResponse>) => {
-      return { message: error };
-    });
+  try {
+    const response = await axios
+      .post(url, data, options)
+      .then((resp) => resp.data)
+      .catch((error: AxiosError<ErrorResponse>) => {
+        return { message: error };
+      });
 
-  return response;
+    return response;
+  } catch {
+    console.log("Erro no login");
+    return { status: "bad", message: "Login failed" };
+  }
 };
 
 export async function signUp({
