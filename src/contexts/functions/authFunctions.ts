@@ -3,6 +3,7 @@ import { SetStateAction } from "react";
 import * as authService from "../../service/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "../dto/user.dto";
+import { setItemWithExpiration } from "../../utils/storageWithExpiration";
 
 //SIM, IHAGO, EU DEIXEI O CHAT GPT COMENTAR PRA MIM
 
@@ -35,10 +36,18 @@ export const signIn = async (
     if (response.token) {
       setToken(response.token);
       setUser(response.user);
-      await AsyncStorage.setItem("@RNAuth:token", response.token);
+      await setItemWithExpiration({
+        key: "@RNAuth:token",
+        value: response.token,
+        expirationInMinutes: 1000 * 60 * 60 * 1,
+      });
       const user = await authService.getUser(response.token);
       if (user)
-        await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(user));
+        await setItemWithExpiration({
+          key: "@RNAuth:user",
+          value: JSON.stringify(user),
+          expirationInMinutes: 1000 * 60 * 60 * 1,
+        });
     }
     return response;
   } catch (error) {
@@ -57,7 +66,8 @@ export const logout = async (setUser: {
   (arg0: null): void;
 }) => {
   try {
-    await AsyncStorage.clear();
+    await AsyncStorage.removeItem("@RNAuth:user");
+    await AsyncStorage.removeItem("@RNAuth:token");
     setUser(null);
   } catch (error) {
     console.error("Erro no logout:", error);

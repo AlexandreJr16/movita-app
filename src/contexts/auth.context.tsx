@@ -15,6 +15,7 @@ import * as empresas from "./functions/empresaFunction";
 import { SignInResponse } from "./dto/signInResponse.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
 import { getUser } from "../service";
+import { getItemWithExpiration } from "../utils/storageWithExpiration";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 SplashScreen.preventAutoHideAsync();
@@ -29,11 +30,12 @@ export const AuthProvider = ({ children }: { children: any }) => {
   async function loadStorageData() {
     try {
       //Get dos dados guardados localmente relacionados ao Token e ao user
-      const storageToken = await AsyncStorage.getItem("@RNAuth:token");
-      const storageUser = await AsyncStorage.getItem("@RNAuth:user");
-      const user = storageUser ? JSON.parse(storageUser) : null;
+      const storageToken = await getItemWithExpiration("@RNAuth:token");
+      const storageUser = await getItemWithExpiration("@RNAuth:user");
 
-      // console.log({ storageToken, user });
+      const user = storageUser ? JSON.parse(storageUser).value : null;
+
+      console.log({ storageToken, user });
       if (storageToken) {
         //Set do Token e User
         setToken(storageToken);

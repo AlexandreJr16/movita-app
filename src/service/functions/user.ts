@@ -7,6 +7,7 @@ import {
 } from "./dto/requestDTO";
 import { API_URL } from "../../../configs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setItemWithExpiration } from "../../utils/storageWithExpiration";
 
 const handleApiError = (error: AxiosError<ErrorResponse>) => {
   if (error.response) {
@@ -105,7 +106,13 @@ export const getUser = async (token: string): Promise<any> => {
       handleApiError(error);
     });
 
-  await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(user));
+  setItemWithExpiration({
+    key: "@RNAuth:user",
+    value: JSON.stringify(user),
+    expirationInMinutes: 1000 * 60 * 60 * 1,
+  });
+
+  // await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(user));
 
   return user;
 };
