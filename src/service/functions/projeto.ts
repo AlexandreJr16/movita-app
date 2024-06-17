@@ -1,5 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { API_URL } from "../../../configs";
+import {
+  getItemWithExpiration,
+  setItemWithExpiration,
+} from "../../utils/storageWithExpiration";
 
 export const createProjeto = async (dto: {
   users: { user1: number; user2: number };
@@ -46,8 +50,20 @@ export const getTopProjects = async (num: number): Promise<any> => {
   };
 
   try {
-    const response = await axios.get(url, options);
-    return response.data;
+    const responseProjetoStorage = await getItemWithExpiration(
+      "@RNAuth:topProjetos"
+    );
+    if (responseProjetoStorage) {
+      return responseProjetoStorage;
+    } else {
+      const response = await axios.get(url, options);
+      await setItemWithExpiration({
+        key: "@RNAuth:topProjetos",
+        value: response.data,
+        expirationInMinutes: 1000 * 60 * 60 * 1,
+      });
+      return response.data;
+    }
   } catch (error) {
     throw error;
   }

@@ -10,6 +10,7 @@ import Carrossel from "../../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../../contexts/auth.context";
 import styles from "../../styles";
+import InputMaskedCadastro from "../../../../../components/Cadastro/MaskedInput/MaskedInput";
 
 const SignUpScreen2 = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
@@ -81,7 +82,8 @@ const SignUpScreen2 = ({ navigation }: any) => {
               Email:
             </InputCadastro>
 
-            <InputCadastro
+            <InputMaskedCadastro
+              masked={"(99) 99999-9999"}
               inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
               text={signupUser.telefone}
@@ -91,7 +93,7 @@ const SignUpScreen2 = ({ navigation }: any) => {
               }}
             >
               Telefone:
-            </InputCadastro>
+            </InputMaskedCadastro>
           </View>
 
           <LoginButton text={"Próximo"} func={handleSubmit} />

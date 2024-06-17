@@ -1,20 +1,38 @@
 import axios from "axios";
 import { API_URL } from "../../../configs";
+import {
+  getItemWithExpiration,
+  setItemWithExpiration,
+} from "../../utils/storageWithExpiration";
 
 export const getRandomEmpresas = async (num: number): Promise<any> => {
-  const url = `${API_URL}/empresa/getTop/${num}`;
+  const responseEmpresasStorage = await getItemWithExpiration(
+    "@RNAuth:randomEmpresas"
+  );
+  if (responseEmpresasStorage) {
+    console.log("Pegado do storage");
+    return responseEmpresasStorage;
+  } else {
+    console.log("Pegado da api");
+    const url = `${API_URL}/empresa/getTop/${num}`;
 
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-  try {
-    const response = await axios.get(url, options);
-    return response.data;
-  } catch (error) {
-    throw error;
+    try {
+      const response = await axios.get(url, options);
+      await setItemWithExpiration({
+        key: "@RNAuth:randomEmpresas",
+        value: response.data,
+        expirationInMinutes: 1000 * 60 * 60 * 1,
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
 };
 
