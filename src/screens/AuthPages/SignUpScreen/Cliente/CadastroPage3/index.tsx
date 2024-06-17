@@ -11,6 +11,7 @@ import ErrorAlert from "../../../../../components/ErrorAlert/ErrorAlert";
 import Carrossel from "../../../../../components/Login/Carrossel/Carrossel";
 import LoginButton from "../../../../../components/Login/LoginButton/LoginButton";
 import AuthContext from "../../../../../contexts/auth.context";
+import InputMaskedCadastro from "../../../../../components/Cadastro/MaskedInput/MaskedInput";
 
 const SignUpScreen3 = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
@@ -72,7 +73,8 @@ const SignUpScreen3 = ({ navigation }: any) => {
               justifyContent: "space-between",
             }}
           >
-            <InputCadastro
+            <InputMaskedCadastro
+              masked={"999.999.999-99"}
               inputMode={"numeric"}
               styleContainer={{ width: "100%" }}
               text={signupUser.cpf}
@@ -82,7 +84,7 @@ const SignUpScreen3 = ({ navigation }: any) => {
               }}
             >
               CPF/CNPJ:
-            </InputCadastro>
+            </InputMaskedCadastro>
           </View>
 
           <LoginButton text={"Próximo"} func={handleSubmit} />
