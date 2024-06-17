@@ -13,6 +13,7 @@ import AuthContext from "../../../contexts/auth.context";
 import ErrorAlert from "../../../components/ErrorAlert/ErrorAlert";
 import LoadingIndicator from "../../../components/Default/Loading";
 import Texto from "../../../components/Default/texto/Texto";
+import { User, LockSimple } from "phosphor-react-native";
 
 const Login = ({ navigation }: { navigation: any }) => {
   const { signIn, loading, signed } = useContext(AuthContext);
@@ -74,12 +75,12 @@ const Login = ({ navigation }: { navigation: any }) => {
         </View>
         <View style={styles.inputContainer}>
           <InputLogin
-            Icon={<UserIcon />}
+            Icon={<User color="#878787" size={32} />}
             placeholder="E-mail:"
             func={handleEmail}
           ></InputLogin>
           <InputLogin
-            Icon={<SecurityIcon />}
+            Icon={<LockSimple color="#878787" size={32} />}
             placeholder="Senha:"
             secureText={true}
             func={handlePassword}
