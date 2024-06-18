@@ -1,11 +1,11 @@
-import * as React from "react"
-import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
+import * as React from "react";
+import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg";
 
 function Plus(props) {
   return (
     <Svg
-      width={39}
-      height={39}
+      width={props.size ?? 39}
+      height={props.size ?? 39}
       viewBox="0 0 39 39"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ function Plus(props) {
         />
       </Defs>
     </Svg>
-  )
+  );
 }
 
-export default Plus
+export default Plus;

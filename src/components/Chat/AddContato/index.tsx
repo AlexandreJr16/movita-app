@@ -14,6 +14,7 @@ import socket from "../../../utils/socket";
 import ImagemBuffer from "../../Default/Imagem";
 import AuthContext from "../../../contexts/auth.context";
 import Texto from "../../Default/texto/Texto";
+import Plus from "../../../assents/Chat/plus";
 
 //DTO para a criação de sala de bate papo
 type createRoomDTO = {
@@ -80,7 +81,7 @@ const AddContatoComponent = ({
             style={styles.timeStyle}
             onPress={() => createRoom({ userId1: user?.id, userId2: id })}
           >
-            <Ionicons name="add" color={"#fff"} style={{ fontSize: 25 }} />
+            <Plus size={25} />
           </Pressable>
         </View>
       </View>

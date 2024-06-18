@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   chatscreen: {
     flex: 1,
-    backgroundColor: "#414141",
+    backgroundColor: "#2f2f2f",
   },
   header: {
     width: "100%",
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 30,
     right: 20,
-    backgroundColor: "#36A5BF",
+    backgroundColor: "#1966C0",
     padding: 5,
     borderRadius: 100,
   },
