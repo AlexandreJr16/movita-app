@@ -22,13 +22,11 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   nota: {
-    marginTop: 5,
     color: "#fff",
     fontSize: 13,
     textTransform: "uppercase",
     backgroundColor: "#1A6DCD",
     borderRadius: 6,
-    paddingHorizontal: 10,
   },
   status: {
     color: "#959595",

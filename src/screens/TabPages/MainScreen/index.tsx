@@ -44,7 +44,7 @@ export default function MainScreen({ navigation }: { navigation: any }) {
           <HeaderMain navigation={navigation} />
           <SelectCategory navigation={navigation} />
 
-          <React.Fragment>
+          <View style={styles.carrosselContainer}>
             <Suspense fallback={<ActivityIndicator />}>
               <ShowProductsCarousel
                 navigation={navigation}
@@ -68,7 +68,7 @@ export default function MainScreen({ navigation }: { navigation: any }) {
                 color={"#36A5BF"}
               />
             </Suspense>
-          </React.Fragment>
+          </View>
 
           {/* {loading && <ActivityIndicator size="large" color="#0000ff" />} */}
         </View>

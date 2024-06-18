@@ -4,6 +4,7 @@ import ImagemBuffer from "../../Default/Imagem";
 import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import DefaultMiniProjeto from "../../../assents/defaults/MiniProjeto";
+import { Star } from "phosphor-react-native";
 
 const Companies = ({
   produto,
@@ -41,17 +42,31 @@ const Companies = ({
             {produto.Endereco ? produto.Endereco : null}
           </Texto>
         </View>
-        <Texto weight="bold" style={styles.nota}>
-          {produto.nota ? ` ⭐ ${produto.nota}` : "⭐ 0"}
-        </Texto>
+        <View
+          style={{
+            ...styles.nota,
+            paddingHorizontal: 10,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+            gap: 5,
+            paddingVertical: 1,
+          }}
+        >
+          <Star size={20} color="#FFC501" weight="fill" />
+          <Texto weight="bold" style={styles.nota}>
+            {produto.nota ? produto.nota : " 0"}
+          </Texto>
+        </View>
       </View>
 
       <Texto weight="regular" style={styles.description} numberOfLines={1}>
-        {/* {produto.descricao} */}
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
+        {produto.descricao ??
+          ` Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
         exercitationem dolorum voluptates minima deserunt ut omnis vitae
         nostrum, cumque sit fuga maiores velit explicabo aut corporis quos, a
-        veniam iste!
+        veniam iste!`}
       </Texto>
     </TouchableOpacity>
   );

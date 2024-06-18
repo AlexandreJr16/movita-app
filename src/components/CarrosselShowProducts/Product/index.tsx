@@ -43,14 +43,14 @@ const Produto = ({
         {produto.titulo}
       </Texto>
       <Texto weight="regular" style={styles.status}>
-        {/* {produto.status} */}Cozinha
+        {produto.status ?? `Sem categoria`}
       </Texto>
       <Texto weight="regular" style={styles.description} numberOfLines={1}>
-        {/* {produto.descricao} */}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque in
+        {produto.descricao ??
+          `Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque in
         nam, ut asperiores pariatur cumque aperiam et rerum alias deleniti
         inventore quisquam sunt quae magni suscipit, nulla laborum voluptates
-        exercitationem!
+        exercitationem!`}
       </Texto>
     </TouchableOpacity>
   );

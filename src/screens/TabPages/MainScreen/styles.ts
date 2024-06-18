@@ -54,6 +54,14 @@ const styles = StyleSheet.create({
     height: 136,
     backgroundColor: "FF0000",
   },
+  carrosselContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    gap: 10,
+    paddingTop: 15,
+  },
 });
 
 export default styles;

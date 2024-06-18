@@ -3,6 +3,7 @@ import Texto from "../../Default/texto/Texto";
 import styles from "./styles";
 import React from "react";
 import StarFeedBack from "../../../assents/ShowItem/Start";
+import { Star } from "phosphor-react-native";
 
 const FeedBackShowProduct = ({
   feedback,
@@ -20,7 +21,7 @@ const FeedBackShowProduct = ({
     <View style={styles.feedbackContainer}>
       <View style={styles.topFeedback}>
         <View style={styles.notaContainer}>
-          <StarFeedBack />
+          <Star color="#fff" size={25} weight="fill" />
           <Texto weight="bold" style={styles.notaFont}>
             {feedback.nota}
           </Texto>
