@@ -17,7 +17,7 @@ const ProjetoMessage = ({
   projeto,
   users,
 }: {
-  projeto: {
+  projeto?: {
     id: number;
     title: string;
     detalhes: string;
@@ -34,8 +34,8 @@ const ProjetoMessage = ({
 
   const handleResponderProjeto = async (value: boolean) => {
     const dto: EnviarResposta = {
-      descricao: projeto.detalhes,
-      titulo: projeto.title,
+      descricao: projeto?.detalhes ?? "Sem descrição",
+      titulo: projeto?.title ?? "Sem título",
       users: users,
     };
     const response = await createProjeto(dto);

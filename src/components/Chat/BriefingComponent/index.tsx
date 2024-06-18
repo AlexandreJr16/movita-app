@@ -7,7 +7,7 @@ const BriefingComponent = ({
   briefing,
   navigation,
 }: {
-  briefing: {
+  briefing?: {
     id?: number;
     answered?: boolean;
     title?: string;
@@ -17,7 +17,7 @@ const BriefingComponent = ({
   navigation: any;
 }) => {
   const [visible, setVisible] = useState(false);
-  const { title, id } = briefing;
+
   return (
     <View
       style={{
@@ -28,7 +28,7 @@ const BriefingComponent = ({
         gap: 10,
       }}
     >
-      {briefing.answered ? (
+      {briefing?.answered ? (
         <View style={{ flex: 1, gap: 15 }}>
           <View
             style={{
@@ -116,7 +116,7 @@ const BriefingComponent = ({
             }}
           >
             <Texto weight="bold" style={{ fontSize: 18, color: "#fff" }}>
-              {title}
+              {briefing?.title}
             </Texto>
             <Texto weight="regular" style={{ fontSize: 14, color: "#989898" }}>
               Briefing Novo
@@ -124,7 +124,9 @@ const BriefingComponent = ({
           </View>
           <Pressable
             onPress={() => {
-              navigation.navigate("BriefingRespond", { briefingId: id });
+              navigation.navigate("BriefingRespond", {
+                briefingId: briefing?.id,
+              });
             }}
             style={{
               backgroundColor: "#238298",

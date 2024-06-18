@@ -91,7 +91,7 @@ const Messaging = ({ route, navigation }: any) => {
       scrollToBottom();
     };
 
-    socket.emit("findRoom", { roomId: itemParam.id, take: 5, skip: 0 });
+    socket.emit("findRoom", { roomId: itemParam.id, take: 15, skip: 0 });
     socket.on("foundRoom", handleFoundRoom);
 
     return () => {
@@ -102,7 +102,6 @@ const Messaging = ({ route, navigation }: any) => {
 
   useEffect(() => {
     const handleNewMessageReceived = (newMessage: MessageResponse) => {
-      console.log(newMessage);
       if (nome === newMessage.userName) return;
       setChatMessages((prevMessages) => [...prevMessages, newMessage]);
       scrollToBottom();
@@ -144,10 +143,6 @@ const Messaging = ({ route, navigation }: any) => {
       console.error("Erro ao buscar projetos:", error);
     }
   };
-
-  useEffect(() => {
-    fetchProjects();
-  }, [itemParam]);
 
   const handleNewImage = (imagem: Buffer) => {
     if (!imagem) return;

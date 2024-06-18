@@ -25,11 +25,10 @@ export default function MessageComponent({
 }) {
   const { user } = useContext(AuthContext);
   const nome = useMemo(() => {
-    return user.tipoUser === "empresa"
-      ? user.Empresa[0].nomeFantasia
-      : user.Cliente[0].nome;
+    return user?.tipoUser === "empresa"
+      ? user?.Empresa?.[0]?.nomeFantasia
+      : user?.Cliente?.[0]?.nome;
   }, [user]);
-
   const status = item.userName !== nome;
 
   const arrayBufferToBase64 = useMemo(() => {
@@ -66,7 +65,7 @@ export default function MessageComponent({
             )}
             {item.tipoMessage === "IMAGEM" && (
               <ImagemBuffer
-                imgBuffer={item.imagem}
+                imgBuffer={item?.imagem}
                 key={1}
                 style={{
                   width: "90%",
