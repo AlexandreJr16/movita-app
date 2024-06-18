@@ -12,9 +12,9 @@ import {
   ImageBackground,
   TouchableOpacity,
   FlatList,
+  ScrollView,
 } from "react-native";
 import { Buffer } from "buffer";
-import { ScrollView } from "react-native-gesture-handler";
 import SendMessage from "../../../../assents/Chat/SendMessage";
 import AddSource from "../../../../assents/Chat/addSoruce";
 import Arrow from "../../../../assents/Perfil/Arrow";
@@ -24,23 +24,23 @@ import TextoInput from "../../../../components/Default/texto/TextoInput";
 import AuthContext from "../../../../contexts/auth.context";
 import socket from "../../../../utils/socket";
 import styles from "./styles";
-import { MessageResponse, RoomResponse } from "..";
 import MessageComponent from "../../../../components/Chat/MessageComponent";
 import ImagePickerModal from "../../../../components/ImageModal";
 import ProjetoContext from "../../../../contexts/project.context";
 import FixedProjects from "../../../../components/Chat/ShowFixedProjects/FixedProjects";
+import { MessageResponse, RoomResponse } from "..";
 
 export type SendMessage = {
   texto?: string | null;
-  imagem?: any;
+  imagem?: Buffer | null;
   modelo3D?: Buffer | null;
-  userName?: string;
-  roomId?: number;
-  tipoMessage?: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING" | "PROJETO";
+  userName: string;
+  roomId: number;
+  tipoMessage: "TEXTO" | "IMAGEM" | "MODELO_3D" | "BRIEFING" | "PROJETO";
   briefing?: {
     title: string;
     answered: boolean;
-    question: [{ text: string; response: string }];
+    question: { text: string; response: string }[];
   };
   project?: {
     title: string;
@@ -55,15 +55,13 @@ export type ProjetosResponseType = {
   status: string;
   nota: number;
   imagem: Buffer[];
-
   contratanteId: number;
   fabricanteId: number;
-
   createdAt: string;
   updatedAt: string;
 };
 
-const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
+const Messaging = ({ route, navigation }: any) => {
   const { user } = useContext(AuthContext);
   const { findProjetoByUserCompany } = useContext(ProjetoContext);
   const scrollViewRef = useRef<ScrollView>(null);
@@ -72,35 +70,14 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
   const [visibleImagePicker, setVisibleImagePicker] = useState(false);
   const [visibleAnex, setVisibleAnex] = useState(false);
   const [projects, setProjects] = useState<ProjetosResponseType[]>([]);
-
-  // Texto sendo digitado
   const [message, setMessage] = useState("");
-
-  // Cor da barra de digitação
   const [variableColor, setVariableColor] = useState<string | null>("#5A5A5A");
 
   const nome =
     user?.tipoUser === "empresa"
       ? user?.Empresa && user.Empresa[0]?.nomeFantasia
       : user?.Cliente && user.Cliente[0]?.nome;
-
   const itemParam: RoomResponse = route.params;
-
-  const handleLastMessage = (text: string) => {
-    // Função não utilizada no código fornecido
-  };
-
-  // Função de digitação
-  const focusText = async () => {
-    setVariableColor(null);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    scrollToBottom();
-  };
-
-  // Função de sair da digitação
-  const blurText = async () => {
-    setVariableColor("#5A5A5A");
-  };
 
   const scrollToBottom = () => {
     if (scrollViewRef.current) {
@@ -108,7 +85,6 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
     }
   };
 
-  // Procurar bate-papos
   useEffect(() => {
     const handleFoundRoom = (roomChats: MessageResponse[]) => {
       setChatMessages(roomChats);
@@ -124,9 +100,9 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
     };
   }, [itemParam]);
 
-  // Receber mensagens
   useEffect(() => {
     const handleNewMessageReceived = (newMessage: MessageResponse) => {
+      console.log(newMessage);
       if (nome === newMessage.userName) return;
       setChatMessages((prevMessages) => [...prevMessages, newMessage]);
       scrollToBottom();
@@ -134,13 +110,12 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
 
     socket.on("newMessageReceived", handleNewMessageReceived);
 
-    return () => {
-      socket.off("newMessageReceived", handleNewMessageReceived);
-    };
+    // return () => {
+    //   socket.off("newMessageReceived", handleNewMessageReceived);
+    // };
   }, [nome]);
 
-  // Enviar nova mensagem
-  const handleNewMessage = () => {
+  const handleNewMessage = useCallback(() => {
     if (message === "") return;
 
     const newMessage: MessageResponse = {
@@ -154,15 +129,13 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
 
     setChatMessages((prevMessages) => [...prevMessages, newMessage]);
     socket.emit("newMessage", newMessage);
-
     setMessage("");
     scrollToBottom();
-  };
+  }, [message, nome, itemParam.id]);
 
-  // Pegar todos os itens associados
-  const handleGetProjectsByChat = async () => {
+  const fetchProjects = async () => {
     try {
-      const response: ProjetosResponseType[] = await findProjetoByUserCompany({
+      const response = await findProjetoByUserCompany({
         clienteId: itemParam.userId1,
         empresaId: itemParam.userId2,
       });
@@ -173,8 +146,8 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
   };
 
   useEffect(() => {
-    handleGetProjectsByChat();
-  }, []);
+    fetchProjects();
+  }, [itemParam]);
 
   const handleNewImage = (imagem: Buffer) => {
     if (!imagem) return;
@@ -192,9 +165,9 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
     socket.emit("newMessage", newMessage);
   };
 
-  // Enviar novo modelo 3D
   const handleNewModel = (modelo: Buffer) => {
     if (!modelo) return;
+
     const newMessage: MessageResponse = {
       tipoMessage: "MODELO_3D",
       modelo3D: modelo,
@@ -203,14 +176,14 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
       id: Math.random() * 3142142,
       createAt: new Date(),
     };
+
     socket.emit("newMessage", newMessage);
   };
 
-  // Enviar Projeto (Apenas teste)
   const picker = () => {
     const dto: SendMessage = {
       tipoMessage: "PROJETO",
-      userName: nome,
+      userName: nome ?? "",
       roomId: itemParam.id,
       project: { title: "OLA", detalhes: "ELE é bonito" },
     };
@@ -234,7 +207,6 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
           <FlatList
             data={chatMessages}
             keyExtractor={(item) => `${item.id}`}
-            inverted
             renderItem={({ item }) => (
               <MessageComponent
                 item={item}
@@ -288,7 +260,7 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
           <View
             style={{
               ...styles.messaginginputContainer,
-              backgroundColor: variableColor || undefined,
+              backgroundColor: variableColor || "#5A5A5A",
             }}
           >
             <View
@@ -307,16 +279,17 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
                   style={styles.messagingbuttonContainer}
                   onPress={() => {
                     setVisibleAnex(!visibleAnex);
-                    setTimeout(() => {
-                      scrollToBottom();
-                    }, 1000);
+                    setTimeout(scrollToBottom, 1000);
                   }}
                 >
                   <AddSource />
                 </TouchableOpacity>
                 <TextoInput
-                  onFocus={focusText}
-                  onBlur={blurText}
+                  onFocus={() => {
+                    setVariableColor(null);
+                    setTimeout(scrollToBottom, 500);
+                  }}
+                  onBlur={() => setVariableColor("#5A5A5A")}
                   weight="regular"
                   style={styles.inputMessage}
                   value={message}
@@ -345,15 +318,7 @@ const Messaging = ({ route, navigation }: { route: any; navigation: any }) => {
   );
 };
 
-export default Messaging;
-
-const HeaderChat = ({
-  navigation,
-  name,
-}: {
-  navigation: any;
-  name: string;
-}) => (
+const HeaderChat = ({ navigation, name }: any) => (
   <React.Fragment>
     <StatusBar barStyle="light-content" backgroundColor="#1f1f1f" />
     <View style={styles.header}>
@@ -367,3 +332,5 @@ const HeaderChat = ({
     </View>
   </React.Fragment>
 );
+
+export default Messaging;

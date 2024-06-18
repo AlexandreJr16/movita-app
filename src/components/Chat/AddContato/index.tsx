@@ -39,12 +39,16 @@ const AddContatoComponent = ({
   const { user } = useContext(AuthContext);
 
   //Faz a requisição para criar uma nova sala
-  const createRoom = (dto: createRoomDTO) => {
-    console.log(dto, "CRiando");
-    const { userId1, userId2 } = dto;
-    socket.emit("createRoom", { userId1, userId2 });
-    socket.emit("roomList", { id: user?.id });
-    navigation.goBack();
+  const createRoom = async (dto: createRoomDTO) => {
+    // console.log(dto, "CRiando");
+    try {
+      const { userId1, userId2 } = dto;
+      await socket.emit("createRoom", { userId1, userId2 });
+      await socket.emit("roomList", { id: user?.id });
+      navigation.goBack();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

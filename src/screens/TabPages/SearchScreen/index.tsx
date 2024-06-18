@@ -40,8 +40,8 @@ const SearchScreen = ({ navigation }: any) => {
           ? { ...item, imagem: item.imagem[0] }
           : { ...item, imagem: null };
       });
-      console.log(empresaImg[0], "ONSO");
-      setArrProjetos([projeto, empresaImg, modelo]);
+      setArrProjetos([projeto, empresaImg]);
+      console.log(projeto);
       setVisibleSearch(true);
     }
   };
@@ -81,9 +81,9 @@ const SearchScreen = ({ navigation }: any) => {
     );
     setHSearch(data);
   };
-  // useEffect(() => {
-  //   console.log(arrProjetos);
-  // }, [arrProjetos]);
+  useEffect(() => {
+    console.log(arrProjetos);
+  }, [arrProjetos]);
 
   return (
     <View style={styles.background}>
@@ -127,31 +127,29 @@ const SearchScreen = ({ navigation }: any) => {
             </View>
           ))
         ) : (
-          <React.Fragment>
-            <Suspense fallback={<ActivityIndicator />}>
-              {/* <ShowProductsCarousel
-                navigation={navigation}
-                title={"Projetos bem avaliados:"}
-                produtos={arrProjetos[0]}
-                color={"#36A5BF"}
-                loading={loading}
-              /> 
-
-              <ShowProductsCarousel
-                loading={loading}
-                navigation={navigation}
-                title={"Outros:"}
-                produtos={arrProjetos[2]}
-                color={"#36A5BF"}
-              /> */}
-              <ShowCompaniesCarrossel
-                navigation={navigation}
-                title={"Empresas bem avaliados:"}
-                companies={arrProjetos[1]}
-                loading={loading}
-              />
-            </Suspense>
-          </React.Fragment>
+          <View
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
+            }}
+          >
+            <ShowCompaniesCarrossel
+              navigation={navigation}
+              title={"Empresas bem avaliados:"}
+              companies={arrProjetos[1] ?? null}
+              loading={loading}
+            />
+            <ShowProductsCarousel
+              navigation={navigation}
+              title={"Projetos bem avaliados:"}
+              produtos={arrProjetos[0] ?? null}
+              color={"#36A5BF"}
+              loading={loading}
+            />
+          </View>
         )}
       </ScrollView>
     </View>

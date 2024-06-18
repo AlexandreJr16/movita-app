@@ -9,6 +9,7 @@ import {
   RoomResponse,
 } from "../../../screens/TabPages/ChatScreen";
 import { formattedDate } from "../../../utils/tranformDataToString";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ChatComponent = ({
   item,

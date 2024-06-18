@@ -37,13 +37,13 @@ const ShowProductsCarousel = ({
             }}
           >
             <Texto weight="regular" style={styles.title}>
-              {title}
+              {title ?? ""}
             </Texto>
             <Texto weight="regular" style={styles.yellowText}>
               Ver mais
             </Texto>
           </View>
-          {produtos.length > 0 ? (
+          {produtos && produtos.length > 0 ? (
             <ScrollView
               showsHorizontalScrollIndicator={false}
               horizontal={true}
@@ -51,9 +51,9 @@ const ShowProductsCarousel = ({
                 width: "100%",
               }}
             >
-              {produtos.map((item: { id: any }, i: any) => (
+              {produtos.map((item: any) => (
                 <Produto
-                  key={`${item.id}-${i}`}
+                  key={`${item.id}`}
                   color={color}
                   navigation={navigation}
                   produto={item}

@@ -26,12 +26,12 @@ const Produto = ({
     }
   };
 
-  return (
+  return produto ? (
     <TouchableOpacity
       onPress={navigateToProduct}
       style={styles.produtoContainer}
     >
-      {produto.imagem[0] ? (
+      {produto.imagem && produto.imagem[0] ? (
         <ImagemBuffer
           imgBuffer={produto.imagem[0]}
           style={styles.imagemProduto}
@@ -40,7 +40,7 @@ const Produto = ({
         <DefaultMiniProjeto />
       )}
       <Texto weight="bold" style={styles.title}>
-        {produto.titulo}
+        {produto.titulo ? "" : produto.nome ?? "Sem nome"}
       </Texto>
       <Texto weight="regular" style={styles.status}>
         {produto.status ?? `Sem categoria`}
@@ -53,7 +53,7 @@ const Produto = ({
         exercitationem!`}
       </Texto>
     </TouchableOpacity>
-  );
+  ) : null;
 };
 
 export default Produto;

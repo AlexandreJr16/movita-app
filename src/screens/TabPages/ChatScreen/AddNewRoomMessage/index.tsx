@@ -90,6 +90,7 @@ const AddRoomMessage = ({ navigation }: { navigation: any }) => {
             data={empresa}
             renderItem={renderChatItem}
             keyExtractor={keyExtractor}
+            scrollEnabled={true}
           />
         ) : (
           <View style={styles.chatemptyContainer}>

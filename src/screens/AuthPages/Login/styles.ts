@@ -2,37 +2,43 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: "100%",
     display: "flex",
-    // alignItems: "center",
     height: "100%",
+    justifyContent: "space-between",
     backgroundColor: "#1F1F1F",
     gap: 10,
   },
   logo: {
-    marginBottom: 60,
-    marginTop: 20,
     alignSelf: "center",
   },
   carrossel: {
-    maxHeight: 300,
+    paddingVertical: 30,
   },
   textContainer: {
     width: "100%",
     display: "flex",
     alignItems: "flex-start",
-    paddingHorizontal: 25,
-    margin: 5,
+    paddingHorizontal: 30,
   },
-  title: { color: "#fff", fontSize: 32, lineHeight: 36 },
-  smallTitle: { color: "#fff", fontSize: 20, lineHeight: 23 },
+  title: {
+    color: "#fff",
+    fontSize: 32,
+    lineHeight: 36,
+  },
+  smallTitle: {
+    color: "#fff",
+    fontSize: 20,
+    lineHeight: 23,
+  },
   inputContainer: {
     width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: "5%",
-    marginBottom: 40,
+    paddingHorizontal: 20,
+    gap: 16,
   },
   forgetPContainer: {
     paddingHorizontal: 12,
@@ -41,16 +47,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     flexDirection: "row",
+    gap: 5,
   },
   forgetPassword: {
     color: "#fff",
-    marginRight: 5,
   },
   blueForgetPassword: {
     color: "#36A5BF",
     textDecorationLine: "underline",
   },
   signUpContainer: {
+    gap: 5,
     paddingHorizontal: 12,
     paddingVertical: 10,
     width: "100%",
@@ -65,7 +72,6 @@ const styles = StyleSheet.create({
   },
   signIn: {
     color: "#fff",
-    marginRight: 5,
   },
   errorText: {
     color: "#C63818",

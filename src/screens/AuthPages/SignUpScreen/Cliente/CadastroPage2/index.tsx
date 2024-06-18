@@ -1,5 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Pressable, ScrollView, StatusBar, View } from "react-native";
+import React, { useContext, useState } from "react";
+import {
+  Pressable,
+  ScrollView,
+  StatusBar,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import BlueBack from "../../../../../assents/Cadastro/BlueBack";
 import Logo from "../../../../../assents/Perfil/Logo";
 import InputCadastro from "../../../../../components/Cadastro/Input/InputCadastro";
@@ -14,14 +21,14 @@ import InputMaskedCadastro from "../../../../../components/Cadastro/MaskedInput/
 
 const SignUpScreen2 = ({ navigation }: any) => {
   const { signupUser, setSignupUser } = useContext(AuthContext);
-
   const { loading } = useContext(AuthContext);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleEmail = (value: any) =>
     setSignupUser({ ...signupUser, email: value });
   const handleTelefone = (value: any) =>
     setSignupUser({ ...signupUser, telefone: value });
+
   const handleSubmit = () => {
     const isError =
       signupUser.email == undefined ||
@@ -40,8 +47,11 @@ const SignUpScreen2 = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <StatusBar translucent={true} barStyle="light-content" />
         <View style={styles.container}>
           <View style={styles.logoContainer}>
@@ -100,7 +110,7 @@ const SignUpScreen2 = ({ navigation }: any) => {
           <LoadingIndicator visible={loading} />
         </View>
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
