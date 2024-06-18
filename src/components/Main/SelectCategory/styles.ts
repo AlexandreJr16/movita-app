@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     flexDirection: "row",
   },
-  img: {},
+  img: { width: "60%" },
   btn: {
     display: "flex",
     alignItems: "center",

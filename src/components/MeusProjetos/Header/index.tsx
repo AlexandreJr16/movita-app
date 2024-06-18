@@ -11,6 +11,7 @@ import LupaAzul from "../../../assents/MeusProjetos/LupaAzul";
 import LupaRed from "../../../assents/MeusProjetos/LupaRed";
 import { Pressable } from "react-native";
 import TextoInput from "../../Default/texto/TextoInput";
+import { MagnifyingGlass } from "phosphor-react-native";
 
 const HeaderMyProduct = ({
   navigation,
@@ -62,7 +63,13 @@ const HeaderMyProduct = ({
                   }
             }
           ></TextoInput>
-          <Pressable>{color == "blue" ? <LupaAzul /> : <LupaRed />}</Pressable>
+          <Pressable>
+            {color == "blue" ? (
+              <MagnifyingGlass size={33} color="#36A5BF" />
+            ) : (
+              <MagnifyingGlass size={33} color="#A64029" />
+            )}
+          </Pressable>
         </View>
 
         {showFilter && (

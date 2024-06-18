@@ -1,11 +1,11 @@
-import { Pressable, View } from "react-native";
+import { Pressable, View, Image } from "react-native";
 import EmpresasIcon from "../../../assents/MainScreen/EmpresasIcon";
 import ModelosIcon from "../../../assents/MainScreen/ModelosIcon";
-import ProjetosIcon from "../../../assents/MainScreen/ProjetosIcon";
 import styles from "./styles";
 import Texto from "../../Default/texto/Texto";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import {} from "phosphor-react-native";
+import ProjetosIcon from "../../../assents/MainScreen/ProjetosIcon";
 
 const SelectCategory = ({ navigation }: { navigation?: any }) => {
   const color = "#1966C0";
@@ -18,7 +18,11 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
         style={{ gap: 10 }}
       >
         <View style={{ ...styles.btn, backgroundColor: color }}>
-          <ProjetosIcon style={styles.img} />
+          <Image
+            resizeMode="contain"
+            source={require("../../../assents/MainScreen/projetos.png")}
+            style={styles.img}
+          />
         </View>
         <Texto
           weight="bold"
@@ -35,7 +39,11 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
         style={{ gap: 10 }}
       >
         <View style={{ ...styles.btn, backgroundColor: color }}>
-          <EmpresasIcon style={styles.img} />
+          <Image
+            resizeMode="contain"
+            source={require("../../../assents/MainScreen/empresas.png")}
+            style={styles.img}
+          />
         </View>
         <Texto
           weight="bold"
@@ -52,7 +60,11 @@ const SelectCategory = ({ navigation }: { navigation?: any }) => {
         style={{ gap: 10 }}
       >
         <View style={{ ...styles.btn, backgroundColor: color }}>
-          <ModelosIcon style={styles.img} />
+          <Image
+            resizeMode="contain"
+            source={require("../../../assents/MainScreen/modelos.png")}
+            style={styles.img}
+          />
         </View>
         <Texto
           weight="bold"

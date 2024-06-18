@@ -12,6 +12,7 @@ import AuthContext from "../../../contexts/auth.context";
 import ProjetoContext from "../../../contexts/project.context";
 import ShowCompaniesCarrossel from "../../../components/CarrosselShowCompanies";
 import ShowProductsCarousel from "../../../components/CarrosselShowProducts";
+import { MagnifyingGlass } from "phosphor-react-native";
 
 const SearchScreen = ({ navigation }: any) => {
   const [textSearch, setTextSearch] = useState<any>("");
@@ -97,7 +98,7 @@ const SearchScreen = ({ navigation }: any) => {
           style={styles.textInputTyping}
         ></TextoInput>
         <Pressable onPress={handleSubmit}>
-          <LupaAzul />
+          <MagnifyingGlass size={32} color="#52B6CE" />
         </Pressable>
       </View>
 

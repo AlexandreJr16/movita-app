@@ -11,7 +11,7 @@ import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import SelectButton from "../../../components/Perfil/SelectButton";
 import ShowPerfil from "../../../components/Perfil/ShowPerfil";
 import AuthContext from "../../../contexts/auth.context";
-import Lock from "../../../assents/Perfil/Lock";
+import { Files, Heart, Lock, X } from "phosphor-react-native";
 
 const PerfilScreen = ({ navigation }: any) => {
   //logout
@@ -23,7 +23,7 @@ const PerfilScreen = ({ navigation }: any) => {
       <ShowPerfil />
       <View style={styles.container}>
         <SelectButton
-          icon={<Lock />}
+          icon={<Lock size={25} color="#52B6CE" />}
           arrow={<BlackArrowPerfil />}
           fontColor={"#000"}
           bgColor={"#fff"}
@@ -34,7 +34,7 @@ const PerfilScreen = ({ navigation }: any) => {
           Detalhes da conta
         </SelectButton>
         <SelectButton
-          icon={<Lock />}
+          icon={<Lock size={25} color="#52B6CE" />}
           arrow={<BlackArrowPerfil />}
           fontColor={"#000"}
           bgColor={"#fff"}
@@ -45,7 +45,7 @@ const PerfilScreen = ({ navigation }: any) => {
           Alterar Senha
         </SelectButton>
         <SelectButton
-          icon={<HeartPerfil />}
+          icon={<Heart size={25} color="#52B6CE" />}
           arrow={<BlackArrowPerfil />}
           fontColor={"#000"}
           bgColor={"#fff"}
@@ -56,7 +56,7 @@ const PerfilScreen = ({ navigation }: any) => {
           Meus favoritos
         </SelectButton>
         <SelectButton
-          icon={<DocumentPerfil />}
+          icon={<Files size={25} color="#52B6CE" />}
           arrow={<BlackArrowPerfil />}
           fontColor={"#000"}
           bgColor={"#fff"}
@@ -67,7 +67,7 @@ const PerfilScreen = ({ navigation }: any) => {
           Meus Projetos
         </SelectButton>
         <SelectButton
-          icon={<CrossPerfil />}
+          icon={<X size={25} weight="regular" color="#52B6CE" />}
           arrow={<BlackArrowPerfil />}
           fontColor={"#000"}
           bgColor={"#fff"}
@@ -78,7 +78,7 @@ const PerfilScreen = ({ navigation }: any) => {
           Sair da conta
         </SelectButton>
         <SelectButton
-          icon={<SignOutPerfil />}
+          icon={<X size={25} color="#fff" />}
           arrow={<WhiteArrowPerfil />}
           fontColor={"#fff"}
           bgColor={"#CF654D"}

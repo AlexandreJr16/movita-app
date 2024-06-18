@@ -2,18 +2,11 @@ import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MainRoutes from "./tab/main.routes";
-import SearchScreen from "../screens/TabPages/SearchScreen";
-import Home from "../assents/NavBar/NoSelected/Home";
-import Message from "../assents/NavBar/NoSelected/Message";
-import Perfil from "../assents/NavBar/NoSelected/Perfil";
-import Search from "../assents/NavBar/NoSelected/Search";
-import MessageSelected from "../assents/NavBar/Selected/SelectedMessage";
-import SearchSelected from "../assents/NavBar/Selected/SelectedSearch";
-import PerfilSelected from "../assents/NavBar/Selected/SelectedPerfil";
-import HomeSelected from "../assents/NavBar/Selected/SelectedHome";
+
 import PerfilRoutes from "./tab/perfil.routes";
 import ChatRoutes from "./tab/chat.routes";
 import SearchRoutes from "./tab/search.routes";
+import { Chats, House, MagnifyingGlass, User } from "phosphor-react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -44,13 +37,29 @@ export default function TabRoutes() {
               let iconName;
 
               if (route.name === "main") {
-                iconName = focused ? <HomeSelected /> : <Home />;
+                iconName = focused ? (
+                  <House color="#fff" size={40} />
+                ) : (
+                  <House color="#fff" size={40} />
+                );
               } else if (route.name === "chat") {
-                iconName = focused ? <MessageSelected /> : <Message />;
+                iconName = focused ? (
+                  <Chats color="#52B6CE" size={40} />
+                ) : (
+                  <Chats color="#fff" size={40} />
+                );
               } else if (route.name === "search") {
-                iconName = focused ? <SearchSelected /> : <Search />;
+                iconName = focused ? (
+                  <MagnifyingGlass color="#52B6CE" size={40} />
+                ) : (
+                  <MagnifyingGlass color="#fff" size={40} />
+                );
               } else if (route.name === "perfil") {
-                iconName = focused ? <PerfilSelected /> : <Perfil />;
+                iconName = focused ? (
+                  <User color="#BF9969" size={40} />
+                ) : (
+                  <User color="#fff" size={40} />
+                );
               }
 
               return iconName;
@@ -96,9 +105,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderBottomWidth: 0,
     height: 70,
-    padding: 0,
-    marginBottom: 0,
-    elevation: 0,
   },
   tabBarIOS: {
     backgroundColor: "#151515",
@@ -106,8 +112,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     borderTopWidth: 0,
   },
-  tabBarItemAndroid: {
-    marginBottom: 23,
-  },
+  tabBarItemAndroid: {},
   tabBarItemIOS: {},
 });
