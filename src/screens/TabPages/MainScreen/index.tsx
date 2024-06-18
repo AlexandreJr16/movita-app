@@ -67,20 +67,6 @@ export default function MainScreen({ navigation }: { navigation: any }) {
                 produtos={produtos[2]}
                 color={"#36A5BF"}
               />
-
-              <ShowCompaniesCarrossel
-                navigation={navigation}
-                title={"Empresas bem avaliados:"}
-                companies={produtos[1]}
-                loading={loading}
-              />
-              <ShowProductsCarousel
-                loading={loading}
-                navigation={navigation}
-                title={"Outros:"}
-                produtos={produtos[2]}
-                color={"#36A5BF"}
-              />
             </Suspense>
           </React.Fragment>
 

@@ -33,6 +33,7 @@ const ShowProductsCarousel = ({
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
+              paddingHorizontal: 10,
             }}
           >
             <Texto weight="regular" style={styles.title}>
