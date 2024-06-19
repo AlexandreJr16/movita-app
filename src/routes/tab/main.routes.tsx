@@ -8,6 +8,8 @@ import ShowEmpresaPerfil from "../../screens/ShowPages/ShowEmpresa";
 import MeusProjetosScreen from "../../screens/SearchPages/ProjetosSearch";
 import EmpresasSearchScreen from "../../screens/SearchPages/EmpresasSearch";
 import ModelosSearch from "../../screens/SearchPages/ModeloSearch";
+import SeeMoreEmpresas from "../../screens/ShowPages/SeeMore/SeeMoreEmpresas";
+import SeeMoreProducts from "../../screens/ShowPages/SeeMore/SeeMoreProducts";
 
 const MainRoutes: React.FC = () => {
   const Stack = createNativeStackNavigator();
@@ -28,6 +30,8 @@ const MainRoutes: React.FC = () => {
       <Stack.Screen name="EmpresaSearch" component={EmpresasSearchScreen} />
       <Stack.Screen name="ModelSearch" component={ModelosSearch} />
       <Stack.Screen name="ModelShow" component={ShowModel} />
+      <Stack.Screen name="SeeMoreProduct" component={SeeMoreProducts} />
+      <Stack.Screen name="SeeMoreEmpresa" component={SeeMoreEmpresas} />
     </Stack.Navigator>
   );
 };

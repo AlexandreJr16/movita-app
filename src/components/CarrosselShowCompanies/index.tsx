@@ -1,4 +1,4 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, Pressable } from "react-native";
 import Texto from "../Default/texto/Texto";
 import Companies from "./Companies";
 import styles from "./styles";
@@ -12,12 +12,14 @@ const ShowCompaniesCarrossel = ({
   color = "#fff",
   title = "Outros",
   loading = false,
+  seeMore,
 }: {
   companies: any[];
   navigation: any;
   color?: any;
   title?: any;
   loading?: boolean;
+  seeMore?: boolean;
 }) => {
   return (
     <React.Fragment>
@@ -39,9 +41,17 @@ const ShowCompaniesCarrossel = ({
                 <Texto weight="regular" style={styles.title}>
                   {title}
                 </Texto>
-                <Texto weight="regular" style={styles.yellowText}>
-                  Ver mais
-                </Texto>
+                {seeMore == true ? (
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate("SeeMoreEmpresa");
+                    }}
+                  >
+                    <Texto weight="regular" style={styles.yellowText}>
+                      Ver mais
+                    </Texto>
+                  </Pressable>
+                ) : null}
               </View>
               {companies[0] != null ? (
                 <ScrollView
@@ -51,34 +61,6 @@ const ShowCompaniesCarrossel = ({
                     width: "100%",
                   }}
                 >
-                  {companies.map((item, index) => (
-                    <Companies
-                      navigation={navigation}
-                      produto={item}
-                      key={index}
-                    />
-                  ))}
-                  {companies.map((item, index) => (
-                    <Companies
-                      navigation={navigation}
-                      produto={item}
-                      key={index}
-                    />
-                  ))}
-                  {companies.map((item, index) => (
-                    <Companies
-                      navigation={navigation}
-                      produto={item}
-                      key={index}
-                    />
-                  ))}
-                  {companies.map((item, index) => (
-                    <Companies
-                      navigation={navigation}
-                      produto={item}
-                      key={index}
-                    />
-                  ))}
                   {companies.map((item, index) => (
                     <Companies
                       navigation={navigation}

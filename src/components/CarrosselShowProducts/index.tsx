@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Pressable } from "react-native";
 import Texto from "../Default/texto/Texto";
 import Produto from "./Product";
 import SkeletonProduto from "./Product/Skeleton/SkeletonProduto";
@@ -11,6 +11,7 @@ const ShowProductsCarousel = ({
   color = "#fff",
   title = "Outros",
   loading = false,
+  seeMore,
 }: any) => {
   return (
     <View style={styles.container}>
@@ -39,9 +40,17 @@ const ShowProductsCarousel = ({
             <Texto weight="regular" style={styles.title}>
               {title ?? ""}
             </Texto>
-            <Texto weight="regular" style={styles.yellowText}>
-              Ver mais
-            </Texto>
+            {seeMore == true ? (
+              <Pressable
+                onPress={() => {
+                  navigation.navigate("SeeMoreProduct");
+                }}
+              >
+                <Texto weight="regular" style={styles.yellowText}>
+                  Ver mais
+                </Texto>
+              </Pressable>
+            ) : null}
           </View>
           {produtos && produtos.length > 0 ? (
             <ScrollView

@@ -52,6 +52,7 @@ export default function MainScreen({ navigation }: { navigation: any }) {
                 produtos={produtos[0]}
                 color={"#36A5BF"}
                 loading={loading}
+                seeMore={true}
               />
 
               <ShowCompaniesCarrossel
@@ -59,6 +60,7 @@ export default function MainScreen({ navigation }: { navigation: any }) {
                 title={"Empresas bem avaliados:"}
                 companies={produtos[1]}
                 loading={loading}
+                seeMore={true}
               />
               <ShowProductsCarousel
                 loading={loading}
@@ -66,6 +68,7 @@ export default function MainScreen({ navigation }: { navigation: any }) {
                 title={"Outros:"}
                 produtos={produtos[2]}
                 color={"#36A5BF"}
+                seeMore={true}
               />
             </Suspense>
           </View>
