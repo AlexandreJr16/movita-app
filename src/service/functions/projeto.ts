@@ -245,3 +245,20 @@ export const findProjetoByUserCompany = async (dto: {
     throw error;
   }
 };
+export const findProjectsPagination = async (dto: {
+  page: number;
+  limit: number;
+}) => {
+  const url = `${API_URL}/projeto/pagination/${dto.page}/${dto.limit}`;
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

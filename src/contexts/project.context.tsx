@@ -24,6 +24,7 @@ type ProjetoContextData = {
     descricao: string;
   }) => any;
   findProjectById: (dto: { id: number }) => any;
+  findProjectPagination: (dto: { page: number; limit: number }) => any;
 };
 
 const ProjetoContext = createContext({} as ProjetoContextData);
@@ -75,6 +76,13 @@ export const ProjetoProvider = ({ children }: any) => {
   }) => {
     return await projectsFunctions.findProjetoByUserCompany(dto);
   };
+  const findProjectPagination = async (dto: {
+    page: number;
+    limit: number;
+  }) => {
+    const { limit, page } = dto;
+    return await api.findProjectsPagination({ page, limit });
+  };
 
   return (
     <ProjetoContext.Provider
@@ -90,6 +98,7 @@ export const ProjetoProvider = ({ children }: any) => {
         findProjetoByUserCompany,
         createProjeto,
         findProjectById,
+        findProjectPagination,
       }}
     >
       {children}
