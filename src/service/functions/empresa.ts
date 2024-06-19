@@ -111,3 +111,20 @@ export const likeEmpresa = async (
     throw error;
   }
 };
+export const findEmpresaPagination = async (dto: {
+  page: number;
+  limit: number;
+}) => {
+  const url = `${API_URL}/empresa/pagination/${dto.page}/${dto.limit}`;
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

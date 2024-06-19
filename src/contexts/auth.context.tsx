@@ -15,6 +15,8 @@ import * as empresas from "./functions/empresaFunction";
 import { SignInResponse } from "./dto/signInResponse.dto";
 import { UpdateSenhaForgotDTO } from "./dto/updateSenhaForgot.dto";
 import { getUser } from "../service";
+import * as api from "../service/index";
+
 import { getItemWithExpiration } from "../utils/storageWithExpiration";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -90,6 +92,12 @@ export const AuthProvider = ({ children }: { children: any }) => {
 
   const findEmpresaByName = async (nome: string) => {
     return await empresas.findEmpresaByName(nome);
+  };
+  const findEmpresasPagination = async (dto: {
+    page: number;
+    limit: number;
+  }) => {
+    return await api.findEmpresaPagination(dto);
   };
 
   // Funções Forgot Password  ---------------------------------------------------------------------------------
@@ -169,6 +177,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
     findEmpresasByName: findEmpresaByName,
     setLoading: definirLoading,
     setUser: definirUser,
+    findEmpresasPagination,
   };
 
   return (

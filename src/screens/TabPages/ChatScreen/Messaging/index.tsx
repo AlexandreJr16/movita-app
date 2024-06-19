@@ -201,9 +201,10 @@ const Messaging = ({ route, navigation }: any) => {
         >
           <FlatList
             data={chatMessages}
-            keyExtractor={(item) => `${item.id}`}
-            renderItem={({ item }) => (
+            keyExtractor={(item, index) => `${item.id}-${index}`}
+            renderItem={({ item, index }) => (
               <MessageComponent
+                key={index}
                 item={item}
                 navigation={navigation}
                 users={{ user1: itemParam.userId1, user2: itemParam.userId2 }}

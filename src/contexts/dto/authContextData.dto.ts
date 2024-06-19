@@ -35,4 +35,5 @@ export interface AuthContextData {
   findProjetoByName: (nome: string) => any;
   setLoading: () => any;
   setUser: () => any;
+  findEmpresasPagination: (dto: { page: number; limit: number }) => any;
 }

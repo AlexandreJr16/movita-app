@@ -46,7 +46,7 @@ const Produto = ({
             style={styles.imagemProduto}
           />
         ) : (
-          <DefaultMiniProjeto />
+          <DefaultMiniProjeto style={styles.imagemProduto} />
         )}
         <Texto weight="bold" style={styles.title}>
           {produto.titulo ? produto.titulo : produto.nome ?? "Sem nome"}

@@ -4,6 +4,8 @@ import Texto from "../../../components/Default/texto/Texto";
 import HeaderPerfil from "../../../components/Perfil/HeaderPerfil";
 import ProjetoContext from "../../../contexts/project.context";
 import { ProjetosResponseType } from "../../TabPages/ChatScreen/Messaging";
+import Produto from "./Product";
+import ProdutoSeeMore from "./Product";
 const { width } = Dimensions.get("window");
 const itemWidth = (width - 40) / 2 - 20; // Calcula a largura
 
@@ -55,12 +57,15 @@ const SeeMoreProducts = ({ navigation }: { navigation: any }) => {
       <HeaderPerfil navigation={navigation} visibleLogo={false} />
       <FlatList
         data={data}
-        renderItem={({ item }) => (
-          <View style={{ padding: 25, width: "50%" }}>
-            <Texto weight="bold">{item?.titulo ?? "Sem nome"}</Texto>
-          </View>
+        renderItem={({ item, index }) => (
+          <ProdutoSeeMore
+            navigation={navigation}
+            produto={item}
+            tipo="projeto"
+            color={undefined}
+          />
         )}
-        style={{ display: "flex" }}
+        style={{ display: "flex", paddingHorizontal: 10, width: "100%" }}
         scrollEnabled={true}
         numColumns={2}
         keyExtractor={(item) => `${item.id}`}
