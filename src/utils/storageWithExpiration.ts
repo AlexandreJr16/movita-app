@@ -13,7 +13,8 @@ const setItemWithExpiration = async (dto: {
 }) => {
   const { key, expirationInMinutes, value } = dto;
   try {
-    const expirationDate = new Date().getTime() + expirationInMinutes * 60000;
+    const expirationDate = new Date().getTime() + 60 * 60000;
+
     const item = {
       value,
       expirationDate,

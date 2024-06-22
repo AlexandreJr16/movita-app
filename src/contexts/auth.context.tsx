@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
   //Faz o carregamento dos Dados salvos localmente
   async function loadStorageData() {
     try {
+      // await AsyncStorage.clear();
       //Get dos dados guardados localmente relacionados ao Token e ao user
       const storageToken = await getItemWithExpiration("@RNAuth:token");
       const storageUser = await getItemWithExpiration("@RNAuth:user");
