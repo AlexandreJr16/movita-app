@@ -93,16 +93,16 @@ const FixedAllProjects = ({
           </Fields>
           <Fields mainText={"Briefing"}>
             <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
-              Tipo do móvel: Cadeira
+              Tipo do móvel: {"Indefinido pelo fabricante"}
             </Texto>
             <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
-              Categoria: Quarto
+              Categoria: {"Móvel planejado"}
             </Texto>
             <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
-              Tamanho: 1x1x1
+              Tamanho: {"1x1x1"}
             </Texto>
             <Texto style={{ color: "#fff", fontSize: 16 }} weight="bold">
-              Cor: Amarelo
+              Cor: {"Amarelo"}
             </Texto>
           </Fields>
           <Fields mainText={"Modelos 3D"}>

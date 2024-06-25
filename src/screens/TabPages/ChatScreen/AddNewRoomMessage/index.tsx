@@ -7,6 +7,7 @@ import Texto from "../../../../components/Default/texto/Texto";
 import AddContatoComponent from "../../../../components/Chat/AddContato";
 import AuthContext from "../../../../contexts/auth.context";
 import VitaNotFound from "../../../../assents/Vita/VitaNotFound";
+import { ScrollView } from "react-native-gesture-handler";
 
 type ResponseEmpresa = {
   id: number;
@@ -83,29 +84,35 @@ const AddRoomMessage = ({ navigation }: { navigation: any }) => {
         title={"Mensagens"}
         handleSearch={debouncedHandleSearch}
       />
-
-      <View style={styles.chatlistContainer}>
-        {empresa.length > 0 ? (
-          <FlatList
-            data={empresa}
-            renderItem={renderChatItem}
-            keyExtractor={keyExtractor}
-            scrollEnabled={true}
-          />
-        ) : (
-          <View style={styles.chatemptyContainer}>
-            <Texto
-              weight="bold"
-              style={{
-                ...styles.chatemptyText,
-              }}
-            >
-              Não conseguimos encontrar esta empresa.
-            </Texto>
-            <VitaNotFound />
-          </View>
-        )}
-      </View>
+      {empresa != null && empresa && empresa[0] && (
+        <View style={styles.chatlistContainer}>
+          {empresa[0] ? (
+            // <FlatList
+            //   data={empresa}
+            //   renderItem={renderChatItem}
+            //   keyExtractor={keyExtractor}
+            //   scrollEnabled={true}
+            // />
+            <ScrollView>
+              {empresa.map((item) => {
+                return renderChatItem({ item });
+              })}
+            </ScrollView>
+          ) : (
+            <View style={styles.chatemptyContainer}>
+              <Texto
+                weight="bold"
+                style={{
+                  ...styles.chatemptyText,
+                }}
+              >
+                Não conseguimos encontrar esta empresa.
+              </Texto>
+              <VitaNotFound />
+            </View>
+          )}
+        </View>
+      )}
     </View>
   );
 };

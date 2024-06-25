@@ -128,6 +128,7 @@ const Chat = ({ navigation }: { navigation: any }) => {
             scrollEnabled={true}
             renderItem={renderChatItem}
             keyExtractor={keyExtractor}
+            style={{ display: "flex", gap: 2 }}
           />
         ) : (
           <View style={styles.chatemptyContainer}>

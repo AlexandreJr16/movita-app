@@ -189,6 +189,10 @@ const Messaging = ({ route, navigation }: any) => {
     handleNewImage(base64Image);
   };
 
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
   return (
     <View style={styles.messagingscreen}>
       <HeaderChat name={itemParam.name} navigation={navigation} />

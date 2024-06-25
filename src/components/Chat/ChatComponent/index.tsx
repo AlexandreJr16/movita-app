@@ -21,10 +21,16 @@ const ChatComponent = ({
   const [messages, setMessages] = useState<MessageResponse>();
 
   useLayoutEffect(() => {
-    const lastMessage = item.Message[item.Message.length - 1];
+    const lastMessage = item.Message[0]
+      ? item.Message[item.Message.length - 1]
+      : {
+          texto: "",
+          tipoMessage: "TEXTO",
+          createAt: "",
+        };
 
     if (lastMessage != undefined) {
-      const createdAtDate = new Date(lastMessage.createAt);
+      const createdAtDate = new Date(lastMessage.createAt ?? "");
       const now = new Date();
       const timeDifference = now.getTime() - createdAtDate.getTime();
       let formattedTime;
@@ -39,7 +45,7 @@ const ChatComponent = ({
         formattedTime = `há ${daysAgo} dias`;
       }
 
-      setMessages(lastMessage);
+      setMessages(lastMessage as MessageResponse);
     }
   }, []);
 
