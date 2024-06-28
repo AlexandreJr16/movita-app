@@ -6,8 +6,6 @@ import Texto from "../../Default/texto/Texto";
 import { MessageResponse } from "../../../screens/TabPages/ChatScreen";
 import { formattedDate } from "../../../utils/tranformDataToString";
 import ImagemBuffer from "../../Default/Imagem";
-import { Buffer } from "buffer";
-
 import ModelViewer from "./ModelViewer";
 import BriefingComponent from "../BriefingComponent";
 import ProjetoMessage from "../ProjetoMessage/ProjetoMessage";

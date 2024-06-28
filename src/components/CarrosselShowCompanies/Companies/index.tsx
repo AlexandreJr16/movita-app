@@ -29,17 +29,20 @@ const Companies = ({
       style={styles.produtoContainer}
     >
       {produto.imagem ? (
-        <ImagemBuffer imgBuffer={produto.imagem} style={styles.imagemProduto} />
+        <ImagemBuffer
+          imgBuffer={produto.imagem ?? produto.imagem[0] ?? null}
+          style={styles.imagemProduto}
+        />
       ) : (
         <DefaultMiniProjeto />
       )}
       <View style={styles.viewSuperior}>
         <View style={styles.viewSuperiorDireita}>
           <Texto weight="bold" style={styles.title}>
-            {produto.titulo}
+            {produto.titulo ?? produto.nomeFantasia ?? produto.nome ?? ""}
           </Texto>
           <Texto weight="regular" style={styles.status}>
-            {produto.Endereco ? produto.Endereco : null}
+            {produto.Endereco ? produto.Endereco : "Endereço não definido"}
           </Texto>
         </View>
         <View

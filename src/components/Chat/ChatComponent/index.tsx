@@ -21,13 +21,15 @@ const ChatComponent = ({
   const [messages, setMessages] = useState<MessageResponse>();
 
   useLayoutEffect(() => {
-    const lastMessage = item.Message[0]
-      ? item.Message[item.Message.length - 1]
-      : {
-          texto: "",
-          tipoMessage: "TEXTO",
-          createAt: "",
-        };
+    // console.log(item.Message.length);
+    const lastMessage =
+      item.Message && item.Message[0]
+        ? item.Message[item.Message.length > 0 ? item.Message.length - 1 : 0]
+        : {
+            texto: "",
+            tipoMessage: "TEXTO",
+            createAt: "",
+          };
 
     if (lastMessage != undefined) {
       const createdAtDate = new Date(lastMessage.createAt ?? "");

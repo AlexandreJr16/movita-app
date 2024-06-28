@@ -193,6 +193,20 @@ const Messaging = ({ route, navigation }: any) => {
     fetchProjects();
   }, []);
 
+  const flatListRef = useRef<FlatList>(null);
+
+  // Função para rolar a FlatList para o fim
+  const scrollToEnd = () => {
+    flatListRef.current?.scrollToEnd({ animated: true });
+  };
+
+  // Rolar para o fim sempre que a lista de mensagens mudar
+  useEffect(() => {
+    setTimeout(() => {
+      scrollToEnd();
+    }, 500);
+  }, [chatMessages]);
+
   return (
     <View style={styles.messagingscreen}>
       <HeaderChat name={itemParam.name} navigation={navigation} />
@@ -204,6 +218,7 @@ const Messaging = ({ route, navigation }: any) => {
           source={require("../../../../assents/Chat/bg.png")}
         >
           <FlatList
+            ref={flatListRef}
             data={chatMessages}
             keyExtractor={(item, index) => `${item.id}-${index}`}
             renderItem={({ item, index }) => (

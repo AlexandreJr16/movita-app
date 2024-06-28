@@ -9,7 +9,7 @@ import Texto from "../../../components/Default/texto/Texto";
 import FeedBackShowProduct from "../../../components/ShowItem/Feedback";
 import LoadingIndicator from "../../../components/Default/Loading";
 
-const ShowEmpresaPerfil = ({ route, navigation }) => {
+const ShowEmpresaPerfil = ({ route, navigation }: any) => {
   const id = route.params.id;
   const { getEmpresasById, loading } = useContext(AuthContext);
   const [user, setUser] = useState<any>(undefined);

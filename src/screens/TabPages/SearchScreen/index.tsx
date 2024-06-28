@@ -31,10 +31,13 @@ const SearchScreen = ({ navigation }: any) => {
   //Função para a partir de uma string fornecida buscar item com aquilo
   const findItems = async (text: string) => {
     if (text && text != "") {
-      const projeto = await findEmpresasByName(text);
-      const empresa = await findProjetoByName(text);
+      const empresa = await findEmpresasByName(text);
+      const projeto = await findProjetoByName(text);
       const modelo = await findProjetoByName(text);
 
+      // const projetoImg = projeto.map(()=>{
+
+      // })
       const empresaImg = empresa.map((item: { imagem: any[] }) => {
         return item.imagem[0]
           ? { ...item, imagem: item.imagem[0] }

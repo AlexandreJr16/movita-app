@@ -46,6 +46,9 @@ type ResponseProjeto = {
   updatedAt: string;
 };
 
+const API_AR =
+  "https://0387-2804-14d-14a1-58b6-6967-17c1-19c4-51f2.ngrok-free.app";
+
 const FixedAllProjects = ({
   route,
   navigation,
@@ -56,9 +59,11 @@ const FixedAllProjects = ({
   const { findProjectById } = useContext(ProjetoContext);
   const projectId = route.params;
   const [projeto, setProjeto] = useState<ResponseProjeto>();
+  console.log(projectId);
 
   const handleLink = () => {
-    const url = "https://movita-ar.vercel.app";
+    const num = projectId.id == 15 ? 1 : projectId.id == 14 ? 2 : 0;
+    const url = projectId.id ? `${API_AR}/store?default=${num}` : API_AR;
     Linking.openURL(url).catch((err) =>
       console.error("Erro ao abrir URL:", err)
     );

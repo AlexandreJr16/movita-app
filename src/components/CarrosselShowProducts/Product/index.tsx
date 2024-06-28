@@ -35,7 +35,6 @@ const Produto = ({
       console.log(error);
     }
   };
-  // console.log(produto);
 
   return produto ? (
     <Animated.View style={{ ...styles.produtoContainer, opacity: fadeAnim }}>
