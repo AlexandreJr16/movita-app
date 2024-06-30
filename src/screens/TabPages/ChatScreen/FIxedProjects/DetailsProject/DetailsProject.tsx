@@ -47,7 +47,7 @@ type ResponseProjeto = {
 };
 
 const API_AR =
-  "https://0387-2804-14d-14a1-58b6-6967-17c1-19c4-51f2.ngrok-free.app";
+  "https://7f78-2804-389-e1b8-66e-b0dc-90f3-961a-2f5c.ngrok-free.app";
 
 const FixedAllProjects = ({
   route,
@@ -120,7 +120,7 @@ const FixedAllProjects = ({
                 }}
                 weight="bold"
               >
-                OASSS
+                Modelo 3D
               </Texto>
             </Pressable>
           </Fields>
